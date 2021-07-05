@@ -4,7 +4,8 @@ import {
     FILTRED_FOR_PRICE_LOW_TO_HIGH,
     FILTRED_FOR_RATING_HIGH_TO_LOW,
     FILTRED_FOR_RATING_LOW_TO_HIGH,
-    GET_URL
+    GET_URL,
+    LOADING
 } from "./constant";
 
 

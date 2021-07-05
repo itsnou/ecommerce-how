@@ -7,7 +7,8 @@ import {
     GET_PRODUCTS_FOR_NAME,
     GET_PRODUCT_DETAIL,
     GET_URL,
-    GET_USERS
+    GET_USERS,
+    LOADING
 } from './constant';
 
 export const getProductsAll = () => {
