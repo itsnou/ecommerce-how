@@ -2,19 +2,59 @@ import styled from 'styled-components';
 
 const StyledDiv = styled.div`
     background-color: #272727;
-    height: 450px;
+    height: 250px;
     
     .nav-logo{
         text-align: center;
+        margin:auto;
         img{
-            width:700px;
+            width:400px;
         }
     }
 
     .nav-social{
-        width: 80%;
+        text-align:right;
+        width: 90%;
         color:white;
-        font-size: 48px;
+        font-size: 22px;
+        font-weight:bold;
+        p{
+            padding:0;
+            margin:10px;
+        }
+        a{
+            text-decoration:none;
+            color:gray;
+            font-size:30px;
+        }
+    }
+
+    .nav-user{
+        .nav-list_usuario{
+            display:flex;
+            list-style:none;
+            padding:0;
+            font-weight:bold;
+            li{
+                padding:4px;
+                margin-left:10px;
+                a{
+                    text-decoration:none;
+                    color:white;
+                    :hover{
+                        color: red;
+                    }
+                }
+            }
+            .nav-list-count{
+                background-color:black;
+                color:white;
+                padding:4px;
+            }
+            .nav-list_price{
+                color:white;
+            }
+        }
     }
 `
 

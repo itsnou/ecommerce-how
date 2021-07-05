@@ -11,6 +11,5 @@ ReactDOM.render(
       <App />
     </BrowserRouter>
   </Provider>,
-import {BrowserRouter} from 'react-router-dom'
-
+document.getElementById('root')
 );
