@@ -17,6 +17,7 @@ const StyledDiv = styled.div`
                 margin:0;
                 align-items:center;
                 font-weight:bold;
+                justify-content:space-around;
                 li{
                     list-style:none;
                     margin-left:15px;
