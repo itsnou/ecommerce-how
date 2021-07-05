@@ -1,13 +1,12 @@
 import LOGO from '../../assets/image/LOGO.png';
 import Login from './NavUser/User';
+import NavBar from './NavBar/NavBar';
 import StyledDiv from './styled.js';
 import { Grid } from '@material-ui/core';
 import {FaFacebookSquare, FaInstagramSquare} from 'react-icons/fa';
 
-
-
 const Nav = () => {
-    return (  
+    return (
         <StyledDiv>
             <Grid container item xs={12} spacing={2}>
                 <Grid container item xs={8} spacing={2}>
@@ -28,6 +27,7 @@ const Nav = () => {
                     <Login/>
                 </Grid>
             </Grid>
+            <NavBar/>
         </StyledDiv>
     );
 }

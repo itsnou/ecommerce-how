@@ -17,6 +17,7 @@ const StyledDiv = styled.div`
         width: 90%;
         color:white;
         font-size: 22px;
+        font-weight:bold;
         p{
             padding:0;
             margin:10px;
@@ -33,12 +34,25 @@ const StyledDiv = styled.div`
             display:flex;
             list-style:none;
             padding:0;
+            font-weight:bold;
             li{
+                padding:4px;
                 margin-left:10px;
                 a{
                     text-decoration:none;
                     color:white;
+                    :hover{
+                        color: red;
+                    }
                 }
+            }
+            .nav-list-count{
+                background-color:black;
+                color:white;
+                padding:4px;
+            }
+            .nav-list_price{
+                color:white;
             }
         }
     }
