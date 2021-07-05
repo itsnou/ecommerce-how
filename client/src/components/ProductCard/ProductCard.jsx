@@ -12,7 +12,6 @@ const ProductCard = (props) => {
 					alt='image not found'
 				/>
 			</div>
-
 			<h3 className='name'>{name}</h3>
 			<h2 className='price'>{price}</h2>
 			<div className='buttonsDiv'>
