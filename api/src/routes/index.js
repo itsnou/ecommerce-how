@@ -10,6 +10,7 @@ router.get("/", async (req, res) => {
   res.send(cualquiera);
 });
 
+//Pruebas de rutas
 router.post("/", (req, res) => {
   const productId = productSchema.findById(req.body.id);
   const newProduct = new invoiceSchema();
