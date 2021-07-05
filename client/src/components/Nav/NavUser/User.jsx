@@ -6,7 +6,8 @@ const User = () => {
     const [products, setProducts] = useState(0);
     const [price, setPrice] = useState(0);
 
-
+    //ACA VA EL CÓDIGO DE LÓGICA
+    
     return (  
         <div className='nav-user'>
             <ul className='nav-list_usuario'>
