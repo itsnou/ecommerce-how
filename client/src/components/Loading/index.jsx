@@ -4,7 +4,7 @@ import PropagateLoader from "react-spinners/PropagateLoader";
 export const Loading = () => {
     return (
         <div >
-            <h1> LOADING <BeatLoader size={30} /></h1>
+            <h1> LOADING <PropagateLoader size={30} /></h1>
         </div>
     );
 };

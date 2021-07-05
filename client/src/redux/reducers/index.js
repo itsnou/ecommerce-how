@@ -122,3 +122,5 @@ const reducer = (state = initialState, { payload, type }) => {
             return state;
     };
 };
+
+export default reducer;
