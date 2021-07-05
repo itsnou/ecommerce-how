@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 const StyledDiv = styled.div`
     background-color: #272727;
-    height: 250px;
+    height: 200px;
     
     .nav-logo{
         text-align: center;
@@ -16,7 +16,7 @@ const StyledDiv = styled.div`
         text-align:right;
         width: 90%;
         color:white;
-        font-size: 22px;
+        font-size: 18px;
         font-weight:bold;
         p{
             padding:0;
@@ -25,7 +25,7 @@ const StyledDiv = styled.div`
         a{
             text-decoration:none;
             color:gray;
-            font-size:30px;
+            font-size:18px;
         }
     }
 
@@ -56,6 +56,7 @@ const StyledDiv = styled.div`
             }
         }
     }
+    
 `
 
 export default StyledDiv;

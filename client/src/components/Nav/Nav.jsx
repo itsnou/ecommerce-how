@@ -18,8 +18,8 @@ const Nav = () => {
                     <div className='nav-social'>
                         <div className='nav-redes'>
                             <p>Seguinos  
-                            <a href='https://facebook.com' rel="noreferrer noopener" target='_blank'> <FaFacebookSquare/></a>
-                            <a href='https://instagram.com' rel="noreferrer noopener" target='_blank'> <FaInstagramSquare/></a>
+                                <a href='https://facebook.com' rel="noreferrer noopener" target='_blank'> <FaFacebookSquare/></a>
+                                <a href='https://instagram.com' rel="noreferrer noopener" target='_blank'> <FaInstagramSquare/></a>
                             </p>
                         </div>
                         <hr/>

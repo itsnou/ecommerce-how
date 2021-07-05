@@ -1,4 +1,4 @@
-export const GET_URL = "http://localhost:3001/"
+export const GET_URL = "http://localhost:3001/";
 
 export const GET_PRODUCTS_ALL = 'GET_PRODUCTS_ALL';
 export const GET_PRODUCTS_FOR_NAME = 'GET_PRODUCTS_FOR_NAME';
