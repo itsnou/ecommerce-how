@@ -8,6 +8,7 @@ import {
     GET_PRODUCT_DETAIL,
     GET_URL,
     GET_USERS,
+    GET_USER_DETAIL,
     LOADING
 } from './constant';
 
@@ -67,11 +68,24 @@ export const getUsers = () => {
     return async (dispatch) => {
         dispatch({ type: LOADING });
         try {
-            const products = await axios.get(`${GET_URL}users`);
+            const products = await axios.get(`${GET_URL}user`);
             return dispatch({ type: GET_USERS, payload: products.data });
         } catch (e) {
             console.log(e);
             return dispatch({ type: GET_USERS, payload: [] })
+        }
+    };
+};
+
+export const getUserDetail = (id) => {
+    return async (dispatch) => {
+        dispatch({ type: LOADING });
+        try {
+            const products = await axios.get(`${GET_URL}user/${id}`);
+            return dispatch({ type: GET_USER_DETAIL, payload: products.data });
+        } catch (e) {
+            console.log(e);
+            return dispatch({ type: GET_USER_DETAIL, payload: [] })
         }
     };
 };

@@ -9,6 +9,7 @@ import {
     getProductsForCategory,
     getProductsForName,
     getUsers,
+    getUserDetail,
     getOrders,
     getProductDetail,
     getOrderDetail
@@ -30,6 +31,7 @@ export {
     getOrderDetail,
     getUsers,
     getOrders,
+    getUserDetail,
     getProductsAll,
     getProductDetail,
     getProductsForCategory,
