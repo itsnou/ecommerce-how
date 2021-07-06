@@ -9,6 +9,7 @@ const Catalogo = () => {
     const dispatch = useDispatch();
     const products = useSelector(state=> state.products);
 
+
     useEffect(()=>{
        dispatch(getProductsAll());
     },[dispatch]);

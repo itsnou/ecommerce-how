@@ -16,7 +16,7 @@ export const getProductsAll = () => {
     return async (dispatch) => {
         dispatch({ type: LOADING });
         try {
-            const products = await axios.get(`${GET_URL}`);
+            const products = await axios.get(`${GET_URL}products`);
             return dispatch({ type: GET_PRODUCTS_ALL, payload: products.data });
         } catch (e) {
             console.log(e);
@@ -55,7 +55,7 @@ export const getProductDetail = (id) => {
     return async (dispatch) => {
         dispatch({ type: LOADING });
         try {
-            const products = await axios.get(`${GET_URL}${id}`);
+            const products = await axios.get(`${GET_URL}products/${id}`);
             return dispatch({ type: GET_PRODUCT_DETAIL, payload: products.data });
         } catch (e) {
             console.log(e);
