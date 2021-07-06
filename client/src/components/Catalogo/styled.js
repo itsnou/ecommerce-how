@@ -1,40 +1,107 @@
 import styled from 'styled-components';
 
 const StyledDiv = styled.div`
-    width:95%;
-    margin:auto;
     display:grid;
-    gap: 1rem;
-    grid-template-columns: repeat(auto-fill, minmax(min(100%,25rem), 1fr));
-    margin-top:10px;
-    
-    .container-card{
-        display:grid;
-        gird-template-rows: 1fr 1fr 1fr;
-        border:1px solid black;
-        width: 350px;
-        height:350px;
+    grid-template-areas: 'filter product product product'
+                        'filter product product product'
+                        'filter product product product';
+    .filter{
+        grid-area: filter;
+    }
+    .cards-container{
+        grid-area: product;
+        width:95%;
         margin:auto;
-        .card-image{
-            text-align:center;
-            width:350px;
-            img{
-                margin-top:6px;
-                width:5rem;
-                height:8rem;
+        display:grid;
+        gap: 1rem;
+        grid-template-columns: repeat(auto-fill, minmax(min(100%,28rem), 1fr));
+        
+        .container-card{
+            display:grid;
+            grid-template-columns: 1fr 1fr;
+            width:500px;
+            height:15rem;
+            margin:auto;
+            border-radius: 8px;
+            box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+            .card-image{
+                text-align:center;
+                height:100%;
+                display:block;
+                overflow: hidden;
+                img{
+                    margin-top:6px;
+                    width:8rem;
+                    height:14rem;
+                    :hover{
+                        transform: scale(1.5); 
+                    }
+                }
             }
-        }
-        .card-name{
-            font-size: 19px;
-            text-align:center;
-        }
-        .card-price{
-            text-align:center;
-        }
-        .card-buttonsDiv{
-            display:flex;
-            width:100%;
-        }
+            .card-sales{
+                background-color:#FADDD3;
+                color:black;
+                border-radius: 0px 8px 8px 0px;
+                .card-name{
+                    font-size: 19px;
+                    text-align:center;
+                    margin-bottom:2px;
+                }
+                .line-div{
+                    width:50%;
+                    padding:0;
+                    margin:0 auto;
+                }
+                .card-price{
+                    text-align:center;
+                }
+                .card-adds{
+                    font-weight:bold;
+                    text-align:center;
+                }
+                .card-buttonsDiv{
+                    display:flex;
+                    justify-content:center;
+                    width:100%;
+                        .card-rating{
+                            padding:4px;
+                            margin-right:5px;
+                            background-color: #420D1F;
+                            border-radius:3px;
+                            color:white;
+                            :hover{
+                                background-color:white;
+                                color:#420D1F;
+                                cursor:pointer;
+                            }
+                        }
+                        .card-buttons_build{
+                            background-color: #420D1F;
+                            border-radius:3px;
+                            padding:4px;
+                            color:white;
+                            border:none;
+                            font-weight:bold;
+                            :hover{
+                                background-color:white;
+                                color:#420D1F;
+                                cursor:pointer;
+                            }
+                            button{
+                                text-align:center;
+                                color:white;
+                                margin:auto;
+                                margin-bottom:2px;
+                                cursor:pointer;
+                                :hover{
+                                    font-weight:bold;
+                                    color:#420D1F;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
     }
 `
 

@@ -1,4 +1,4 @@
-import {useState, useEffect} from 'react';
+import {useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import StyledDiv from './styled.js';
 import {getProductsAll} from '../../redux/actions/request';
@@ -17,11 +17,15 @@ const Catalogo = () => {
 
     return (
         <StyledDiv>
-        {
-            products && products.map(el=>{
-                return <ProductCard name={el.name} image={el.imageUrl} price={el.price}/>
-            })
-        }
+            <div className='filter'>
+            </div>
+            <div className='cards-container'>
+                {
+                    products && products.map(el=>{
+                        return <ProductCard name={el.name} image={el.imageUrl} price={el.price} category={el.category} id={el._id}/>
+                    })
+                }
+            </div>
         </StyledDiv>
     );
 }

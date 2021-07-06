@@ -21,9 +21,10 @@ import {
 } from '../actions/constant'
 const initialState = {
     products: [],
+    productDetail:{},
     users: [],
     orders: [],
-    loading: false
+    loading: false,
 }
 
 const reducer = (state = initialState, { payload, type }) => {
@@ -37,8 +38,7 @@ const reducer = (state = initialState, { payload, type }) => {
         case GET_PRODUCT_DETAIL:
             return {
                 ...state,
-                // como voy a recibir solo un porducto (que seguramente sea un objeto) lo encierro en un array
-                products: [payload],
+                productDetail: payload,
                 loading: false
             }
         case GET_PRODUCTS_FOR_NAME:
