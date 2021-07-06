@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import Loading from '../Loading/Loading';
 import { getProductsAll } from '../../redux/actions'
 
-export const Home = () => {
+const Home = () => {
     const dispatch = useDispatch();
     const store = useSelector(state => state);
 
