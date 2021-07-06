@@ -1,5 +1,5 @@
 import LOGO from '../../assets/image/LOGO.png';
-import Login from './NavUser/User';
+import User from './NavUser/User';
 import NavBar from './NavBar/NavBar';
 import StyledDiv from './styled.js';
 import { Grid } from '@material-ui/core';
@@ -24,7 +24,7 @@ const Nav = () => {
                         </div>
                         <hr/>
                     </div>
-                    <Login/>
+                    <User/>
                 </Grid>
             </Grid>
             <NavBar/>

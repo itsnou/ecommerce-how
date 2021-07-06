@@ -28,6 +28,7 @@ import { modifyItemInCart } from "../../utils/modifyItemInCart";
 
 const initialState = {
   products: [],
+  productDetail:{},
   users: [],
   orders: [],
   loading: false,
@@ -42,13 +43,12 @@ const reducer = (state = initialState, { payload, type }) => {
         products: payload,
         loading: false,
       };
-    case GET_PRODUCT_DETAIL:
-      return {
-        ...state,
-        // como voy a recibir solo un porducto (que seguramente sea un objeto) lo encierro en un array
-        products: [payload],
-        loading: false,
-      };
+      case GET_PRODUCT_DETAIL:
+        return {
+            ...state,
+            productDetail: payload,
+            loading: false
+        }
     case GET_PRODUCTS_FOR_NAME:
       return {
         ...state,
