@@ -22,7 +22,7 @@ const ProductsSchema = new mongoose.Schema(
     category: {
       type: String,
       required: true,
-      enum: ["red", "white", "rose"], //AGREGAR LUEGO MAS CATEGORIAS SI ES NECESARIO
+      enum: ["Tinto", "Blanco", "Rosado"], //AGREGAR LUEGO MAS CATEGORIAS SI ES NECESARIO
     },
     stock: {
       type: Number,
