@@ -1,8 +1,9 @@
 import StyledDiv from './styled.js';
+import Search from '../../Search/Search';
 import {Link} from 'react-router-dom';
 
 const NavBar = () => {
-    return (  
+    return (
         <StyledDiv>
             <div className='navbar-fully'>
                 <div className='navbar-container'>
@@ -22,11 +23,11 @@ const NavBar = () => {
                     </ul>
                 </div>
                 <div className='navbar-input'>
-                    <input placeholder='Buscar'/>
+                    <Search/>
                 </div>
             </div>
         </StyledDiv>
     );
 }
- 
+
 export default NavBar;

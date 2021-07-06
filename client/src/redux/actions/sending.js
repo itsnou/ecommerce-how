@@ -1,3 +1,4 @@
+import axios from 'axios';
 import {
     GET_URL,
     ADD_PRODUCT,
@@ -7,6 +8,7 @@ import {
     ADD_USER,
     DELETE_USER,
 } from "./constant";
+
 
 export const addProduct = (product) => {
     return async (dispatch) => {
