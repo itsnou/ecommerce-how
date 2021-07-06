@@ -11,19 +11,22 @@ const StyledDiv = styled.div`
         height:100%;
         .navbar-container{
             margin:auto;
-            ul{
+            .navbar-links{
                 display:flex;
-                color:#BEBDBD;
                 margin:0;
                 align-items:center;
                 font-weight:bold;
                 justify-content:space-around;
-                li{
-                    list-style:none;
-                    margin-left:15px;
-                    :hover{
-                        color:gray;
-                        cursor:pointer;
+                a{
+                    text-decoration:none;
+                    color:#BEBDBD;
+                    li{
+                        list-style:none;
+                        margin-left:15px;
+                        :hover{
+                            color:gray;
+                            cursor:pointer;
+                        }
                     }
                 }
             }

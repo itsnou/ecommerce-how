@@ -2,8 +2,10 @@ import React from 'react';
 import CardDiv from './styled';
 import {FaWineGlass, FaCartPlus} from 'react-icons/fa';
 
-const ProductCard = (props) => {
-	const {name, price, image} = props;
+const ProductCard = ({name,image,price}) => {
+
+	console.log(name);
+
 	return (
 		<CardDiv>
 			<div>

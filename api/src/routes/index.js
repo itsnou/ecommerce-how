@@ -6,8 +6,9 @@ const invoiceSchema = require("../models/invoices");
 const orders = require("../models/orders");
 
 router.get("/", async (req, res) => {
-  // const cualquiera = await invoiceSchema.find({}).populate("products");
-  // res.send(cualquiera);
+  const products = await productSchema.find();
+  res.send(products);
+
 });
 
 //Pruebas de rutas
