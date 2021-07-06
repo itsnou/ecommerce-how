@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 const StyledDiv = styled.div`
     background-color: #272727;
-    height: 200px;
+    height: 216px;
     
     .nav-logo{
         text-align: center;

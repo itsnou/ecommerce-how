@@ -1,5 +1,4 @@
 import React from 'react';
-import CardDiv from './styled';
 import {FaWineGlass, FaCartPlus} from 'react-icons/fa';
 
 const ProductCard = ({name,image,price}) => {
@@ -7,16 +6,16 @@ const ProductCard = ({name,image,price}) => {
 	console.log(name);
 
 	return (
-		<CardDiv>
-			<div>
+		<div className='container-card'>
+			<div className='card-image'>
 				<img
 					src={image}
 					alt='image not found'
 				/>
 			</div>
-			<h3 className='name'>{name}</h3>
-			<h2 className='price'>{price}</h2>
-			<div className='buttonsDiv'>
+			<h3 className='card-name'>{name}</h3>
+			<h2 className='card-price'>$ {price}</h2>
+			<div className='card-buttonsDiv'>
 				<div>
 					<FaWineGlass />
 				</div>
@@ -25,7 +24,7 @@ const ProductCard = ({name,image,price}) => {
 					<button>agregar</button>
 				</div>
 			</div>
-		</CardDiv>
+		</div>
 	);
 };
 
