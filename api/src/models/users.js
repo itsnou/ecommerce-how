@@ -16,6 +16,7 @@ const UsersSchema = new mongoose.Schema(
     },
     //SE DEBE HACER LA VALIDACIÓN
     email: {
+      unique: true,
       required: true,
       type: String,
     },

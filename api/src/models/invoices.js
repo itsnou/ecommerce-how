@@ -2,16 +2,10 @@ const mongoose = require("mongoose");
 
 const InvoicesSchema = new mongoose.Schema(
   {
-    products: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Product",
-      },
-    ],
-
-    total_amount: {
+    items: [Object], //{name,price,quantity}
+    totalAmount: {
       type: Number,
-      required: false,
+      required: true,
     },
   },
   {
