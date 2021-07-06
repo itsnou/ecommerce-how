@@ -5,7 +5,7 @@ import {Link} from 'react-router-dom';
 const ProductCard = ({name,image,price, category, id}) => {
 
 	const buyWine =(id)=>{
-		
+		//aca van las cosas del carrito para que pusheen.
 	}
 
 	return (
