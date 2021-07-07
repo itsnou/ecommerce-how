@@ -13,14 +13,15 @@ const Catalogo = () => {
 
     useEffect(() => {
         dispatch(getProductsAll());
-        setProducts(store.products);
-    });
+    },[dispatch]);
 
     useEffect(() => {
         if (store.search !== 0) {
             setProducts(store.search);
+        } else {
+            setProducts(store.products);
         }
-    }, [dispatch, store.search]);
+    }, [store.search]);
 
     //paginated
     const [pageNumber, setPageNumber] = useState(0);
