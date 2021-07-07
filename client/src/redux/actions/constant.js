@@ -1,4 +1,5 @@
-export const GET_URL = "http://localhost:3001/";
+export const GET_URL = 'http://localhost:3001/';
+
 
 export const GET_PRODUCTS_ALL = "GET_PRODUCTS_ALL";
 export const GET_PRODUCTS_BY_NAME = "GET_PRODUCTS_BY_NAME";
@@ -24,3 +25,4 @@ export const ADD_TO_CART = "ADD_TO_CART";
 export const DELETE_FROM_CART = "DELETE_FROM_CART";
 export const MODIFY_ITEM_CART = "MODIFY_ITEM_CART";
 export const REMOVE_FROM_CART = "REMOVE_FROM_CART";
+
