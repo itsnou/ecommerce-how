@@ -4,7 +4,34 @@ const StyledDiv = styled.div`
     display:grid;
     grid-template-areas: 'filter product product product'
                         'filter product product product'
-                        'filter product product product';
+                        'filter product product product'
+                        'filter paginate paginate paginate';
+
+    .paginate{
+        grid-area: paginate;
+        margin:auto;
+        .paginationBtn{
+            list-style:none;
+            display:flex;
+            li{
+                cursor:pointer;
+                padding: 6px;
+                background-color:#420D1F;
+                color:white;
+                font-weight:bold;
+                border-radius:5px;
+                margin: auto 4px;
+                outline:none;
+            }
+            .paginationActive{
+                background-color:#900C3E;
+            }
+            .paginationDisable{
+                background-color:gray;
+            }
+        }
+    }
+
     .filter{
         grid-area: filter;
     }
@@ -14,7 +41,7 @@ const StyledDiv = styled.div`
         margin:auto;
         display:grid;
         gap: 1rem;
-        grid-template-columns: repeat(auto-fill, minmax(min(100%,28rem), 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(min(100%,30rem), 1fr));
         
         .container-card{
             display:grid;
