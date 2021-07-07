@@ -155,10 +155,16 @@ const reducer = (state = initialState, { payload, type }) => {
         [payload]: [],
       };
     case FILTRED_FOR_CATEGORY:
+      let filtered;
+      if (state.search.length) {
+        filtered = state.search;
+      } else {
+        filtered = state.products;
+      }
       return {
         ...state,
         productsFilter: payload.filterVarietals.length
-          ? state.products
+          ? filtered
               .filter((el) => el.category === payload.category)
               .filter((el) => {
                 let validate = true;
@@ -169,7 +175,7 @@ const reducer = (state = initialState, { payload, type }) => {
                 }
                 return validate;
               })
-          : state.products.filter((el) => el.category === payload.category),
+          : filtered.filter((el) => el.category === payload.category),
       };
     case GET_VARIETALS:
       return {

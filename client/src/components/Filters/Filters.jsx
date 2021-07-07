@@ -9,6 +9,7 @@ import {
 const Filters = () => {
   const dispatch = useDispatch();
   const products = useSelector((state) => state.products);
+  const search = useSelector((state) => state.search);
   const varietals = useSelector((state) => state.varietals);
   const [filterCategory, setFilterCategory] = useState({
     category: "default",
@@ -16,10 +17,13 @@ const Filters = () => {
   });
 
   useEffect(() => {
-    dispatch(filtredForCategory(filterCategory));
     dispatch(getVarietals());
+  }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(filtredForCategory(filterCategory));
     dispatch(changeFilterState(filterCategory.category));
-  }, [filterCategory]);
+  }, [dispatch, filterCategory, search]);
 
   const handleChange = (event) => {
     setFilterCategory({ ...filterCategory, category: event.target.value });

@@ -130,7 +130,7 @@ export const getOrderDetail = (id) => {
 
 export const getVarietals = () => {
   return async (dispatch) => {
-    dispatch({ type: LOADING });
+    // dispatch({ type: LOADING });
     try {
       const varietals = await axios.get(`${GET_URL}varietal`);
       return dispatch({ type: GET_VARIETALS, payload: varietals.data });
