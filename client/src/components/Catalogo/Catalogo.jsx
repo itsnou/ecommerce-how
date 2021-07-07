@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import StyledDiv from "./styled.js";
-import { getProductsAll } from "../../redux/actions/request";
+import { getProductsAll, getProductsByName } from "../../redux/actions/request";
 import ProductCard from "../ProductCard/ProductCard";
 import ReactPaginate from "react-paginate";
 import Loading from "../Loading/Loading";
@@ -13,6 +13,7 @@ const Catalogo = () => {
 
     useEffect(() => {
         dispatch(getProductsAll());
+        dispatch(getProductsByName(""));
     },[dispatch]);
 
     useEffect(() => {
