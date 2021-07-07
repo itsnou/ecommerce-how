@@ -2,6 +2,7 @@ import {React, useEffect, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {getProductDetail} from '../../redux/actions/request';
 import {addToCart} from '../../redux/actions/cart';
+import StyledDiv from './style';
 
 const ProductDetail = ({match}) => {
 	const dispatch = useDispatch();
@@ -23,25 +24,24 @@ const ProductDetail = ({match}) => {
 	};
 
 	return (
-		<div>
-			<h1>Componente detail</h1>
-			<h2>{detail.name}</h2>
-			<div>
+		<StyledDiv>
+			<div className='detail-img'>
 				<img src={detail.imageUrl} alt='image not found' />
 			</div>
-			<div>
+			<div className='detail-explain'>
+				<h2>{detail.name}</h2>
 				<h3>Bodega: {detail.vineyard}</h3>
 				<h3>Categoria: {detail.category}</h3>
 				<h3>Precio: ${detail.price}</h3>
-				<div>
+				<div className='detail-varietal'>
 					<h3>Varietal/es: </h3>
 					{detail.varietal &&
 						detail.varietal.map((e) => {
 							return <h3 key={e}>{e}</h3>;
 						})}
 				</div>
-				<h3>detalle: {detail.description}</h3>
-				<div>
+				<h3>Detalle: {detail.description}</h3>
+				<div className='detail-btn'>
 					<input
 						type='number'
 						min={detail.quantity}
@@ -49,10 +49,10 @@ const ProductDetail = ({match}) => {
 						value={count}
 						onChange={(e) => setCount(e.target.value)}
 					/>
-					<button onClick={() => handleClick()}>add</button>
+					<button onClick={() => handleClick()}>AGREGAR</button>
 				</div>
 			</div>
-		</div>
+		</StyledDiv>
 	);
 };
 
