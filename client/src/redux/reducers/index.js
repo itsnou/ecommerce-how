@@ -19,7 +19,7 @@ import {
   GET_USER_DETAIL,
   LOADING,
   ADD_TO_CART,
-  DELETE_FROM_CART,
+  REMOVE_FROM_CART,
   MODIFY_ITEM_CART,
 } from "../actions/constant";
 
@@ -28,7 +28,7 @@ import { modifyItemInCart } from "../../utils/modifyItemInCart";
 
 const initialState = {
   products: [],
-  productDetail:{},
+  productDetail: {},
   users: [],
   orders: [],
   loading: false,
@@ -43,12 +43,12 @@ const reducer = (state = initialState, { payload, type }) => {
         products: payload,
         loading: false,
       };
-      case GET_PRODUCT_DETAIL:
-        return {
-            ...state,
-            productDetail: payload,
-            loading: false
-        }
+    case GET_PRODUCT_DETAIL:
+      return {
+        ...state,
+        productDetail: payload,
+        loading: false,
+      };
     case GET_PRODUCTS_FOR_NAME:
       return {
         ...state,
@@ -131,7 +131,7 @@ const reducer = (state = initialState, { payload, type }) => {
         ...state,
         cart: addToCart(payload, state.cart),
       };
-    case DELETE_FROM_CART:
+    case REMOVE_FROM_CART:
       return {
         ...state,
         cart: state.cart.filter((e) => e._id !== payload),
