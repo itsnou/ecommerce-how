@@ -1,16 +1,16 @@
-import axios from 'axios';
+import axios from "axios";
 import {
     GET_ORDERS,
     GET_ORDER_DETAIL,
     GET_PRODUCTS_ALL,
     GET_PRODUCTS_FOR_CATEGORY,
-    GET_PRODUCTS_FOR_NAME,
+    GET_PRODUCTS_BY_NAME,
     GET_PRODUCT_DETAIL,
     GET_URL,
     GET_USERS,
     GET_USER_DETAIL,
-    LOADING
-} from './constant';
+    LOADING,
+} from "./constant";
 
 export const getProductsAll = () => {
     return async (dispatch) => {
@@ -20,20 +20,23 @@ export const getProductsAll = () => {
             return dispatch({ type: GET_PRODUCTS_ALL, payload: products.data });
         } catch (e) {
             console.log(e);
-            return dispatch({ type: GET_PRODUCTS_ALL, payload: [] })
+            return dispatch({ type: GET_PRODUCTS_ALL, payload: [] });
         }
     };
 };
 
-export const getProductsForName = (name) => {
+export const getProductsByName = (name) => {
     return async (dispatch) => {
         dispatch({ type: LOADING });
         try {
             const products = await axios.get(`${GET_URL}products?name=${name}`);
-            return dispatch({ type: GET_PRODUCTS_FOR_NAME, payload: products.data });
+            return dispatch({
+                type: GET_PRODUCTS_BY_NAME,
+                payload: products.data,
+            });
         } catch (e) {
             console.log(e);
-            return dispatch({ type: GET_PRODUCTS_FOR_NAME, payload: [] })
+            return dispatch({ type: GET_PRODUCTS_BY_NAME, payload: [] });
         }
     };
 };
@@ -42,11 +45,16 @@ export const getProductsForCategory = (category) => {
     return async (dispatch) => {
         dispatch({ type: LOADING });
         try {
-            const products = await axios.get(`${GET_URL}products?category=${category}`);
-            return dispatch({ type: GET_PRODUCTS_FOR_CATEGORY, payload: products.data });
+            const products = await axios.get(
+                `${GET_URL}products?category=${category}`
+            );
+            return dispatch({
+                type: GET_PRODUCTS_FOR_CATEGORY,
+                payload: products.data,
+            });
         } catch (e) {
             console.log(e);
-            return dispatch({ type: GET_PRODUCTS_FOR_CATEGORY, payload: [] })
+            return dispatch({ type: GET_PRODUCTS_FOR_CATEGORY, payload: [] });
         }
     };
 };
@@ -56,10 +64,13 @@ export const getProductDetail = (id) => {
         dispatch({ type: LOADING });
         try {
             const products = await axios.get(`${GET_URL}products/${id}`);
-            return dispatch({ type: GET_PRODUCT_DETAIL, payload: products.data });
+            return dispatch({
+                type: GET_PRODUCT_DETAIL,
+                payload: products.data,
+            });
         } catch (e) {
             console.log(e);
-            return dispatch({ type: GET_PRODUCT_DETAIL, payload: [] })
+            return dispatch({ type: GET_PRODUCT_DETAIL, payload: [] });
         }
     };
 };
@@ -72,7 +83,7 @@ export const getUsers = () => {
             return dispatch({ type: GET_USERS, payload: products.data });
         } catch (e) {
             console.log(e);
-            return dispatch({ type: GET_USERS, payload: [] })
+            return dispatch({ type: GET_USERS, payload: [] });
         }
     };
 };
@@ -85,7 +96,7 @@ export const getUserDetail = (id) => {
             return dispatch({ type: GET_USER_DETAIL, payload: products.data });
         } catch (e) {
             console.log(e);
-            return dispatch({ type: GET_USER_DETAIL, payload: [] })
+            return dispatch({ type: GET_USER_DETAIL, payload: [] });
         }
     };
 };
@@ -98,7 +109,7 @@ export const getOrders = () => {
             return dispatch({ type: GET_ORDERS, payload: products.data });
         } catch (e) {
             console.log(e);
-            return dispatch({ type: GET_ORDERS, payload: [] })
+            return dispatch({ type: GET_ORDERS, payload: [] });
         }
     };
 };
@@ -111,8 +122,7 @@ export const getOrderDetail = (id) => {
             return dispatch({ type: GET_ORDER_DETAIL, payload: products.data });
         } catch (e) {
             console.log(e);
-            return dispatch({ type: GET_ORDER_DETAIL, payload: [] })
+            return dispatch({ type: GET_ORDER_DETAIL, payload: [] });
         }
     };
 };
-
