@@ -5,11 +5,14 @@ import { getProductsAll, getProductsByName } from "../../redux/actions/request";
 import ProductCard from "../ProductCard/ProductCard";
 import ReactPaginate from "react-paginate";
 import Loading from "../Loading/Loading";
+import Filters from "../Filters/Filters";
 
 const Catalogo = () => {
   const dispatch = useDispatch();
   const store = useSelector((state) => state);
   const [products, setProducts] = useState([]);
+  const productsFilter = useSelector((state) => state.productsFilter);
+  const filter = useSelector((state) => state.filter);
 
   useEffect(() => {
     dispatch(getProductsAll());
@@ -51,7 +54,9 @@ const Catalogo = () => {
         <Loading />
       ) : (
         <StyledDiv>
-          <div className="filter"></div>
+          <div className="filter">
+            <Filters></Filters>
+          </div>
           <div className="cards-container">{displayProducts}</div>
           <div className="paginate">
             <ReactPaginate
