@@ -9,13 +9,13 @@ import ReactPaginate from 'react-paginate';
 const Catalogo = () => {
     const dispatch = useDispatch();
     const products = useSelector(state=> state.products);
-    const [pageNumber, setPageNumber] = useState(0);
-    
+
     useEffect(()=>{
         dispatch(getProductsAll());
      },[dispatch]);
 
      //paginated
+    const [pageNumber, setPageNumber] = useState(0);
     const productsPerPage= 6; // productos a mostrar
     const pagesVisited = pageNumber * productsPerPage;
     const displayProducts = products
