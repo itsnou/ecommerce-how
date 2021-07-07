@@ -1,5 +1,4 @@
 export const GET_URL = "http://localhost:3001/";
-
 export const GET_PRODUCTS_ALL = "GET_PRODUCTS_ALL";
 export const GET_PRODUCTS_FOR_NAME = "GET_PRODUCTS_FOR_NAME";
 export const GET_PRODUCTS_FOR_CATEGORY = "GET_PRODUCTS_FOR_CATEGORY";
@@ -22,3 +21,6 @@ export const LOADING = "LOADING";
 export const ADD_TO_CART = "ADD_TO_CART";
 export const DELETE_FROM_CART = "DELETE_FROM_CART";
 export const MODIFY_ITEM_CART = "MODIFY_ITEM_CART";
+export const FILTRED_FOR_CATEGORY = "FILTRED_FOR_CATEGORY";
+export const GET_VARIETALS = "GET_VARIETALS";
+export const FILTER_STATE = "FILTER_STATE";

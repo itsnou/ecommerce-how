@@ -21,6 +21,9 @@ import {
   ADD_TO_CART,
   DELETE_FROM_CART,
   MODIFY_ITEM_CART,
+  FILTRED_FOR_CATEGORY,
+  GET_VARIETALS,
+  FILTER_STATE,
 } from "../actions/constant";
 
 import { addToCart } from "../../utils/addToCart";
@@ -28,11 +31,14 @@ import { modifyItemInCart } from "../../utils/modifyItemInCart";
 
 const initialState = {
   products: [],
-  productDetail:{},
+  productDetail: {},
   users: [],
   orders: [],
   loading: false,
   cart: [],
+  productsFilter: [],
+  varietals: [],
+  filter: "off",
 };
 
 const reducer = (state = initialState, { payload, type }) => {
@@ -43,12 +49,12 @@ const reducer = (state = initialState, { payload, type }) => {
         products: payload,
         loading: false,
       };
-      case GET_PRODUCT_DETAIL:
-        return {
-            ...state,
-            productDetail: payload,
-            loading: false
-        }
+    case GET_PRODUCT_DETAIL:
+      return {
+        ...state,
+        productDetail: payload,
+        loading: false,
+      };
     case GET_PRODUCTS_FOR_NAME:
       return {
         ...state,
@@ -140,6 +146,34 @@ const reducer = (state = initialState, { payload, type }) => {
       return {
         ...state,
         cart: modifyItemInCart(payload, state.cart),
+      };
+    case FILTRED_FOR_CATEGORY:
+      return {
+        ...state,
+        productsFilter: payload.filterVarietals.length
+          ? state.products
+              .filter((el) => el.category === payload.category)
+              .filter((el) => {
+                let validate = true;
+                for (let i = 0; i < payload.filterVarietals.length; i++) {
+                  if (!el.varietal.includes(payload.filterVarietals[i])) {
+                    validate = false;
+                  }
+                }
+                return validate;
+              })
+          : state.products.filter((el) => el.category === payload.category),
+      };
+    case GET_VARIETALS:
+      return {
+        ...state,
+        varietals: payload,
+        loading: false,
+      };
+    case FILTER_STATE:
+      return {
+        ...state,
+        filter: payload !== "default" ? "on" : "off",
       };
     default:
       return state;
