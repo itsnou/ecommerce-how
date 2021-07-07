@@ -15,6 +15,11 @@ const Catalogo = () => {
     dispatch(getProductsAll());
     dispatch(getProductsByName(""));
   }, [dispatch]);
+  useEffect(() => {
+    if (store.search.length) {
+      setPageNumber(0);
+    }
+  }, [store.search.length]);
 
   useEffect(() => {
     if (store.search !== 0) {
