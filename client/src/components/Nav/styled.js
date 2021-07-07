@@ -36,6 +36,7 @@ const StyledDiv = styled.div`
             list-style:none;
             padding:0;
             font-weight:bold;
+            font-size:12px;
             li{
                 padding:4px;
                 margin-left:10px;
@@ -47,7 +48,7 @@ const StyledDiv = styled.div`
                     }
                 }
             }
-            .nav-list-count{
+            .nav-list_count{
                 background-color:black;
                 color:white;
                 padding:4px;

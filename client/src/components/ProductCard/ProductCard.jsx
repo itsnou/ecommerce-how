@@ -1,33 +1,34 @@
-import {useEffect, useState} from 'react';
-import {FaWineGlass, FaCartPlus} from 'react-icons/fa';
+import { FaCartPlus} from 'react-icons/fa';
 import {Link} from 'react-router-dom';
+import { useDispatch} from 'react-redux';
+import{addToCart} from '../../redux/actions/cart'
 
-const ProductCard = ({name,image,price, category, id}) => {
+const ProductCard = ({product}) => {
+    
+	const dispatch = useDispatch();
 
-	const buyWine =(id)=>{
+	const buyWine =(product)=>{
 		//aca van las cosas del carrito para que pusheen.
+		dispatch(addToCart(product));
 	}
 
 	return (
 		<div className='container-card'>
-			<Link to={`/product/${id}`}>
+			<Link to={`/product/${product._id}`}>
 				<div className='card-image'>
 					<img
-						src={image}
-						alt={name}
+						src={product.imageUrl}
+						alt={product.name}
 					/>
 				</div>
 			</Link>
 			<div className='card-sales'>
-				<h3 className='card-name'>{name}</h3>
+				<h3 className='card-name'>{product.name}</h3>
 				<hr className='line-div'/>
-				<p className='card-adds'>{category}</p>
-				<h2 className='card-price'>$ {price}</h2>
+				<p className='card-adds'>{product.category}</p>
+				<h2 className='card-price'>$ {product.price}</h2>
 				<div className='card-buttonsDiv'>
-						<div className='card-rating'>
-							<FaWineGlass />
-						</div>
-						<button className='card-buttons_build' onClick={() => buyWine(id)}>
+						<button className='card-buttons_build' onClick={() => buyWine(product)}>
 							<FaCartPlus />
 							 AGREGAR
 						</button>
