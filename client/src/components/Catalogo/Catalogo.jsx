@@ -5,11 +5,16 @@ import { getProductsAll, getProductsByName } from "../../redux/actions/request";
 import ProductCard from "../ProductCard/ProductCard";
 import ReactPaginate from "react-paginate";
 import Loading from "../Loading/Loading";
+import Filters from "../Filters/Filters";
 
 const Catalogo = () => {
   const dispatch = useDispatch();
   const store = useSelector((state) => state);
-  const [products, setProducts] = useState([]);
+  const search = useSelector((state) => state.search);
+  const products = useSelector((state) => state.products);
+  const productsFilter = useSelector((state) => state.productsFilter);
+  const [renderProduct, setRenderProduct] = useState([]);
+  const filter = useSelector((state) => state.filter);
 
   useEffect(() => {
     dispatch(getProductsAll());
@@ -22,24 +27,22 @@ const Catalogo = () => {
   }, [store.search.length]);
 
   useEffect(() => {
-    if (store.search !== 0) {
-      setProducts(store.search);
-    } else {
-      setProducts(store.products);
-    }
-  }, [store.search, store.products]);
+    setRenderProduct(search.length ? search : products);
+  }, [search, products]);
+
+  let filterProducts = filter === "on" ? productsFilter : renderProduct;
 
   //paginated
   const [pageNumber, setPageNumber] = useState(0);
   const productsPerPage = 6; // productos a mostrar
   const pagesVisited = pageNumber * productsPerPage;
-  const displayProducts = products
+  const displayProducts = filterProducts
     .slice(pagesVisited, pagesVisited + productsPerPage)
     .map((product, idx) => {
       return <ProductCard key={idx} product={product} />;
     });
 
-  const pageCount = Math.ceil(products.length / productsPerPage);
+  const pageCount = Math.ceil(filterProducts.length / productsPerPage);
 
   const changePage = ({ selected }) => {
     setPageNumber(selected);
@@ -51,20 +54,30 @@ const Catalogo = () => {
         <Loading />
       ) : (
         <StyledDiv>
-          <div className="filter"></div>
-          <div className="cards-container">{displayProducts}</div>
+          <div className="filter">
+            <Filters></Filters>
+          </div>
+          <div className="cards-container">
+            {displayProducts.length ? (
+              displayProducts
+            ) : (
+              <h1>No hay coincidencias</h1>
+            )}
+          </div>
           <div className="paginate">
-            <ReactPaginate
-              previousLabel={"Anterior"}
-              nextLabel={"Siguiente"}
-              pageCount={pageCount}
-              onPageChange={changePage}
-              containerClassName={"paginationBtn"}
-              previousLinkClassName={"previousBtn"}
-              nextLinkClassName={"nextBtn"}
-              disabledClassName={"paginationDisable"}
-              activeClassName={"paginationActive"}
-            />
+            {filterProducts.length > 6 ? (
+              <ReactPaginate
+                previousLabel={"Anterior"}
+                nextLabel={"Siguiente"}
+                pageCount={pageCount}
+                onPageChange={changePage}
+                containerClassName={"paginationBtn"}
+                previousLinkClassName={"previousBtn"}
+                nextLinkClassName={"nextBtn"}
+                disabledClassName={"paginationDisable"}
+                activeClassName={"paginationActive"}
+              />
+            ) : null}
           </div>
         </StyledDiv>
       )}
