@@ -50,33 +50,81 @@ const Filters = () => {
   return (
     <div>
       <div>
-        <select name="" id="" onChange={(event) => handleChange(event)}>
-          <option value="default">Categorias</option>
-          <option value="Tinto">Tinto</option>
-          <option value="Rosado">Rosado</option>
-          <option value="Blanco">Blanco</option>
-        </select>
+        <div>
+          <div>
+            <label>Categorias</label>
+          </div>
+
+          <label>
+            <input
+              type="checkbox"
+              value="Blanco"
+              id=""
+              onChange={(event) => handleChange(event)}
+            />
+            Blanco
+          </label>
+        </div>
+
+        <div>
+          <label>
+            <input
+              type="checkbox"
+              value="Rosado"
+              id=""
+              onChange={(event) => handleChange(event)}
+            />
+            Rosado
+          </label>
+        </div>
+        <div>
+          <label>
+            <input
+              type="checkbox"
+              value="Tinto"
+              id=""
+              onChange={(event) => handleChange(event)}
+            />
+            Tinto
+          </label>
+        </div>
+        <label>Varietales</label>
       </div>
       <div>
-        {filterCategory.category === "default" ? (
-          <p></p>
-        ) : (
-          varietals.map((el) => {
-            return (
-              <div>
-                <label>
-                  <input
-                    type="checkbox"
-                    value={el.name}
-                    id={el._id}
-                    onClick={(event) => handleVarietals(event)}
-                  ></input>
-                  {el.name}
-                </label>
-              </div>
-            );
-          })
-        )}
+        {filterCategory.category === "default"
+          ? varietals.map((el) => {
+              return (
+                <div>
+                  <label>
+                    <input
+                      type="checkbox"
+                      value={el.name}
+                      id={el._id}
+                      onClick={(event) => handleVarietals(event)}
+                    ></input>
+                    {el.name}
+                  </label>
+                </div>
+              );
+            })
+          : // )
+            varietals
+              .filter((el) => el.relatedCategory === filterCategory.category)
+              .map((el) => {
+                return (
+                  <div>
+                    <label>
+                      <input
+                        type="checkbox"
+                        value={el.name}
+                        id={el._id}
+                        onClick={(event) => handleVarietals(event)}
+                      ></input>
+                      {el.name}
+                    </label>
+                  </div>
+                );
+              })}
       </div>
     </div>
   );
