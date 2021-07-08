@@ -1,26 +1,88 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { removeFromCart, modifyItemCart } from "../../redux/actions/cart";
+import StyledCartItems from "./styled.js";
 
 export const Cart = () => {
   const dispatch = useDispatch();
-  var cartItems = useSelector((store) => store.cart);
-  //funcion onclick pa' despachar la action 
+  const cartItems = useSelector((store) => store.cart);
+  let total = 0;
+  //funcion onclick pa' despachar la action
+  const handleOnClick = (e, product) => {
+    if (e === "x") {
+      dispatch(removeFromCart(product));
+    } else {
+      let newQuantity = product.quantity;
+      if (e === "+") {
+        newQuantity++;
+      } else {
+        if (newQuantity === 1) return;
+        newQuantity--;
+      }
+      let obj = {
+        ...product,
+        quantity: newQuantity,
+      };
+      dispatch(modifyItemCart(obj));
+    }
+  };
   return (
-    <div>
-      {cartItems.length && 
-        cartItems.map((e, index) => {
-          return (
-            <div key={index}>
-            <button onClick={}>X</button>
-              <h2>{e.name}</h2>
-              <img src={e.image} alt="image not found" />
-              <button onClick={}>-</button>
-              <h2>{e.quantity}</h2>
-              <button onClick={}>+</button>
-              <h2>{e.price}</h2>
-            </div>
-          );
-        })}
-    </div>
+    <>
+      <div>
+        {cartItems.length &&
+          cartItems.map((e, index) => {
+            total = total + e.price * e.quantity;
+            console.log(e);
+            return (
+              <StyledCartItems key={index}>
+                <button
+                  className="btn-item-cart"
+                  onClick={() => {
+                    handleOnClick("x", e._id);
+                  }}
+                >
+                  X
+                </button>
+                <img
+                  className="img-card"
+                  src={e.imageUrl}
+                  alt="image not found"
+                />
+                <h2>{e.name}</h2>
+                <div className="container-btn">
+                  <button
+                    className="btn-item-cart"
+                    onClick={() => {
+                      handleOnClick("-", e);
+                    }}
+                  >
+                    -
+                  </button>
+                  <h2>{e.quantity}</h2>
+                  <button
+                    className="btn-item-cart"
+                    name="+"
+                    onClick={() => {
+                      handleOnClick("+", e);
+                    }}
+                  >
+                    +
+                  </button>
+                </div>
+                <h2>$ {e.price}</h2>
+                <h2>$ {e.price * e.quantity}</h2>
+              </StyledCartItems>
+            );
+          })}
+        {!cartItems.length && <h1>No hay ningún producto en el carrito</h1>}
+        <StyledCartItems>
+          <div className="total">
+            <h2>Total: $ {total}</h2>
+          </div>
+        </StyledCartItems>
+      </div>
+    </>
   );
 };
+
+export default Cart;

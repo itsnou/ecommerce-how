@@ -1,5 +1,5 @@
 export const modifyItemInCart = (obj, array) => {
-  array.map((e) => {
+  let newArr = array.map((e) => {
     if (e._id === obj._id) {
       e = {
         ...e,
@@ -8,6 +8,7 @@ export const modifyItemInCart = (obj, array) => {
     }
     return e;
   });
+  return newArr;
 };
 
 export default modifyItemInCart;

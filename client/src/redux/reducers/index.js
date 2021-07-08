@@ -19,7 +19,7 @@ import {
   GET_USER_DETAIL,
   LOADING,
   ADD_TO_CART,
-  DELETE_FROM_CART,
+  REMOVE_FROM_CART,
   MODIFY_ITEM_CART,
   RESET,
   FILTER_STATE,
@@ -145,7 +145,7 @@ const reducer = (state = initialState, { payload, type }) => {
         ...state,
         cart: addToCart(payload, state.cart),
       };
-    case DELETE_FROM_CART:
+    case REMOVE_FROM_CART:
       return {
         ...state,
         cart: state.cart.filter((e) => e._id !== payload),
