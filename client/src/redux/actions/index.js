@@ -2,26 +2,34 @@ import {
     filtredForPriceHightoLow,
     filtredForPriceLowToHigh,
     filtredForRatingHightoLow,
-    filtredForRatingLowToHigh
-} from './filtrer';
+    filtredForRatingLowToHigh,
+} from "./filtrer";
 import {
     getProductsAll,
     getProductsForCategory,
-    getProductsForName,
+    getProductsByName,
     getUsers,
     getUserDetail,
     getOrders,
     getProductDetail,
-    getOrderDetail
-} from './request';
+    getOrderDetail,
+} from "./request";
 import {
     addCategory,
     addProduct,
     addUser,
     deleteCategory,
     deleteProduct,
-    deleteUser
-} from './sending'
+    deleteUser,
+} from "./sending";
+import { RESET } from "./constant";
+
+export const reset = (props) => {
+    return {
+        type: RESET,
+        payload: props,
+    };
+};
 
 export {
     filtredForPriceHightoLow,
@@ -35,11 +43,11 @@ export {
     getProductsAll,
     getProductDetail,
     getProductsForCategory,
-    getProductsForName,
+    getProductsByName,
     addCategory,
     addProduct,
     addUser,
     deleteCategory,
     deleteProduct,
-    deleteUser
+    deleteUser,
 };

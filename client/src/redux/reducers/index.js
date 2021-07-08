@@ -13,7 +13,7 @@ import {
   GET_ORDER_DETAIL,
   GET_PRODUCTS_ALL,
   GET_PRODUCTS_FOR_CATEGORY,
-  GET_PRODUCTS_FOR_NAME,
+  GET_PRODUCTS_BY_NAME,
   GET_PRODUCT_DETAIL,
   GET_USERS,
   GET_USER_DETAIL,
@@ -21,6 +21,10 @@ import {
   ADD_TO_CART,
   REMOVE_FROM_CART,
   MODIFY_ITEM_CART,
+  RESET,
+  FILTER_STATE,
+  GET_VARIETALS,
+  FILTRED_FOR_CATEGORY,
 } from "../actions/constant";
 
 import { addToCart } from "../../utils/addToCart";
@@ -31,8 +35,12 @@ const initialState = {
   productDetail: {},
   users: [],
   orders: [],
-  loading: false,
   cart: [],
+  search: [],
+  loading: false,
+  productsFilter: [],
+  varietals: [],
+  filter: "off",
 };
 
 const reducer = (state = initialState, { payload, type }) => {
@@ -49,10 +57,16 @@ const reducer = (state = initialState, { payload, type }) => {
         productDetail: payload,
         loading: false,
       };
-    case GET_PRODUCTS_FOR_NAME:
+    case GET_PRODUCTS_BY_NAME:
+      let searching;
+      if (payload.length > 0) {
+        searching = payload;
+      } else {
+        searching = ["No hay productos"];
+      }
       return {
         ...state,
-        products: payload,
+        search: searching,
         loading: false,
       };
     case GET_PRODUCTS_FOR_CATEGORY:
@@ -140,6 +154,45 @@ const reducer = (state = initialState, { payload, type }) => {
       return {
         ...state,
         cart: modifyItemInCart(payload, state.cart),
+      };
+    case RESET:
+      return {
+        ...state,
+        [payload]: [],
+      };
+    case FILTRED_FOR_CATEGORY:
+      let filtered;
+      if (state.search.length) {
+        filtered = state.search;
+      } else {
+        filtered = state.products;
+      }
+      return {
+        ...state,
+        productsFilter: payload.filterVarietals.length
+          ? filtered
+              .filter((el) => el.category === payload.category)
+              .filter((el) => {
+                let validate = true;
+                for (let i = 0; i < payload.filterVarietals.length; i++) {
+                  if (!el.varietal.includes(payload.filterVarietals[i])) {
+                    validate = false;
+                  }
+                }
+                return validate;
+              })
+          : filtered.filter((el) => el.category === payload.category),
+      };
+    case GET_VARIETALS:
+      return {
+        ...state,
+        varietals: payload,
+        loading: false,
+      };
+    case FILTER_STATE:
+      return {
+        ...state,
+        filter: payload !== "default" ? "on" : "off",
       };
     default:
       return state;
