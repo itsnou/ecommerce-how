@@ -20,13 +20,22 @@ const Filters = () => {
     dispatch(getVarietals());
   }, [dispatch]);
 
+  useEffect(async () => {
+    setFilterCategory({
+      ...filterCategory,
+    });
+  }, [filterCategory.category]);
+
   useEffect(() => {
     dispatch(filtredForCategory(filterCategory));
-    dispatch(changeFilterState(filterCategory.category));
+    dispatch(changeFilterState(filterCategory));
   }, [dispatch, filterCategory, search]);
 
   const handleChange = (event) => {
-    setFilterCategory({ ...filterCategory, category: event.target.value });
+    return setFilterCategory({
+      ...filterCategory,
+      category: event.target.value,
+    });
   };
   const handleVarietals = (event) => {
     if (filterCategory.filterVarietals.includes(event.target.value)) {
@@ -50,33 +59,83 @@ const Filters = () => {
   return (
     <div>
       <div>
-        <select name="" id="" onChange={(event) => handleChange(event)}>
-          <option value="default">Categorias</option>
-          <option value="Tinto">Tinto</option>
-          <option value="Rosado">Rosado</option>
-          <option value="Blanco">Blanco</option>
-        </select>
+        <div>
+          <div>
+            <label>Categorias</label>
+            <label>
+              <input
+                type="radio"
+                value="default"
+                id=""
+                name="category"
+                onClick={(event) => handleChange(event)}
+                defaultChecked
+              />
+              Todos
+              <input
+                type="radio"
+                value="Blanco"
+                id=""
+                name="category"
+                onClick={(event) => handleChange(event)}
+              />
+              Blanco
+              <input
+                type="radio"
+                value="Rosado"
+                id=""
+                name="category"
+                onClick={(event) => handleChange(event)}
+              />
+              Rosado
+              <input
+                type="radio"
+                value="Tinto"
+                id=""
+                name="category"
+                onClick={(event) => handleChange(event)}
+              />
+              Tinto
+            </label>
+          </div>
+        </div>
+        <label>Varietales</label>
       </div>
       <div>
-        {filterCategory.category === "default" ? (
-          <p></p>
-        ) : (
-          varietals.map((el) => {
-            return (
-              <div>
-                <label>
-                  <input
-                    type="checkbox"
-                    value={el.name}
-                    id={el._id}
-                    onClick={(event) => handleVarietals(event)}
-                  ></input>
-                  {el.name}
-                </label>
-              </div>
-            );
-          })
-        )}
+        {filterCategory.category === "default"
+          ? varietals.map((el) => {
+              return (
+                <div>
+                  <label>
+                    <input
+                      type="checkbox"
+                      value={el.name}
+                      id={el.name}
+                      onChange={(event) => handleVarietals(event)}
+                    ></input>
+                    {el.name}
+                  </label>
+                </div>
+              );
+            })
+          : // )
+            varietals
+              .filter((el) => el.relatedCategory === filterCategory.category)
+              .map((el) => {
+                return (
+                  <div>
+                    <label>
+                      <input
+                        type="checkbox"
+                        value={el.name}
+                        id={el.name}
+                        onChange={(event) => handleVarietals(event)}
+                      ></input>
+                      {el.name}
+                    </label>
+                  </div>
+                );
+              })}
       </div>
     </div>
   );

@@ -29,6 +29,7 @@ import {
 
 import { addToCart } from "../../utils/addToCart";
 import { modifyItemInCart } from "../../utils/modifyItemInCart";
+import { filterWines, filterOnOff } from "../../utils/methods";
 
 const initialState = {
   products: [],
@@ -169,19 +170,7 @@ const reducer = (state = initialState, { payload, type }) => {
       }
       return {
         ...state,
-        productsFilter: payload.filterVarietals.length
-          ? filtered
-              .filter((el) => el.category === payload.category)
-              .filter((el) => {
-                let validate = true;
-                for (let i = 0; i < payload.filterVarietals.length; i++) {
-                  if (!el.varietal.includes(payload.filterVarietals[i])) {
-                    validate = false;
-                  }
-                }
-                return validate;
-              })
-          : filtered.filter((el) => el.category === payload.category),
+        productsFilter: filterWines(payload, filtered),
       };
     case GET_VARIETALS:
       return {
@@ -192,7 +181,7 @@ const reducer = (state = initialState, { payload, type }) => {
     case FILTER_STATE:
       return {
         ...state,
-        filter: payload !== "default" ? "on" : "off",
+        filter: filterOnOff(payload),
       };
     default:
       return state;
