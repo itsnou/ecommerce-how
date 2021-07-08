@@ -90,45 +90,42 @@ const StyledDiv = styled.div`
                     display:flex;
                     justify-content:center;
                     width:100%;
-                        .card-rating{
-                            padding:4px;
-                            margin-right:5px;
-                            background-color: #420D1F;
-                            border-radius:3px;
-                            color:white;
-                            :hover{
-                                background-color:white;
-                                color:#420D1F;
-                                cursor:pointer;
-                            }
-                        }
-                        .card-buttons_build{
-                            background-color: #420D1F;
-                            border-radius:3px;
-                            padding:4px;
-                            color:white;
+                    .card-buttons_disabled{
                             border:none;
+                            background-color:gray;
                             font-weight:bold;
+                            border-radius:3px;
+                            padding:4px;
+                            cursor: not-allowed;
+                    }
+                    .card-buttons_build{
+                        background-color: #420D1F;
+                        border-radius:3px;
+                        padding:4px;
+                        color:white;
+                        border:none;
+                        font-weight:bold;
+                        :hover{
+                            background-color:white;
+                            color:#420D1F;
+                            cursor:pointer;
+                        }
+                    
+                        button{
+                            text-align:center;
+                            color:white;
+                            margin:auto;
+                            margin-bottom:2px;
+                            cursor:pointer;
                             :hover{
-                                background-color:white;
+                                font-weight:bold;
                                 color:#420D1F;
-                                cursor:pointer;
-                            }
-                            button{
-                                text-align:center;
-                                color:white;
-                                margin:auto;
-                                margin-bottom:2px;
-                                cursor:pointer;
-                                :hover{
-                                    font-weight:bold;
-                                    color:#420D1F;
-                                }
                             }
                         }
                     }
                 }
             }
+        }
     }
 `
 

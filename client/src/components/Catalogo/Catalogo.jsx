@@ -9,7 +9,6 @@ import Filters from "../Filters/Filters";
 
 const Catalogo = () => {
   const dispatch = useDispatch();
-  const store = useSelector((state) => state);
   const search = useSelector((state) => state.search);
   const products = useSelector((state) => state.products);
   const productsFilter = useSelector((state) => state.productsFilter);
@@ -20,11 +19,12 @@ const Catalogo = () => {
     dispatch(getProductsAll());
     dispatch(getProductsByName(""));
   }, [dispatch]);
+
   useEffect(() => {
-    if (store.search.length) {
+    if (search.length) {
       setPageNumber(0);
     }
-  }, [store.search.length]);
+  }, [search.length]);
 
   useEffect(() => {
     setRenderProduct(search.length ? search : products);
@@ -50,9 +50,6 @@ const Catalogo = () => {
 
   return (
     <>
-      {store.loading ? (
-        <Loading />
-      ) : (
         <StyledDiv>
           <div className="filter">
             <Filters></Filters>
@@ -80,7 +77,6 @@ const Catalogo = () => {
             ) : null}
           </div>
         </StyledDiv>
-      )}
     </>
   );
 };
