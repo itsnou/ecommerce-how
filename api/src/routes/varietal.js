@@ -13,9 +13,10 @@ router.get("/", async (req, res) => {
 
 router.post("/", async (req, res) => {
   try {
-    const { name } = req.body;
-    const data = {
+    const { name, relatedCategory  } = req.body;
+    let data = {
       name: name,
+      relatedCategory : relatedCategory      
     };
     const newVarietal = await new VarietalSchema(data);
     await newVarietal.save();
