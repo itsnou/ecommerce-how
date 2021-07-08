@@ -61,7 +61,6 @@ export const getProductsForCategory = (category) => {
 
 export const getProductDetail = (id) => {
   return async (dispatch) => {
-    dispatch({ type: LOADING });
     try {
       const products = await axios.get(`${GET_URL}products/${id}`);
       return dispatch({

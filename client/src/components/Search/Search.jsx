@@ -1,52 +1,59 @@
-import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { HiOutlineSearch } from "react-icons/hi";
-import { getProductsByName } from "../../redux/actions";
-import StyledDiv from "./styled.js";
-import Button from "@material-ui/core/Button";
-
+import React, { useState } from "react";
+import AutoSuggest from "react-autosuggest";
+import { useSelector } from "react-redux";
+import StyledDiv from "./styled";
+import { Link } from "react-router-dom";
+import { getProductDetail } from "../../redux/actions/request";
+import { useDispatch } from "react-redux";
 const Search = () => {
-  const [product, setProduct] = useState("");
-  const search = useSelector((state) => state.search);
-
   const dispatch = useDispatch();
+  const wines = useSelector((state) => state.products);
+  const lowerCasedCompanies = wines.map((company) => {
+    return {
+      id: company._id,
+      name: company.name.toUpperCase(),
+    };
+  });
+  console.log(lowerCasedCompanies);
+  const [value, setValue] = useState("");
+  const [suggestions, setSuggestions] = useState([]);
 
-  const handleChange = (e) => {
-    setProduct(e.target.value);
-    dispatch(getProductsByName(e.target.value));
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    dispatch(getProductsByName(product));
-    setProduct("");
-  };
-
-  useEffect(() => {
-    if (search.length === 0) {
-      setProduct("");
-    }
-  }, [dispatch, search]);
-
+  function getSuggestions(value) {
+    return lowerCasedCompanies.filter((company) =>
+      company.name.includes(value.trim().toUpperCase())
+    );
+  }
+  console.log(suggestions);
   return (
     <StyledDiv>
-      <div>
-        <form onSubmit={() => handleSubmit()}>
-          <input
-            type="search"
-            placeholder="Buscar..."
-            value={product}
-            onChange={(e) => handleChange(e)}
-          />
-          <Button
-            className="btn"
-            variant="contained"
-            onClick={() => handleSubmit()}
+      <AutoSuggest
+        suggestions={suggestions}
+        onSuggestionsClearRequested={() => setSuggestions([])}
+        onSuggestionsFetchRequested={({ value }) => {
+          setValue(value);
+          setSuggestions(getSuggestions(value));
+        }}
+        onSuggestionSelected={(_, { suggestionValue }) =>
+          console.log("Selected: " + suggestionValue)
+        }
+        getSuggestionValue={(suggestion) => suggestion.name}
+        renderSuggestion={(suggestion) => (
+          <Link
+            to={`/product/${suggestion.id}`}
+            onClick={() => dispatch(getProductDetail(suggestion.id))}
           >
-            <HiOutlineSearch />
-          </Button>
-        </form>
-      </div>
+            {suggestion.name}
+          </Link>
+        )}
+        inputProps={{
+          placeholder: "Ingresá un nombre de vino",
+          value: value,
+          onChange: (_, { newValue, method }) => {
+            setValue(newValue);
+          },
+        }}
+        highlightFirstSuggestion={true}
+      />
     </StyledDiv>
   );
 };
