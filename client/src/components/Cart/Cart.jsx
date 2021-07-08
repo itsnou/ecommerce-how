@@ -13,7 +13,7 @@ export const Cart = () => {
       dispatch(removeFromCart(product));
     } else {
       let newQuantity = product.quantity;
-      if (e === "+") {
+      if (e === "+" && newQuantity < product.stock) {
         newQuantity++;
       } else {
         if (newQuantity === 1) return;
@@ -29,10 +29,10 @@ export const Cart = () => {
   return (
     <>
       <div>
+        {console.log(cartItems)}
         {cartItems.length &&
           cartItems.map((e, index) => {
             total = total + e.price * e.quantity;
-            console.log(e);
             return (
               <StyledCartItems key={index}>
                 <button
@@ -68,6 +68,7 @@ export const Cart = () => {
                   >
                     +
                   </button>
+                  <h2>Stock: {e.stock}</h2>
                 </div>
                 <h2>$ {e.price}</h2>
                 <h2>$ {e.price * e.quantity}</h2>
