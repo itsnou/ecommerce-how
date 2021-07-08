@@ -58,9 +58,15 @@ const reducer = (state = initialState, { payload, type }) => {
         loading: false,
       };
     case GET_PRODUCTS_BY_NAME:
+      let searching;
+      if (payload.length > 0) {
+        searching = payload;
+      } else {
+        searching = ["No hay productos"];
+      }
       return {
         ...state,
-        search: payload,
+        search: searching,
         loading: false,
       };
     case GET_PRODUCTS_FOR_CATEGORY:

@@ -28,7 +28,6 @@ export const getProductsAll = () => {
 
 export const getProductsByName = (name) => {
   return async (dispatch) => {
-    dispatch({ type: LOADING });
     try {
       const products = await axios.get(`${GET_URL}products?name=${name}`);
       return dispatch({

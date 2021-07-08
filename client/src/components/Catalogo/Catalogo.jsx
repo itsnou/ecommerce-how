@@ -26,13 +26,6 @@ const Catalogo = () => {
     }
   }, [store.search.length]);
 
-  //   useEffect(() => {
-  //     if (!store.search.length) {
-  //       setProducts(store.search);
-  //     } else {
-  //       setProducts(store.products);
-  //     }
-  //   }, [store.search, store.products]);
   useEffect(() => {
     setRenderProduct(search.length ? search : products);
   }, [search, products]);
@@ -64,19 +57,27 @@ const Catalogo = () => {
           <div className="filter">
             <Filters></Filters>
           </div>
-          <div className="cards-container">{displayProducts}</div>
+          <div className="cards-container">
+            {displayProducts.length ? (
+              displayProducts
+            ) : (
+              <h1>No hay coincidencias</h1>
+            )}
+          </div>
           <div className="paginate">
-            <ReactPaginate
-              previousLabel={"Anterior"}
-              nextLabel={"Siguiente"}
-              pageCount={pageCount}
-              onPageChange={changePage}
-              containerClassName={"paginationBtn"}
-              previousLinkClassName={"previousBtn"}
-              nextLinkClassName={"nextBtn"}
-              disabledClassName={"paginationDisable"}
-              activeClassName={"paginationActive"}
-            />
+            {filterProducts.length > 6 ? (
+              <ReactPaginate
+                previousLabel={"Anterior"}
+                nextLabel={"Siguiente"}
+                pageCount={pageCount}
+                onPageChange={changePage}
+                containerClassName={"paginationBtn"}
+                previousLinkClassName={"previousBtn"}
+                nextLinkClassName={"nextBtn"}
+                disabledClassName={"paginationDisable"}
+                activeClassName={"paginationActive"}
+              />
+            ) : null}
           </div>
         </StyledDiv>
       )}
