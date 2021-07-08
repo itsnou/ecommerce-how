@@ -7,6 +7,11 @@ const VarietalSchema = new mongoose.Schema(
       required: true,
       unique: true,
     },
+    relatedCategory : {
+      type : String,
+      required : true
+    }
+    
   },
   { versionKey: false }
 );
