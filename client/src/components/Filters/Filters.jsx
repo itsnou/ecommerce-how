@@ -20,13 +20,22 @@ const Filters = () => {
     dispatch(getVarietals());
   }, [dispatch]);
 
+  useEffect(async () => {
+    setFilterCategory({
+      ...filterCategory,
+    });
+  }, [filterCategory.category]);
+
   useEffect(() => {
     dispatch(filtredForCategory(filterCategory));
-    dispatch(changeFilterState(filterCategory.category));
+    dispatch(changeFilterState(filterCategory));
   }, [dispatch, filterCategory, search]);
 
   const handleChange = (event) => {
-    setFilterCategory({ ...filterCategory, category: event.target.value });
+    return setFilterCategory({
+      ...filterCategory,
+      category: event.target.value,
+    });
   };
   const handleVarietals = (event) => {
     if (filterCategory.filterVarietals.includes(event.target.value)) {
@@ -53,40 +62,42 @@ const Filters = () => {
         <div>
           <div>
             <label>Categorias</label>
+            <label>
+              <input
+                type="radio"
+                value="default"
+                id=""
+                name="category"
+                onClick={(event) => handleChange(event)}
+                defaultChecked
+              />
+              Todos
+              <input
+                type="radio"
+                value="Blanco"
+                id=""
+                name="category"
+                onClick={(event) => handleChange(event)}
+              />
+              Blanco
+              <input
+                type="radio"
+                value="Rosado"
+                id=""
+                name="category"
+                onClick={(event) => handleChange(event)}
+              />
+              Rosado
+              <input
+                type="radio"
+                value="Tinto"
+                id=""
+                name="category"
+                onClick={(event) => handleChange(event)}
+              />
+              Tinto
+            </label>
           </div>
-
-          <label>
-            <input
-              type="checkbox"
-              value="Blanco"
-              id=""
-              onChange={(event) => handleChange(event)}
-            />
-            Blanco
-          </label>
-        </div>
-
-        <div>
-          <label>
-            <input
-              type="checkbox"
-              value="Rosado"
-              id=""
-              onChange={(event) => handleChange(event)}
-            />
-            Rosado
-          </label>
-        </div>
-        <div>
-          <label>
-            <input
-              type="checkbox"
-              value="Tinto"
-              id=""
-              onChange={(event) => handleChange(event)}
-            />
-            Tinto
-          </label>
         </div>
         <label>Varietales</label>
       </div>
@@ -99,8 +110,8 @@ const Filters = () => {
                     <input
                       type="checkbox"
                       value={el.name}
-                      id={el._id}
-                      onClick={(event) => handleVarietals(event)}
+                      id={el.name}
+                      onChange={(event) => handleVarietals(event)}
                     ></input>
                     {el.name}
                   </label>
@@ -117,8 +128,8 @@ const Filters = () => {
                       <input
                         type="checkbox"
                         value={el.name}
-                        id={el._id}
-                        onClick={(event) => handleVarietals(event)}
+                        id={el.name}
+                        onChange={(event) => handleVarietals(event)}
                       ></input>
                       {el.name}
                     </label>
