@@ -13,7 +13,7 @@ export const Cart = () => {
       dispatch(removeFromCart(product));
     } else {
       let newQuantity = product.quantity;
-      if (e === "+") {
+      if (e === "+" && newQuantity < product.stock) {
         newQuantity++;
       } else {
         if (newQuantity === 1) return;
@@ -26,29 +26,21 @@ export const Cart = () => {
       dispatch(modifyItemCart(obj));
     }
   };
+
   return (
     <>
-      <div>
-        {cartItems.length &&
+      <StyledCartItems>
+        {cartItems.length ?
           cartItems.map((e, index) => {
             total = total + e.price * e.quantity;
-            console.log(e);
             return (
-              <StyledCartItems key={index}>
-                <button
-                  className="btn-item-cart"
-                  onClick={() => {
-                    handleOnClick("x", e._id);
-                  }}
-                >
-                  X
-                </button>
-                <img
-                  className="img-card"
-                  src={e.imageUrl}
-                  alt="image not found"
-                />
-                <h2>{e.name}</h2>
+              <div key={index} className='container-cards_products'>
+                <div className='container-img_card'>
+                  <img className="img-card" src={e.imageUrl} alt="image not found"/>
+                </div>
+                <div className='container-title'>
+                  <h2>{e.name}</h2>
+                </div>
                 <div className="container-btn">
                   <button
                     className="btn-item-cart"
@@ -68,19 +60,30 @@ export const Cart = () => {
                   >
                     +
                   </button>
+                  <h2>Stock <span>{e.stock}</span></h2>
                 </div>
-                <h2>$ {e.price}</h2>
-                <h2>$ {e.price * e.quantity}</h2>
-              </StyledCartItems>
+                <div className='product-card_price'>
+                  <h2>$ {e.price * e.quantity}</h2>
+                </div>
+                <button
+                  className="btn-item-cart"
+                  onClick={() => {
+                    handleOnClick("x", e._id);
+                  }}
+                >
+                  X
+                </button>
+              </div>
             );
-          })}
-        {!cartItems.length && <h1>No hay ningún producto en el carrito</h1>}
-        <StyledCartItems>
+          }):
+            <h1>No hay ningún producto en el carrito</h1>
+          }
+        <div className='cart-total'>
           <div className="total">
             <h2>Total: $ {total}</h2>
           </div>
-        </StyledCartItems>
-      </div>
+        </div>
+      </StyledCartItems>
     </>
   );
 };

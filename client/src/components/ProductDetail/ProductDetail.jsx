@@ -1,3 +1,4 @@
+
 import {React, useEffect, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {getProductDetail} from '../../redux/actions/request';
@@ -13,10 +14,11 @@ const ProductDetail = ({match}) => {
 	const [count, setCount] = useState(0);
 	const [stars, setStars] = useState(0);
 
-	useEffect(() => {
-		let id = match.params.id;
-		dispatch(getProductDetail(id));
-	}, [dispatch]);
+
+  useEffect(() => {
+    dispatch(getProductDetail(fixed.current));
+  }, [dispatch]);
+
 
 	useEffect(() => {
 		if (cart.length > 0) {
@@ -34,13 +36,15 @@ const ProductDetail = ({match}) => {
 		}
 	}, [detail]);
 
-	const handleClick = () => {
-		let obj = {
-			...detail,
-			quantity: count,
-		};
-		dispatch(addToCart(obj));
-	};
+
+  const handleClick = () => {
+    let obj = {
+      ...detail,
+      quantity: count,
+    };
+    dispatch(addToCart(obj));
+  };
+
 
 	return (
 		<StyledDiv>
@@ -96,6 +100,7 @@ const ProductDetail = ({match}) => {
 			</div>
 		</StyledDiv>
 	);
+
 };
 
 export default ProductDetail;
