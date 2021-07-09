@@ -6,14 +6,12 @@ import React, { useState, useEffect } from "react";
 
 const NavBar = () => {
   const [url, setUrl] = useState(useHistory().location.pathname.toLowerCase());
-  //("/");
-  console.log(url);
 
-  /* useEffect(() => {
+  useEffect(() => {
     if (url === "/") {
-      setUrl("/catalogo");
+      setUrl("/");
     }
-  }, [url]); */
+  }, [url]);
 
   const handleOnClick = (string) => {
     setUrl(string);

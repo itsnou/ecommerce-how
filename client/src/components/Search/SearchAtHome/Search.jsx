@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import AutoSuggest from "react-autosuggest";
 import { useSelector } from "react-redux";
 import StyledDiv from "./styled";
@@ -9,25 +9,27 @@ import {
 } from "../../../redux/actions/request";
 import { useDispatch } from "react-redux";
 const SearchAtHome = () => {
-  const dispatch = useDispatch();
-  dispatch(getProductsAll());
   const wines = useSelector((state) => state.products);
+  const [value, setValue] = useState("");
+  const [suggestions, setSuggestions] = useState([]);
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getProductsAll());
+  }, []);
+
   const lowerCasedWines = wines.map((wine) => {
     return {
       id: wine._id,
       name: wine.name.toUpperCase(),
     };
   });
-  console.log(lowerCasedWines);
-  const [value, setValue] = useState("");
-  const [suggestions, setSuggestions] = useState([]);
 
-  function getSuggestions(value) {
+  const getSuggestions = (value) => {
     return lowerCasedWines.filter((wine) =>
       wine.name.includes(value.trim().toUpperCase())
     );
-  }
-  console.log(suggestions);
+  };
   return (
     <StyledDiv>
       <AutoSuggest
@@ -37,9 +39,9 @@ const SearchAtHome = () => {
           setValue(value);
           setSuggestions(getSuggestions(value));
         }}
-        onSuggestionSelected={(_, { suggestionValue }) =>
-          console.log("Selected: " + suggestionValue)
-        }
+        // onSuggestionSelected={(_, { suggestionValue }) =>
+        //   console.log("Selected: " + suggestionValue)
+        // }
         getSuggestionValue={(suggestion) => suggestion.name}
         renderSuggestion={(suggestion) => (
           <Link
