@@ -1,34 +1,107 @@
-import React, { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import Loading from "../Loading/Loading";
-import ProductCard from "../ProductCard/ProductCard";
-import { reset } from "../../redux/actions";
+import React from "react";
+import {Link} from 'react-router-dom';
+import face from '../../assets/image/face.svg';
+import insta from '../../assets/image/instagram.svg';
+import twitter from '../../assets/image/twitter.svg';
+import StyledDiv from './styled.js';
 
 const Home = () => {
-  const dispatch = useDispatch();
-  const store = useSelector((state) => state);
-
-  useEffect(() => {
-    dispatch(reset("search"));
-    return () => dispatch(reset("search"));
-  }, [dispatch]);
-
   return (
-    <>
-      {store.loading ? (
-        <Loading />
-      ) : (
-        <div>
-          {store.search.length > 0 ? (
-            store.search.map((product) => <ProductCard product={product} />)
-          ) : (
-            <div>
-              <h1>ACA VA EL BANNER Y LOS VINOS EN OFERTA</h1>
-            </div>
-          )}
+    <StyledDiv>
+      <div className="footer-container">
+        <div className="footer-nosotros">
+          <h2>Nosotros</h2>
+          <ul>
+            <li>
+              <Link to='/empresa'>
+                Nuestra Empresa
+              </Link>
+            </li>
+            <li>
+              <Link to='/contacto'>
+                Contacto
+              </Link>
+            </li>
+            <li>
+              <Link to='/contacto'>
+                FAQ
+              </Link>
+            </li>
+            <li>
+              <Link to='/avisos'>
+                Aviso de Privacidad
+              </Link>
+            </li>
+          </ul>
         </div>
-      )}
-    </>
+        <div className='footer-avisos_seteados'>
+          <h2>Avisos</h2>
+          <ul>
+            <li>
+              <Link to='/avisos'>
+                Términos y condiciones
+              </Link>
+            </li>
+            <li>
+              <Link to='/avisos'>
+                Factura Clientes
+              </Link>
+            </li>
+            <li>
+              <Link to='/avisos'>
+                Factura Empresas
+              </Link>
+            </li>
+            <li>
+              <Link to='/avisos'>
+                Política de devoluciones
+              </Link>
+            </li>
+            <li>
+              <Link to='/avisos'>
+                Política de promociones
+              </Link>
+            </li>
+          </ul>
+        </div>
+        <div className='footer-links_interes'>
+          <h2>Links de Interés</h2>
+          <ul>
+            <li>
+              <Link to='/catalogo'>
+                Cátalogo
+              </Link>
+            </li>
+            <li>
+              <Link to='/contacto'>
+                Contacto
+              </Link>
+            </li>
+          </ul>
+        </div>
+        <div className='footer-followers'>
+          <h2>Seguinos: </h2>
+          <ul>
+            <li>
+              <a href="#" target="_blank">
+                <img src={insta} class="footer-svg" alt=""/>
+              </a>
+            </li>
+            <li>
+              <a href="#" target="_blank">
+                <img src={face} class="footer-svg" alt=""/>
+              </a>
+            </li>
+            <li>
+              <a href="#" target="_blank">
+                <img src={twitter} class="footer-svg" alt=""/>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div className='footer-derechos'>Copyright House&Wines - 2021</div>
+    </StyledDiv>
   );
 };
 

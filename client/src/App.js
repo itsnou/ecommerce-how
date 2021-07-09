@@ -3,7 +3,6 @@ import Nav from "./components/Nav/Nav";
 import Catalogo from "./components/Catalogo/Catalogo";
 import ProductDetail from "./components/ProductDetail/ProductDetail";
 import Cart from "./components/Cart/Cart";
-
 import Home from "./components/Home/Home";
 
 function App() {
