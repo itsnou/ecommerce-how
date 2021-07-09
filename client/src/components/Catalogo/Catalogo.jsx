@@ -38,7 +38,7 @@ const Catalogo = () => {
 
   //paginated
   const [pageNumber, setPageNumber] = useState(0);
-  const productsPerPage = 6; // productos a mostrar
+  const productsPerPage = 14; // productos a mostrar
   const pagesVisited = pageNumber * productsPerPage;
   const displayProducts = filterProducts
     .slice(pagesVisited, pagesVisited + productsPerPage)
