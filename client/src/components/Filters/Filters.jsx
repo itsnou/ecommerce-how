@@ -6,6 +6,8 @@ import {
   filtredForCategory,
 } from "../../redux/actions/filtrer";
 
+//MARIANA AQUI NO SE HACEN MAS FILTROS
+
 const Filters = () => {
   const dispatch = useDispatch();
   const products = useSelector((state) => state.products);
@@ -107,61 +109,16 @@ const Filters = () => {
       <hr />
       <div>
         {filterCategory.category === "default"
-          ? varietals.map((el, idx) => {
+          ? varietals.map((el) => {
               if (filterCategory.filterVarietals.length) {
-                if (filterCategory.filterVarietals.includes(el.name)) {
-                  return (
-                    <div>
-                      <label>
-                        <input
-                          type="checkbox"
-                          value={el.name}
-                          id={el.name}
-                          onChange={(event) => handleVarietals(event)}
-                          defaultChecked
-                        ></input>
-                        {el.name}
-                      </label>
-                    </div>
-                  );
-                } else {
-                  return (
-                    <div>
-                      <label>
-                        <input
-                          type="checkbox"
-                          value={el.name}
-                          id={el.name}
-                          onChange={(event) => handleVarietals(event)}
-                        ></input>
-                        {el.name}
-                      </label>
-                    </div>
-                  );
-                }
-              }
-              return (
-                <div key={idx}>
-                  <label>
-                    <input
-                      type="checkbox"
-                      value={el.name}
-                      id={el.name}
-                      onChange={(event) => handleVarietals(event)}
-                    ></input>
-                    {el.name}
-                  </label>
-                </div>
-              );
-            })
-          : // )
-            varietals
-              .filter((el) => el.relatedCategory === filterCategory.category)
-              .map((el, idx) => {
-                if (filterCategory.filterVarietals.length) {
-                  if (filterCategory.filterVarietals.includes(el.name)) {
+                for (
+                  let i = 0;
+                  i < filterCategory.filterVarietals.length;
+                  i++
+                ) {
+                  if (filterCategory.filterVarietals[i] === el.name) {
                     return (
-                      <div>
+                      <div key={el.name}>
                         <label>
                           <input
                             type="checkbox"
@@ -176,7 +133,7 @@ const Filters = () => {
                     );
                   } else {
                     return (
-                      <div>
+                      <div key={el.name}>
                         <label>
                           <input
                             type="checkbox"
@@ -190,8 +147,9 @@ const Filters = () => {
                     );
                   }
                 }
+              } else {
                 return (
-                  <div key={idx}>
+                  <div key={el.name}>
                     <label>
                       <input
                         type="checkbox"
@@ -203,6 +161,64 @@ const Filters = () => {
                     </label>
                   </div>
                 );
+              }
+            })
+          : // )
+            varietals
+              .filter((el) => el.relatedCategory === filterCategory.category)
+              .map((el) => {
+                if (filterCategory.filterVarietals.length) {
+                  for (
+                    let i = 0;
+                    i < filterCategory.filterVarietals.length;
+                    i++
+                  ) {
+                    if (filterCategory.filterVarietals[i] === el.name) {
+                      return (
+                        <div key={el.name}>
+                          <label>
+                            <input
+                              type="checkbox"
+                              value={el.name}
+                              id={el.name}
+                              onChange={(event) => handleVarietals(event)}
+                              defaultChecked
+                            ></input>
+                            {el.name}
+                          </label>
+                        </div>
+                      );
+                    } else {
+                      return (
+                        <div key={el.name}>
+                          <label>
+                            <input
+                              type="checkbox"
+                              value={el.name}
+                              id={el.name}
+                              onChange={(event) => handleVarietals(event)}
+                            ></input>
+                            {el.name}
+                          </label>
+                        </div>
+                      );
+                    }
+                  }
+                } else {
+                  return (
+                    <div key={el.name}>
+                      <label>
+                        <input
+                          type="checkbox"
+                          value={el.name}
+                          id={el.name}
+                          onChange={(event) => handleVarietals(event)}
+                        ></input>
+                        {el.name}
+                      </label>
+                    </div>
+                  );
+                }
               })}
       </div>
     </div>

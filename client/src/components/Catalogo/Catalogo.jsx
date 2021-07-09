@@ -23,8 +23,12 @@ const Catalogo = () => {
   useEffect(() => {
     if (search.length) {
       setPageNumber(0);
+    } else {
+      if (productsFilter && productsFilter.length) {
+        setPageNumber(0);
+      }
     }
-  }, [search.length]);
+  }, [search.length, productsFilter]);
 
   useEffect(() => {
     setRenderProduct(search.length ? search : products);
@@ -50,33 +54,33 @@ const Catalogo = () => {
 
   return (
     <>
-        <StyledDiv>
-          <div className="filter">
-            <Filters></Filters>
-          </div>
-          <div className="cards-container">
-            {displayProducts.length ? (
-              displayProducts
-            ) : (
-              <h1>No hay coincidencias</h1>
-            )}
-          </div>
-          <div className="paginate">
-            {filterProducts.length > 6 ? (
-              <ReactPaginate
-                previousLabel={"Anterior"}
-                nextLabel={"Siguiente"}
-                pageCount={pageCount}
-                onPageChange={changePage}
-                containerClassName={"paginationBtn"}
-                previousLinkClassName={"previousBtn"}
-                nextLinkClassName={"nextBtn"}
-                disabledClassName={"paginationDisable"}
-                activeClassName={"paginationActive"}
-              />
-            ) : null}
-          </div>
-        </StyledDiv>
+      <StyledDiv>
+        <div className="filter">
+          <Filters></Filters>
+        </div>
+        <div className="cards-container">
+          {displayProducts.length ? (
+            displayProducts
+          ) : (
+            <h1>No hay coincidencias</h1>
+          )}
+        </div>
+        <div className="paginate">
+          {filterProducts.length > 6 ? (
+            <ReactPaginate
+              previousLabel={"Anterior"}
+              nextLabel={"Siguiente"}
+              pageCount={pageCount}
+              onPageChange={changePage}
+              containerClassName={"paginationBtn"}
+              previousLinkClassName={"previousBtn"}
+              nextLinkClassName={"nextBtn"}
+              disabledClassName={"paginationDisable"}
+              activeClassName={"paginationActive"}
+            />
+          ) : null}
+        </div>
+      </StyledDiv>
     </>
   );
 };
