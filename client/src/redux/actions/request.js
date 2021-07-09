@@ -15,7 +15,6 @@ import {
 
 export const getProductsAll = () => {
   return async (dispatch) => {
-    dispatch({ type: LOADING });
     try {
       const products = await axios.get(`${GET_URL}products`);
       return dispatch({ type: GET_PRODUCTS_ALL, payload: products.data });
@@ -43,7 +42,6 @@ export const getProductsByName = (name) => {
 
 export const getProductsForCategory = (category) => {
   return async (dispatch) => {
-    dispatch({ type: LOADING });
     try {
       const products = await axios.get(
         `${GET_URL}products?category=${category}`
@@ -61,7 +59,6 @@ export const getProductsForCategory = (category) => {
 
 export const getProductDetail = (id) => {
   return async (dispatch) => {
-    dispatch({ type: LOADING });
     try {
       const products = await axios.get(`${GET_URL}products/${id}`);
       return dispatch({
@@ -77,7 +74,6 @@ export const getProductDetail = (id) => {
 
 export const getUsers = () => {
   return async (dispatch) => {
-    dispatch({ type: LOADING });
     try {
       const products = await axios.get(`${GET_URL}user`);
       return dispatch({ type: GET_USERS, payload: products.data });
@@ -90,7 +86,6 @@ export const getUsers = () => {
 
 export const getUserDetail = (id) => {
   return async (dispatch) => {
-    dispatch({ type: LOADING });
     try {
       const products = await axios.get(`${GET_URL}user/${id}`);
       return dispatch({ type: GET_USER_DETAIL, payload: products.data });
@@ -103,7 +98,6 @@ export const getUserDetail = (id) => {
 
 export const getOrders = () => {
   return async (dispatch) => {
-    dispatch({ type: LOADING });
     try {
       const products = await axios.get(`${GET_URL}order`);
       return dispatch({ type: GET_ORDERS, payload: products.data });
@@ -116,7 +110,6 @@ export const getOrders = () => {
 
 export const getOrderDetail = (id) => {
   return async (dispatch) => {
-    dispatch({ type: LOADING });
     try {
       const products = await axios.get(`${GET_URL}order/${id}`);
       return dispatch({ type: GET_ORDER_DETAIL, payload: products.data });
