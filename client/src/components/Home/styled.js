@@ -13,7 +13,6 @@ const StyledDiv = styled.div`
         gap: 1rem;
         grid-template-columns: repeat(auto-fill, minmax(min(100%,18rem), 1fr));
         justify-content: space-between;
-
         h2{
             text-align:center;
         }
@@ -26,7 +25,7 @@ const StyledDiv = styled.div`
                     color:white;
                     font-weight:bold;
                     :hover{
-                        font-size:18px;
+                        color:black;
                     }
                 }
             }
@@ -43,7 +42,7 @@ const StyledDiv = styled.div`
                     color:white;
                     font-weight:bold;
                     :hover{
-                        font-size:18px;
+                        color:black;
                     }
                 }
             }
@@ -60,7 +59,7 @@ const StyledDiv = styled.div`
                     color:white;
                     font-weight:bold;
                     :hover{
-                        font-size:18px;
+                        color:black;
                     }
                 }
             }
