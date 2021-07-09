@@ -21,6 +21,9 @@ const Filters = () => {
   }, [dispatch]);
 
   useEffect(async () => {
+    if(filterCategory.category){
+      document.getElementById(filterCategory.filterVarietals[0]).checked=true;
+    }
     setFilterCategory({
       ...filterCategory,
     });
@@ -37,6 +40,7 @@ const Filters = () => {
       category: event.target.value,
     });
   };
+
   const handleVarietals = (event) => {
     if (filterCategory.filterVarietals.includes(event.target.value)) {
       return setFilterCategory({
@@ -45,8 +49,8 @@ const Filters = () => {
           (el) => el !== event.target.value
         ),
       });
-    } else {
-      return setFilterCategory({
+    } else{
+      setFilterCategory({
         ...filterCategory,
         filterVarietals: [
           ...filterCategory.filterVarietals,
@@ -57,55 +61,64 @@ const Filters = () => {
   };
 
   return (
-    <div>
-      <div>
-        <div>
+    <div className='filter-container'>
+      <div className='filter-category'>
           <div>
             <label>Categorias</label>
-            <label>
-              <input
-                type="radio"
-                value="default"
-                id=""
-                name="category"
-                onClick={(event) => handleChange(event)}
-                defaultChecked
-              />
-              Todos
-              <input
-                type="radio"
-                value="Blanco"
-                id=""
-                name="category"
-                onClick={(event) => handleChange(event)}
-              />
-              Blanco
-              <input
-                type="radio"
-                value="Rosado"
-                id=""
-                name="category"
-                onClick={(event) => handleChange(event)}
-              />
-              Rosado
-              <input
-                type="radio"
-                value="Tinto"
-                id=""
-                name="category"
-                onClick={(event) => handleChange(event)}
-              />
-              Tinto
-            </label>
-          </div>
+            <hr/>
+            <div className='filter-category_label'>
+              <label for='todos'>
+                <input
+                  type="radio"
+                  value="default"
+                  id="todos"
+                  name="category"
+                  onClick={(event) => handleChange(event)}
+                  defaultChecked
+                />
+                Todos
+              </label>
+              <label for='blanco'>
+                <input
+                  type="radio"
+                  value="Blanco"
+                  id="blanco"
+                  name="category"
+                  onClick={(event) => handleChange(event)}
+                />
+                Blanco
+              </label>
+              <label for='rosado'>
+                <input
+                  type="radio"
+                  value="Rosado"
+                  id="rosado"
+                  name="category"
+                  onClick={(event) => handleChange(event)}
+                />
+                Rosado
+              </label>
+              <label label='tinto'>
+                <input
+                  type="radio"
+                  value="Tinto"
+                  id="tinto"
+                  name="category"
+                  onClick={(event) => handleChange(event)}
+                />
+                Tinto
+              </label>
+            </div>
         </div>
-        <label>Varietales</label>
       </div>
+      <br></br>
+        <label>Varietales</label>
+        <hr/>
       <div>
         {filterCategory.category === "default"
-          ? varietals.map((el) => {
+          ? varietals.map((el,idx) => {
               return (
-                <div>
+                <div key={idx}>
                   <label>
                     <input
                       type="checkbox"
@@ -121,9 +134,9 @@ const Filters = () => {
           : // )
             varietals
               .filter((el) => el.relatedCategory === filterCategory.category)
-              .map((el) => {
+              .map((el,idx) => {
                 return (
-                  <div>
+                  <div key={idx}>
                     <label>
                       <input
                         type="checkbox"

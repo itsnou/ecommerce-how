@@ -29,12 +29,12 @@ export const Cart = () => {
 
   return (
     <>
-      <div>
+      <StyledCartItems>
         {cartItems.length ?
           cartItems.map((e, index) => {
             total = total + e.price * e.quantity;
             return (
-              <StyledCartItems key={index}>
+              <div key={index} className='container-cards_products'>
                 <div className='container-img_card'>
                   <img className="img-card" src={e.imageUrl} alt="image not found"/>
                 </div>
@@ -73,17 +73,17 @@ export const Cart = () => {
                 >
                   X
                 </button>
-              </StyledCartItems>
+              </div>
             );
           }):
             <h1>No hay ningún producto en el carrito</h1>
           }
-        <StyledCartItems>
+        <div className='cart-total'>
           <div className="total">
             <h2>Total: $ {total}</h2>
           </div>
-        </StyledCartItems>
-      </div>
+        </div>
+      </StyledCartItems>
     </>
   );
 };

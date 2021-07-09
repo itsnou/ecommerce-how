@@ -34,7 +34,23 @@ const StyledDiv = styled.div`
 
     .filter{
         grid-area: filter;
+        width:100%;
+        user-select:none;
+        .filter-container{
+            background-color: #420D1F;
+            margin:20px 20px;
+            padding:25px;
+            border-radius:6px;
+            position:fixed;
+            color:white;
+            font-weight:bold;
+            .filter-category_label{
+                display:flex;
+                flex-direction:column;
+            }
+        }
     }
+
     .cards-container{
         grid-area: product;
         width:95%;
@@ -46,11 +62,11 @@ const StyledDiv = styled.div`
         .container-card{
             display:grid;
             grid-template-columns: 1fr 1fr;
-            width:500px;
+            width:450px;
             height:15rem;
             margin:auto;
             border-radius: 8px;
-            box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+            box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 20px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
             .card-image{
                 text-align:center;
                 height:100%;
