@@ -26,29 +26,21 @@ export const Cart = () => {
       dispatch(modifyItemCart(obj));
     }
   };
+
   return (
     <>
       <div>
-        {console.log(cartItems)}
-        {cartItems.length &&
+        {cartItems.length ?
           cartItems.map((e, index) => {
             total = total + e.price * e.quantity;
             return (
               <StyledCartItems key={index}>
-                <button
-                  className="btn-item-cart"
-                  onClick={() => {
-                    handleOnClick("x", e._id);
-                  }}
-                >
-                  X
-                </button>
-                <img
-                  className="img-card"
-                  src={e.imageUrl}
-                  alt="image not found"
-                />
-                <h2>{e.name}</h2>
+                <div className='container-img_card'>
+                  <img className="img-card" src={e.imageUrl} alt="image not found"/>
+                </div>
+                <div className='container-title'>
+                  <h2>{e.name}</h2>
+                </div>
                 <div className="container-btn">
                   <button
                     className="btn-item-cart"
@@ -68,14 +60,24 @@ export const Cart = () => {
                   >
                     +
                   </button>
-                  <h2>Stock: {e.stock}</h2>
+                  <h2>Stock <span>{e.stock}</span></h2>
                 </div>
-                <h2>$ {e.price}</h2>
-                <h2>$ {e.price * e.quantity}</h2>
+                <div className='product-card_price'>
+                  <h2>$ {e.price * e.quantity}</h2>
+                </div>
+                <button
+                  className="btn-item-cart"
+                  onClick={() => {
+                    handleOnClick("x", e._id);
+                  }}
+                >
+                  X
+                </button>
               </StyledCartItems>
             );
-          })}
-        {!cartItems.length && <h1>No hay ningún producto en el carrito</h1>}
+          }):
+            <h1>No hay ningún producto en el carrito</h1>
+          }
         <StyledCartItems>
           <div className="total">
             <h2>Total: $ {total}</h2>
