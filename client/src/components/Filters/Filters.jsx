@@ -52,62 +52,62 @@ const Filters = () => {
   };
 
   return (
-    <div className='filter-container'>
-      <div className='filter-category'>
-          <div>
-            <label>Categorias</label>
-            <hr/>
-            <div className='filter-category_label'>
-              <label for='todos'>
-                <input
-                  type="radio"
-                  value="default"
-                  id="todos"
-                  name="category"
-                  onClick={(event) => handleChange(event)}
-                  defaultChecked
-                />
-                Todos
-              </label>
-              <label for='blanco'>
-                <input
-                  type="radio"
-                  value="Blanco"
-                  id="blanco"
-                  name="category"
-                  onClick={(event) => handleChange(event)}
-                />
-                Blanco
-              </label>
-              <label for='rosado'>
-                <input
-                  type="radio"
-                  value="Rosado"
-                  id="rosado"
-                  name="category"
-                  onClick={(event) => handleChange(event)}
-                />
-                Rosado
-              </label>
-              <label label='tinto'>
-                <input
-                  type="radio"
-                  value="Tinto"
-                  id="tinto"
-                  name="category"
-                  onClick={(event) => handleChange(event)}
-                />
-                Tinto
-              </label>
-            </div>
+    <div className="filter-container">
+      <div className="filter-category">
+        <div>
+          <label>Categorias</label>
+          <hr />
+          <div className="filter-category_label">
+            <label for="todos">
+              <input
+                type="radio"
+                value="default"
+                id="todos"
+                name="category"
+                onClick={(event) => handleChange(event)}
+                defaultChecked
+              />
+              Todos
+            </label>
+            <label for="blanco">
+              <input
+                type="radio"
+                value="Blanco"
+                id="blanco"
+                name="category"
+                onClick={(event) => handleChange(event)}
+              />
+              Blanco
+            </label>
+            <label for="rosado">
+              <input
+                type="radio"
+                value="Rosado"
+                id="rosado"
+                name="category"
+                onClick={(event) => handleChange(event)}
+              />
+              Rosado
+            </label>
+            <label label="tinto">
+              <input
+                type="radio"
+                value="Tinto"
+                id="tinto"
+                name="category"
+                onClick={(event) => handleChange(event)}
+              />
+              Tinto
+            </label>
+          </div>
         </div>
       </div>
       <br></br>
-        <label>Varietales</label>
-        <hr/>
+      <label>Varietales</label>
+      <hr />
       <div>
         {filterCategory.category === "default"
-          ? varietals.map((el) => {
+          ? varietals.map((el, idx) => {
               if (filterCategory.filterVarietals.length) {
                 if (filterCategory.filterVarietals.includes(el.name)) {
                   return (
@@ -157,7 +157,7 @@ const Filters = () => {
           : // )
             varietals
               .filter((el) => el.relatedCategory === filterCategory.category)
-              .map((el,idx) => {
+              .map((el, idx) => {
                 return (
                   <div key={idx}>
                     <label>
