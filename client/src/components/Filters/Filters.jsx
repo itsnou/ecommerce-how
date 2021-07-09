@@ -158,6 +158,38 @@ const Filters = () => {
             varietals
               .filter((el) => el.relatedCategory === filterCategory.category)
               .map((el, idx) => {
+                if (filterCategory.filterVarietals.length) {
+                  if (filterCategory.filterVarietals.includes(el.name)) {
+                    return (
+                      <div>
+                        <label>
+                          <input
+                            type="checkbox"
+                            value={el.name}
+                            id={el.name}
+                            onChange={(event) => handleVarietals(event)}
+                            defaultChecked
+                          ></input>
+                          {el.name}
+                        </label>
+                      </div>
+                    );
+                  } else {
+                    return (
+                      <div>
+                        <label>
+                          <input
+                            type="checkbox"
+                            value={el.name}
+                            id={el.name}
+                            onChange={(event) => handleVarietals(event)}
+                          ></input>
+                          {el.name}
+                        </label>
+                      </div>
+                    );
+                  }
+                }
                 return (
                   <div key={idx}>
                     <label>
