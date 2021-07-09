@@ -20,15 +20,6 @@ const Filters = () => {
     dispatch(getVarietals());
   }, [dispatch]);
 
-  useEffect(async () => {
-    if(filterCategory.category){
-      document.getElementById(filterCategory.filterVarietals[0]).checked=true;
-    }
-    setFilterCategory({
-      ...filterCategory,
-    });
-  }, [filterCategory.category]);
-
   useEffect(() => {
     dispatch(filtredForCategory(filterCategory));
     dispatch(changeFilterState(filterCategory));
@@ -43,13 +34,13 @@ const Filters = () => {
 
   const handleVarietals = (event) => {
     if (filterCategory.filterVarietals.includes(event.target.value)) {
-      return setFilterCategory({
+      setFilterCategory({
         ...filterCategory,
         filterVarietals: filterCategory.filterVarietals.filter(
           (el) => el !== event.target.value
         ),
       });
-    } else{
+    } else {
       setFilterCategory({
         ...filterCategory,
         filterVarietals: [
@@ -116,7 +107,39 @@ const Filters = () => {
         <hr/>
       <div>
         {filterCategory.category === "default"
-          ? varietals.map((el,idx) => {
+          ? varietals.map((el) => {
+              if (filterCategory.filterVarietals.length) {
+                if (filterCategory.filterVarietals.includes(el.name)) {
+                  return (
+                    <div>
+                      <label>
+                        <input
+                          type="checkbox"
+                          value={el.name}
+                          id={el.name}
+                          onChange={(event) => handleVarietals(event)}
+                          defaultChecked
+                        ></input>
+                        {el.name}
+                      </label>
+                    </div>
+                  );
+                } else {
+                  return (
+                    <div>
+                      <label>
+                        <input
+                          type="checkbox"
+                          value={el.name}
+                          id={el.name}
+                          onChange={(event) => handleVarietals(event)}
+                        ></input>
+                        {el.name}
+                      </label>
+                    </div>
+                  );
+                }
+              }
               return (
                 <div key={idx}>
                   <label>
