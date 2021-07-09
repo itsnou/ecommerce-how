@@ -3,24 +3,28 @@ import AutoSuggest from "react-autosuggest";
 import { useSelector } from "react-redux";
 import StyledDiv from "./styled";
 import { Link } from "react-router-dom";
-import { getProductDetail } from "../../redux/actions/request";
+import {
+  getProductDetail,
+  getProductsAll,
+} from "../../../redux/actions/request";
 import { useDispatch } from "react-redux";
-const Search = () => {
+const SearchAtHome = () => {
   const dispatch = useDispatch();
+  dispatch(getProductsAll());
   const wines = useSelector((state) => state.products);
-  const lowerCasedCompanies = wines.map((company) => {
+  const lowerCasedWines = wines.map((wine) => {
     return {
-      id: company._id,
-      name: company.name.toUpperCase(),
+      id: wine._id,
+      name: wine.name.toUpperCase(),
     };
   });
-  console.log(lowerCasedCompanies);
+  console.log(lowerCasedWines);
   const [value, setValue] = useState("");
   const [suggestions, setSuggestions] = useState([]);
 
   function getSuggestions(value) {
-    return lowerCasedCompanies.filter((company) =>
-      company.name.includes(value.trim().toUpperCase())
+    return lowerCasedWines.filter((wine) =>
+      wine.name.includes(value.trim().toUpperCase())
     );
   }
   console.log(suggestions);
@@ -46,7 +50,7 @@ const Search = () => {
           </Link>
         )}
         inputProps={{
-          placeholder: "Ingresá un nombre de vino",
+          placeholder: "Buscar...",
           value: value,
           onChange: (_, { newValue, method }) => {
             setValue(newValue);
@@ -58,4 +62,4 @@ const Search = () => {
   );
 };
 
-export default Search;
+export default SearchAtHome;
