@@ -3,6 +3,8 @@ import {
     filtredForPriceLowToHigh,
     filtredForRatingHightoLow,
     filtredForRatingLowToHigh,
+    filtredByAtoZ,
+    filtredByZtoA,
 } from "./filtrer";
 import {
     getProductsAll,
@@ -36,6 +38,8 @@ export {
     filtredForPriceLowToHigh,
     filtredForRatingHightoLow,
     filtredForRatingLowToHigh,
+    filtredByAtoZ,
+    filtredByZtoA,
     getOrderDetail,
     getUsers,
     getOrders,
