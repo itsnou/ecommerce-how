@@ -3,9 +3,7 @@ import Nav from "./components/Nav/Nav";
 import Catalogo from "./components/Catalogo/Catalogo";
 import ProductDetail from "./components/ProductDetail/ProductDetail";
 import Cart from "./components/Cart/Cart";
-
 import Home from "./components/Home/Home";
-import Create from "./components/create";
 
 function App() {
   return (
@@ -17,7 +15,6 @@ function App() {
       <Route exact path="/catalogo" component={Catalogo} />
       <Route exact path="/product/:id" component={ProductDetail} />
       <Route exact path="/carrito" component={Cart} />
-      <Route exact path="/create" component={Create} />
     </>
   );
 }
