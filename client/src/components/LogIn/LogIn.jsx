@@ -1,25 +1,29 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import GoogleLogin from "react-google-login";
-import { addUser } from "../../redux/actions/sending";
+import { logIn } from "../../redux/actions/sending";
 import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router";
 
-const LogUser = () => {
+const LogIn = () => {
   const [error, setError] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [name, setName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const created = useSelector((state) => state.created);
   const dispatch = useDispatch();
+  const loged = useSelector((state) => state.loged);
+  const history = useHistory();
+  useEffect(() => {
+    if (loged === "on") {
+      history.push("/");
+      window.location.reload();
+    }
+  }, [loged]);
 
   const responseGoogle = (responseGoogle) => {
     let data = {
-      name: responseGoogle.profileObj.givenName,
       email: responseGoogle.profileObj.email,
-      lastName: responseGoogle.profileObj.familyName,
       password: responseGoogle.profileObj.googleId,
     };
-    dispatch(addUser(data));
+    dispatch(logIn(data));
   };
 
   function validateUser(value) {
@@ -30,15 +34,13 @@ const LogUser = () => {
     }
     setEmail(value);
   }
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     let data = {
-      name: "HARDCODE",
-      lastName: "HARDCODE",
       email: email,
       password: password,
     };
-    dispatch(addUser(data));
+    dispatch(logIn(data));
   };
 
   return (
@@ -65,11 +67,11 @@ const LogUser = () => {
       <br />
       <GoogleLogin
         clientId="262689421829-3o7njoctsh6lj3kcqsk4lhgtphta7233.apps.googleusercontent.com"
-        buttonText="Crear cuenta con Google"
+        buttonText="Iniciar sesión con google"
         onSuccess={responseGoogle}
         cookiePolicy={"single_host_origin"}
       />
     </div>
   );
 };
-export default LogUser;
+export default LogIn;

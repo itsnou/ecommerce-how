@@ -3,12 +3,25 @@ const router = Router();
 const userSchema = require("../models/users");
 const jwt = require("jsonwebtoken");
 const passport = require("passport");
+const jwt_decode = require("jwt-decode");
 
 router.get(
   "/",
   passport.authenticate("jwt", { session: false }),
   async (req, res) => {
-    res.send("hey");
+    const token = req.headers.authorization.split(" ");
+    const decodificado = jwt_decode(token[1]);
+    const findUser = await userSchema.findOne({ email: decodificado.email });
+    const returnedUser = {
+      _id: findUser._id,
+      address: findUser.address,
+      orders: findUser.orders,
+      userStatus: findUser.userStatus,
+      name: findUser.name,
+      lastName: findUser.lastName,
+      email: findUser.email,
+    };
+    res.json(returnedUser);
   }
 );
 
@@ -25,9 +38,9 @@ router.post("/signup", async (req, res) => {
   try {
     const newUser = await new userSchema(data);
     await newUser.save();
-    return res.send("Post OK");
+    return res.status(201).send({ message: "Se creo correctamente" });
   } catch (err) {
-    return res.status(404).send(err);
+    return res.status(404).send({ message: "No se creo correctamente" });
   }
 });
 
@@ -35,19 +48,20 @@ router.post("/login", async (req, res) => {
   const { email, password } = req.body;
   const userEmail = await userSchema.findOne({ email: email });
   if (!userEmail) {
-    return res.send("No existe");
+    return res.status(401).send({ message: "off" });
   }
   const validate = await userEmail.isValidPassword(password);
   if (!validate) {
-    return res.send("Invalid password");
+    return res.status(401).send({ message: "off" });
   }
 
   const jwtToken = jwt.sign(
     { id: userEmail._id, email: userEmail.email },
-    "secret",{expiresIn:"30s"}
+    "secret",
+    { expiresIn: "1d" }
   );
 
-  res.send(jwtToken);
+  res.send({ token: jwtToken, message: "on" });
 });
 
 module.exports = router;
