@@ -24,7 +24,7 @@ export const addProduct = (product) => {
 export const addUser = (user) => {
     return async (dispatch) => {
         try {
-            await axios.post(`${GET_URL}user`, user);
+            await axios.post(`${GET_URL}users`, user);
             return dispatch({ type: ADD_USER })
         } catch (e) {
             console.log(e)
@@ -67,7 +67,7 @@ export const deleteCategory = (category) => {
 export const deleteUser = (user) => {
     return async (dispatch) => {
         try {
-            await axios.post(`${GET_URL}delete/user`, user);
+            await axios.post(`${GET_URL}delete/users`, user);
             return dispatch({ type: DELETE_USER })
         } catch (e) {
             console.log(e)
