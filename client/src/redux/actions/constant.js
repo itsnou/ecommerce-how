@@ -29,3 +29,5 @@ export const MODIFY_ITEM_CART = "MODIFY_ITEM_CART";
 export const FILTRED_FOR_CATEGORY = "FILTRED_FOR_CATEGORY";
 export const GET_VARIETALS = "GET_VARIETALS";
 export const FILTER_STATE = "FILTER_STATE";
+export const LOG_IN = "LOG_IN";
+export const LOAD_PROFILE = "LOAD_PROFILE";
