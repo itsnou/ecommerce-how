@@ -6,6 +6,7 @@ import Cart from "./components/Cart/Cart";
 import About from "./components/About/About"
 import LogUser from "./components/LogUser/LogUser";
 import Home from "./components/Home/Home";
+import ControlPanel from "./components/ControlPanel/ControlPanel";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
       <Route exact path="/carrito" component={Cart} />
       <Route exact path="/empresa" component={About} />
       <Route exact path="/create" component={LogUser} />
+      <Route exact path="/admin/controlpanel" component={ControlPanel} />
     </>
   );
 }
