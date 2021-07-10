@@ -1,106 +1,22 @@
 import React from "react";
-import {Link} from 'react-router-dom';
-import face from '../../assets/image/face.svg';
-import insta from '../../assets/image/instagram.svg';
-import twitter from '../../assets/image/twitter.svg';
+import Footer from './Footer/Footer';
+import Banner from './Banner/Banner';
+import Destacados from './Destacados/Destacados';
 import StyledDiv from './styled.js';
+
 
 const Home = () => {
   return (
     <StyledDiv>
-      <div className="footer-container">
-        <div className="footer-nosotros">
-          <h2>Nosotros</h2>
-          <ul>
-            <li>
-              <Link to='/empresa'>
-                Nuestra Empresa
-              </Link>
-            </li>
-            <li>
-              <Link to='/contacto'>
-                Contacto
-              </Link>
-            </li>
-            <li>
-              <Link to='/contacto'>
-                FAQ
-              </Link>
-            </li>
-            <li>
-              <Link to='/avisos'>
-                Aviso de Privacidad
-              </Link>
-            </li>
-          </ul>
-        </div>
-        <div className='footer-avisos_seteados'>
-          <h2>Avisos</h2>
-          <ul>
-            <li>
-              <Link to='/avisos'>
-                Términos y condiciones
-              </Link>
-            </li>
-            <li>
-              <Link to='/avisos'>
-                Factura Clientes
-              </Link>
-            </li>
-            <li>
-              <Link to='/avisos'>
-                Factura Empresas
-              </Link>
-            </li>
-            <li>
-              <Link to='/avisos'>
-                Política de devoluciones
-              </Link>
-            </li>
-            <li>
-              <Link to='/avisos'>
-                Política de promociones
-              </Link>
-            </li>
-          </ul>
-        </div>
-        <div className='footer-links_interes'>
-          <h2>Links de Interés</h2>
-          <ul>
-            <li>
-              <Link to='/catalogo'>
-                Cátalogo
-              </Link>
-            </li>
-            <li>
-              <Link to='/contacto'>
-                Contacto
-              </Link>
-            </li>
-          </ul>
-        </div>
-        <div className='footer-followers'>
-          <h2>Seguinos: </h2>
-          <ul>
-            <li>
-              <a href="#" target="_blank">
-                <img src={insta} class="footer-svg" alt=""/>
-              </a>
-            </li>
-            <li>
-              <a href="#" target="_blank">
-                <img src={face} class="footer-svg" alt=""/>
-              </a>
-            </li>
-            <li>
-              <a href="#" target="_blank">
-                <img src={twitter} class="footer-svg" alt=""/>
-              </a>
-            </li>
-          </ul>
-        </div>
+      <div className='banner'>
+        <Banner/>
       </div>
-      <div className='footer-derechos'>Copyright House&Wines - 2021</div>
+      <div>
+        <Destacados/>
+      </div>
+      <div>
+        <Footer/>
+      </div>
     </StyledDiv>
   );
 };

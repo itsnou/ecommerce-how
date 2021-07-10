@@ -9,7 +9,6 @@ import {
   GET_URL,
   GET_USERS,
   GET_USER_DETAIL,
-  LOADING,
   GET_VARIETALS,
 } from "./constant";
 
