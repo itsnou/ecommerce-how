@@ -28,6 +28,7 @@ const StyledDiv = styled.div`
 
     }
   }
+  
 `;
 
 export default StyledDiv;

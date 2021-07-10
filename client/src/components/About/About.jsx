@@ -1,12 +1,13 @@
 import StyledDiv from './styled.js';
 import LOGO from '../../assets/image/LOGO.png';
-// import Footer from '../Footer/Footer
+import Footer from '../Home/Footer/Footer'
 
 
 
 const About = () => {
 
   return (
+    <>
     <StyledDiv>
       <div className='nav-logo'>
         <div className='title'>
@@ -25,8 +26,9 @@ const About = () => {
       </div>
         <img src={LOGO} alt='LOGO-HOW'/>
       </div>
-      {/* <Footer/> */}
     </StyledDiv>
+      <Footer/>
+      </>
   )
 
 }
