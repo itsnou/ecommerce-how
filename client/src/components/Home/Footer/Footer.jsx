@@ -2,10 +2,11 @@ import {Link} from 'react-router-dom';
 import face from '../../../assets/image/face.svg';
 import insta from '../../../assets/image/instagram.svg';
 import twitter from '../../../assets/image/twitter.svg';
+import StyledDiv from './styled.js'
 
 const Footer = () => {
     return (  
-        <div className='footer'>
+        <StyledDiv>
             <div className="footer-container">
                 <div className="footer-nosotros">
                     <h2>Nosotros</h2>
@@ -104,7 +105,7 @@ const Footer = () => {
                 </div>
             </div>
             <div className='footer-derechos'>Copyright House&Wines - 2021</div>
-    </div>
+    </StyledDiv>
     );
 }
  
