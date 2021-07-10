@@ -1,63 +1,14 @@
 import {
-    FILTRED_FOR_PRICE_HIGH_TO_LOW,
-    FILTRED_FOR_PRICE_LOW_TO_HIGH,
-    FILTRED_FOR_RATING_HIGH_TO_LOW,
-    FILTRED_FOR_RATING_LOW_TO_HIGH,
-    FILTRED_FOR_CATEGORY,
+    FILTERED_BY_CATEGORY,
     FILTER_STATE,
-    FILTRED_BY_Z_A,
-    FILTRED_BY_A_Z,
+    SORTS,
+    CHANGE_SORT_STATE
 } from "./constant";
 
-export const filtredForRatingLowToHigh = (products) => {
-    return {
-        type: FILTRED_FOR_RATING_LOW_TO_HIGH,
-        payload: products.sort((a, b) => b.rating - a.rating),
-    };
-};
-
-export const filtredForRatingHightoLow = (products) => {
-    return {
-        type: FILTRED_FOR_RATING_HIGH_TO_LOW,
-        payload: products.sort((a, b) => a.rating - b.rating),
-    };
-};
-
-export const filtredForPriceLowToHigh = (products) => {
-    return {
-        type: FILTRED_FOR_PRICE_LOW_TO_HIGH,
-        payload: products.sort((a, b) => a.price - b.price),
-    };
-};
-
-export const filtredForPriceHightoLow = (products) => {
-    return {
-        type: FILTRED_FOR_PRICE_HIGH_TO_LOW,
-        payload: products.sort((a, b) => b.price - a.price),
-    };
-};
-
-export const filtredByZtoA = (products) => {
-    return {
-        type: FILTRED_BY_Z_A,
-        payload: products.sort((a, b) => {
-            return b.name.toLowerCase().localeCompare(a.name.toLowerCase());
-        }),
-    };
-};
-
-export const filtredByAtoZ = (products) => {
-    return {
-        type: FILTRED_BY_A_Z,
-        payload: products.sort((a, b) => {
-            return a.name.toLowerCase().localeCompare(b.name.toLowerCase());
-        }),
-    };
-};
 
 export const filtredForCategory = (category) => {
     return (dispatch) => {
-        dispatch({ type: FILTRED_FOR_CATEGORY, payload: category });
+        dispatch({ type: FILTERED_BY_CATEGORY, payload: category });
     };
 };
 
@@ -66,3 +17,14 @@ export const changeFilterState = (category) => {
         dispatch({ type: FILTER_STATE, payload: category });
     };
 };
+
+export const sorts=(payload)=>{
+    return(dispatch)=>{
+        dispatch({type:SORTS,payload:payload})
+    }
+}
+
+export const changeSortState=(payload)=>{
+    return (dispatch)=>
+    dispatch({type:CHANGE_SORT_STATE,payload:payload})
+}

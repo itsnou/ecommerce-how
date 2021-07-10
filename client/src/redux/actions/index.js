@@ -1,12 +1,4 @@
 import {
-    filtredForPriceHightoLow,
-    filtredForPriceLowToHigh,
-    filtredForRatingHightoLow,
-    filtredForRatingLowToHigh,
-    filtredByAtoZ,
-    filtredByZtoA,
-} from "./filtrer";
-import {
     getProductsAll,
     getProductsForCategory,
     getProductsByName,
@@ -34,12 +26,6 @@ export const reset = (props) => {
 };
 
 export {
-    filtredForPriceHightoLow,
-    filtredForPriceLowToHigh,
-    filtredForRatingHightoLow,
-    filtredForRatingLowToHigh,
-    filtredByAtoZ,
-    filtredByZtoA,
     getOrderDetail,
     getUsers,
     getOrders,

@@ -4,6 +4,8 @@ import { getProductsAll, getVarietals } from "../../redux/actions/request";
 import {
   changeFilterState,
   filtredForCategory,
+  sorts,
+  changeSortState
 } from "../../redux/actions/filtrer";
 
 //MARIANA AQUI NO SE HACEN MAS FILTROS
@@ -33,6 +35,16 @@ const Filters = () => {
       category: event.target.value,
     });
   };
+  const handleSelect=(event)=>{
+    if(event.target.value==="default"){
+      dispatch(changeSortState('off'))
+    }else{
+      dispatch(changeSortState(event.target.value))
+      dispatch(sorts(event.target.value))
+    }
+    
+
+  }
 
   const handleVarietals = (event) => {
     if (filterCategory.filterVarietals.includes(event.target.value)) {
@@ -220,6 +232,15 @@ const Filters = () => {
                   );
                 }
               })}
+      </div>
+      <div>
+        <select name="" id="" onChange={(event)=>handleSelect(event)}>
+          <option value="default">Default</option>
+          <option value="1">Precio ascendente</option>
+          <option value="2">Precio descendente</option>
+          <option value="3">A-Z</option>
+          <option value="4">Z-A</option>
+        </select>
       </div>
     </div>
   );

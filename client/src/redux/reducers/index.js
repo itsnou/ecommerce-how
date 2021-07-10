@@ -5,10 +5,6 @@ import {
     DELETE_CATEGORY,
     DELETE_PRODUCT,
     DELETE_USER,
-    FILTRED_FOR_PRICE_HIGH_TO_LOW,
-    FILTRED_FOR_PRICE_LOW_TO_HIGH,
-    FILTRED_FOR_RATING_HIGH_TO_LOW,
-    FILTRED_FOR_RATING_LOW_TO_HIGH,
     GET_ORDERS,
     GET_ORDER_DETAIL,
     GET_PRODUCTS_ALL,
@@ -24,12 +20,14 @@ import {
     RESET,
     FILTER_STATE,
     GET_VARIETALS,
-    FILTRED_FOR_CATEGORY,
+    FILTERED_BY_CATEGORY,
+    SORTS,
+    CHANGE_SORT_STATE
 } from "../actions/constant";
 
 import { addToCart } from "../../utils/addToCart";
 import { modifyItemInCart } from "../../utils/modifyItemInCart";
-import { filterWines, filterOnOff } from "../../utils/methods";
+import { filterWines, filterOnOff,handleSelect } from "../../utils/methods";
 
 const initialState = {
     products: [],
@@ -42,6 +40,7 @@ const initialState = {
     productsFilter: [],
     varietals: [],
     filter: "off",
+    sorts:"off"
 };
 
 const reducer = (state = initialState, { payload, type }) => {
@@ -100,26 +99,6 @@ const reducer = (state = initialState, { payload, type }) => {
                 orders: [payload],
                 loading: false,
             };
-        case FILTRED_FOR_PRICE_LOW_TO_HIGH:
-            return {
-                ...state,
-                products: payload,
-            };
-        case FILTRED_FOR_PRICE_HIGH_TO_LOW:
-            return {
-                ...state,
-                products: payload,
-            };
-        case FILTRED_FOR_RATING_LOW_TO_HIGH:
-            return {
-                ...state,
-                products: payload,
-            };
-        case FILTRED_FOR_RATING_HIGH_TO_LOW:
-            return {
-                ...state,
-                products: payload,
-            };
         case ADD_USER:
             return state;
         case ADD_CATEGORY:
@@ -157,9 +136,9 @@ const reducer = (state = initialState, { payload, type }) => {
                 ...state,
                 [payload]: [],
             };
-        case FILTRED_FOR_CATEGORY:
+        case FILTERED_BY_CATEGORY:
             let filtered;
-            if (state.search.length) {
+            if (state.search.length ) {
                 filtered = state.search;
             } else {
                 filtered = state.products;
@@ -179,6 +158,19 @@ const reducer = (state = initialState, { payload, type }) => {
                 ...state,
                 filter: filterOnOff(payload),
             };
+        case SORTS:
+            let toSort
+            if(!state.productsFilter){
+                toSort="products";
+            }else{
+                toSort="filter";
+            }
+            return handleSelect(state,payload,toSort)
+        case CHANGE_SORT_STATE:
+            return {
+                ...state,
+                sorts:payload
+            }
         default:
             return state;
     }

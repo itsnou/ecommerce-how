@@ -15,11 +15,19 @@ const Catalogo = () => {
     const productsFilter = useSelector((state) => state.productsFilter);
     const [renderProduct, setRenderProduct] = useState([]);
     const filter = useSelector((state) => state.filter);
+    const sorts=useSelector((state)=>state.sorts)
 
     useEffect(() => {
         dispatch(getProductsAll());
         dispatch(getProductsByName(""));
     }, [dispatch]);
+
+    useEffect(()=>{
+      if(sorts==="off"){
+        dispatch(getProductsAll());
+        dispatch(getProductsByName(""));
+      }
+    },[dispatch,sorts])
 
     useEffect(() => {
         if (search.length) {
@@ -33,7 +41,7 @@ const Catalogo = () => {
 
     useEffect(() => {
         setRenderProduct(search.length ? search : products);
-    }, [search, products]);
+    }, [search, products,sorts]);
 
     let filterProducts = filter === "on" ? productsFilter : renderProduct;
 
