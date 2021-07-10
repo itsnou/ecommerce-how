@@ -19,7 +19,7 @@ const LogUser = () => {
                 email: response.profileObj.email,
                 lastName: response.profileObj.familyName,
                 userStatus: "Regular",
-                password: "12345"
+                password: response.profileObj.googleId
             }
             console.log(data)
            await dispatch(addUser(data))
