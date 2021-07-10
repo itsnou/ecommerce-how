@@ -19,12 +19,18 @@ const Destacados = () => {
     }
 
     return(
-        <div className='productos-destacados'>
-            {
-                destacados && destacados.map((product,idx)=>{
-                    return <ProductCard product={product}/>
-                })
-            }
+        <div className="container-destacados">
+            <div className='title-destacados'>
+                <h2>Vinos <span>Destacados</span></h2>
+                <hr/>
+            </div>
+            <div className='productos-destacados'>
+                {
+                    destacados && destacados.map((product,idx)=>{
+                        return <ProductCard product={product}/>
+                    })
+                }
+            </div>
         </div>
     );
 }

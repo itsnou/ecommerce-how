@@ -60,24 +60,27 @@ export const Cart = () => {
                   >
                     +
                   </button>
-                  <h2>Stock <span>{e.stock}</span></h2>
                 </div>
                 <div className='product-card_price'>
+                  <h2>Stock: <span>{e.stock}</span></h2>
                   <h2>$ {e.price * e.quantity}</h2>
                 </div>
-                <button
-                  className="btn-item-cart"
-                  onClick={() => {
-                    handleOnClick("x", e._id);
-                  }}
-                >
-                  X
-                </button>
+                <div className='btn-delete'>
+                  <button
+                    className="btn-item-delete"
+                    onClick={() => {
+                      handleOnClick("x", e._id);
+                    }}
+                  >
+                    X
+                  </button>
+                </div>
               </div>
             );
           }):
             <h1>No hay ningún producto en el carrito</h1>
           }
+          <hr/>
         <div className='cart-total'>
           <div className="total">
             <h2>Total: $ {total}</h2>
