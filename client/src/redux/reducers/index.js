@@ -1,37 +1,37 @@
 import {
-    ADD_CATEGORY,
-    ADD_PRODUCT,
-    ADD_USER,
-    DELETE_CATEGORY,
-    DELETE_PRODUCT,
-    DELETE_USER,
-    GET_ORDERS,
-    GET_ORDER_DETAIL,
-    GET_PRODUCTS_ALL,
-    GET_PRODUCTS_FOR_CATEGORY,
-    GET_PRODUCTS_BY_NAME,
-    GET_PRODUCT_DETAIL,
-    GET_USERS,
-    GET_USER_DETAIL,
-    LOADING,
-    ADD_TO_CART,
-    REMOVE_FROM_CART,
-    MODIFY_ITEM_CART,
-    RESET,
-    FILTER_STATE,
-    GET_VARIETALS,
-    FILTERED_BY_CATEGORY,
-    SORTS,
-    CHANGE_SORT_STATE,
-    LOG_IN,
-    LOAD_PROFILE
+  ADD_CATEGORY,
+  ADD_PRODUCT,
+  ADD_USER,
+  DELETE_CATEGORY,
+  DELETE_PRODUCT,
+  DELETE_USER,
+  GET_ORDERS,
+  GET_ORDER_DETAIL,
+  GET_PRODUCTS_ALL,
+  GET_PRODUCTS_FOR_CATEGORY,
+  GET_PRODUCTS_BY_NAME,
+  GET_PRODUCT_DETAIL,
+  GET_USERS,
+  GET_USER_DETAIL,
+  LOADING,
+  ADD_TO_CART,
+  REMOVE_FROM_CART,
+  MODIFY_ITEM_CART,
+  RESET,
+  FILTER_STATE,
+  GET_VARIETALS,
+  FILTERED_BY_CATEGORY,
+  SORTS,
+  CHANGE_SORT_STATE,
+  LOG_IN,
+  LOAD_PROFILE,
 } from "../actions/constant";
 
 import { addToCart } from "../../utils/addToCart";
 import { modifyItemInCart } from "../../utils/modifyItemInCart";
-import { filterWines, filterOnOff,handleSelect } from "../../utils/methods";
+import { filterWines, filterOnOff, handleSelect } from "../../utils/methods";
 
-const initialState={
+const initialState = {
   products: [],
   productDetail: {},
   users: [],
@@ -45,7 +45,7 @@ const initialState={
   user: {},
   created: "",
   loged: "off",
-  sorts:"off",
+  sorts: "off",
 };
 
 const reducer = (state = initialState, { payload, type }) => {
@@ -155,7 +155,7 @@ const reducer = (state = initialState, { payload, type }) => {
         ...state,
         [payload]: [],
       };
-    case FILTRED_FOR_CATEGORY:
+    case FILTERED_BY_CATEGORY:
       let filtered;
       if (state.search.length) {
         filtered = state.search;
@@ -177,19 +177,19 @@ const reducer = (state = initialState, { payload, type }) => {
         ...state,
         filter: filterOnOff(payload),
       };
-     case SORTS:
-        let toSort
-        if(!state.productsFilter){
-            toSort="products";
-          }else{
-             toSort="filter";
-           }
-         return handleSelect(state,payload,toSort)
-     case CHANGE_SORT_STATE:
-        return {
-            ...state,
-           sorts:payload
-        }
+    case SORTS:
+      let toSort;
+      if (!state.productsFilter) {
+        toSort = "products";
+      } else {
+        toSort = "filter";
+      }
+      return handleSelect(state, payload, toSort);
+    case CHANGE_SORT_STATE:
+      return {
+        ...state,
+        sorts: payload,
+      };
     default:
       return state;
   }
