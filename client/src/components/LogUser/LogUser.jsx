@@ -1,13 +1,8 @@
-import React, { useEffect, useState } from "react";
-// import { Link } from 'react-router-dom';
+import React, { useState } from "react";
 import GoogleLogin from "react-google-login";
-import axios from "axios";
 import { addUser } from "../../redux/actions/sending";
 import { useDispatch, useSelector } from "react-redux";
 
-// danger {
-//    border: red 1px solid;
-// }
 const LogUser = () => {
   const [error, setError] = useState("");
   const [email, setEmail] = useState("");

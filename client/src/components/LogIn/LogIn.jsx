@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import GoogleLogin from "react-google-login";
 import { logIn } from "../../redux/actions/sending";
 import { useDispatch, useSelector } from "react-redux";
-import { Redirect, useHistory } from "react-router";
+import { useHistory } from "react-router";
 
 const LogIn = () => {
   const [error, setError] = useState("");

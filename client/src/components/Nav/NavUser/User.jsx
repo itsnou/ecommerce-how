@@ -49,7 +49,11 @@ const User = () => {
     <div className="nav-user">
       <ul className="nav-list_usuario">
         <li>
-          <Link to="/create">CREAR CUENTA</Link>
+          {userLog === "on" ? (
+            <h1></h1>
+          ) : (
+            <Link to="/create">CREAR CUENTA</Link>
+          )}
         </li>
         <li>
           {userLog === "on" ? (
