@@ -1,39 +1,24 @@
 const { Router } = require("express");
 const router = Router();
 const userSchema = require("../models/users");
+const jwt = require("jsonwebtoken");
+const passport = require("passport");
 
-router.get("/", async (req, res) => {
-  const { user } = req.query;
-  if (user) {
-    try {
-      const getUsers = await userSchema.find();
-      return res.send(getUsers);
-    } catch (err) {
-      return res.status(404).send("Users not found");
-    }
+router.get(
+  "/",
+  passport.authenticate("jwt", { session: false }),
+  async (req, res) => {
+    res.send("hey");
   }
-  const getAllUsers = await userSchema.find();
-  return res.send(getAllUsers);
-});
+);
 
-router.get("/:id", async (req, res) => {
-  const { id } = req.params;
-  try {
-    const usersById = await userSchema.findById(id);
-    return res.send(usersById);
-  } catch (err) {
-    return res.status(404).send("User not found");
-  }
-});
-
-router.post("/", async (req, res) => {
-  const { name, lastName, email, userStatus, address, password } = req.body;
+router.post("/signup", async (req, res) => {
+  const { name, lastName, email, address, password } = req.body;
+  console.log(name);
   const data = {
     name: name,
     lastName: lastName,
     email: email,
-    userStatus: userStatus,
-    address: address,
     password: password,
     orders: [],
   };
@@ -44,6 +29,25 @@ router.post("/", async (req, res) => {
   } catch (err) {
     return res.status(404).send(err);
   }
+});
+
+router.post("/login", async (req, res) => {
+  const { email, password } = req.body;
+  const userEmail = await userSchema.findOne({ email: email });
+  if (!userEmail) {
+    return res.send("No existe");
+  }
+  const validate = await userEmail.isValidPassword(password);
+  if (!validate) {
+    return res.send("Invalid password");
+  }
+
+  const jwtToken = jwt.sign(
+    { id: userEmail._id, email: userEmail.email },
+    "secret"
+  );
+
+  res.send(jwtToken);
 });
 
 module.exports = router;
