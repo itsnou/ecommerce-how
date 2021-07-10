@@ -37,15 +37,15 @@ const Catalogo = () => {
 
     let filterProducts = filter === "on" ? productsFilter : renderProduct;
 
-    //paginated
-    const [pageNumber, setPageNumber] = useState(0);
-    const productsPerPage = 6; // productos a mostrar
-    const pagesVisited = pageNumber * productsPerPage;
-    const displayProducts = filterProducts
-        .slice(pagesVisited, pagesVisited + productsPerPage)
-        .map((product, idx) => {
-            return <ProductCard key={idx} product={product} />;
-        });
+  //paginated
+  const [pageNumber, setPageNumber] = useState(0);
+  const productsPerPage = 14; // productos a mostrar 
+  const pagesVisited = pageNumber * productsPerPage;
+  const displayProducts = filterProducts
+    .slice(pagesVisited, pagesVisited + productsPerPage)
+    .map((product, idx) => {
+      return <ProductCard key={idx} product={product} />;
+    });
 
     const pageCount = Math.ceil(filterProducts.length / productsPerPage);
 
@@ -53,38 +53,37 @@ const Catalogo = () => {
         setPageNumber(selected);
     };
 
-    return (
-        <>
-            <StyledDiv>
-                <div className="filter">
-                    <Filters></Filters>
-                    <Sort></Sort>
-                </div>
-                <div className="cards-container">
-                    {displayProducts.length ? (
-                        displayProducts
-                    ) : (
-                        <h1>No hay coincidencias</h1>
-                    )}
-                </div>
-                <div className="paginate">
-                    {filterProducts.length > 6 ? (
-                        <ReactPaginate
-                            previousLabel={"Anterior"}
-                            nextLabel={"Siguiente"}
-                            pageCount={pageCount}
-                            onPageChange={changePage}
-                            containerClassName={"paginationBtn"}
-                            previousLinkClassName={"previousBtn"}
-                            nextLinkClassName={"nextBtn"}
-                            disabledClassName={"paginationDisable"}
-                            activeClassName={"paginationActive"}
-                        />
-                    ) : null}
-                </div>
-            </StyledDiv>
-        </>
-    );
+  return (
+    <>
+      <StyledDiv>
+        <div className="filter">
+          <Filters></Filters>
+        </div>
+        <div className="cards-container">
+          {displayProducts.length ? (
+            displayProducts
+          ) : (
+            <h1>No hay coincidencias</h1>
+          )}
+        </div>
+        <div className="paginate">
+          {filterProducts.length > 6 ? (
+            <ReactPaginate
+              previousLabel={"Anterior"}
+              nextLabel={"Siguiente"}
+              pageCount={pageCount}
+              onPageChange={changePage}
+              containerClassName={"paginationBtn"}
+              previousLinkClassName={"previousBtn"}
+              nextLinkClassName={"nextBtn"}
+              disabledClassName={"paginationDisable"} //visibility:hidden;
+              activeClassName={"paginationActive"}
+            />
+          ) : null}
+        </div>
+      </StyledDiv>
+    </>
+  );
 };
 
 export default Catalogo;
