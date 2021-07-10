@@ -31,7 +31,7 @@ const User = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    if (countCart.length > 0) {
+    if (countCart.length >0) {
       //contador de precios
       let count = countCart.map((e) => e.price * e.quantity);
       const reducer = (accumulator, currentValue) => accumulator + currentValue;
@@ -42,6 +42,10 @@ const User = () => {
       let quantity = countCart.map((e) => e.quantity);
       quantityProduct.current = quantity.reduce(reducer);
       setCartCount(quantityProduct.current);
+    }
+    if(!countCart.length){
+      setCartCount(0)
+      setPrice(0);
     }
   }, [countCart, dispatch]);
 
