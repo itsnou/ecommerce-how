@@ -6,35 +6,36 @@ import ProductCard from "../ProductCard/ProductCard";
 import ReactPaginate from "react-paginate";
 import Loading from "../Loading/Loading";
 import Filters from "../Filters/Filters";
+import Sort from "../Sorts/Sort";
 
 const Catalogo = () => {
-  const dispatch = useDispatch();
-  const search = useSelector((state) => state.search);
-  const products = useSelector((state) => state.products);
-  const productsFilter = useSelector((state) => state.productsFilter);
-  const [renderProduct, setRenderProduct] = useState([]);
-  const filter = useSelector((state) => state.filter);
+    const dispatch = useDispatch();
+    const search = useSelector((state) => state.search);
+    const products = useSelector((state) => state.products);
+    const productsFilter = useSelector((state) => state.productsFilter);
+    const [renderProduct, setRenderProduct] = useState([]);
+    const filter = useSelector((state) => state.filter);
 
-  useEffect(() => {
-    dispatch(getProductsAll());
-    dispatch(getProductsByName(""));
-  }, [dispatch]);
+    useEffect(() => {
+        dispatch(getProductsAll());
+        dispatch(getProductsByName(""));
+    }, [dispatch]);
 
-  useEffect(() => {
-    if (search.length) {
-      setPageNumber(0);
-    } else {
-      if (productsFilter && productsFilter.length) {
-        setPageNumber(0);
-      }
-    }
-  }, [search.length, productsFilter]);
+    useEffect(() => {
+        if (search.length) {
+            setPageNumber(0);
+        } else {
+            if (productsFilter && productsFilter.length) {
+                setPageNumber(0);
+            }
+        }
+    }, [search.length, productsFilter]);
 
-  useEffect(() => {
-    setRenderProduct(search.length ? search : products);
-  }, [search, products]);
+    useEffect(() => {
+        setRenderProduct(search.length ? search : products);
+    }, [search, products]);
 
-  let filterProducts = filter === "on" ? productsFilter : renderProduct;
+    let filterProducts = filter === "on" ? productsFilter : renderProduct;
 
   //paginated
   const [pageNumber, setPageNumber] = useState(0);
@@ -46,11 +47,11 @@ const Catalogo = () => {
       return <ProductCard key={idx} product={product} />;
     });
 
-  const pageCount = Math.ceil(filterProducts.length / productsPerPage);
+    const pageCount = Math.ceil(filterProducts.length / productsPerPage);
 
-  const changePage = ({ selected }) => {
-    setPageNumber(selected);
-  };
+    const changePage = ({ selected }) => {
+        setPageNumber(selected);
+    };
 
   return (
     <>
