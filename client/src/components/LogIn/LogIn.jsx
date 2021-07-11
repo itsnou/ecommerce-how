@@ -3,8 +3,8 @@ import GoogleLogin from "react-google-login";
 import { logIn } from "../../redux/actions/sending";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
-import Button from '@material-ui/core/Button';
-import StyledDiv from './styled.js';
+import Button from "@material-ui/core/Button";
+import StyledDiv from "./styled.js";
 
 const LogIn = () => {
   const [error, setError] = useState("");
@@ -49,12 +49,12 @@ const LogIn = () => {
   return (
     <StyledDiv>
       <GoogleLogin
-          clientId="262689421829-3o7njoctsh6lj3kcqsk4lhgtphta7233.apps.googleusercontent.com"
-          buttonText="Iniciar sesión con google"
-          onSuccess={responseGoogle}
-          cookiePolicy={"single_host_origin"}
+        clientId="262689421829-3o7njoctsh6lj3kcqsk4lhgtphta7233.apps.googleusercontent.com"
+        buttonText="Iniciar sesión con google"
+        onSuccess={responseGoogle}
+        cookiePolicy={"single_host_origin"}
       />
-      <form className='form-login' onSubmit={(e) => handleSubmit(e)}>
+      <form className="form-login" onSubmit={(e) => handleSubmit(e)}>
         <input
           name="email"
           value={email}
@@ -69,7 +69,9 @@ const LogIn = () => {
           type="password"
           onChange={(e) => setPassword(e.target.value)}
         />
-        <Button variant="contained">Enviar</Button>
+        <Button type="submit" variant="contained">
+          ENVIAR
+        </Button>
       </form>
     </StyledDiv>
   );
