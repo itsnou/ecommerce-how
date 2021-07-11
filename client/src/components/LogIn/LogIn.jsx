@@ -3,6 +3,8 @@ import GoogleLogin from "react-google-login";
 import { logIn } from "../../redux/actions/sending";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
+import Button from "@material-ui/core/Button";
+import StyledDiv from "./styled.js";
 
 const LogIn = () => {
   const [error, setError] = useState("");
@@ -11,6 +13,7 @@ const LogIn = () => {
   const dispatch = useDispatch();
   const loged = useSelector((state) => state.loged);
   const history = useHistory();
+
   useEffect(() => {
     if (loged === "on") {
       history.push("/");
@@ -28,7 +31,7 @@ const LogIn = () => {
 
   function validateUser(value) {
     if (!/\S+@\S+\.\S+/.test(value)) {
-      setError("el usuario tiene que ser un gmail");
+      setError("El usuario tiene que ser un mail");
     } else {
       setError("");
     }
@@ -44,34 +47,33 @@ const LogIn = () => {
   };
 
   return (
-    <div>
-      <form onSubmit={(e) => handleSubmit(e)}>
-        <input
-          name="email"
-          value={email}
-          placeholder="email"
-          onChange={(e) => validateUser(e.target.value)}
-        />
-        {!error ? null : <span>{error}</span>}
-        <input
-          name="password"
-          value={password}
-          placeholder="password"
-          type="password"
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        +
-        <input type="submit" />
-      </form>
-      <br />
-      <br />
+    <StyledDiv>
       <GoogleLogin
         clientId="262689421829-3o7njoctsh6lj3kcqsk4lhgtphta7233.apps.googleusercontent.com"
         buttonText="Iniciar sesión con google"
         onSuccess={responseGoogle}
         cookiePolicy={"single_host_origin"}
       />
-    </div>
+      <form className="form-login" onSubmit={(e) => handleSubmit(e)}>
+        <input
+          name="email"
+          value={email}
+          placeholder="Email"
+          onChange={(e) => validateUser(e.target.value)}
+        />
+        {!error ? null : <p>{error}</p>}
+        <input
+          name="password"
+          value={password}
+          placeholder="Password"
+          type="password"
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <Button type="submit" variant="contained">
+          ENVIAR
+        </Button>
+      </form>
+    </StyledDiv>
   );
 };
 export default LogIn;

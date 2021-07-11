@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import GoogleLogin from "react-google-login";
 import { addUser } from "../../redux/actions/sending";
 import { useDispatch, useSelector } from "react-redux";
+import StyledDiv from "./styled.js";
+import Button from "@material-ui/core/Button";
 
 const LogUser = () => {
   const [error, setError] = useState("");
@@ -9,6 +11,7 @@ const LogUser = () => {
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
   const [lastName, setLastName] = useState("");
+
   const created = useSelector((state) => state.created);
   const dispatch = useDispatch();
 
@@ -22,19 +25,20 @@ const LogUser = () => {
     dispatch(addUser(data));
   };
 
-  function validateUser(value) {
+  const validateUser = (value) => {
     if (!/\S+@\S+\.\S+/.test(value)) {
       setError("el usuario tiene que ser un gmail");
     } else {
       setError("");
     }
     setEmail(value);
-  }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     let data = {
-      name: "HARDCODE",
-      lastName: "HARDCODE",
+      name: name,
+      lastName: lastName,
       email: email,
       password: password,
     };
@@ -42,34 +46,59 @@ const LogUser = () => {
   };
 
   return (
-    <div>
-      <form onSubmit={(e) => handleSubmit(e)}>
-        <input
-          name="email"
-          value={email}
-          placeholder="email"
-          onChange={(e) => validateUser(e.target.value)}
+    <StyledDiv>
+      <div className="create-google">
+        <GoogleLogin
+          clientId="262689421829-3o7njoctsh6lj3kcqsk4lhgtphta7233.apps.googleusercontent.com"
+          buttonText="Crear cuenta con Google"
+          onSuccess={responseGoogle}
+          cookiePolicy={"single_host_origin"}
         />
+      </div>
+      <form className="form-create" onSubmit={(e) => handleSubmit(e)}>
+        <div className="create-login_name">
+          <label>Ingrese su Nombre: </label>
+          <input
+            name="name"
+            placeholder="Nombre"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+        </div>
+        <div className="create-login_lastName">
+          <label>Ingrese su Apellido: </label>
+          <input
+            name="lastName"
+            placeholder="Apellido"
+            value={lastName}
+            onChange={(e) => setLastName(e.target.value)}
+          />
+        </div>
+        <div className="create-login_email">
+          <label>Ingrese su email: </label>
+          <input
+            name="email"
+            value={email}
+            placeholder="email"
+            onChange={(e) => validateUser(e.target.value)}
+          />
+        </div>
         {!error ? null : <span>{error}</span>}
-        <input
-          name="password"
-          value={password}
-          placeholder="password"
-          type="password"
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        +
-        <input type="submit" />
+        <div className="create-login_password">
+          <label>Ingrese su contraseña: </label>
+          <input
+            name="password"
+            value={password}
+            placeholder="password"
+            type="password"
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </div>
+        <Button type="submit" variant="contained">
+          Enviar
+        </Button>
       </form>
-      <br />
-      <br />
-      <GoogleLogin
-        clientId="262689421829-3o7njoctsh6lj3kcqsk4lhgtphta7233.apps.googleusercontent.com"
-        buttonText="Crear cuenta con Google"
-        onSuccess={responseGoogle}
-        cookiePolicy={"single_host_origin"}
-      />
-    </div>
+    </StyledDiv>
   );
 };
 export default LogUser;
