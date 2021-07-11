@@ -12,7 +12,7 @@ export const Cart = () => {
 
   const handleOnClick = (e, product) => {
     if (e === "x") {
-      dispatch(removeFromCart(product));
+      dispatch(removeFromCart(product._id));
       localStorage.removeItem(`${product.name}`)
     } else {
       let newQuantity = product.quantity;
@@ -73,7 +73,7 @@ export const Cart = () => {
                   <button
                     className="btn-item-delete"
                     onClick={() => {
-                      handleOnClick("x", e._id);
+                      handleOnClick("x", e);
                     }}
                   >
                     X
