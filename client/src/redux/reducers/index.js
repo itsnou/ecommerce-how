@@ -44,7 +44,7 @@ const initialState = {
   productsFilter: [],
   varietals: [],
   filter: "off",
-  user: {},
+  user: [],
   created: "",
   loged: "off",
 };
@@ -102,7 +102,7 @@ const reducer = (state = initialState, { payload, type }) => {
     case LOAD_PROFILE:
       return {
         ...state,
-        user: payload.user,
+        user: [payload.user],
         loged: payload.log,
       };
     case LOG_IN:

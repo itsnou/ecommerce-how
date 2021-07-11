@@ -13,8 +13,6 @@ const Profile = () => {
     dispatch(getProfile());
   }, [dispatch]);
 
-  console.log(user);
-
   return <div>{loged === "on" ? 
   <StyledDiv>
     <div>
