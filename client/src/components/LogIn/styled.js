@@ -41,8 +41,12 @@ const StyledDiv = styled.div`
             margin-bottom:15px;
             padding:5px;
             background-color: #420D1F;
+            font-weight:bold;
             span{
                 color:white;
+                :hover{
+                        color:black;
+                    }
             }
         }
     }
