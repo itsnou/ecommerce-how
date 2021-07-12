@@ -8,14 +8,13 @@ import ItemProduct from './ItemProduct.jsx';
 import Categorys from './Categorys.jsx';
 import Subsidiarys from './Subsidiarys.jsx';
 import Search from './Search.jsx';
+import ItemUsers from './ItemUsers.jsx';
 
 
 
 const ControlPanel = () => {
     const store = useSelector(state => state);
     const [visual, setVisual] = useState({
-        products: false,
-        productsSearch: false,
     });
 
 
@@ -34,6 +33,12 @@ const ControlPanel = () => {
                 {visual.productsSearch && 
                 <>
                 <Search index={"product"} />
+                {store.search.length>1 && store.search.map(p => <ItemProduct product={p} />)}
+                </>}
+                {visual.users && store.users.map(p => <ItemUsers product={p} />)}
+                {visual.usersSearch && 
+                <>
+                <Search index={"user"} />
                 {store.search.length>1 && store.search.map(p => <ItemProduct product={p} />)}
                 </>}
             </div>

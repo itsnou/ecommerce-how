@@ -6,24 +6,37 @@ import Paper from '@material-ui/core/Paper';
 import Popper from '@material-ui/core/Popper';
 import MenuItem from '@material-ui/core/MenuItem';
 import MenuList from '@material-ui/core/MenuList';
+import { getUsers } from '../../redux/actions';
+import { useDispatch } from 'react-redux';
 
 
-const Users=({visual, setVisual})=> {
+const Users = ({ setVisual }) => {
     const [open, setOpen] = useState(false);
     const anchorRef = useRef(null);
-
-  
-
-    const handleToggle = () => {
-        setOpen((prevOpen) => !prevOpen);
-    };
+    const dispatch = useDispatch();
 
     const handleClick = (e) => {
+        if (e.target.value === 1) {
+            dispatch(getUsers());
+            setVisual({
+                users: true
+            })
+        }
+        if (e.target.value === 2) {
+            setVisual({
+                userSearch: true
+            })
+        }
         if (anchorRef.current && anchorRef.current.contains(e.target)) {
             return;
         }
         setOpen(false);
     };
+
+    const handleToggle = () => {
+        setOpen((prevOpen) => !prevOpen);
+    };
+
 
     function handleListKeyDown(event) {
         if (event.key === 'Tab') {

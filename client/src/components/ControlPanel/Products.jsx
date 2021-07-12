@@ -10,7 +10,7 @@ import { useDispatch } from 'react-redux';
 import { getProductsAll } from '../../redux/actions';
 
 
-const Products = ({ visual, setVisual }) => {
+const Products = ({ setVisual }) => {
     const [open, setOpen] = useState(false);
     const anchorRef = useRef(null);
     const dispatch = useDispatch();
@@ -25,16 +25,12 @@ const Products = ({ visual, setVisual }) => {
         if (e.target.value === 1) {
             dispatch(getProductsAll());
             setVisual({
-                ...visual,
-                products: true,
-                productsSearch: false
+                products: true
             })
         }
         if (e.target.value === 2) {
-            dispatch(getProductsAll());
             setVisual({
-                ...visual,
-                products: false,
+               
                 productsSearch: true
             })
         }
