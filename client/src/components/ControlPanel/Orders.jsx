@@ -1,39 +1,76 @@
-import React, { useState } from 'react';
-import { Grid, Button, Menu, MenuItem } from '@material-ui/core';
-import { StyledMenu } from './styled.js';
+import React, { useEffect, useRef, useState } from 'react';
+import Button from '@material-ui/core/Button';
+import ClickAwayListener from '@material-ui/core/ClickAwayListener';
+import Grow from '@material-ui/core/Grow';
+import Paper from '@material-ui/core/Paper';
+import Popper from '@material-ui/core/Popper';
+import MenuItem from '@material-ui/core/MenuItem';
+import MenuList from '@material-ui/core/MenuList';
 
 
+const Orders=({visual, setVisual})=> {
+    const [open, setOpen] = useState(false);
+    const anchorRef = useRef(null);
 
-const Orders = () => {
-    const [order, setOrder] = useState(0)
-    const handleClick = (event) => {
-        setOrder(event.currentTarget);
+  
+
+    const handleToggle = () => {
+        setOpen((prevOpen) => !prevOpen);
     };
-    const handleClose = () => {
-        setOrder(null);
+
+    const handleClick = (e) => {
+        if (anchorRef.current && anchorRef.current.contains(e.target)) {
+            return;
+        }
+        setOpen(false);
     };
+
+    function handleListKeyDown(event) {
+        if (event.key === 'Tab') {
+            event.preventDefault();
+            setOpen(false);
+        }
+    }
+
+    // return focus to the button when we transitioned from !open -> open
+    const prevOpen = useRef(open);
+    useEffect(() => {
+        if (prevOpen.current === true && open === false) {
+            anchorRef.current.focus();
+        }
+
+        prevOpen.current = open;
+    }, [open]);
 
     return (
-        <StyledMenu>
-            <div>
-                <Grid>
-                    <Button aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
-                        Ordenes
-                    </Button>
-                    <Menu
-                        id="order"
-                        anchorEl={order}
-                        keepMounted
-                        open={Boolean(order)}
-                        onClose={handleClose}
+        <div>
+            <Button
+                ref={anchorRef}
+                aria-controls={open ? 'menu-list-grow' : undefined}
+                aria-haspopup="true"
+                onClick={handleToggle}
+            >
+                Ordenes
+            </Button>
+            <Popper open={open} anchorEl={anchorRef.current} role={undefined} transition disablePortal>
+                {({ TransitionProps, placement }) => (
+                    <Grow
+                        {...TransitionProps}
+                        style={{ transformOrigin: placement === 'bottom' ? 'center left' : 'center bottom' }}
                     >
-                        <MenuItem onClick={handleClose}> Ver todas las ordenes</MenuItem>
-                        <MenuItem onClick={handleClose}> Buscar Orden</MenuItem>
-                    </Menu>
-                </Grid>
-            </div>
-        </StyledMenu>
-    )
+                        <Paper>
+                            <ClickAwayListener onClickAway={handleClick}>
+                                <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
+                                    <MenuItem value={1} onClick={handleClick}>Ver todas las ordenes</MenuItem>
+                                    <MenuItem value={2} onClick={handleClick}>Buscar orden</MenuItem>
+                                </MenuList>
+                            </ClickAwayListener>
+                        </Paper>
+                    </Grow>
+                )}
+            </Popper>
+        </div>
+    );
 };
 
 export default Orders;
