@@ -11,6 +11,19 @@ const StyledDiv = styled.div`
     align-items: center;
     margin-top: 30px;
     z-index: 999;
+    width:350px;
+    border-radius:8px;
+    a{
+      text-decoration:none;
+      color:black;
+      font-weight:bold;
+      :hover{
+        color:red;
+      }
+    }
+    li{
+      list-style:none;
+    }
   }
   input {
     text-align: center;
@@ -18,6 +31,8 @@ const StyledDiv = styled.div`
     float: left;
     background: #fff;
     height: 30px;
+      list-style:none;
+    
   }
   .btn {
     margin-left: -32px;
