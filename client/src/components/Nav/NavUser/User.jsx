@@ -4,14 +4,13 @@ import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { addToCart, modifyItemCart } from "../../../redux/actions/cart";
 
-
 const User = () => {
   const dispatch = useDispatch();
   const [price, setPrice] = useState(0);
   const countCart = useSelector((state) => state.cart);
   const [cartCount, setCartCount] = useState(0);
   const [userLog, setUserLog] = useState("");
-  
+
   useEffect(() => {
     if (sessionStorage.getItem("userLog") === "on") {
       setUserLog("on");
@@ -34,7 +33,7 @@ const User = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    if (countCart.length >0) {
+    if (countCart.length > 0) {
       //contador de precios
       let count = countCart.map((e) => e.price * e.quantity);
       const reducer = (accumulator, currentValue) => accumulator + currentValue;
@@ -46,11 +45,16 @@ const User = () => {
       quantityProduct.current = quantity.reduce(reducer);
       setCartCount(quantityProduct.current);
     }
-    if(!countCart.length){
-      setCartCount(0)
+    if (!countCart.length) {
+      setCartCount(0);
       setPrice(0);
     }
   }, [countCart, dispatch]);
+
+  const disconnect = () => {
+    window.location.reload();
+    window.sessionStorage.clear();
+  };
 
   return (
     <div className="nav-user">
@@ -64,7 +68,14 @@ const User = () => {
         </li>
         <li>
           {userLog === "on" ? (
-            <Link to="/profile">PERFIL</Link>
+            <div>
+              <Link to="/profile">PERFIL</Link>
+              <div>
+                <Link to="/" onClick={() => disconnect()}>
+                  DESCONECTARSE
+                </Link>
+              </div>
+            </div>
           ) : (
             <Link to="/login">INICIAR SESIÓN</Link>
           )}
