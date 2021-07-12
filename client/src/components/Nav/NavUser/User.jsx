@@ -4,12 +4,14 @@ import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { addToCart, modifyItemCart } from "../../../redux/actions/cart";
 
+
 const User = () => {
   const dispatch = useDispatch();
   const [price, setPrice] = useState(0);
   const countCart = useSelector((state) => state.cart);
   const [cartCount, setCartCount] = useState(0);
   const [userLog, setUserLog] = useState("");
+  
   useEffect(() => {
     if (sessionStorage.getItem("userLog") === "on") {
       setUserLog("on");
@@ -17,6 +19,7 @@ const User = () => {
       setUserLog("off");
     }
   }, [userLog]);
+
   let prces = 0;
   let counter = 0;
   let fixed = useRef(prces);

@@ -56,6 +56,22 @@ const StyledDiv = styled.div`
                 padding:10px;
                 border:1px solid black;
         }
+        button{
+                border-radius:6px;
+                border:none;
+                outline:none;
+                font-size:16px;
+                margin-bottom:15px;
+                padding:5px;
+                background-color: #420D1F;
+                font-weight:bold;
+                span{
+                    color:white;
+                    :hover{
+                        color:black;
+                    }
+                }
+            }
     }
 
 
