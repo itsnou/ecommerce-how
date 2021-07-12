@@ -71,9 +71,7 @@ const User = () => {
             <div>
               <Link to="/profile">PERFIL</Link>
               <div>
-                <Link to="/" onClick={() => disconnect()}>
-                  DESCONECTARSE
-                </Link>
+                <Link onClick={() => disconnect()}>DESCONECTARSE</Link>
               </div>
             </div>
           ) : (
