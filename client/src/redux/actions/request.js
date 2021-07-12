@@ -10,6 +10,7 @@ import {
   GET_USERS,
   GET_USER_DETAIL,
   GET_VARIETALS,
+  LOAD_PROFILE,
 } from "./constant";
 
 export const getProductsAll = () => {
@@ -128,6 +129,26 @@ export const getVarietals = () => {
     } catch (e) {
       console.log(e);
       return dispatch({ type: GET_VARIETALS, payload: [] });
+    }
+  };
+};
+
+export const getProfile = () => {
+  let apiRes;
+  return async (dispatch) => {
+    try {
+      apiRes = await axios.get(`${GET_URL}users`, {
+        headers: {
+          authorization: "Bearer " + sessionStorage.getItem("token"),
+        },
+      });
+      dispatch({
+        type: LOAD_PROFILE,
+        payload: { user: apiRes.data, log: "on" },
+      });
+    } catch (err) {
+      apiRes = err.response.data.message;
+      dispatch({ type: LOAD_PROFILE, payload: { user: [], log: "off" } });
     }
   };
 };

@@ -165,7 +165,9 @@ const Filters = () => {
             })
           : // )
             varietals
-              .filter((el) => el.relatedCategory === filterCategory.category)
+              .filter((el) => el.relatedCategory === filterCategory.category ||
+                              filterCategory.filterVarietals.includes(el.name)
+              )
               .map((el) => {
                 if (filterCategory.filterVarietals.length) {
                   for (

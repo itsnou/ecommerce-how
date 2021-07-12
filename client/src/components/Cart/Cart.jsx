@@ -5,12 +5,15 @@ import StyledCartItems from "./styled.js";
 
 export const Cart = () => {
   const dispatch = useDispatch();
-  const cartItems = useSelector((store) => store.cart);
+  const cartItems = useSelector((state) => state.cart);
   let total = 0;
   //funcion onclick pa' despachar la action
+
+
   const handleOnClick = (e, product) => {
     if (e === "x") {
-      dispatch(removeFromCart(product));
+      dispatch(removeFromCart(product._id));
+      localStorage.removeItem(`${product.name}`)
     } else {
       let newQuantity = product.quantity;
       if (e === "+" && newQuantity < product.stock) {
@@ -24,6 +27,7 @@ export const Cart = () => {
         quantity: newQuantity,
       };
       dispatch(modifyItemCart(obj));
+      window.localStorage.setItem(`${product.name}`, JSON.stringify(obj));
     }
   };
 
@@ -69,7 +73,7 @@ export const Cart = () => {
                   <button
                     className="btn-item-delete"
                     onClick={() => {
-                      handleOnClick("x", e._id);
+                      handleOnClick("x", e);
                     }}
                   >
                     X

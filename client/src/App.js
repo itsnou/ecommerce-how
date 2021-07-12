@@ -3,10 +3,12 @@ import Nav from "./components/Nav/Nav";
 import Catalogo from "./components/Catalogo/Catalogo";
 import ProductDetail from "./components/ProductDetail/ProductDetail";
 import Cart from "./components/Cart/Cart";
-import About from "./components/About/About"
+import About from "./components/About/About";
 import LogUser from "./components/LogUser/LogUser";
 import Home from "./components/Home/Home";
 import ControlPanel from "./components/ControlPanel/ControlPanel";
+import LogIn from "./components/LogIn/LogIn";
+import Profile from "./components/Profile/Profile";
 
 function App() {
   return (
@@ -21,6 +23,8 @@ function App() {
       <Route exact path="/empresa" component={About} />
       <Route exact path="/create" component={LogUser} />
       <Route exact path="/admin/controlpanel" component={ControlPanel} />
+      <Route exact path="/login" component={LogIn} />
+      <Route exact path="/profile" component={Profile} />
     </>
   );
 }
