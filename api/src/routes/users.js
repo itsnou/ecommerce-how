@@ -87,12 +87,14 @@ router.put(
     const token = req.headers.authorization.split(" ");
     const decodificado = jwt_decode(token[1]);
     const findUser = await userSchema.findOne({ email: decodificado.email });
+    console.log(findUser);
     if (findUser.userStatus === "Admin") {
       const { userEmail } = req.body;
       const user = await userSchema.findOneAndUpdate(
         { email: userEmail },
         { userStatus: "Admin" }
       );
+      console.log(user);
       res.send("Actualizado");
     } else {
       res.send("No tiene permisos ");
