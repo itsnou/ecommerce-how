@@ -97,7 +97,6 @@ const reducer = (state = initialState, { payload, type }) => {
       return {
         ...state,
         users: payload,
-        loading: false,
       };
     case LOAD_PROFILE:
       return {

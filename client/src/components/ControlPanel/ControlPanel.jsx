@@ -35,7 +35,7 @@ const ControlPanel = () => {
                 <Search index={"product"} />
                 {store.search.length>1 && store.search.map(p => <ItemProduct product={p} />)}
                 </>}
-                {visual.users && store.users.map(p => <ItemUsers product={p} />)}
+                {visual.users && store.users.map(p => <ItemUsers user={p} />)}
                 {visual.usersSearch && 
                 <>
                 <Search index={"user"} />
