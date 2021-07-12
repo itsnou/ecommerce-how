@@ -148,7 +148,7 @@ export const getProfile = () => {
       });
     } catch (err) {
       apiRes = err.response.data.message;
-      dispatch({ type: LOAD_PROFILE, payload: "off" });
+      dispatch({ type: LOAD_PROFILE, log: "off" });
     }
   };
 };

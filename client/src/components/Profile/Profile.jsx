@@ -13,19 +13,19 @@ const Profile = () => {
     dispatch(getProfile());
   }, [dispatch]);
 
-  return <div>{loged === "on" ? 
+  return <div>{user && loged === "on" ? 
   <StyledDiv>
     <div>
-      <h1>Bienvenido: {user.name} {user.lastName}</h1>
+      <h1>Bienvenido: {user[0].name} {user[0].lastName}</h1>
     </div>
     <hr/>
     <div>
-      <h2>Email: {user.email}</h2>
+      <h2>Email: {user[0].email}</h2>
     </div>
     <div>
       <h4>Compras realizadas: </h4>
       {
-        user.orders.length > 0 
+        user[0].orders.length > 0 
         ? <div>
           {/* aca va el mapeo de los productos */}
         </div>
