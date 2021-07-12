@@ -25,6 +25,23 @@ router.get(
   }
 );
 
+router.get(
+  "/allusers",
+  passport.authenticate("jwt", { session: false }),
+  async (req, res) => {
+    const token = req.headers.authorization.split(" ");
+    const decodificado = jwt_decode(token[1]);
+    const findUser = await userSchema.findOne({ email: decodificado.email });
+    console.log(findUser);
+    if (findUser.userStatus === "Admin") {
+      const allUsers = await userSchema.find();
+      res.send(allUsers);
+    } else {
+      res.status(401).send({ message: "No está autorizado" });
+    }
+  }
+);
+
 router.post("/signup", async (req, res) => {
   const { name, lastName, email, address, password } = req.body;
   console.log(name);
