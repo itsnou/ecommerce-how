@@ -17,10 +17,14 @@ router.get("/",
     const findUser = await userSchema.findOne({ email: decodificado.email });
 
     if(findUser.userStatus !== "Admin") {      
-      const allInvoices = await invoiceSchema.find({ email: findUser.userEmail });
+      const allInvoices = await invoiceSchema
+      .find({ email: decodificado.email })
+      .populate("user");
       return res.send(allInvoices);
     }
-    const allInvoices = await invoiceSchema.find();
+    const allInvoices = await invoiceSchema
+    .find()
+    .populate("user");
     return res.send(allInvoices);
   } catch (err) {
     res.status(404).send("No autorizado para acceder a las facturas");
@@ -39,11 +43,7 @@ router.post("/",
     const data = {
       items: items,
       totalAmount: totalAmount,
-      user: findUser._id,
-      userName: findUser.name,
-      userLastName: findUser.lastName,
-      userAddress: findUser.address,
-      userEmail: findUser.email
+      user: findUser._id
     };
     const newInvoice = await new invoiceSchema(data);
     await newInvoice.save();
