@@ -5,14 +5,18 @@ import Users from './Users.jsx';
 import Products from './Products.jsx';
 import { useSelector } from 'react-redux';
 import ItemProduct from './ItemProduct.jsx';
+import Categorys from './Categorys.jsx';
+import Subsidiarys from './Subsidiarys.jsx';
+import Search from './Search.jsx';
 
 
 
 const ControlPanel = () => {
-    const products = useSelector(state => state.products);
+    const store = useSelector(state => state);
     const [visual, setVisual] = useState({
         products: false,
-    })
+        productsSearch: false,
+    });
 
 
 
@@ -22,9 +26,16 @@ const ControlPanel = () => {
                 <Orders visual={visual} setVisual={setVisual} />
                 <Users visual={visual} setVisual={setVisual} />
                 <Products visual={visual} setVisual={setVisual} />
+                <Categorys visual={visual} setVisual={setVisual} />
+                <Subsidiarys visual={visual} setVisual={setVisual} />
             </div >
             <div className="content">
-                {visual.products && products.map(p => <ItemProduct product={p} />)}
+                {visual.products && store.products.map(p => <ItemProduct product={p} />)}
+                {visual.productsSearch && 
+                <>
+                <Search index={"product"} />
+                {store.search.length>1 && store.search.map(p => <ItemProduct product={p} />)}
+                </>}
             </div>
         </StyledPanel>
     )
