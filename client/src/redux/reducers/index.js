@@ -27,6 +27,7 @@ import {
   FILTRED_FOR_CATEGORY,
   LOAD_PROFILE,
   LOG_IN,
+  EDIT_USER_STATUS,
 } from "../actions/constant";
 
 import { addToCart } from "../../utils/addToCart";
@@ -197,6 +198,8 @@ const reducer = (state = initialState, { payload, type }) => {
         ...state,
         filter: filterOnOff(payload),
       };
+      case EDIT_USER_STATUS:
+        return state;
     default:
       return state;
   }

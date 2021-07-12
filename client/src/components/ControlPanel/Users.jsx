@@ -24,7 +24,7 @@ const Users = ({ setVisual }) => {
         }
         if (e.target.value === 2) {
             setVisual({
-                userSearch: true
+                usersSearch: true
             })
         }
         if (anchorRef.current && anchorRef.current.contains(e.target)) {
