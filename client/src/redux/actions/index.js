@@ -23,6 +23,7 @@ import {
     deleteCategory,
     deleteProduct,
     deleteUser,
+    editUserStatus
 } from "./sending";
 import { RESET } from "./constant";
 
@@ -54,4 +55,5 @@ export {
     deleteCategory,
     deleteProduct,
     deleteUser,
+    editUserStatus
 };

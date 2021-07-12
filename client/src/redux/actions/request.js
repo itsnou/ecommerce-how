@@ -91,11 +91,15 @@ export const getUsers = () => {
 export const getUserDetail = (id) => {
   return async (dispatch) => {
     try {
-      const products = await axios.get(`${GET_URL}user/${id}`);
-      return dispatch({ type: GET_USER_DETAIL, payload: products.data });
+      const users = await axios.get(`${GET_URL}users/${id}`, {
+        headers: {
+          authorization: "Bearer " + sessionStorage.getItem("token"),
+        },
+      });
+      return dispatch({ type: GET_USER_DETAIL, payload: users.data });
     } catch (e) {
       console.log(e);
-      return dispatch({ type: GET_USER_DETAIL, payload: [] });
+      return dispatch({ type: GET_USER_DETAIL, payload: {} });
     }
   };
 };

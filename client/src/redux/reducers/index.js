@@ -38,6 +38,7 @@ const initialState = {
   products: [],
   productDetail: {},
   users: [],
+  userDetail:{},
   orders: [],
   cart: [],
   search: [],
@@ -113,8 +114,7 @@ const reducer = (state = initialState, { payload, type }) => {
     case GET_USER_DETAIL:
       return {
         ...state,
-        orders: [payload],
-        loading: false,
+        userDetail:{}
       };
     case FILTRED_FOR_PRICE_LOW_TO_HIGH:
       return {

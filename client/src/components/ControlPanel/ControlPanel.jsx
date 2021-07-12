@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { StyledPanel } from './styled.js';
-import Orders from './Orders.jsx';
-import Users from './Users.jsx';
-import Products from './Products.jsx';
+import Orders from './Orders/Orders.jsx';
+import Users from './Users/Users.jsx';
+import Products from './Products/Products.jsx';
 import { useSelector } from 'react-redux';
-import ItemProduct from './ItemProduct.jsx';
-import Categorys from './Categorys.jsx';
-import Subsidiarys from './Subsidiarys.jsx';
+import ItemProduct from './Products/ItemProduct.jsx';
+import Categorys from './Categorys/Categorys.jsx';
+import Subsidiarys from './Subsidiarys/Subsidiarys.jsx';
 import Search from './Search.jsx';
-import ItemUsers from './ItemUsers.jsx';
+import ItemUsers from './Users/ItemUsers.jsx';
 
 
 

@@ -7,7 +7,7 @@ import Popper from '@material-ui/core/Popper';
 import MenuItem from '@material-ui/core/MenuItem';
 import MenuList from '@material-ui/core/MenuList';
 import { useDispatch } from 'react-redux';
-import { getProductsAll } from '../../redux/actions';
+import { getProductsAll } from '../../../redux/actions';
 
 
 const Products = ({ setVisual }) => {

@@ -44,6 +44,26 @@ const StyledProduct = styled.div`
     }
 
 `
+const StyledUsers = styled.div`
+    display:flex;
+    justify-content:space-between;
+    margin: 0px 20px 0px 20px;
+    padding: 5px;
+    background-color: #EDEDED;
+    list-style: none;
+    border-radius: 2px;
+    border:solid rgba(0, 0, 0, 0.1);
+    .name {
+        width: 300px;
+    }
+    .email {
+        width:300px;
+    }
+    .status{
+        width:100px;
+    }
+
+`
 const StyledSearch = styled.div`
     background: white;
     color: black;
@@ -67,4 +87,4 @@ const StyledSearch = styled.div`
   }
 `
 
-export { StyledPanel, StyledMenu, StyledProduct, StyledSearch };
+export { StyledPanel, StyledMenu, StyledProduct, StyledSearch, StyledUsers };
