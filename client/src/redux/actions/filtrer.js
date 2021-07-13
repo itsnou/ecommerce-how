@@ -7,8 +7,15 @@ import {
     FILTER_STATE,
     FILTRED_BY_Z_A,
     FILTRED_BY_A_Z,
+    USERS_FILTERED
 } from "./constant";
 
+export const userFiltered = (name) => {
+    return {
+        type : USERS_FILTERED,
+        payload : name
+    }
+}
 export const filtredForRatingLowToHigh = (products) => {
     return {
         type: FILTRED_FOR_RATING_LOW_TO_HIGH,
