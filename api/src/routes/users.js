@@ -120,4 +120,21 @@ router.put(
   }
 );
 
+router.delete(
+  "/deleteuser",
+  passport.authenticate("jwt", { session: false }),
+  async (req, res) => {
+    const token = req.headers.authorization.split(" ");
+    const decodificado = jwt_decode(token[1]);
+    const findUser = await userSchema.findOne({ email: decodificado.email });
+    if (findUser.userStatus === "Admin") {
+      const { id } = req.body;
+      const userDeleted = await userSchema.findByIdAndDelete({ _id: id });
+      res.send("Usuario borrado");
+    } else {
+      res.status(401).send({ message: "No tiene acceso" });
+    }
+  }
+);
+
 module.exports = router;
