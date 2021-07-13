@@ -7,6 +7,7 @@ import About from "./components/About/About";
 import LogUser from "./components/LogUser/LogUser";
 import Home from "./components/Home/Home";
 import ControlPanel from "./components/ControlPanel/ControlPanel";
+import FormProduct from "./components/ControlPanel/Products/EditProduct/EditProduct";
 import LogIn from "./components/LogIn/LogIn";
 import Profile from "./components/Profile/Profile";
 import UserDetail from "./components/ControlPanel/Users/UserDetail"
@@ -27,6 +28,7 @@ function App() {
       <Route exact path="/admin/controlpanel" component={ControlPanel} />
       <Route exact path="/login" component={LogIn} />
       <Route exact path="/profile" component={Profile} />
+      <Route exact path="/admin/editProduct/:id" component={FormProduct}/>
     </>
   );
 }

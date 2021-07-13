@@ -6,7 +6,7 @@ import Button from '@material-ui/core/Button';
 const ItemProduct = ({ product }) => {
     return (
         <StyledProduct>
-            <Link to={`/product/${product._id}`}>
+            <Link to={`/admin/editProduct/${product._id}`}>
                 <li className="name">{product.name}</li>
             </Link>
             <li className="price">$ {product.price}</li>
