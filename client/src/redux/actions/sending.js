@@ -108,3 +108,19 @@ export const editUserStatus= (userEmail) => {
     }
   }
 }
+
+export const editProduct= (data) => {
+  return async (dispatch) => {
+    try{
+      console.log("***********front",data);
+      const change= axios.put(`${GET_URL}users/upgradeuser`,{userEmail:data},{
+        headers: {
+          authorization: "Bearer " + sessionStorage.getItem("token"),
+        },
+      })
+      dispatch({type:EDIT_USER_STATUS})
+    } catch (e){
+      console.log(e);
+    }
+  }
+}
