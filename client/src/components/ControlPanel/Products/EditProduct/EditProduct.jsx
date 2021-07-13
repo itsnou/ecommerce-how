@@ -2,6 +2,7 @@ import {useRef,useEffect} from 'react';
 import {useForm} from 'react-hook-form';
 import {useDispatch, useSelector} from 'react-redux';
 import {getProductDetail} from '../../../../redux/actions/request';
+import {editProduct} from '../../../../redux/actions/sending';
 
 const FormProduct = ({match}) => {
     const dispatch = useDispatch();
@@ -13,13 +14,17 @@ const FormProduct = ({match}) => {
         return dispatch(getProductDetail(id.current))
     },[dispatch])
     
-    const onSubmit = data => console.log(data);
+    const onSubmit = data => dispatch(editProduct(data));
     console.log(watch("example"));
 
     return (
         <>
         {product.name !== undefined && 
             <form onSubmit={handleSubmit(onSubmit)}>
+                <label>
+                    Descripcion del Producto:
+                    <input {...register("id",{required:true})} value={`${product._id}`}/>
+                </label>
                 <label>
                     Nombre del producto:
                     <input {...register("name",{required:true})} defaultValue={`${product.name}`}/>
