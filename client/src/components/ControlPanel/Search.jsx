@@ -1,12 +1,13 @@
-import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { HiOutlineSearch } from "react-icons/hi";
-import { getProductsByName } from "../../redux/actions";
-import Button from "@material-ui/core/Button";
-import { StyledSearch } from "./styled";
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { HiOutlineSearch } from 'react-icons/hi';
+import { getProductsByName, userFiltered } from '../../redux/actions';
+
+import Button from '@material-ui/core/Button';
+import { StyledSearch } from './styled';
 
 const Search = ({ itemValue }) => {
-    const [input, setInput] = useState("");
+    const [input, setInput] = useState('');
 
     const dispatch = useDispatch();
 
@@ -18,17 +19,19 @@ const Search = ({ itemValue }) => {
     const handleSubmit = (e) => {
         e.preventDefault();
         switch ({ itemValue }) {
-            case "products":
+            case 'products':
                 return dispatch(getProductsByName(input));
+            case 'users':
+                return dispatch(userFiltered(input));
             default:
-                return
+                return;
         }
-        setInput("");
+        setInput('');
     };
 
     useEffect(() => {
         if (input.length === 0) {
-            setInput("");
+            setInput('');
         }
     }, [dispatch]);
 
@@ -37,14 +40,14 @@ const Search = ({ itemValue }) => {
             <div>
                 <form onSubmit={handleSubmit}>
                     <input
-                        type="search"
-                        placeholder="Buscar..."
+                        type='search'
+                        placeholder='Buscar...'
                         value={itemValue}
                         onChange={handleChange}
                     />
                     <Button
-                        className="btn"
-                        variant="contained"
+                        className='btn'
+                        variant='contained'
                         onClick={handleSubmit}
                     >
                         <HiOutlineSearch />

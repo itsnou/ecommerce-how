@@ -32,3 +32,4 @@ export const GET_VARIETALS = "GET_VARIETALS";
 export const FILTER_STATE = "FILTER_STATE";
 export const LOG_IN = "LOG_IN";
 export const LOAD_PROFILE = "LOAD_PROFILE";
+export const USERS_FILTERED = "USERS_FILTERED";

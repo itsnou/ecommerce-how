@@ -5,6 +5,7 @@ import {
     filtredForRatingLowToHigh,
     filtredByAtoZ,
     filtredByZtoA,
+    userFiltered
 } from "./filtrer";
 import {
     getProductsAll,
@@ -41,6 +42,7 @@ export {
     filtredForRatingLowToHigh,
     filtredByAtoZ,
     filtredByZtoA,
+    userFiltered,
     getOrderDetail,
     getUsers,
     getOrders,
