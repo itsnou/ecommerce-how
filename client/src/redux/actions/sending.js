@@ -129,3 +129,22 @@ export const editProduct = (data) => {
     }
   };
 };
+
+export const blockUser = (id) => {
+  console.log(id);
+  return async (dispatch) => {
+    try {
+      const change = await axios.put(
+        `${GET_URL}users/blockuser`,
+        { id: id },
+        {
+          headers: {
+            authorization: "Bearer " + sessionStorage.getItem("token"),
+          },
+        }
+      );
+    } catch (e) {
+      console.log(e);
+    }
+  };
+};
