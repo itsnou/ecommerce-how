@@ -54,13 +54,13 @@ const StyledUsers = styled.div`
     border-radius: 2px;
     border:solid rgba(0, 0, 0, 0.1);
     .name {
-        width: 300px;
+        width: 400px;
     }
     .email {
-        width:300px;
+        width:600px;
     }
     .status{
-        width:100px;
+        width:200px;
     }
 
 `

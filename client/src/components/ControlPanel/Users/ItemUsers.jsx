@@ -8,19 +8,20 @@ import { editUserStatus } from "../../../redux/actions";
 import { getUsers } from "../../../redux/actions/request.js";
 
 const ItemUsers = ({ user }) => {
-const dispatch=useDispatch();
-const handleClick=()=>{
-    dispatch(editUserStatus(user.email));
-    swal("¡Buen trabajo!", "¡Usuario modificado!", "success");
-    dispatch(getUsers());
-}
+    const dispatch = useDispatch();
+    const handleClick = () => {
+        dispatch(editUserStatus(user.email));
+        swal("¡Buen trabajo!", "¡Usuario modificado!", "success");
+        dispatch(getUsers());
+    }
     return (
         <StyledUsers>
             <Link to={`/user/${user._id}`}>
-            <li className="name">{user.name} {user.lastname}</li> 
+                <li className="name">{user.name} {user.lastname}</li>
             </Link>
             <li className="email">{user.email}</li>
-            <li className="status">{user.userStatus}</li><Button variant="contained" onClick={handleClick}>Hacer Admin</Button>            
+            <li className="status">{user.userStatus}</li>
+            {user.userStatus === "Regular" && <Button variant="contained" onClick={handleClick}>Hacer Admin</Button>}
             <Button variant="contained" color="secondary" >X</Button>
         </StyledUsers>
     )

@@ -79,7 +79,7 @@ const Products = ({ setVisual }) => {
                                     <MenuItem value={1} onClick={handleClick}>Ver todos los productos</MenuItem>
                                     <MenuItem value={2} onClick={handleClick}>Buscar producto</MenuItem>
                                     <MenuItem value={3} onClick={handleClick}>Agregar producto</MenuItem>
-                                    <MenuItem value={3} onClick={handleClick}>Modificar ofertas</MenuItem>
+                                    <MenuItem value={4} onClick={handleClick}>Modificar ofertas</MenuItem>
                                 </MenuList>
                             </ClickAwayListener>
                         </Paper>
