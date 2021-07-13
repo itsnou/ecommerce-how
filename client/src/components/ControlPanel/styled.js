@@ -57,12 +57,15 @@ const StyledUsers = styled.div`
         width: 300px;
     }
     .email {
-        width:300px;
+        width:500px;
     }
     .status{
         width:100px;
     }
-
+    .btn{
+    visibility:hidden;
+    }
+    
 `
 const StyledSearch = styled.div`
     background: white;
@@ -86,5 +89,28 @@ const StyledSearch = styled.div`
     color: #214252;
   }
 `
+const StyledUserDetail = styled.div`
 
-export { StyledPanel, StyledMenu, StyledProduct, StyledSearch, StyledUsers };
+display: flex;
+justify-content:center;
+align-items:center;
+height: 60%;
+width: 50%;
+position: absolute; 
+margin: 60px 25% 0px 25%;
+text-align:center;
+list-style:none;
+background-color: #EDEDED;
+border-radius: 8px;
+border:solid rgba(0, 0, 0, 0.1);
+box-shadow: 0px 14px 15px rgba(0, 0, 0, 0.1);
+.btn{
+    margin: 150px 10px 0px 10px;
+}
+.name{
+    font-size: 30px;
+    font-weight:bold;
+    margin: 0px 10px 0px 10px;
+}
+`
+export { StyledPanel, StyledMenu, StyledProduct, StyledSearch, StyledUsers, StyledUserDetail };
