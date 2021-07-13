@@ -27,16 +27,20 @@ import {
   FILTRED_FOR_CATEGORY,
   LOAD_PROFILE,
   LOG_IN,
+  EDIT_USER_STATUS,
+  USERS_FILTERED
+
 } from "../actions/constant";
 
 import { addToCart } from "../../utils/addToCart";
 import { modifyItemInCart } from "../../utils/modifyItemInCart";
-import { filterWines, filterOnOff } from "../../utils/methods";
+import { filterWines, filterOnOff, filterUsers } from "../../utils/methods";
 
 const initialState = {
   products: [],
   productDetail: {},
   users: [],
+  userDetail: {},
   orders: [],
   cart: [],
   search: [],
@@ -47,6 +51,8 @@ const initialState = {
   user: [],
   created: "",
   loged: "off",
+  searchUser: []
+
 };
 
 const reducer = (state = initialState, { payload, type }) => {
@@ -57,6 +63,7 @@ const reducer = (state = initialState, { payload, type }) => {
         products: payload,
         loading: false,
       };
+
     case GET_PRODUCT_DETAIL:
       return {
         ...state,
@@ -97,7 +104,6 @@ const reducer = (state = initialState, { payload, type }) => {
       return {
         ...state,
         users: payload,
-        loading: false,
       };
     case LOAD_PROFILE:
       return {
@@ -113,8 +119,12 @@ const reducer = (state = initialState, { payload, type }) => {
     case GET_USER_DETAIL:
       return {
         ...state,
-        orders: [payload],
-        loading: false,
+        userDetail: payload
+      };
+    case USERS_FILTERED:
+      return {
+        ...state,
+        searchUser: filterUsers(payload)
       };
     case FILTRED_FOR_PRICE_LOW_TO_HIGH:
       return {
@@ -198,6 +208,8 @@ const reducer = (state = initialState, { payload, type }) => {
         ...state,
         filter: filterOnOff(payload),
       };
+    case EDIT_USER_STATUS:
+      return state;
     default:
       return state;
   }

@@ -40,3 +40,9 @@ export const filterOnOff = (payload) => {
   }
   return "off";
 };
+
+export const filterUsers = (payload) => {
+  return payload.users.filter((user) =>
+    user.name.toLowerCase().includes(payload.name.toLowerCase())
+  );
+}

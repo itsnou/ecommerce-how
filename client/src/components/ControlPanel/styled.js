@@ -44,6 +44,29 @@ const StyledProduct = styled.div`
     }
 
 `
+const StyledUsers = styled.div`
+    display:flex;
+    justify-content:space-between;
+    margin: 0px 20px 0px 20px;
+    padding: 5px;
+    background-color: #EDEDED;
+    list-style: none;
+    border-radius: 2px;
+    border:solid rgba(0, 0, 0, 0.1);
+    .name {
+        width: 300px;
+    }
+    .email {
+        width:500px;
+    }
+    .status{
+        width:100px;
+    }
+    .btn{
+    visibility:hidden;
+    }
+    
+`
 const StyledSearch = styled.div`
     background: white;
     color: black;
@@ -66,5 +89,28 @@ const StyledSearch = styled.div`
     color: #214252;
   }
 `
+const StyledUserDetail = styled.div`
 
-export { StyledPanel, StyledMenu, StyledProduct, StyledSearch };
+display: flex;
+justify-content:center;
+align-items:center;
+height: 60%;
+width: 50%;
+position: absolute; 
+margin: 60px 25% 0px 25%;
+text-align:center;
+list-style:none;
+background-color: #EDEDED;
+border-radius: 8px;
+border:solid rgba(0, 0, 0, 0.1);
+box-shadow: 0px 14px 15px rgba(0, 0, 0, 0.1);
+.btn{
+    margin: 150px 10px 0px 10px;
+}
+.name{
+    font-size: 30px;
+    font-weight:bold;
+    margin: 0px 10px 0px 10px;
+}
+`
+export { StyledPanel, StyledMenu, StyledProduct, StyledSearch, StyledUsers, StyledUserDetail };

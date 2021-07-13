@@ -7,10 +7,10 @@ import Popper from '@material-ui/core/Popper';
 import MenuItem from '@material-ui/core/MenuItem';
 import MenuList from '@material-ui/core/MenuList';
 import { useDispatch } from 'react-redux';
-import { getProductsAll } from '../../redux/actions';
+import { getProductsAll } from '../../../redux/actions';
 
 
-const Products = ({ visual, setVisual }) => {
+const Products = ({ setVisual }) => {
     const [open, setOpen] = useState(false);
     const anchorRef = useRef(null);
     const dispatch = useDispatch();
@@ -25,29 +25,23 @@ const Products = ({ visual, setVisual }) => {
         if (e.target.value === 1) {
             dispatch(getProductsAll());
             setVisual({
-                ...visual,
-                products: true,
-                productsSearch: false,
-                addProduct: false
+                products: true
             })
         }
         if (e.target.value === 2) {
             // dispatch(getProductsAll());
             setVisual({
-                ...visual,
-                products: false,
                 productsSearch: true,
-                addProduct: false
             })
         }
         if(e.target.value === 3){
             setVisual({
-                ...visual,
                 products: false,
                 productsSearch: false,
-                addProduct: true
+                addProduct: true,
             })
         }
+        
         if (anchorRef.current && anchorRef.current.contains(e.target)) {
             return;
         }

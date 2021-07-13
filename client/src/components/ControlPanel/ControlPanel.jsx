@@ -1,16 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { StyledPanel } from './styled.js';
-import Orders from './Orders.jsx';
-import Users from './Users.jsx';
-import Products from './Products.jsx';
+import Orders from './Orders/Orders.jsx';
+import Users from './Users/Users.jsx';
+import Products from './Products/Products.jsx';
 import { useSelector } from 'react-redux';
-import ItemProduct from './ItemProduct.jsx';
-import Categorys from './Categorys.jsx';
-import Subsidiarys from './Subsidiarys.jsx';
+import ItemProduct from './Products/ItemProduct.jsx';
+import Categorys from './Categorys/Categorys.jsx';
+import Subsidiarys from './Subsidiarys/Subsidiarys.jsx';
 import Search from './Search.jsx';
 import AddProduct from './AddProduct.jsx';
-
-
+import ItemUsers from './Users/ItemUsers.jsx';
 
 const ControlPanel = () => {
     const store = useSelector(state => state);
@@ -18,6 +17,7 @@ const ControlPanel = () => {
         products: false,
         productsSearch: false,
         addProduct: false
+
     });
 
 
@@ -35,12 +35,18 @@ const ControlPanel = () => {
                 {visual.products && store.products.map(p => <ItemProduct product={p} />)}
                 {visual.productsSearch && 
                 <>
-                <Search index={"product"} />
+                <Search itemValue={"product"} />
                 {store.search.length>1 && store.search.map(p => <ItemProduct product={p} />)}
                 </>}
                 {visual.addProduct &&
                 <AddProduct/>
                 }
+                {visual.users && store.users.map(p => <ItemUsers user={p} />)}
+                {visual.usersSearch && 
+                <>
+                <Search itemValue={"user"} />
+                {store.searchUser.length>0 && store.searchUser.map(p => <ItemUsers user={p} />)}
+                </>}
             </div>
         </StyledPanel>
     )

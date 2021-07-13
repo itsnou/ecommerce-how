@@ -5,6 +5,7 @@ import {
     filtredForRatingLowToHigh,
     filtredByAtoZ,
     filtredByZtoA,
+    userFiltered
 } from "./filtrer";
 import {
     getProductsAll,
@@ -23,6 +24,7 @@ import {
     deleteCategory,
     deleteProduct,
     deleteUser,
+    editUserStatus
 } from "./sending";
 import { RESET } from "./constant";
 
@@ -40,6 +42,7 @@ export {
     filtredForRatingLowToHigh,
     filtredByAtoZ,
     filtredByZtoA,
+    userFiltered,
     getOrderDetail,
     getUsers,
     getOrders,
@@ -54,4 +57,5 @@ export {
     deleteCategory,
     deleteProduct,
     deleteUser,
+    editUserStatus
 };
