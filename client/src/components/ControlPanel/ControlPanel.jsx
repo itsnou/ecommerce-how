@@ -32,14 +32,14 @@ const ControlPanel = () => {
                 {visual.products && store.products.map(p => <ItemProduct product={p} />)}
                 {visual.productsSearch && 
                 <>
-                <Search index={"product"} />
+                <Search itemValue={"product"} />
                 {store.search.length>1 && store.search.map(p => <ItemProduct product={p} />)}
                 </>}
                 {visual.users && store.users.map(p => <ItemUsers user={p} />)}
                 {visual.usersSearch && 
                 <>
-                <Search index={"user"} />
-                {store.search.length>1 && store.search.map(p => <ItemProduct product={p} />)}
+                <Search itemValue={"user"} />
+                {store.searchUser.length>0 && store.searchUser.map(p => <ItemUsers user={p} />)}
                 </>}
             </div>
         </StyledPanel>

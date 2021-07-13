@@ -10,10 +10,10 @@ import {
     USERS_FILTERED
 } from "./constant";
 
-export const userFiltered = (name) => {
+export const userFiltered = (name,users) => {
     return {
         type : USERS_FILTERED,
-        payload : name
+        payload : {name,users}
     }
 }
 export const filtredForRatingLowToHigh = (products) => {

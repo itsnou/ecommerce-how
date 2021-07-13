@@ -89,5 +89,7 @@ const StyledSearch = styled.div`
     color: #214252;
   }
 `
+const StyledUserDetail =styled.div`
 
-export { StyledPanel, StyledMenu, StyledProduct, StyledSearch, StyledUsers };
+`
+export { StyledPanel, StyledMenu, StyledProduct, StyledSearch, StyledUsers, StyledUserDetail };

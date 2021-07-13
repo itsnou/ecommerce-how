@@ -119,12 +119,12 @@ const reducer = (state = initialState, { payload, type }) => {
     case GET_USER_DETAIL:
       return {
         ...state,
-        userDetail: {}
+        userDetail: payload
       };
     case USERS_FILTERED:
       return {
         ...state,
-        searchUser: filterUsers(payload, state.users)
+        searchUser: filterUsers(payload)
       };
     case FILTRED_FOR_PRICE_LOW_TO_HIGH:
       return {
