@@ -32,7 +32,6 @@ router.get(
     const token = req.headers.authorization.split(" ");
     const decodificado = jwt_decode(token[1]);
     const findUser = await userSchema.findOne({ email: decodificado.email });
-    console.log(findUser);
     if (findUser.userStatus === "Admin") {
       const allUsers = await userSchema.find();
       res.send(allUsers);
@@ -80,5 +79,28 @@ router.post("/login", async (req, res) => {
 
   res.send({ token: jwtToken, message: "on" });
 });
+
+router.put(
+  "/upgradeuser",
+  passport.authenticate("jwt", { session: false }),
+  async (req, res) => {
+    const { userEmail } = req.body;
+    console.log("******************", userEmail)
+    const token = req.headers.authorization.split(" ");
+    const decodificado = jwt_decode(token[1]);
+    const findUser = await userSchema.findOne({ email: decodificado.email });
+    console.log(findUser);    
+    if (findUser.userStatus === "Admin") {      
+      const user = await userSchema.findOneAndUpdate(
+        { email: userEmail },
+        { userStatus: "Admin" }
+      );
+      console.log(user);
+      res.send("Actualizado");
+    } else {
+      res.status(401).send("No tiene permisos ");
+    }
+  }
+);
 
 module.exports = router;

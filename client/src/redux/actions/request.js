@@ -75,8 +75,12 @@ export const getProductDetail = (id) => {
 export const getUsers = () => {
   return async (dispatch) => {
     try {
-      const products = await axios.get(`${GET_URL}user`);
-      return dispatch({ type: GET_USERS, payload: products.data });
+      const users = await axios.get(`${GET_URL}users/allusers`, {
+        headers: {
+          authorization: "Bearer " + sessionStorage.getItem("token"),
+        },
+      });
+      return dispatch({ type: GET_USERS, payload: users.data });
     } catch (e) {
       console.log(e);
       return dispatch({ type: GET_USERS, payload: [] });
@@ -87,11 +91,15 @@ export const getUsers = () => {
 export const getUserDetail = (id) => {
   return async (dispatch) => {
     try {
-      const products = await axios.get(`${GET_URL}user/${id}`);
-      return dispatch({ type: GET_USER_DETAIL, payload: products.data });
+      const users = await axios.get(`${GET_URL}users/${id}`, {
+        headers: {
+          authorization: "Bearer " + sessionStorage.getItem("token"),
+        },
+      });
+      return dispatch({ type: GET_USER_DETAIL, payload: users.data });
     } catch (e) {
       console.log(e);
-      return dispatch({ type: GET_USER_DETAIL, payload: [] });
+      return dispatch({ type: GET_USER_DETAIL, payload: {} });
     }
   };
 };

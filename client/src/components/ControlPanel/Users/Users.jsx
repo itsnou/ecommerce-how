@@ -6,36 +6,25 @@ import Paper from '@material-ui/core/Paper';
 import Popper from '@material-ui/core/Popper';
 import MenuItem from '@material-ui/core/MenuItem';
 import MenuList from '@material-ui/core/MenuList';
+import { getUsers } from '../../../redux/actions';
 import { useDispatch } from 'react-redux';
-import { getProductsAll } from '../../redux/actions';
 
 
-const Products = ({ visual, setVisual }) => {
+const Users = ({ setVisual }) => {
     const [open, setOpen] = useState(false);
     const anchorRef = useRef(null);
     const dispatch = useDispatch();
 
-
-
-    const handleToggle = () => {
-        setOpen((prevOpen) => !prevOpen);
-    };
-
     const handleClick = (e) => {
         if (e.target.value === 1) {
-            dispatch(getProductsAll());
+            dispatch(getUsers());
             setVisual({
-                ...visual,
-                products: true,
-                productsSearch: false
+                users: true
             })
         }
         if (e.target.value === 2) {
-            dispatch(getProductsAll());
             setVisual({
-                ...visual,
-                products: false,
-                productsSearch: true
+                usersSearch: true
             })
         }
         if (anchorRef.current && anchorRef.current.contains(e.target)) {
@@ -43,6 +32,11 @@ const Products = ({ visual, setVisual }) => {
         }
         setOpen(false);
     };
+
+    const handleToggle = () => {
+        setOpen((prevOpen) => !prevOpen);
+    };
+
 
     function handleListKeyDown(event) {
         if (event.key === 'Tab') {
@@ -53,7 +47,7 @@ const Products = ({ visual, setVisual }) => {
 
     // return focus to the button when we transitioned from !open -> open
     const prevOpen = useRef(open);
-    React.useEffect(() => {
+    useEffect(() => {
         if (prevOpen.current === true && open === false) {
             anchorRef.current.focus();
         }
@@ -69,21 +63,19 @@ const Products = ({ visual, setVisual }) => {
                 aria-haspopup="true"
                 onClick={handleToggle}
             >
-                Productos
+                Usuarios
             </Button>
             <Popper open={open} anchorEl={anchorRef.current} role={undefined} transition disablePortal>
                 {({ TransitionProps, placement }) => (
                     <Grow
                         {...TransitionProps}
-                        style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom' }}
+                        style={{ transformOrigin: placement === 'bottom' ? 'center left' : 'center bottom' }}
                     >
                         <Paper>
                             <ClickAwayListener onClickAway={handleClick}>
                                 <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
-                                    <MenuItem value={1} onClick={handleClick}>Ver todos los productos</MenuItem>
-                                    <MenuItem value={2} onClick={handleClick}>Buscar producto</MenuItem>
-                                    <MenuItem value={3} onClick={handleClick}>Agregar producto</MenuItem>
-                                    <MenuItem value={3} onClick={handleClick}>Modificar ofertas</MenuItem>
+                                    <MenuItem value={1} onClick={handleClick}>Ver todos los usuarios</MenuItem>
+                                    <MenuItem value={2} onClick={handleClick}>Buscar usuario</MenuItem>
                                 </MenuList>
                             </ClickAwayListener>
                         </Paper>
@@ -94,4 +86,4 @@ const Products = ({ visual, setVisual }) => {
     );
 };
 
-export default Products;
+export default Users;

@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { StyledProduct } from "./styled.js";
+import { StyledProduct } from "../styled.js";
+import Button from '@material-ui/core/Button';
 
 const ItemProduct = ({ product }) => {
     return (
@@ -12,8 +13,8 @@ const ItemProduct = ({ product }) => {
             <li className="vineyard">{product.vineyard}</li>
             <li className="stock">{product.stock}<button>-</button><button>+</button></li>
             <br />
-            <button>EDITAR</button>
-            <button>X</button>
+            <Button variant="contained">EDITAR</Button>
+            <Button variant="contained" color="secondary" >X</Button>
         </StyledProduct>
     )
 };
