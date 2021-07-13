@@ -8,6 +8,7 @@ import ItemProduct from './ItemProduct.jsx';
 import Categorys from './Categorys.jsx';
 import Subsidiarys from './Subsidiarys.jsx';
 import Search from './Search.jsx';
+import AddProduct from './AddProduct.jsx';
 
 
 
@@ -16,6 +17,7 @@ const ControlPanel = () => {
     const [visual, setVisual] = useState({
         products: false,
         productsSearch: false,
+        addProduct: false
     });
 
 
@@ -36,6 +38,9 @@ const ControlPanel = () => {
                 <Search index={"product"} />
                 {store.search.length>1 && store.search.map(p => <ItemProduct product={p} />)}
                 </>}
+                {visual.addProduct &&
+                <AddProduct/>
+                }
             </div>
         </StyledPanel>
     )

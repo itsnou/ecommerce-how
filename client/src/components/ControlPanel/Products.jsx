@@ -27,15 +27,25 @@ const Products = ({ visual, setVisual }) => {
             setVisual({
                 ...visual,
                 products: true,
-                productsSearch: false
+                productsSearch: false,
+                addProduct: false
             })
         }
         if (e.target.value === 2) {
-            dispatch(getProductsAll());
+            // dispatch(getProductsAll());
             setVisual({
                 ...visual,
                 products: false,
-                productsSearch: true
+                productsSearch: true,
+                addProduct: false
+            })
+        }
+        if(e.target.value === 3){
+            setVisual({
+                ...visual,
+                products: false,
+                productsSearch: false,
+                addProduct: true
             })
         }
         if (anchorRef.current && anchorRef.current.contains(e.target)) {
@@ -83,7 +93,7 @@ const Products = ({ visual, setVisual }) => {
                                     <MenuItem value={1} onClick={handleClick}>Ver todos los productos</MenuItem>
                                     <MenuItem value={2} onClick={handleClick}>Buscar producto</MenuItem>
                                     <MenuItem value={3} onClick={handleClick}>Agregar producto</MenuItem>
-                                    <MenuItem value={3} onClick={handleClick}>Modificar ofertas</MenuItem>
+                                    <MenuItem value={4} onClick={handleClick}>Modificar ofertas</MenuItem>
                                 </MenuList>
                             </ClickAwayListener>
                         </Paper>
