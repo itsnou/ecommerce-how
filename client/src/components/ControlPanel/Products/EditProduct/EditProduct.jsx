@@ -16,8 +16,6 @@ const FormProduct = ({match}) => {
     },[dispatch])
     
     const onSubmit = data => dispatch(editProduct(data));
-    console.log(watch("example"));
-    console.log(product)
 
     return (
         <StyledDiv>
