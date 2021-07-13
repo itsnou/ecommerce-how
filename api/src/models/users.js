@@ -22,7 +22,7 @@ const UsersSchema = new mongoose.Schema(
     userStatus: {
       required: false,
       type: String,
-      enum: ["Premium", "Regular", "Admin"],
+      enum: ["Premium", "Regular", "Admin", "Bloqueado"],
       default: "Regular",
     },
     address: {

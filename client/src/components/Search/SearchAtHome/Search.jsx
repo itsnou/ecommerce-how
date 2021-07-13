@@ -8,6 +8,7 @@ import {
   getProductsAll,
 } from "../../../redux/actions/request";
 import { useDispatch } from "react-redux";
+
 const SearchAtHome = () => {
   const wines = useSelector((state) => state.products);
   const [value, setValue] = useState("");
@@ -26,10 +27,14 @@ const SearchAtHome = () => {
   });
 
   const getSuggestions = (value) => {
-    return lowerCasedWines.filter((wine) =>
-      wine.name.includes(value.trim().toUpperCase())
+    return lowerCasedWines.filter((wine,idx) =>{
+      if(idx<5){
+        return wine.name.includes(value.trim().toUpperCase())
+      }
+    }
     );
   };
+  
   return (
     <StyledDiv>
       <AutoSuggest
@@ -39,9 +44,6 @@ const SearchAtHome = () => {
           setValue(value);
           setSuggestions(getSuggestions(value));
         }}
-        // onSuggestionSelected={(_, { suggestionValue }) =>
-        //   console.log("Selected: " + suggestionValue)
-        // }
         getSuggestionValue={(suggestion) => suggestion.name}
         renderSuggestion={(suggestion) => (
           <Link
@@ -58,7 +60,7 @@ const SearchAtHome = () => {
             setValue(newValue);
           },
         }}
-        highlightFirstSuggestion={true}
+        highlightFirstSuggestion={false}
       />
     </StyledDiv>
   );

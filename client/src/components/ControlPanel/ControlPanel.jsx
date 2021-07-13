@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from 'react';
 import { StyledPanel } from './styled.js';
 import Orders from './Orders/Orders.jsx';
@@ -22,19 +23,23 @@ const ControlPanel = () => {
 
 
 
-    return (
-        <StyledPanel>
-            <div className="panel">
-                <Orders visual={visual} setVisual={setVisual} />
-                <Users visual={visual} setVisual={setVisual} />
-                <Products visual={visual} setVisual={setVisual} />
-                <Categorys visual={visual} setVisual={setVisual} />
-                <Subsidiarys visual={visual} setVisual={setVisual} />
-            </div >
-            <div className="content">
-                {visual.products && store.products.map(p => <ItemProduct product={p} />)}
-                {visual.productsSearch && 
-                <>
+
+  return (
+    <StyledPanel>
+      {window.sessionStorage.getItem("admin") ? (
+        <>
+          <div className="panel">
+            <Orders visual={visual} setVisual={setVisual} />
+            <Users visual={visual} setVisual={setVisual} />
+            <Products visual={visual} setVisual={setVisual} />
+            <Categorys visual={visual} setVisual={setVisual} />
+            <Subsidiarys visual={visual} setVisual={setVisual} />
+          </div>
+          <div className="content">
+            {visual.products &&
+              store.products.map((p) => <ItemProduct product={p} />)}
+            {visual.productsSearch && (
+              <>
                 <Search itemValue={"product"} />
                 {store.search.length>1 && store.search.map(p => <ItemProduct product={p} />)}
                 </>}
@@ -45,11 +50,15 @@ const ControlPanel = () => {
                 {visual.usersSearch && 
                 <>
                 <Search itemValue={"user"} />
-                {store.searchUser.length>0 && store.searchUser.map(p => <ItemUsers user={p} />)}
-                </>}
-            </div>
-        </StyledPanel>
-    )
+                {store.searchUser.length > 0 &&
+                  store.searchUser.map((p) => <ItemUsers user={p} />)}
+              </>
+            )}
+          </div>
+        </>
+      ) : null}
+    </StyledPanel>
+  );
 };
 
 export default ControlPanel;

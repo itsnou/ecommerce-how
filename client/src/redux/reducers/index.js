@@ -21,6 +21,7 @@ import {
   ADD_TO_CART,
   REMOVE_FROM_CART,
   MODIFY_ITEM_CART,
+  MODIFY_PRODUCT,
   RESET,
   FILTER_STATE,
   GET_VARIETALS,
@@ -181,6 +182,8 @@ const reducer = (state = initialState, { payload, type }) => {
         ...state,
         cart: modifyItemInCart(payload, state.cart),
       };
+    case MODIFY_PRODUCT:
+      return state;
     case RESET:
       return {
         ...state,
