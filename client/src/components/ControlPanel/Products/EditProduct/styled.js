@@ -10,10 +10,15 @@ const StyledDiv = styled.div`
         >* {
             padding: 1em;
         }
+        display:grid;
+        grid-template-columns: repeat(auto-fill, minmax(min(100%,30rem), 1fr));
+        
         .edit-product{
-            background: #ffffff;
+            background: #420D1F;
             border-top-right-radius: 10px;
             border-bottom-right-radius: 10px;
+            color:white;
+            font-weight:bold;
             .edit-product_container{
                 display: grid;
                 grid-template-columns: 1fr 1fr;
@@ -30,10 +35,10 @@ const StyledDiv = styled.div`
                     border: none;
                     background: none;
                     outline: 0;
-                    border-bottom: 1px solid rgb(255, 0, 0);
                     color: black;
                     border-radius: 4px;
-                    background: rgb(255, 0, 0);
+                    background: white;
+                    box-shadow: rgba(255, 255, 255, 0.3) 0px 5px 15px;
                     border: 0;
                     text-transform: uppercase;
                     padding: 1em;
@@ -55,26 +60,27 @@ const StyledDiv = styled.div`
                     width: 100%;
                     padding: .7em;
                     border: none;
-                    background: none;
+                    background: white;
                     outline: 0;
-                    border-bottom: 1px solid red;
-                    color: rgb(2, 2, 2);
+                    color: black;
                     border-radius: 4px;
+                    font-width:bold;
                 }
                 textarea {
                     width: 100%;
                     padding: .7em;
                     border: none;
-                    background: none;
+                    background: white;
                     outline: 0;
-                    border-bottom: 1px solid red;
-                    color: rgb(2, 2, 2);
+                    color: black;
+                    font-weight:bold;
                     border-radius: 4px;
                 }
             }
         }
         .product-image{
-            background: #c50000;
+            margin:auto;
+            background: white;
             border-top-left-radius: 10px;
             border-bottom-left-radius: 10px;
         }
