@@ -73,6 +73,7 @@ const User = () => {
               <div>
                 <Link onClick={() => disconnect()}>DESCONECTARSE</Link>
               </div>
+              <Link to="/admin/controlpanel">PANEL DE CONTROL</Link>
             </div>
           ) : (
             <Link to="/login">INICIAR SESIÓN</Link>

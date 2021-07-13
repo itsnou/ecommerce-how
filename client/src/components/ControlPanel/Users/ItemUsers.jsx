@@ -21,7 +21,8 @@ const ItemUsers = ({ user }) => {
             </Link>
             <li className="email">{user.email}</li>
             <li className="status">{user.userStatus}</li>
-            {user.userStatus === "Regular" && <Button variant="contained" onClick={handleClick}>Hacer Admin</Button>}
+            {user.userStatus === "Regular" ? <Button variant="contained" onClick={handleClick}>Hacer Admin</Button >:
+            <Button className="btn" variant="contained" onClick={handleClick}>Hacer Admin</Button >}
             <Button variant="contained" color="secondary" >X</Button>
         </StyledUsers>
     )

@@ -54,15 +54,18 @@ const StyledUsers = styled.div`
     border-radius: 2px;
     border:solid rgba(0, 0, 0, 0.1);
     .name {
-        width: 400px;
+        width: 300px;
     }
     .email {
-        width:600px;
+        width:500px;
     }
     .status{
-        width:200px;
+        width:100px;
     }
-
+    .btn{
+    visibility:hidden;
+    }
+    
 `
 const StyledSearch = styled.div`
     background: white;
