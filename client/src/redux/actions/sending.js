@@ -8,7 +8,8 @@ import {
   ADD_USER,
   DELETE_USER,
   LOG_IN,
-  EDIT_USER_STATUS
+  EDIT_USER_STATUS,
+  MODIFY_PRODUCT
 } from "./constant";
 
 export const addProduct = (product) => {
@@ -103,6 +104,22 @@ export const editUserStatus= (userEmail) => {
         },
       })
       dispatch({type:EDIT_USER_STATUS})
+    } catch (e){
+      console.log(e);
+    }
+  }
+}
+
+export const editProduct= (data) => {
+  return async (dispatch) => {
+    try{
+      console.log("***********front",data);
+      const change= await axios.put(`${GET_URL}products/modify`,data,{
+        headers: {
+          authorization: "Bearer " + sessionStorage.getItem("token"),
+        },
+      })
+      dispatch({type:MODIFY_PRODUCT})
     } catch (e){
       console.log(e);
     }
