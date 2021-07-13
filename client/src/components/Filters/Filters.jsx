@@ -6,7 +6,7 @@ import {
   filtredForCategory,
 } from "../../redux/actions/filtrer";
 
-//MARIANA AQUI NO SE HACEN MAS FILTROS
+//MARIANA AQUI NO SE HACEN MAS FILTROS (jajajajaj amo a mi suegra)
 
 const Filters = () => {
   const dispatch = useDispatch();
@@ -17,7 +17,7 @@ const Filters = () => {
     category: "default",
     filterVarietals: [],
   });
-
+console.log(varietals)
   useEffect(() => {
     dispatch(getVarietals());
   }, [dispatch]);

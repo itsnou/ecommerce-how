@@ -15,7 +15,7 @@ import {
 export const addProduct = (product) => {
   return async (dispatch) => {
     try {
-      await axios.post(`${GET_URL}product`, product);
+      await axios.post(`${GET_URL}products`, product);
       return dispatch({ type: ADD_PRODUCT });
     } catch (e) {
       console.log(e);
