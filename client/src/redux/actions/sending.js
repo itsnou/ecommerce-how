@@ -123,7 +123,7 @@ export const editProduct = (data) => {
           authorization: "Bearer " + sessionStorage.getItem("token"),
         },
       });
-      dispatch({ type: MODIFY_PRODUCT });
+      dispatch({ type: MODIFY_PRODUCT , payload: true});
     } catch (e) {
       console.log(e);
     }

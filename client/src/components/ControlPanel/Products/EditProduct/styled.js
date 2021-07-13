@@ -19,6 +19,9 @@ const StyledDiv = styled.div`
             border-bottom-right-radius: 10px;
             color:white;
             font-weight:bold;
+            .id-hidden{
+                visibility:hidden;
+            }
             .edit-product_container{
                 display: grid;
                 grid-template-columns: 1fr 1fr;
