@@ -88,14 +88,21 @@ router.post("/login", async (req, res) => {
   if (!validate) {
     return res.status(401).send({ message: "off" });
   }
+  if (userEmail.userStatus === "Bloqueado") {
+    return res.status(401).send({ message: "Acceso denegado" });
+  }
 
   const jwtToken = jwt.sign(
-    { id: userEmail._id, email: userEmail.email },
+    {
+      id: userEmail._id,
+      email: userEmail.email,
+    },
     "secret",
     { expiresIn: "1d" }
   );
-
-  res.send({ token: jwtToken, message: "on" });
+  if (userEmail.userStatus === "Admin")
+    return res.send({ token: jwtToken, message: "on", admin: "on" });
+  return res.send({ token: jwtToken, message: "on" });
 });
 
 router.put(

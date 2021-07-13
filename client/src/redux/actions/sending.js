@@ -8,7 +8,7 @@ import {
   ADD_USER,
   DELETE_USER,
   LOG_IN,
-  EDIT_USER_STATUS
+  EDIT_USER_STATUS,
 } from "./constant";
 
 export const addProduct = (product) => {
@@ -83,8 +83,10 @@ export const logIn = (user) => {
     let apiRes;
     try {
       apiRes = await axios.post(`${GET_URL}users/login`, user);
+      console.log(apiRes.data);
       window.sessionStorage.setItem("token", apiRes.data.token);
       window.sessionStorage.setItem("userLog", "on");
+      if (apiRes.data.admin) window.sessionStorage.setItem("admin", "on");
       dispatch({ type: LOG_IN, payload: apiRes.data.message });
     } catch (err) {
       apiRes = err.response.data.message;
@@ -93,18 +95,21 @@ export const logIn = (user) => {
   };
 };
 
-export const editUserStatus= (userEmail) => {
+export const editUserStatus = (userEmail) => {
   return async (dispatch) => {
-    try{
-      console.log("***********front",userEmail);
-      const change= axios.put(`${GET_URL}users/upgradeuser`,{userEmail:userEmail},{
-        headers: {
-          authorization: "Bearer " + sessionStorage.getItem("token"),
-        },
-      })
-      dispatch({type:EDIT_USER_STATUS})
-    } catch (e){
+    try {
+      const change = axios.put(
+        `${GET_URL}users/upgradeuser`,
+        { userEmail: userEmail },
+        {
+          headers: {
+            authorization: "Bearer " + sessionStorage.getItem("token"),
+          },
+        }
+      );
+      dispatch({ type: EDIT_USER_STATUS });
+    } catch (e) {
       console.log(e);
     }
-  }
-}
+  };
+};

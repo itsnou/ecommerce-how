@@ -10,10 +10,14 @@ const User = () => {
   const countCart = useSelector((state) => state.cart);
   const [cartCount, setCartCount] = useState(0);
   const [userLog, setUserLog] = useState("");
+  const [admin, setAdmin] = useState("");
 
   useEffect(() => {
     if (sessionStorage.getItem("userLog") === "on") {
       setUserLog("on");
+      if (sessionStorage.getItem("admin")) {
+        setAdmin("on");
+      }
     } else {
       setUserLog("off");
     }
@@ -73,7 +77,9 @@ const User = () => {
               <div>
                 <Link onClick={() => disconnect()}>DESCONECTARSE</Link>
               </div>
-              <Link to="/admin/controlpanel">PANEL DE CONTROL</Link>
+              {admin === "on" ? (
+                <Link to="/admin/controlpanel">PANEL DE CONTROL</Link>
+              ) : null}
             </div>
           ) : (
             <Link to="/login">INICIAR SESIÓN</Link>
