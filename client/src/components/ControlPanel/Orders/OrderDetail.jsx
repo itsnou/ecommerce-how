@@ -19,7 +19,7 @@ const OrderDetail = ({ match }) => {
           Nombre del cliente: {order.invoice.userName} {order.invoice.userLastName}
         </li>
         <li className="email">Email: {order.invoice.userEmail}</li>
-        <li className="status">Estado de la orden: {user.state}</li>
+        <li className="status">Estado de la orden: {order.state}</li>
         <li>Cambiar estado:
           <ButtonGroup color="primary" aria-label="outlined primary button group">
             <Button>En proceso</Button>
@@ -27,15 +27,15 @@ const OrderDetail = ({ match }) => {
             <Button>Finalizada</Button>
             <Button>Cancelada</Button>
           </ButtonGroup></li>
-        {user.invoice.items && (user.invoice.items.length > 0 &&
-          <li>Productos : {user.invoice.items.map(item => {
+        {order.invoice.items && (order.invoice.items.length > 0 &&
+          <li>Productos : {order.invoice.items.map(item => {
             <div className="prodcut">
               <li>Producto: {item.name}</li>
               <li>Precio: ${item.price}</li>
               <li>Cantidad: {item.quantity}</li>
             </div>
           })}</li>)}
-        <li>Fecha: {user.invoice.date}</li>
+        <li>Fecha: {order.invoice.date}</li>
       </div>
     </StyledOrderDetail>
   );
