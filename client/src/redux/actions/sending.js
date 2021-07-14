@@ -15,7 +15,11 @@ import {
 export const addProduct = (product) => {
   return async (dispatch) => {
     try {
-      await axios.post(`${GET_URL}products`, product);
+      await axios.post(`${GET_URL}products`, product, {
+        headers: {
+          authorization: "Bearer " + sessionStorage.getItem("token"),
+        },
+      });
       return dispatch({ type: ADD_PRODUCT });
     } catch (e) {
       console.log(e);
