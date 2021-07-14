@@ -124,11 +124,15 @@ export const getOrders = () => {
 export const getOrderDetail = (id) => {
   return async (dispatch) => {
     try {
-      const products = await axios.get(`${GET_URL}order/${id}`);
-      return dispatch({ type: GET_ORDER_DETAIL, payload: products.data });
+      const order = await axios.get(`${GET_URL}orders/id`, {
+        headers: {
+          authorization: "Bearer " + sessionStorage.getItem("token"),
+        },
+      });
+      return dispatch({ type: GET_ORDER_DETAIL, payload: order.data });
     } catch (e) {
       console.log(e);
-      return dispatch({ type: GET_ORDER_DETAIL, payload: [] });
+      return dispatch({ type: GET_ORDER_DETAIL, payload: {} });
     }
   };
 };

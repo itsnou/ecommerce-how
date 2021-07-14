@@ -153,6 +153,27 @@ box-shadow: 0px 14px 15px rgba(0, 0, 0, 0.1);
     margin: 0px 10px 0px 10px;
 }
 `
+const StyledOrderDetail = styled.div`
+
+display: flex;
+justify-content:center;
+align-items:center;
+height: 60%;
+width: 50%;
+position: absolute; 
+margin: 60px 25% 0px 25%;
+text-align:center;
+list-style:none;
+background-color: #EDEDED;
+border-radius: 8px;
+border:solid rgba(0, 0, 0, 0.1);
+box-shadow: 0px 14px 15px rgba(0, 0, 0, 0.1);
+.name{
+    font-size: 30px;
+    font-weight:bold;
+    margin: 0px 10px 0px 10px;
+}
+`
 export {
     StyledPanel,
     StyledMenu,
@@ -160,5 +181,6 @@ export {
     StyledSearch,
     StyledUsers,
     StyledUserDetail,
-    StyledOrders
+    StyledOrders,
+    StyledOrderDetail
 };

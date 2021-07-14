@@ -13,7 +13,7 @@ const ItemOrder = ({ order }) => {
     else if (order.state === "Creada") type = "created";
     return (
         <StyledOrders>
-            <Link to={`/user/${order._id}`}>
+            <Link to={`/order/${order._id}`}>
                 <li className="name">{order.invoice.userName} {order.invoice.userLastName}</li>
             </Link>
             <li className="email">{order.invoice.userEmail}</li>

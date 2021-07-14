@@ -43,6 +43,7 @@ const initialState = {
   users: [],
   userDetail: {},
   orders: [],
+  orderDetail:{},
   cart: [],
   search: [],
   loading: false,
@@ -98,7 +99,7 @@ const reducer = (state = initialState, { payload, type }) => {
     case GET_ORDER_DETAIL:
       return {
         ...state,
-        orders: [payload],
+        orderDetail:payload,
         loading: false,
       };
     case GET_USERS:

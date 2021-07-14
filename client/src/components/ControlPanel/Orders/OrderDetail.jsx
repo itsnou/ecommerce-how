@@ -1,68 +1,44 @@
-import React, { useEffect} from "react";
-import Button from "@material-ui/core/Button";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { editUserStatus, getUserDetail } from "../../../redux/actions";
-import swal from "sweetalert";
-import { StyledUserDetail } from "../styled";
-import { blockUser } from "../../../redux/actions/sending";
+import { getOrderDetail } from "../../../redux/actions";
+import { StyledOrderDetail } from "../styled";
+import { ButtonGroup, Button } from "@material-ui/core";
 
-const ItemUsers = ({ match }) => {
+const OrderDetail = ({ match }) => {
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.userDetail);
+  const order = useSelector((state) => state.orderDetail);
+
   useEffect(() => {
-    dispatch(getUserDetail(match.params.id));
+    dispatch(getOrderDetail(match.params.id));
   }, [dispatch]);
 
-  const handleClick = () => {
-    dispatch(editUserStatus(user.email));
-    dispatch(getUserDetail(match.params.id));
-    // swal("¡Buen trabajo!", "¡Usuario modificado!", "success");
-  };
-
-  const blockedUser = () => {
-    dispatch(blockUser(user._id));
-    dispatch(getUserDetail(match.params.id));
-  };
-
   return (
-    <StyledUserDetail>
+    <StyledOrderDetail>
       <div>
         <li className="name">
-          Nombre: {user.name} {user.lastName}
+          Nombre del cliente: {order.invoice.userName} {order.invoice.userLastName}
         </li>
-        <li className="email">Email: {user.email}</li>
-        {user.address && <li className="adress">Direccion: {user.address}</li>}
-        <br />
-
-        {user.orders && user.orders.length > 0 && (
-          <>
-            <li>
-              {" "}
-              Ordenes:
-              {user.orders.map((u) => (
-                <li>{u}</li>
-              ))}
-            </li>
-          </>
-        )}
-        <li className="status">{user.userStatus}</li>
-        <Button className="btn" variant="contained" onClick={handleClick}>
-          Hacer Admin
-        </Button>
-        <Button
-          className="btn"
-          variant="contained"
-          color="secondary"
-          onClick={blockedUser}
-        >
-          Bloquear Usuario
-        </Button>
-        <Button className="btn" variant="contained">
-          Forzar reinicio de contraseña
-        </Button>
+        <li className="email">Email: {order.invoice.userEmail}</li>
+        <li className="status">Estado de la orden: {user.state}</li>
+        <li>Cambiar estado:
+          <ButtonGroup color="primary" aria-label="outlined primary button group">
+            <Button>En proceso</Button>
+            <Button>Enviada</Button>
+            <Button>Finalizada</Button>
+            <Button>Cancelada</Button>
+          </ButtonGroup></li>
+        {user.invoice.items && (user.invoice.items.length > 0 &&
+          <li>Productos : {user.invoice.items.map(item => {
+            <div className="prodcut">
+              <li>Producto: {item.name}</li>
+              <li>Precio: ${item.price}</li>
+              <li>Cantidad: {item.quantity}</li>
+            </div>
+          })}</li>)}
+        <li>Fecha: {user.invoice.date}</li>
       </div>
-    </StyledUserDetail>
+    </StyledOrderDetail>
   );
 };
 
-export default ItemUsers;
+export default OrderDetail;

@@ -6,7 +6,7 @@ import swal from "sweetalert";
 import { StyledUserDetail } from "../styled";
 import { blockUser } from "../../../redux/actions/sending";
 
-const ItemUsers = ({ match }) => {
+const UserDetail = ({ match }) => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.userDetail);
   useEffect(() => {
@@ -108,4 +108,4 @@ const ItemUsers = ({ match }) => {
   );
 };
 
-export default ItemUsers;
+export default UserDetail;

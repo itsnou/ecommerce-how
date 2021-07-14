@@ -11,6 +11,7 @@ import FormProduct from "./components/ControlPanel/Products/EditProduct/EditProd
 import LogIn from "./components/LogIn/LogIn";
 import Profile from "./components/Profile/Profile";
 import UserDetail from "./components/ControlPanel/Users/UserDetail"
+import OrderDetail from "./components/ControlPanel/Orders/OrderDetail";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
       <Route exact path="/catalogo" component={Catalogo} />
       <Route exact path="/product/:id" component={ProductDetail} />
       <Route exact path="/user/:id" component={UserDetail} />
+      <Route exact path="/order/:id" component={OrderDetail} />
       <Route exact path="/carrito" component={Cart} />
       <Route exact path="/empresa" component={About} />
       <Route exact path="/create" component={LogUser} />
