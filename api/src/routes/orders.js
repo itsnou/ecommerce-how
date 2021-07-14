@@ -9,25 +9,35 @@ const jwt_decode = require("jwt-decode");
 
 
 router.get(
-  '/:id',
+  "/:id",
   passport.authenticate("jwt", { session: false }),
   async (req, res) => {
     const token = req.headers.authorization.split(" ");
     const decodificado = jwt_decode(token[1]);
     const findUser = await userSchema.findOne({ email: decodificado.email });
-  try {
-    const { id } = req.params;
-    const orderById = await orderSchema.findById(id);
-    res.send(orderById)
-  } catch (err) {
-    return res.status(404).send('Order not found')
+    try {
+      const { id } = req.params;
+      const orderById = await orderSchema
+      .findById(id)
+      .populate("user")
+      .populate("invoice");
+      res.send(orderById);
+    } catch (err) {
+      return res.status(404).send("Order not found");
+    }
   }
-})
+);
 
-router.get("/", async (req, res) => {
-  const { userName, date } = req.query;
+router.get("/",
+  passport.authenticate("jwt", { session: false }),
+  async (req, res) => {
+    const token = req.headers.authorization.split(" ");
+    const decodificado = jwt_decode(token[1]);
+    const findUser = await userSchema.findOne({ email: decodificado.email });
+    const { userName, date, state } = req.query;
 
-  if (userName) {
+  if (findUser.userStatus !== "Admin") {
+    
     try {
       const ordersByUser = await orderSchema
         .find()
