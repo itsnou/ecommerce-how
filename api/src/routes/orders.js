@@ -28,16 +28,17 @@ router.get(
   }
 );
 
+// router.get('/user')
+
 router.get("/",
   passport.authenticate("jwt", { session: false }),
   async (req, res) => {
     const token = req.headers.authorization.split(" ");
     const decodificado = jwt_decode(token[1]);
     const findUser = await userSchema.findOne({ email: decodificado.email });
-    const { userName, date, state } = req.query;
+    const { user, date, state } = req.query;
 
   if (findUser.userStatus !== "Admin") {
-    
     try {
       const ordersByUser = await orderSchema
         .find()
@@ -55,6 +56,17 @@ router.get("/",
     try {
       const ordersByDate = await orderSchema
         .find({ date: date })
+        .populate("user")
+        .populate("invoice");
+      return res.send(ordersByDate);
+    } catch (err) {
+      return res.status(404).send("Date without orders");
+    }
+  }
+  if (state) {
+    try {
+      const ordersByDate = await orderSchema
+        .find({ state: state })
         .populate("user")
         .populate("invoice");
       return res.send(ordersByDate);
