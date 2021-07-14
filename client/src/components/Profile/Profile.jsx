@@ -6,10 +6,8 @@ import StyledDiv from "./styled";
 const Profile = () => {
   const dispatch = useDispatch();
   const loged = useSelector((state) => state.loged);
-  const user = useSelector((state) => {
-    console.log(state);
-    return state.user;
-  });
+  const user = useSelector((state) => state.user);
+  
   useEffect(() => {
     dispatch(getProfile());
   }, [dispatch]);

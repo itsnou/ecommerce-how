@@ -10,7 +10,9 @@ import ControlPanel from "./components/ControlPanel/ControlPanel";
 import FormProduct from "./components/ControlPanel/Products/EditProduct/EditProduct";
 import LogIn from "./components/LogIn/LogIn";
 import Profile from "./components/Profile/Profile";
-import UserDetail from "./components/ControlPanel/Users/UserDetail"
+import UserDetail from "./components/ControlPanel/Users/UserDetail";
+import Checkout from './components/Checkout/Checkout';
+
 
 function App() {
   return (
@@ -29,6 +31,7 @@ function App() {
       <Route exact path="/login" component={LogIn} />
       <Route exact path="/profile" component={Profile} />
       <Route exact path="/admin/editProduct/:id" component={FormProduct}/>
+      <Route exact path="/checkout" component={Checkout}/>
     </>
   );
 }

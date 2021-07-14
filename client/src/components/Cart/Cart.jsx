@@ -1,7 +1,10 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { removeFromCart, modifyItemCart } from "../../redux/actions/cart";
 import StyledCartItems from "./styled.js";
+import Button from '@material-ui/core/Button';
+import Grid from '@material-ui/core/Grid';
+import {Link} from 'react-router-dom';
 
 export const Cart = () => {
   const dispatch = useDispatch();
@@ -87,7 +90,21 @@ export const Cart = () => {
           <hr/>
         <div className='cart-total'>
           <div className="total">
-            <h2>Total: $ {total}</h2>
+            <Grid
+              container
+              direction="row"
+              justifyContent="space-between"
+              alignItems="center"
+            >
+              <Grid item xs={6}>
+                <h2>Total: $ {total}</h2>
+              </Grid>
+              <Grid item xs={6}>
+                <Link to='/checkout'>
+                 <Button variant="contained">COMPRAR!</Button>
+                </Link>
+              </Grid>
+            </Grid>
           </div>
         </div>
       </StyledCartItems>
