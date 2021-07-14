@@ -26,6 +26,8 @@ const StyledMenu = styled.div`
 `
 const StyledProduct = styled.div`
     display:flex;
+    text-align: center;
+    align-items: center;
     justify-content:space-between;
     margin: 0px 20px 0px 20px;
     padding: 5px;
@@ -46,6 +48,8 @@ const StyledProduct = styled.div`
 `
 const StyledUsers = styled.div`
     display:flex;
+    text-align: center;
+    align-items: center;
     justify-content:space-between;
     margin: 0px 20px 0px 20px;
     padding: 5px;
@@ -89,6 +93,42 @@ const StyledSearch = styled.div`
     color: #214252;
   }
 `
+const StyledOrders = styled.div`
+    display:flex;
+    justify-content:space-between;
+    text-align: center;
+    align-items: center;
+    margin: 0px 20px 0px 20px;
+    padding: 5px;
+    background-color: #EDEDED;
+    list-style: none;
+    border-radius: 2px;
+    border:solid rgba(0, 0, 0, 0.1);
+    .name {
+        width: 250px;
+    }
+    .email {
+        width:200px;
+    }
+    .cant {
+        display:flex;
+        align-items: center;
+        flex-direction: column;
+        justify-content: center;
+        width:100px;
+    }
+    .complete{
+        width:150px;
+        background-color: blue;
+        color:white;
+    }
+    .process{
+        width:150px;
+        background-color: green;
+        color:white;
+    }
+
+`
 const StyledUserDetail = styled.div`
 
 display: flex;
@@ -113,4 +153,12 @@ box-shadow: 0px 14px 15px rgba(0, 0, 0, 0.1);
     margin: 0px 10px 0px 10px;
 }
 `
-export { StyledPanel, StyledMenu, StyledProduct, StyledSearch, StyledUsers, StyledUserDetail };
+export {
+    StyledPanel,
+    StyledMenu,
+    StyledProduct,
+    StyledSearch,
+    StyledUsers,
+    StyledUserDetail,
+    StyledOrders
+};
