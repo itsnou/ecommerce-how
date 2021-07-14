@@ -120,12 +120,12 @@ export const editUserStatus = (userEmail) => {
   };
 };
 
-export const editOrderStatus = (id, newStatus) => {
+export const editOrderStatus = (id, state) => {
   return async (dispatch) => {
     try {
       const change = axios.put(
         `${GET_URL}orders/modify`,
-        { id: id, status: newStatus },
+        { id, state },
         {
           headers: {
             authorization: "Bearer " + sessionStorage.getItem("token"),

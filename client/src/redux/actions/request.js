@@ -124,7 +124,7 @@ export const getOrders = () => {
 export const getOrderDetail = (id) => {
   return async (dispatch) => {
     try {
-      const order = await axios.get(`${GET_URL}orders/id`, {
+      const order = await axios.get(`${GET_URL}orders/${id}`, {
         headers: {
           authorization: "Bearer " + sessionStorage.getItem("token"),
         },

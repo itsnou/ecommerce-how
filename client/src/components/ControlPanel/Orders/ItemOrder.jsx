@@ -14,9 +14,9 @@ const ItemOrder = ({ order }) => {
     return (
         <StyledOrders>
             <Link to={`/order/${order._id}`}>
-                <li className="name">{order.invoice.userName} {order.invoice.userLastName}</li>
+                <li className="name">{order.user.name} {order.user.lastName}</li>
             </Link>
-            <li className="email">{order.invoice.userEmail}</li>
+            <li className="email">{order.user.email}</li>
             <li className="cant">
                 <li>Cant.Prod.: {order.invoice.items.length}</li>
                 <li className="amount">Total: ${order.invoice.totalAmount}</li>

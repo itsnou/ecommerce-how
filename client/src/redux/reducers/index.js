@@ -95,13 +95,11 @@ const reducer = (state = initialState, { payload, type }) => {
       return {
         ...state,
         orders: payload,
-        loading: false,
       };
     case GET_ORDER_DETAIL:
       return {
         ...state,
         orderDetail: payload,
-        loading: false,
       };
     case GET_USERS:
       return {
