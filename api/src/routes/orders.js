@@ -7,6 +7,23 @@ const jwt = require("jsonwebtoken");
 const passport = require("passport");
 const jwt_decode = require("jwt-decode");
 
+
+router.get(
+  '/:id',
+  passport.authenticate("jwt", { session: false }),
+  async (req, res) => {
+    const token = req.headers.authorization.split(" ");
+    const decodificado = jwt_decode(token[1]);
+    const findUser = await userSchema.findOne({ email: decodificado.email });
+  try {
+    const { id } = req.params;
+    const orderById = await orderSchema.findById(id);
+    res.send(orderById)
+  } catch (err) {
+    return res.status(404).send('Order not found')
+  }
+})
+
 router.get("/", async (req, res) => {
   const { userName, date } = req.query;
 
