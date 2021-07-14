@@ -32,10 +32,10 @@ export const addUser = (user) => {
     let apiRes;
     try {
       apiRes = await axios.post(`${GET_URL}users/signup`, user);
-      dispatch({ type: ADD_USER, payload: apiRes.data.message });
+      dispatch({ type: ADD_USER, payload:{ created:apiRes.data.message,  confirm:true }});
     } catch (err) {
       apiRes = err.response.data.message;
-      dispatch({ type: ADD_USER, payload: apiRes });
+      dispatch({ type: ADD_USER, payload:{created:apiRes, confirm:false} });
     }
   };
 };
@@ -127,7 +127,7 @@ export const editProduct = (data) => {
           authorization: "Bearer " + sessionStorage.getItem("token"),
         },
       });
-      dispatch({ type: MODIFY_PRODUCT });
+      dispatch({ type: MODIFY_PRODUCT , payload: true});
     } catch (e) {
       console.log(e);
     }

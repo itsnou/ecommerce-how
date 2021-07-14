@@ -3,10 +3,13 @@ import styled from 'styled-components';
 const StyledDiv = styled.div`
     border:1px solid black;
     width: 75%;
-    margin:auto;
+    margin:15px auto;
     background-color: #420D1F;
-    margin-top:15px;
     border-radius:8px;
+    h1{
+        color:white;
+        text-align:center;
+    }
     .create-google{
         margin:auto;
         text-align:center;
@@ -15,7 +18,6 @@ const StyledDiv = styled.div`
             color:black;
         }
     }
-
     .form-create{
         display:flex;
         flex-direction:column;
@@ -72,9 +74,7 @@ const StyledDiv = styled.div`
                     }
                 }
             }
-    }
-
-
+        }
 `
 
 export default StyledDiv;

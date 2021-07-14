@@ -10,16 +10,20 @@ const FormProduct = ({match}) => {
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
     const id = useRef(match.params.id);
     const product = useSelector(state => state.productDetail);
+    const edit = useSelector(state => state.confirm);
     
     useEffect(()=>{
         return dispatch(getProductDetail(id.current))
     },[dispatch])
     
-    const onSubmit = data => dispatch(editProduct(data));
+    const onSubmit = data => {
+        dispatch(editProduct(data));
+    }
+
 
     return (
         <StyledDiv>
-        {product.name !== undefined && 
+        {product.name !== undefined && window.sessionStorage.getItem('admin') ? 
             <div className='container-grap'>
                 <div className='product-image'>
                     <img src={product.imageUrl} alt={product.name}/>
@@ -29,6 +33,7 @@ const FormProduct = ({match}) => {
                         <div className='edit-product_id'>
                             <p>Id del Producto:</p>
                             <p>{`${product._id}`}</p>
+                            <input className='id-hidden' {...register("id")} value={`${product._id}`}/>
                         </div>
                         <p>
                             <label>Nombre del producto:</label>
@@ -48,15 +53,16 @@ const FormProduct = ({match}) => {
                         </p>
                         <p className='block'>
                             <label>Descripcion del Producto:</label>
-                            <textarea {...register("description",{required:true})} defaultValue={`${product.description}`} rows={1} />
+                            <textarea {...register("description",{required:true})} defaultValue={`${product.description}`} rows={3} />
                         </p>
                         <p classname='block'>
                             <button type="submit">ENVIAR</button>
                         </p>
                     </form>
+                    {edit ? <h1>LA MODIFICACIÓN FUE UN ÉXITO</h1> : null}
                 </div>
             </div>
-        }
+        : <h1>No tiene permisos para ingresar aqui</h1>}
         </StyledDiv>
     );
 }

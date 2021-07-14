@@ -52,8 +52,8 @@ const initialState = {
   user: [],
   created: "",
   loged: "off",
-  searchUser: []
-
+  searchUser: [],
+  confirm: false
 };
 
 const reducer = (state = initialState, { payload, type }) => {
@@ -150,7 +150,8 @@ const reducer = (state = initialState, { payload, type }) => {
     case ADD_USER:
       return {
         ...state,
-        created: payload,
+        created: payload.created,
+        confirm:payload.confirm
       };
     case ADD_CATEGORY:
       return state;
@@ -183,7 +184,10 @@ const reducer = (state = initialState, { payload, type }) => {
         cart: modifyItemInCart(payload, state.cart),
       };
     case MODIFY_PRODUCT:
-      return state;
+      return{
+        ...state,
+        confirm:payload
+      }
     case RESET:
       return {
         ...state,

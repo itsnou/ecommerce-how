@@ -107,6 +107,7 @@ router.put(
     const findUser = await userSchema.findOne({ email: decodificado.email });
     if (findUser.userStatus === "Admin") {
       const { id, description, name, price, stock, vineyard } = req.body;
+      console.log(id,description,stock,price)
       const update = {
         name: name,
         price: price,
