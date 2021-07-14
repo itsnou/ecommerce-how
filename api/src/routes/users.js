@@ -43,7 +43,6 @@ router.get(
 
 router.post("/signup", async (req, res) => {
   const { name, lastName, email, address, password } = req.body;
-  console.log(name);
   const data = {
     name: name,
     lastName: lastName,
@@ -112,14 +111,12 @@ router.put(
     const token = req.headers.authorization.split(" ");
     const decodificado = jwt_decode(token[1]);
     const findUser = await userSchema.findOne({ email: decodificado.email });
-    console.log(findUser);
     if (findUser.userStatus === "Admin") {
       const { userEmail } = req.body;
       const user = await userSchema.findOneAndUpdate(
         { email: userEmail },
         { userStatus: "Admin" }
       );
-      console.log(user);
       res.send("Actualizado");
     } else {
       res.send("No tiene permisos ");
@@ -127,8 +124,8 @@ router.put(
   }
 );
 
-router.delete(
-  "/deleteuser",
+router.put(
+  "/blockuser",
   passport.authenticate("jwt", { session: false }),
   async (req, res) => {
     const token = req.headers.authorization.split(" ");
@@ -136,8 +133,11 @@ router.delete(
     const findUser = await userSchema.findOne({ email: decodificado.email });
     if (findUser.userStatus === "Admin") {
       const { id } = req.body;
-      const userDeleted = await userSchema.findByIdAndDelete({ _id: id });
-      res.send("Usuario borrado");
+      console.log(id);
+      const userDeleted = await userSchema.findByIdAndUpdate(id, {
+        userStatus: "Bloqueado",
+      });
+      res.send("Usuario bloqueado");
     } else {
       res.status(401).send({ message: "No tiene acceso" });
     }

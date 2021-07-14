@@ -15,7 +15,11 @@ import {
 export const addProduct = (product) => {
   return async (dispatch) => {
     try {
-      await axios.post(`${GET_URL}product`, product);
+      await axios.post(`${GET_URL}products`, product, {
+        headers: {
+          authorization: "Bearer " + sessionStorage.getItem("token"),
+        },
+      });
       return dispatch({ type: ADD_PRODUCT });
     } catch (e) {
       console.log(e);
@@ -124,6 +128,25 @@ export const editProduct = (data) => {
         },
       });
       dispatch({ type: MODIFY_PRODUCT , payload: true});
+    } catch (e) {
+      console.log(e);
+    }
+  };
+};
+
+export const blockUser = (id) => {
+  console.log(id);
+  return async (dispatch) => {
+    try {
+      const change = await axios.put(
+        `${GET_URL}users/blockuser`,
+        { id: id },
+        {
+          headers: {
+            authorization: "Bearer " + sessionStorage.getItem("token"),
+          },
+        }
+      );
     } catch (e) {
       console.log(e);
     }

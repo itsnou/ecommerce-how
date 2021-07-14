@@ -6,7 +6,7 @@ const userSchema = require("../models/users");
 
 router.get("/", async (req, res) => {
   const { userName, date } = req.query;
-  
+
   if (userName) {
     try {
       const ordersByUser = await orderSchema
@@ -47,11 +47,10 @@ router.post("/", async (req, res) => {
     const data = {
       user: userData._id,
       invoice: invoiceData._id,
-  //  items: invoiceData.items
+      //  items: invoiceData.items
     };
     const newOrder = await new orderSchema(data);
     await newOrder.save();
-    console.log(newOrder.invoice)
     return res.send(newOrder);
   } catch (err) {
     return res.status(404).send(err);

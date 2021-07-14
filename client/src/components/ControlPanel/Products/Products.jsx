@@ -29,11 +29,19 @@ const Products = ({ setVisual }) => {
             })
         }
         if (e.target.value === 2) {
+            // dispatch(getProductsAll());
             setVisual({
-               
-                productsSearch: true
+                productsSearch: true,
             })
         }
+        if(e.target.value === 3){
+            setVisual({
+                products: false,
+                productsSearch: false,
+                addProduct: true,
+            })
+        }
+        
         if (anchorRef.current && anchorRef.current.contains(e.target)) {
             return;
         }
