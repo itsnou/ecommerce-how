@@ -150,7 +150,8 @@ const reducer = (state = initialState, { payload, type }) => {
     case ADD_USER:
       return {
         ...state,
-        created: payload,
+        created: payload.created,
+        confirm:payload.confirm
       };
     case ADD_CATEGORY:
       return state;

@@ -10,7 +10,7 @@ const FormProduct = ({match}) => {
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
     const id = useRef(match.params.id);
     const product = useSelector(state => state.productDetail);
-    const edit = useSelector(state => state.editProduct);
+    const edit = useSelector(state => state.confirm);
     
     useEffect(()=>{
         return dispatch(getProductDetail(id.current))

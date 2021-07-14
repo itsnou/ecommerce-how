@@ -3,9 +3,8 @@ import styled from 'styled-components';
 const StyledDiv = styled.div`
     border:1px solid black;
     width: 75%;
-    margin:auto;
+    margin:15px auto;
     background-color: #420D1F;
-    margin-top:15px;
     border-radius:8px;
     .create-google{
         margin:auto;
