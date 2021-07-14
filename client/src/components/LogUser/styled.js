@@ -6,6 +6,10 @@ const StyledDiv = styled.div`
     margin:15px auto;
     background-color: #420D1F;
     border-radius:8px;
+    h1{
+        color:white;
+        text-align:center;
+    }
     .create-google{
         margin:auto;
         text-align:center;
@@ -14,7 +18,6 @@ const StyledDiv = styled.div`
             color:black;
         }
     }
-
     .form-create{
         display:flex;
         flex-direction:column;
@@ -71,9 +74,7 @@ const StyledDiv = styled.div`
                     }
                 }
             }
-    }
-
-
+        }
 `
 
 export default StyledDiv;

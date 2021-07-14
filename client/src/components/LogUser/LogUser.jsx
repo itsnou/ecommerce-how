@@ -12,7 +12,6 @@ const LogUser = () => {
   const [name, setName] = useState("");
   const [lastName, setLastName] = useState("");
   let confirm = useSelector(state => state.confirm);
-   // por las dudas, al ser de multiple uso en el formulario, decido setearlo en false
   const dispatch = useDispatch();
 
   const responseGoogle = (responseGoogle) => {
@@ -97,8 +96,8 @@ const LogUser = () => {
         <Button type="submit" variant="contained">
           Enviar
         </Button>
-      {confirm ? <h1>Cuenta creada satisfactoriamente</h1> : null}
       </form>
+      {confirm ? <h1>Cuenta creada satisfactoriamente</h1> : null}
     </StyledDiv>
   );
 };
