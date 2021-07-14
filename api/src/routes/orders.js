@@ -3,6 +3,9 @@ const router = Router();
 const orderSchema = require("../models/orders");
 const invoiceSchema = require("../models/invoices");
 const userSchema = require("../models/users");
+const jwt = require("jsonwebtoken");
+const passport = require("passport");
+const jwt_decode = require("jwt-decode");
 
 router.get("/", async (req, res) => {
   const { userName, date } = req.query;
@@ -56,5 +59,23 @@ router.post("/", async (req, res) => {
     return res.status(404).send(err);
   }
 });
+
+router.put(
+  '/modify',
+  passport.authenticate("jwt", { session: false }),
+  async (req, res) => {
+    const token = req.headers.authorization.split(" ");
+    const decodificado = jwt_decode(token[1]);
+    const findUser = await userSchema.findOne({ email: decodificado.email });
+    if(findUser.userStatus === 'Admin') {
+      const { id, state } = req.body;
+      const update = { state: state };
+      const order = await orderSchema.findByIdAndUpdate(id, update);
+      res.send('Order state updated');
+    } else {
+      res.status(401).send({message: 'Unauthorized'})
+    }
+  }
+)
 
 module.exports = router;
