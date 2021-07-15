@@ -32,10 +32,16 @@ export const addUser = (user) => {
     let apiRes;
     try {
       apiRes = await axios.post(`${GET_URL}users/signup`, user);
-      dispatch({ type: ADD_USER, payload:{ created:apiRes.data.message,  confirm:true }});
+      dispatch({
+        type: ADD_USER,
+        payload: { created: apiRes.data.message, confirm: true },
+      });
     } catch (err) {
       apiRes = err.response.data.message;
-      dispatch({ type: ADD_USER, payload:{created:apiRes, confirm:false} });
+      dispatch({
+        type: ADD_USER,
+        payload: { created: apiRes, confirm: false },
+      });
     }
   };
 };
@@ -127,7 +133,7 @@ export const editProduct = (data) => {
           authorization: "Bearer " + sessionStorage.getItem("token"),
         },
       });
-      dispatch({ type: MODIFY_PRODUCT , payload: true});
+      dispatch({ type: MODIFY_PRODUCT, payload: true });
     } catch (e) {
       console.log(e);
     }
@@ -147,6 +153,69 @@ export const blockUser = (id) => {
           },
         }
       );
+    } catch (e) {
+      console.log(e);
+    }
+  };
+};
+
+export const checkOut = (data) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.post(
+        `${GET_URL}stripe/checkout`,
+        {
+          id: data.id,
+          amount: data.payment.totalAmount,
+        },
+        {
+          headers: {
+            authorization: "Bearer " + sessionStorage.getItem("token"),
+          },
+        }
+      );
+      console.log(response.data);
+      if (response.data.message === "Sucessfull payment") {
+        const newInvoice = await axios.post(
+          `${GET_URL}invoices`,
+          {
+            items: data.payment.items,
+            totalAmount: data.payment.totalAmount,
+          },
+          {
+            headers: {
+              authorization: "Bearer " + sessionStorage.getItem("token"),
+            },
+          }
+        );
+        const newOrder = await axios.post(
+          `${GET_URL}orders`,
+          { invoice: newInvoice.data },
+          {
+            headers: {
+              authorization: "Bearer " + sessionStorage.getItem("token"),
+            },
+          }
+        );
+        const addOrder = await axios.put(
+          `${GET_URL}users/addorder`,
+          { orderId: newOrder.data },
+          {
+            headers: {
+              authorization: "Bearer " + sessionStorage.getItem("token"),
+            },
+          }
+        );
+        const changeStock = await axios.put(
+          `${GET_URL}invoices`,
+          { items: data.payment.items },
+          {
+            headers: {
+              authorization: "Bearer " + sessionStorage.getItem("token"),
+            },
+          }
+        );
+      }
     } catch (e) {
       console.log(e);
     }

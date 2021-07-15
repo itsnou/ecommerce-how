@@ -29,13 +29,18 @@ import {
   LOAD_PROFILE,
   LOG_IN,
   EDIT_USER_STATUS,
-  USERS_FILTERED
-
+  USERS_FILTERED,
+  SET_PAYMENT,
 } from "../actions/constant";
 
 import { addToCart } from "../../utils/addToCart";
 import { modifyItemInCart } from "../../utils/modifyItemInCart";
-import { filterWines, filterOnOff, filterUsers } from "../../utils/methods";
+import {
+  filterWines,
+  filterOnOff,
+  filterUsers,
+  setPaymentReducer,
+} from "../../utils/methods";
 
 const initialState = {
   products: [],
@@ -53,7 +58,8 @@ const initialState = {
   created: "",
   loged: "off",
   searchUser: [],
-  confirm: false
+  confirm: false,
+  payment: {},
 };
 
 const reducer = (state = initialState, { payload, type }) => {
@@ -120,12 +126,12 @@ const reducer = (state = initialState, { payload, type }) => {
     case GET_USER_DETAIL:
       return {
         ...state,
-        userDetail: payload
+        userDetail: payload,
       };
     case USERS_FILTERED:
       return {
         ...state,
-        searchUser: filterUsers(payload)
+        searchUser: filterUsers(payload),
       };
     case FILTRED_FOR_PRICE_LOW_TO_HIGH:
       return {
@@ -151,7 +157,7 @@ const reducer = (state = initialState, { payload, type }) => {
       return {
         ...state,
         created: payload.created,
-        confirm:payload.confirm
+        confirm: payload.confirm,
       };
     case ADD_CATEGORY:
       return state;
@@ -184,10 +190,10 @@ const reducer = (state = initialState, { payload, type }) => {
         cart: modifyItemInCart(payload, state.cart),
       };
     case MODIFY_PRODUCT:
-      return{
+      return {
         ...state,
-        confirm:payload
-      }
+        confirm: payload,
+      };
     case RESET:
       return {
         ...state,
@@ -217,6 +223,11 @@ const reducer = (state = initialState, { payload, type }) => {
       };
     case EDIT_USER_STATUS:
       return state;
+    case SET_PAYMENT:
+      return {
+        ...state,
+        payment: setPaymentReducer(state),
+      };
     default:
       return state;
   }
