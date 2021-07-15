@@ -12,6 +12,7 @@ import LogIn from "./components/LogIn/LogIn";
 import Profile from "./components/Profile/Profile";
 import UserDetail from "./components/ControlPanel/Users/UserDetail"
 import OrderDetail from "./components/ControlPanel/Orders/OrderDetail";
+import ContactUs from './components/ContactUs/ContactUs';
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
       <Route exact path="/login" component={LogIn} />
       <Route exact path="/profile" component={Profile} />
       <Route exact path="/admin/editProduct/:id" component={FormProduct}/>
+      <Route exact path='/contacto' component={ContactUs} />
     </>
   );
 }
