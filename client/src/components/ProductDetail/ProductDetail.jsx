@@ -62,7 +62,7 @@ const ProductDetail = ({ match }) => {
   return (
     <StyledDiv>
       <div className="detail-img">
-        <img src={detail.imageUrl} alt="image not found" />
+        <img src={detail.imageUrl} alt="not found" />
       </div>
       <div className="detail-explain">
         <h2>{detail.name}</h2>
