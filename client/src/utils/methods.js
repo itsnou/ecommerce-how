@@ -54,6 +54,7 @@ export const setPaymentReducer = (state) => {
     items.push({ name: el.name, price: el.price, quantity: el.quantity });
     totalAmount += el.quantity * el.price;
   });
-  totalAmount = Math.ceil(totalAmount * 0.01);
+  totalAmount = Math.ceil(totalAmount * 0.0104);
+  totalAmount = totalAmount * 100;
   return { totalAmount: totalAmount, items: items };
 };

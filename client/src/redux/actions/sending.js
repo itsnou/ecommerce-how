@@ -35,10 +35,16 @@ export const addUser = (user) => {
     let apiRes;
     try {
       apiRes = await axios.post(`${GET_URL}users/signup`, user);
-      dispatch({ type: ADD_USER, payload: { created: apiRes.data.message, confirm: true } });
+      dispatch({
+        type: ADD_USER,
+        payload: { created: apiRes.data.message, confirm: true },
+      });
     } catch (err) {
       apiRes = err.response.data.message;
-      dispatch({ type: ADD_USER, payload: { created: apiRes, confirm: false } });
+      dispatch({
+        type: ADD_USER,
+        payload: { created: apiRes, confirm: false },
+      });
     }
   };
 };
@@ -209,8 +215,6 @@ export const removeFromWishlist = (product) => {
   };
 };
 
-
-
 export const checkOut = (data) => {
   return async (dispatch) => {
     try {
@@ -226,6 +230,7 @@ export const checkOut = (data) => {
           },
         }
       );
+      console.log(response.data);
       if (response.data.message === "Sucessfull payment") {
         const newInvoice = await axios.post(
           `${GET_URL}invoices`,
