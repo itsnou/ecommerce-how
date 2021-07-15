@@ -20,9 +20,9 @@ router.post('/create_preference', async (req, res) => {
 			},
 		],
 		back_urls: {
-			success: 'https://localhost:3000/', //PONER PAGINA QUE QUEREMOS QUE NOS VAYA CUANDOS EFECTUA EL PAGO
-			pending: 'https://localhost:3000.com/pending',
-			failure: 'https://localhost:3000.com/error',
+			success: 'localhost:3000/', //PONER PAGINA QUE QUEREMOS QUE NOS VAYA CUANDOS EFECTUA EL PAGO
+			pending: 'localhost:3000/',
+			failure: 'localhost:3000/',
 		},
 		auto_return: 'approved',
 	};
