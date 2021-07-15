@@ -172,3 +172,66 @@ export const blockUser = (id) => {
     }
   };
 };
+
+export const checkOut = (data) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.post(
+        `${GET_URL}stripe/checkout`,
+        {
+          id: data.id,
+          amount: data.payment.totalAmount,
+        },
+        {
+          headers: {
+            authorization: "Bearer " + sessionStorage.getItem("token"),
+          },
+        }
+      );
+      console.log(response.data);
+      if (response.data.message === "Sucessfull payment") {
+        const newInvoice = await axios.post(
+          `${GET_URL}invoices`,
+          {
+            items: data.payment.items,
+            totalAmount: data.payment.totalAmount,
+          },
+          {
+            headers: {
+              authorization: "Bearer " + sessionStorage.getItem("token"),
+            },
+          }
+        );
+        const newOrder = await axios.post(
+          `${GET_URL}orders`,
+          { invoice: newInvoice.data },
+          {
+            headers: {
+              authorization: "Bearer " + sessionStorage.getItem("token"),
+            },
+          }
+        );
+        const addOrder = await axios.put(
+          `${GET_URL}users/addorder`,
+          { orderId: newOrder.data },
+          {
+            headers: {
+              authorization: "Bearer " + sessionStorage.getItem("token"),
+            },
+          }
+        );
+        const changeStock = await axios.put(
+          `${GET_URL}invoices`,
+          { items: data.payment.items },
+          {
+            headers: {
+              authorization: "Bearer " + sessionStorage.getItem("token"),
+            },
+          }
+        );
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  };
+};

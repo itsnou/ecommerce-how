@@ -45,4 +45,15 @@ export const filterUsers = (payload) => {
   return payload.users.filter((user) =>
     user.name.toLowerCase().includes(payload.name.toLowerCase())
   );
-}
+};
+
+export const setPaymentReducer = (state) => {
+  let totalAmount = 0;
+  let items = [];
+  state.cart.map((el) => {
+    items.push({ name: el.name, price: el.price, quantity: el.quantity });
+    totalAmount += el.quantity * el.price;
+  });
+  totalAmount = Math.ceil(totalAmount * 0.01);
+  return { totalAmount: totalAmount, items: items };
+};

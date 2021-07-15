@@ -73,6 +73,7 @@ const LogIn = () => {
           ENVIAR
         </Button>
       </form>
+      {loged === 'on' ? console.log(window.location.history) : null}
     </StyledDiv>
   );
 };

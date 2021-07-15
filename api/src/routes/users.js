@@ -144,4 +144,19 @@ router.put(
   }
 );
 
+router.put(
+  "/addorder",
+  passport.authenticate("jwt", { session: false }),
+  async (req, res) => {
+    const { orderId } = req.body;
+    const token = req.headers.authorization.split(" ");
+    const decodificado = jwt_decode(token[1]);
+    const findUser = await userSchema.findOne({ email: decodificado.email });
+    const addOrder = await userSchema.findByIdAndUpdate(findUser._id, {
+      $push: { orders: orderId },
+    });
+    res.send("Correcto");
+  }
+);
+
 module.exports = router;

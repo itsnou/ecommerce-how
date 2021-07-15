@@ -10,9 +10,18 @@ import ControlPanel from "./components/ControlPanel/ControlPanel";
 import FormProduct from "./components/ControlPanel/Products/EditProduct/EditProduct";
 import LogIn from "./components/LogIn/LogIn";
 import Profile from "./components/Profile/Profile";
-import UserDetail from "./components/ControlPanel/Users/UserDetail"
+import UserDetail from "./components/ControlPanel/Users/UserDetail";
+import Checkout from "./components/Checkout/Checkout";
+import StripePayment from "./components/Checkout/StripePayment";
+import { loadStripe } from "@stripe/stripe-js";
+import { Elements } from "@stripe/react-stripe-js";
 import OrderDetail from "./components/ControlPanel/Orders/OrderDetail";
 import ContactUs from './components/ContactUs/ContactUs';
+
+const stripePromise = loadStripe(
+  "pk_test_51JDBoyGdIVmQXHqKUNKQADTSCIpNAgJeaoehTBVijP5uRNmbv2wgrUO92p2fxkOiSg3Ol0GTUYKFZfu7c5WxFOsb00E9tMt4VU"
+);
+
 
 function App() {
   return (
@@ -31,6 +40,11 @@ function App() {
       <Route exact path="/admin/controlpanel" component={ControlPanel} />
       <Route exact path="/login" component={LogIn} />
       <Route exact path="/profile" component={Profile} />
+      <Route exact path="/admin/editProduct/:id" component={FormProduct} />
+      <Route exact path="/checkout" component={Checkout} />
+      <Elements stripe={stripePromise}>
+        <Route exact path="/checkout/stripe" component={StripePayment} />
+      </Elements>
       <Route exact path="/admin/editProduct/:id" component={FormProduct}/>
       <Route exact path='/contacto' component={ContactUs} />
     </>

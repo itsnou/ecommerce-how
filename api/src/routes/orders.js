@@ -44,7 +44,7 @@ router.get("/",
         .populate("invoice");
       return res.send(ordersByUser);
     } catch (err) {
-      return res.status(404).send("User without orders");
+      return res.status(404).send("Order not found");
     }
   }
   if (date) {
@@ -69,60 +69,67 @@ router.get("/",
     } catch (err) {
       return res.status(404).send("Date without orders");
     }
-  }
-  if (user) {
-    try {
-      const ordersByUser = await orderSchema
-        .find()
-        .populate("user")
-        .populate("invoice");
-      const filtered = ordersByUser.filter(order=> order.user.email === user)
-      return res.send(filtered);
-    } catch (err) {
-      return res.status(404).send("Date without orders");
+    if (user) {
+      try {
+        const ordersByUser = await orderSchema
+          .find()
+          .populate("user")
+          .populate("invoice");
+        const filtered = ordersByUser.filter(
+          (order) => order.user.email === user
+        );
+        return res.send(filtered);
+      } catch (err) {
+        return res.status(404).send("Date without orders");
+      }
     }
+    const getAllOrders = await orderSchema
+      .find()
+      .populate("user")
+      .populate("invoice");
+    return res.send(getAllOrders);
   }
-  const getAllOrders = await orderSchema
-    .find()
-    .populate("user")
-    .populate("invoice");
-  return res.send(getAllOrders);
-});
+);
 
-router.post("/", async (req, res) => {
-  try {
-    const { user, invoice } = req.body;
-    const invoiceData = await invoiceSchema.findById(invoice);
-    const userData = await userSchema.findById(user);
-    const data = {
-      user: userData._id,
-      invoice: invoiceData._id,
-    };
-    const newOrder = await new orderSchema(data);
-    await newOrder.save();
-    return res.send(newOrder);
-  } catch (err) {
-    return res.status(404).send(err);
-  }
-});
-
-router.put(
-  '/modify',
+router.post(
+  "/",
   passport.authenticate("jwt", { session: false }),
   async (req, res) => {
     const token = req.headers.authorization.split(" ");
     const decodificado = jwt_decode(token[1]);
     const findUser = await userSchema.findOne({ email: decodificado.email });
-    if(findUser.userStatus === 'Admin') {
-      const { id, state } = req.body;
-      console.log ("*************",id,state)
-      const update = { state: state };
-      const order = await orderSchema.findByIdAndUpdate(id, update);
-      res.send('Order state updated');
-    } else {
-      res.status(401).send({message: 'Unauthorized'})
+    try {
+      const { invoice } = req.body;
+      const invoiceData = await invoiceSchema.findById(invoice);
+      const data = {
+        user: findUser._id,
+        invoice: invoiceData._id,
+      };
+      const newOrder = await new orderSchema(data);
+      await newOrder.save();
+      return res.send(newOrder);
+    } catch (err) {
+      return res.status(404).send(err);
     }
   }
-)
+);
+
+router.put(
+  "/modify",
+  passport.authenticate("jwt", { session: false }),
+  async (req, res) => {
+    const token = req.headers.authorization.split(" ");
+    const decodificado = jwt_decode(token[1]);
+    const findUser = await userSchema.findOne({ email: decodificado.email });
+    if (findUser.userStatus === "Admin") {
+      const { id, state } = req.body;
+      const update = { state: state };
+      const order = await orderSchema.findByIdAndUpdate(id, update);
+      res.send(order._id);
+    } else {
+      res.status(401).send({ message: "Unauthorized" });
+    }
+  }
+);
 
 module.exports = router;
