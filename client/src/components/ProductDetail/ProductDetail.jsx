@@ -8,7 +8,6 @@ import { FaWineGlass } from "react-icons/fa";
 import emptyheart from "../../assets/image/emptyheart.png";
 import fullheart from "../../assets/image/fullheart.png";
 import { addToWishlist, removeFromWishlist } from "../../redux/actions/sending";
-import { validateWishlist } from "../../utils/methodWishlist";
 
 const ProductDetail = ({ match }) => {
   const dispatch = useDispatch();
