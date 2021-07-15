@@ -9,16 +9,10 @@ mercadopago.configure({
 });
 
 router.post('/create_preference', async (req, res) => {
-	const {name, quantity, price} = req.body;
+	console.log('arra: ', req.body.cart);
 
 	const preference = {
-		items: [
-			{
-				title: name,
-				unit_price: price,
-				quantity: quantity,
-			},
-		],
+		items: req.body.cart,
 		back_urls: {
 			success: 'localhost:3000/', //PONER PAGINA QUE QUEREMOS QUE NOS VAYA CUANDOS EFECTUA EL PAGO
 			pending: 'localhost:3000/',
