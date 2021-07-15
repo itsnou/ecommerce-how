@@ -6,12 +6,14 @@ import Paper from '@material-ui/core/Paper';
 import Popper from '@material-ui/core/Popper';
 import MenuItem from '@material-ui/core/MenuItem';
 import MenuList from '@material-ui/core/MenuList';
+import { getOrders } from '../../../redux/actions';
+import { useDispatch } from 'react-redux';
 
 
 const Orders=({visual, setVisual})=> {
     const [open, setOpen] = useState(false);
     const anchorRef = useRef(null);
-
+    const dispatch = useDispatch();
   
 
     const handleToggle = () => {
@@ -19,6 +21,12 @@ const Orders=({visual, setVisual})=> {
     };
 
     const handleClick = (e) => {
+        if (e.target.value === 1) {
+            dispatch(getOrders());
+            setVisual({
+                orders: true
+            })
+        }
         if (anchorRef.current && anchorRef.current.contains(e.target)) {
             return;
         }

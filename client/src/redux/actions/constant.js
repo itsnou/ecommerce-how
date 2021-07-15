@@ -1,5 +1,4 @@
 export const GET_URL = "http://localhost:3001/";
-
 export const GET_PRODUCTS_ALL = "GET_PRODUCTS_ALL";
 export const GET_PRODUCTS_BY_NAME = "GET_PRODUCTS_BY_NAME";
 export const GET_PRODUCTS_FOR_CATEGORY = "GET_PRODUCTS_FOR_CATEGORY";
@@ -12,6 +11,7 @@ export const ADD_USER = "ADD_USER";
 export const ADD_PRODUCT = "ADD_PRODUCT";
 export const ADD_CATEGORY = "ADD_CATEGORY";
 export const EDIT_USER_STATUS = "EDIT_USER_STATUS";
+export const EDIT_ORDER_STATUS= "EDIT_ORDER_STATUS";
 export const DELETE_CATEGORY = "DELETE_CATEGORY";
 export const DELETE_USER = "DELETE_USER";
 export const DELETE_PRODUCT = "DELETE_PRODUCT";
@@ -35,3 +35,7 @@ export const LOG_IN = "LOG_IN";
 export const LOAD_PROFILE = "LOAD_PROFILE";
 export const USERS_FILTERED = "USERS_FILTERED";
 export const BLOCK_USER = "BLOCK_USER";
+export const ADD_TO_WISHLIST = "ADD_TO_WISHLIST";
+export const REMOVE_FROM_WISHLIST = "REMOVE_FROM_WISHLIST";
+export const SET_PAYMENT = "SET_PAYMENT";
+

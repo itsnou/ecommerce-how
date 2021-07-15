@@ -1,14 +1,12 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect } from "react";
 import Button from "@material-ui/core/Button";
 import { useDispatch, useSelector } from "react-redux";
 import { editUserStatus, getUserDetail } from "../../../redux/actions";
-import { getUsers } from "../../../redux/actions";
 import swal from "sweetalert";
 import { StyledUserDetail } from "../styled";
 import { blockUser } from "../../../redux/actions/sending";
 
-const ItemUsers = ({ match }) => {
-  // const fixed = useRef(match.params.id);
+const UserDetail = ({ match }) => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.userDetail);
   useEffect(() => {
@@ -16,14 +14,57 @@ const ItemUsers = ({ match }) => {
   }, [dispatch]);
 
   const handleClick = () => {
-    dispatch(editUserStatus(user.email));
-    dispatch(getUserDetail(match.params.id));
-    // swal("¡Buen trabajo!", "¡Usuario modificado!", "success");
+    if (user.userStatus === "Admin") {
+      swal({ title: "El usuario ya es Admin", icon: "warning" });
+    } else if (user.userStatus === "Bloqueado") {
+      swal({ title: "El usuario esta Bloqueado", icon: "warning" });
+    } else {
+      swal({
+        title: "¿Estas seguro?",
+        text: "Estas por convertir este usuario a Admin",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      })
+        .then((willDelete) => {
+          if (willDelete) {
+            dispatch(editUserStatus(user.email));
+            dispatch(getUserDetail(match.params.id));
+            swal("El usuario ahora es Admin", {
+              icon: "success",
+            });
+          } else {
+            swal("Accion cancelada", {
+              icon: "error",
+            });
+          }
+        });
+    }
   };
 
   const blockedUser = () => {
-    dispatch(blockUser(user._id));
-    dispatch(getUserDetail(match.params.id));
+    if (user.userStatus === "Bloqueado") {
+      swal({ title: "El usuario ya fue bloqueado", icon: "warning" });
+    } else {
+      swal({
+        title: "¿Estas seguro?",
+        text: "Estar por bloquear este usuario",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      })
+        .then((willDelete) => {
+          if (willDelete) {
+            dispatch(blockUser(user._id));
+            dispatch(getUserDetail(match.params.id));
+            swal("El usuario a sido bloqueado", {
+              icon: "success",
+            });
+          } else {
+            swal("Accion cancelada");
+          }
+        });
+    }
   };
 
   return (
@@ -67,4 +108,4 @@ const ItemUsers = ({ match }) => {
   );
 };
 
-export default ItemUsers;
+export default UserDetail;

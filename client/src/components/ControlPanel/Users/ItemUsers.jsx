@@ -6,14 +6,59 @@ import { useDispatch } from "react-redux";
 import swal from 'sweetalert';
 import { editUserStatus } from "../../../redux/actions";
 import { getUsers } from "../../../redux/actions/request.js";
+import { blockUser } from "../../../redux/actions/sending.js";
 
 const ItemUsers = ({ user }) => {
     const dispatch = useDispatch();
+
     const handleClick = () => {
-        dispatch(editUserStatus(user.email));
-        swal("¡Buen trabajo!", "¡Usuario modificado!", "success");
-        dispatch(getUsers());
+        swal({
+            title: "¿Estas seguro?",
+            text: "Estas por convertir este usuario a Admin",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+            .then((willDelete) => {
+                if (willDelete) {
+                    dispatch(editUserStatus(user.email));
+                    dispatch(getUsers());
+                    swal("El usuario ahora es Admin", {
+                        icon: "success",
+                    });
+                } else {
+                    swal("Accion cancelada", {
+                        icon: "error",
+                    });
+                }
+            });        
     }
+    const blockedUser = () => {
+        if (user.userStatus === "Bloqueado") {
+            swal({ title: "El usuario ya fue bloqueado", icon: "warning" });
+        } else {
+            swal({
+                title: "¿Estas seguro?",
+                text: "Estas por bloquear este usuario",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        dispatch(blockUser(user._id));
+                        dispatch(getUsers());
+                        swal("El usuario a sido bloqueado", {
+                            icon: "success",
+                        });
+                    } else {
+                        swal("Accion cancelada", {
+                            icon: "error",
+                        });
+                    }
+                });
+        }
+    };
     return (
         <StyledUsers>
             <Link to={`/user/${user._id}`}>
@@ -21,9 +66,9 @@ const ItemUsers = ({ user }) => {
             </Link>
             <li className="email">{user.email}</li>
             <li className="status">{user.userStatus}</li>
-            {user.userStatus === "Regular" ? <Button variant="contained" onClick={handleClick}>Hacer Admin</Button >:
-            <Button className="btn" variant="contained" onClick={handleClick}>Hacer Admin</Button >}
-            <Button variant="contained" color="secondary" >X</Button>
+            {user.userStatus === "Regular" ? <Button variant="contained" onClick={handleClick}>Hacer Admin</Button > :
+                <Button className="btn" variant="contained" onClick={handleClick}>Hacer Admin</Button >}
+            <Button variant="contained" color="secondary" onClick={blockedUser}>X</Button>
         </StyledUsers>
     )
 };
