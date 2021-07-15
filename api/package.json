@@ -17,6 +17,7 @@
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
     "jwt-decode": "^3.1.2",
+    "mercadopago": "^1.5.8",
     "mongoose": "^5.13.2",
     "mongoose-findorcreate": "^3.0.0",
     "morgan": "^1.10.0",
