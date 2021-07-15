@@ -35,7 +35,6 @@ const StyledCartItems = styled.div`
       background-color:white;
       color:black;
       border-radius:7px;
-
       h2{
         margin:30px;
         span{
@@ -43,7 +42,6 @@ const StyledCartItems = styled.div`
           flex-direction:column;
         }
       }
-      
     }
 
     .product-card_price{
@@ -102,16 +100,23 @@ const StyledCartItems = styled.div`
   }
     .cart-total{
       padding-bottom:10px;
-      margin-bottom:20px;
+      height:40px;
+      margin-bottom:10px;
       background-color: #420D1F;
       border-radius:7px;
       .total {
-        margin:0 auto;
+        width:100%;
         text-align:center;
         padding:0;
         h2{
           padding:0;
           margin:0;
+        }
+        button{
+          margin-top:4px;
+          background-color:white;
+          color:black;
+          font-weight:bold;
         }
       }
     }

@@ -9,6 +9,7 @@ import {
   DELETE_USER,
   LOG_IN,
   EDIT_USER_STATUS,
+  EDIT_ORDER_STATUS,
   MODIFY_PRODUCT,
   ADD_TO_WISHLIST,
   REMOVE_FROM_WISHLIST,
@@ -34,10 +35,10 @@ export const addUser = (user) => {
     let apiRes;
     try {
       apiRes = await axios.post(`${GET_URL}users/signup`, user);
-      dispatch({ type: ADD_USER, payload: apiRes.data.message });
+      dispatch({ type: ADD_USER, payload: { created: apiRes.data.message, confirm: true } });
     } catch (err) {
       apiRes = err.response.data.message;
-      dispatch({ type: ADD_USER, payload: apiRes });
+      dispatch({ type: ADD_USER, payload: { created: apiRes, confirm: false } });
     }
   };
 };
@@ -121,6 +122,25 @@ export const editUserStatus = (userEmail) => {
   };
 };
 
+export const editOrderStatus = (id, state) => {
+  return async (dispatch) => {
+    try {
+      const change = axios.put(
+        `${GET_URL}orders/modify`,
+        { id, state },
+        {
+          headers: {
+            authorization: "Bearer " + sessionStorage.getItem("token"),
+          },
+        }
+      );
+      dispatch({ type: EDIT_ORDER_STATUS });
+    } catch (e) {
+      console.log(e);
+    }
+  };
+};
+
 export const editProduct = (data) => {
   return async (dispatch) => {
     try {
@@ -129,7 +149,7 @@ export const editProduct = (data) => {
           authorization: "Bearer " + sessionStorage.getItem("token"),
         },
       });
-      dispatch({ type: MODIFY_PRODUCT });
+      dispatch({ type: MODIFY_PRODUCT, payload: true });
     } catch (e) {
       console.log(e);
     }
@@ -177,13 +197,76 @@ export const addToWishlist = (product) => {
 export const removeFromWishlist = (product) => {
   return async (dispatch) => {
     try {
-      await axios.delete(`${GET_URL}wishlist/product`, {
+      await axios.delete(`${GET_URL}wishlist/product`, product, {
         headers: {
           authorization: "Bearer " + sessionStorage.getItem("token"),
         },
-        data: { product: product },
       });
       return dispatch({ type: REMOVE_FROM_WISHLIST, payload: product });
+    } catch (e) {
+      console.log(e);
+    }
+  };
+};
+
+
+
+export const checkOut = (data) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.post(
+        `${GET_URL}stripe/checkout`,
+        {
+          id: data.id,
+          amount: data.payment.totalAmount,
+        },
+        {
+          headers: {
+            authorization: "Bearer " + sessionStorage.getItem("token"),
+          },
+        }
+      );
+      if (response.data.message === "Sucessfull payment") {
+        const newInvoice = await axios.post(
+          `${GET_URL}invoices`,
+          {
+            items: data.payment.items,
+            totalAmount: data.payment.totalAmount,
+          },
+          {
+            headers: {
+              authorization: "Bearer " + sessionStorage.getItem("token"),
+            },
+          }
+        );
+        const newOrder = await axios.post(
+          `${GET_URL}orders`,
+          { invoice: newInvoice.data },
+          {
+            headers: {
+              authorization: "Bearer " + sessionStorage.getItem("token"),
+            },
+          }
+        );
+        const addOrder = await axios.put(
+          `${GET_URL}users/addorder`,
+          { orderId: newOrder.data },
+          {
+            headers: {
+              authorization: "Bearer " + sessionStorage.getItem("token"),
+            },
+          }
+        );
+        const changeStock = await axios.put(
+          `${GET_URL}invoices`,
+          { items: data.payment.items },
+          {
+            headers: {
+              authorization: "Bearer " + sessionStorage.getItem("token"),
+            },
+          }
+        );
+      }
     } catch (e) {
       console.log(e);
     }

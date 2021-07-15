@@ -11,8 +11,7 @@ const LogUser = () => {
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
   const [lastName, setLastName] = useState("");
-
-  const created = useSelector((state) => state.created);
+  let confirm = useSelector(state => state.confirm);
   const dispatch = useDispatch();
 
   const responseGoogle = (responseGoogle) => {
@@ -98,6 +97,7 @@ const LogUser = () => {
           Enviar
         </Button>
       </form>
+      {confirm ? <h1>Cuenta creada satisfactoriamente</h1> : null}
     </StyledDiv>
   );
 };

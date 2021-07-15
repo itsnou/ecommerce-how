@@ -26,7 +26,7 @@ const OrdersSchema = new mongoose.Schema(
       required: true,
       type: String,
       default:"En preparación",
-      enum: ["Pago pendiente", "En preparación", "Finalizado"], //"Cancelado por el usuario"
+      enum: ["Pago pendiente", "En preparación", "Finalizado","Cancelado", "Enviado"], //"Cancelado por el usuario"
     },
   },
   {

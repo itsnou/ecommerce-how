@@ -32,12 +32,20 @@ import {
   USERS_FILTERED,
   ADD_TO_WISHLIST,
   REMOVE_FROM_WISHLIST,
+  SET_PAYMENT,
+  EDIT_ORDER_STATUS
+
 } from "../actions/constant";
 
 import { addToCart } from "../../utils/addToCart";
 import { removeFromWishlist } from "../../utils/removeFromWishlist";
 import { modifyItemInCart } from "../../utils/modifyItemInCart";
-import { filterWines, filterOnOff, filterUsers } from "../../utils/methods";
+import {
+  filterWines,
+  filterOnOff,
+  filterUsers,
+  setPaymentReducer,
+} from "../../utils/methods";
 
 const initialState = {
   products: [],
@@ -45,6 +53,7 @@ const initialState = {
   users: [],
   userDetail: {},
   orders: [],
+  orderDetail: {},
   cart: [],
   search: [],
   loading: false,
@@ -56,6 +65,8 @@ const initialState = {
   loged: "off",
   searchUser: [],
   wishlist: [],
+  confirm: false,
+  payment: {},
 };
 
 const reducer = (state = initialState, { payload, type }) => {
@@ -95,13 +106,11 @@ const reducer = (state = initialState, { payload, type }) => {
       return {
         ...state,
         orders: payload,
-        loading: false,
       };
     case GET_ORDER_DETAIL:
       return {
         ...state,
-        orders: [payload],
-        loading: false,
+        orderDetail: payload,
       };
     case GET_USERS:
       return {
@@ -152,7 +161,8 @@ const reducer = (state = initialState, { payload, type }) => {
     case ADD_USER:
       return {
         ...state,
-        created: payload,
+        created: payload.created,
+        confirm: payload.confirm,
       };
     case ADD_CATEGORY:
       return state;
@@ -185,7 +195,10 @@ const reducer = (state = initialState, { payload, type }) => {
         cart: modifyItemInCart(payload, state.cart),
       };
     case MODIFY_PRODUCT:
-      return state;
+      return {
+        ...state,
+        confirm: payload
+      }
     case RESET:
       return {
         ...state,
@@ -227,6 +240,13 @@ const reducer = (state = initialState, { payload, type }) => {
         ...state,
         wishlist: aux,
       };
+    case SET_PAYMENT:
+      return {
+        ...state,
+        payment: setPaymentReducer(state),
+      };
+    case EDIT_ORDER_STATUS:
+      return state;
     default:
       return state;
   }
