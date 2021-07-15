@@ -9,6 +9,7 @@ import {
   DELETE_USER,
   LOG_IN,
   EDIT_USER_STATUS,
+  EDIT_ORDER_STATUS,
   MODIFY_PRODUCT,
 } from "./constant";
 
@@ -32,16 +33,10 @@ export const addUser = (user) => {
     let apiRes;
     try {
       apiRes = await axios.post(`${GET_URL}users/signup`, user);
-      dispatch({
-        type: ADD_USER,
-        payload: { created: apiRes.data.message, confirm: true },
-      });
+      dispatch({ type: ADD_USER, payload: { created: apiRes.data.message, confirm: true } });
     } catch (err) {
       apiRes = err.response.data.message;
-      dispatch({
-        type: ADD_USER,
-        payload: { created: apiRes, confirm: false },
-      });
+      dispatch({ type: ADD_USER, payload: { created: apiRes, confirm: false } });
     }
   };
 };
@@ -119,6 +114,25 @@ export const editUserStatus = (userEmail) => {
         }
       );
       dispatch({ type: EDIT_USER_STATUS });
+    } catch (e) {
+      console.log(e);
+    }
+  };
+};
+
+export const editOrderStatus = (id, state) => {
+  return async (dispatch) => {
+    try {
+      const change = axios.put(
+        `${GET_URL}orders/modify`,
+        { id, state },
+        {
+          headers: {
+            authorization: "Bearer " + sessionStorage.getItem("token"),
+          },
+        }
+      );
+      dispatch({ type: EDIT_ORDER_STATUS });
     } catch (e) {
       console.log(e);
     }

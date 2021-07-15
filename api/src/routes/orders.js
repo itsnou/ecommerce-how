@@ -7,6 +7,7 @@ const jwt = require("jsonwebtoken");
 const passport = require("passport");
 const jwt_decode = require("jwt-decode");
 
+
 router.get(
   "/:id",
   passport.authenticate("jwt", { session: false }),
@@ -17,9 +18,9 @@ router.get(
     try {
       const { id } = req.params;
       const orderById = await orderSchema
-        .findById(id)
-        .populate("user")
-        .populate("invoice");
+      .findById(id)
+      .populate("user")
+      .populate("invoice");
       res.send(orderById);
     } catch (err) {
       return res.status(404).send("Order not found");
@@ -27,49 +28,46 @@ router.get(
   }
 );
 
-router.get(
-  "/",
+
+router.get("/",
   passport.authenticate("jwt", { session: false }),
   async (req, res) => {
     const token = req.headers.authorization.split(" ");
     const decodificado = jwt_decode(token[1]);
     const findUser = await userSchema.findOne({ email: decodificado.email });
     const { user, date, state } = req.query;
-    if (findUser.userStatus !== "Admin") {
-      try {
-        const ordersByUser = await orderSchema
-          .find({ user: findUser._id })
-          .populate("user")
-          .populate("invoice");
-        return res.send(ordersByUser);
-      } catch (err) {
-        return res.status(404).send("User without orders");
-      }
+  if (findUser.userStatus !== "Admin") {
+    try {
+      const ordersByUser = await orderSchema
+        .find({ user: findUser._id })
+        .populate("user")
+        .populate("invoice");
+      return res.send(ordersByUser);
+    } catch (err) {
+      return res.status(404).send("Order not found");
     }
-    if (date) {
-      try {
-        const ordersByDate = await orderSchema
-          .find()
-          .populate("user")
-          .populate("invoice");
-        const filter = ordersByDate.filter((order) =>
-          order.date.toString().includes(date)
-        );
-        return res.send(filter);
-      } catch (err) {
-        return res.status(404).send("Date without orders");
-      }
+  }
+  if (date) {
+    try {
+      const ordersByDate = await orderSchema
+        .find()
+        .populate("user")
+        .populate("invoice");
+        const filter = ordersByDate.filter(order => order.date.toString().includes(date))
+      return res.send(filter);
+    } catch (err) {
+      return res.status(404).send("Date without orders");
     }
-    if (state) {
-      try {
-        const ordersByDate = await orderSchema
-          .find({ state: state })
-          .populate("user")
-          .populate("invoice");
-        return res.send(ordersByDate);
-      } catch (err) {
-        return res.status(404).send("Date without orders");
-      }
+  }
+  if (state) {
+    try {
+      const ordersByDate = await orderSchema
+        .find({ state: state })
+        .populate("user")
+        .populate("invoice");
+      return res.send(ordersByDate);
+    } catch (err) {
+      return res.status(404).send("Date without orders");
     }
     if (user) {
       try {
@@ -125,7 +123,6 @@ router.put(
     const findUser = await userSchema.findOne({ email: decodificado.email });
     if (findUser.userStatus === "Admin") {
       const { id, state } = req.body;
-      console.log("*************", id, state);
       const update = { state: state };
       const order = await orderSchema.findByIdAndUpdate(id, update);
       res.send(order._id);

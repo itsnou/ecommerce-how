@@ -12,6 +12,7 @@ export const ADD_USER = "ADD_USER";
 export const ADD_PRODUCT = "ADD_PRODUCT";
 export const ADD_CATEGORY = "ADD_CATEGORY";
 export const EDIT_USER_STATUS = "EDIT_USER_STATUS";
+export const EDIT_ORDER_STATUS= "EDIT_ORDER_STATUS";
 export const DELETE_CATEGORY = "DELETE_CATEGORY";
 export const DELETE_USER = "DELETE_USER";
 export const DELETE_PRODUCT = "DELETE_PRODUCT";

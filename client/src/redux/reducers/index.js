@@ -31,6 +31,8 @@ import {
   EDIT_USER_STATUS,
   USERS_FILTERED,
   SET_PAYMENT,
+  EDIT_ORDER_STATUS
+
 } from "../actions/constant";
 
 import { addToCart } from "../../utils/addToCart";
@@ -48,6 +50,7 @@ const initialState = {
   users: [],
   userDetail: {},
   orders: [],
+  orderDetail: {},
   cart: [],
   search: [],
   loading: false,
@@ -99,13 +102,11 @@ const reducer = (state = initialState, { payload, type }) => {
       return {
         ...state,
         orders: payload,
-        loading: false,
       };
     case GET_ORDER_DETAIL:
       return {
         ...state,
-        orders: [payload],
-        loading: false,
+        orderDetail: payload,
       };
     case GET_USERS:
       return {
@@ -192,8 +193,8 @@ const reducer = (state = initialState, { payload, type }) => {
     case MODIFY_PRODUCT:
       return {
         ...state,
-        confirm: payload,
-      };
+        confirm: payload
+      }
     case RESET:
       return {
         ...state,
@@ -228,6 +229,8 @@ const reducer = (state = initialState, { payload, type }) => {
         ...state,
         payment: setPaymentReducer(state),
       };
+    case EDIT_ORDER_STATUS:
+      return state;
     default:
       return state;
   }

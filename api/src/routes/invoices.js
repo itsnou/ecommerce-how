@@ -17,13 +17,10 @@ router.get(
       const decodificado = jwt_decode(token[1]);
       const findUser = await userSchema.findOne({ email: decodificado.email });
 
-      if (findUser.userStatus !== "Admin") {
-        const allInvoices = await invoiceSchema
-          .find({ email: decodificado.email })
-          .populate("user");
-        return res.send(allInvoices);
-      }
-      const allInvoices = await invoiceSchema.find().populate("user");
+    if(findUser.userStatus !== "Admin") {      
+      const allInvoices = await invoiceSchema
+      .find({ user: findUser._id })
+      .populate("user");
       return res.send(allInvoices);
     } catch (err) {
       res.status(404).send("No autorizado para acceder a las facturas");

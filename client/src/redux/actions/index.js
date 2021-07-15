@@ -14,8 +14,8 @@ import {
     getUsers,
     getUserDetail,
     getOrders,
-    getProductDetail,
     getOrderDetail,
+    getProductDetail,
 } from "./request";
 import {
     addCategory,
@@ -43,9 +43,9 @@ export {
     filtredByAtoZ,
     filtredByZtoA,
     userFiltered,
-    getOrderDetail,
     getUsers,
     getOrders,
+    getOrderDetail,
     getUserDetail,
     getProductsAll,
     getProductDetail,
