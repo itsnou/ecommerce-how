@@ -30,6 +30,8 @@ import {
   LOG_IN,
   EDIT_USER_STATUS,
   USERS_FILTERED,
+  ADD_TO_WISHLIST,
+  REMOVE_FROM_WISHLIST,
   SET_PAYMENT,
   EDIT_ORDER_STATUS,
   GET_ORDERS_FOR_STATUS
@@ -37,6 +39,7 @@ import {
 } from "../actions/constant";
 
 import { addToCart } from "../../utils/addToCart";
+import { removeFromWishlist } from "../../utils/removeFromWishlist";
 import { modifyItemInCart } from "../../utils/modifyItemInCart";
 import {
   filterWines,
@@ -63,6 +66,7 @@ const initialState = {
   loged: "off",
   searchUser: [],
   searchOrders: [],
+  wishlist: [],
   confirm: false,
   payment: {},
 };
@@ -231,6 +235,18 @@ const reducer = (state = initialState, { payload, type }) => {
       };
     case EDIT_USER_STATUS:
       return state;
+    case ADD_TO_WISHLIST:
+      return {
+        ...state,
+        wishlist: [...state.wishlist, payload],
+      };
+    case REMOVE_FROM_WISHLIST:
+      let aux = state.wishlist.filter((e) => e !== payload);
+      console.log(aux);
+      return {
+        ...state,
+        wishlist: aux,
+      };
     case SET_PAYMENT:
       return {
         ...state,

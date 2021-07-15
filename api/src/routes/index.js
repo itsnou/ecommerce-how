@@ -7,6 +7,7 @@ const varietalRoute = require('./varietal');
 const mpPayment = require('./mercadopago');
 const sendMail = require('./mails');
 const stripeRoute = require("./stripe");
+const wishlistRouter = require("./wishlist");
 const router = Router();
 
 router.use('/products', productsRoute);
@@ -17,6 +18,8 @@ router.use('/varietal', varietalRoute);
 router.use('/paymentMP', mpPayment);
 router.use('/sendMail', sendMail);
 router.use("/stripe", stripeRoute);
+router.use("/wishlist", wishlistRouter);
+
 
 
 module.exports = router;

@@ -11,6 +11,8 @@ import {
   EDIT_USER_STATUS,
   EDIT_ORDER_STATUS,
   MODIFY_PRODUCT,
+  ADD_TO_WISHLIST,
+  REMOVE_FROM_WISHLIST,
 } from "./constant";
 
 export const addProduct = (product) => {
@@ -33,10 +35,16 @@ export const addUser = (user) => {
     let apiRes;
     try {
       apiRes = await axios.post(`${GET_URL}users/signup`, user);
-      dispatch({ type: ADD_USER, payload: { created: apiRes.data.message, confirm: true } });
+      dispatch({
+        type: ADD_USER,
+        payload: { created: apiRes.data.message, confirm: true },
+      });
     } catch (err) {
       apiRes = err.response.data.message;
-      dispatch({ type: ADD_USER, payload: { created: apiRes, confirm: false } });
+      dispatch({
+        type: ADD_USER,
+        payload: { created: apiRes, confirm: false },
+      });
     }
   };
 };
@@ -167,6 +175,40 @@ export const blockUser = (id) => {
           },
         }
       );
+    } catch (e) {
+      console.log(e);
+    }
+  };
+};
+
+export const addToWishlist = (product) => {
+  return async (dispatch) => {
+    try {
+      await axios.post(
+        `${GET_URL}wishlist`,
+        { product: product },
+        {
+          headers: {
+            authorization: "Bearer " + sessionStorage.getItem("token"),
+          },
+        }
+      );
+      return dispatch({ type: ADD_TO_WISHLIST, payload: product });
+    } catch (e) {
+      console.log(e);
+    }
+  };
+};
+
+export const removeFromWishlist = (product) => {
+  return async (dispatch) => {
+    try {
+      await axios.delete(`${GET_URL}wishlist/product`, product, {
+        headers: {
+          authorization: "Bearer " + sessionStorage.getItem("token"),
+        },
+      });
+      return dispatch({ type: REMOVE_FROM_WISHLIST, payload: product });
     } catch (e) {
       console.log(e);
     }
