@@ -1,49 +1,147 @@
 const { Router } = require("express");
 const router = Router();
 const userSchema = require("../models/users");
+const jwt = require("jsonwebtoken");
+const passport = require("passport");
+const jwt_decode = require("jwt-decode");
 
-router.get("/", async (req, res) => {
-  const { user } = req.query;
-  if (user) {
-    try {
-      const getUsers = await userSchema.find();
-      return res.send(getUsers);
-    } catch (err) {
-      return res.status(404).send("Users not found");
+router.get(
+  "/",
+  passport.authenticate("jwt", { session: false }),
+  async (req, res) => {
+    const token = req.headers.authorization.split(" ");
+    const decodificado = jwt_decode(token[1]);
+    const findUser = await userSchema.findOne({ email: decodificado.email });
+    const returnedUser = {
+      _id: findUser._id,
+      address: findUser.address,
+      orders: findUser.orders,
+      userStatus: findUser.userStatus,
+      name: findUser.name,
+      lastName: findUser.lastName,
+      email: findUser.email,
+    };
+    res.json(returnedUser);
+  }
+);
+
+router.get(
+  "/allusers",
+  passport.authenticate("jwt", { session: false }),
+  async (req, res) => {
+    const token = req.headers.authorization.split(" ");
+    const decodificado = jwt_decode(token[1]);
+    const findUser = await userSchema.findOne({ email: decodificado.email });
+    if (findUser.userStatus === "Admin") {
+      const allUsers = await userSchema.find();
+      res.send(allUsers);
+    } else {
+      res.status(401).send({ message: "No está autorizado" });
     }
   }
-  const getAllUsers = await userSchema.find();
-  return res.send(getAllUsers);
-});
+);
 
-router.get("/:id", async (req, res) => {
-  const { id } = req.params;
-  try {
-    const usersById = await userSchema.findById(id);
-    return res.send(usersById);
-  } catch (err) {
-    return res.status(404).send("User not found");
-  }
-});
-
-router.post("/", async (req, res) => {
-  const { name, lastName, email, userStatus, address, password } = req.body;
+router.post("/signup", async (req, res) => {
+  const { name, lastName, email, address, password } = req.body;
   const data = {
     name: name,
     lastName: lastName,
     email: email,
-    userStatus: userStatus,
-    address: address,
     password: password,
     orders: [],
   };
   try {
     const newUser = await new userSchema(data);
     await newUser.save();
-    return res.send("Post OK");
+    return res.status(201).send({ message: "Se creo correctamente" });
   } catch (err) {
-    return res.status(404).send(err);
+    return res.status(404).send({ message: "No se creo correctamente" });
   }
 });
+
+router.get(
+  "/:id",
+  passport.authenticate("jwt", { session: false }),
+  async (req, res) => {
+    const token = req.headers.authorization.split(" ");
+    const decodificado = jwt_decode(token[1]);
+    const findUser = await userSchema.findOne({ email: decodificado.email });
+    if (findUser.userStatus === "Admin") {
+      const { id } = req.params;
+      const user = await userSchema.findById(id);
+      console.log(user);
+      res.send(user);
+    } else {
+      res.status(401).send({ message: "No tiene permisos" });
+    }
+  }
+);
+
+router.post("/login", async (req, res) => {
+  const { email, password } = req.body;
+  const userEmail = await userSchema.findOne({ email: email });
+  if (!userEmail) {
+    return res.status(401).send({ message: "off" });
+  }
+  const validate = await userEmail.isValidPassword(password);
+  if (!validate) {
+    return res.status(401).send({ message: "off" });
+  }
+  if (userEmail.userStatus === "Bloqueado") {
+    return res.status(401).send({ message: "Acceso denegado" });
+  }
+
+  const jwtToken = jwt.sign(
+    {
+      id: userEmail._id,
+      email: userEmail.email,
+    },
+    "secret",
+    { expiresIn: "1d" }
+  );
+  if (userEmail.userStatus === "Admin")
+    return res.send({ token: jwtToken, message: "on", admin: "on" });
+  return res.send({ token: jwtToken, message: "on" });
+});
+
+router.put(
+  "/upgradeuser",
+  passport.authenticate("jwt", { session: false }),
+  async (req, res) => {
+    const token = req.headers.authorization.split(" ");
+    const decodificado = jwt_decode(token[1]);
+    const findUser = await userSchema.findOne({ email: decodificado.email });
+    if (findUser.userStatus === "Admin") {
+      const { userEmail } = req.body;
+      const user = await userSchema.findOneAndUpdate(
+        { email: userEmail },
+        { userStatus: "Admin" }
+      );
+      res.send("Actualizado");
+    } else {
+      res.send("No tiene permisos ");
+    }
+  }
+);
+
+router.put(
+  "/blockuser",
+  passport.authenticate("jwt", { session: false }),
+  async (req, res) => {
+    const token = req.headers.authorization.split(" ");
+    const decodificado = jwt_decode(token[1]);
+    const findUser = await userSchema.findOne({ email: decodificado.email });
+    if (findUser.userStatus === "Admin") {
+      const { id } = req.body;
+      console.log(id);
+      const userDeleted = await userSchema.findByIdAndUpdate(id, {
+        userStatus: "Bloqueado",
+      });
+      res.send("Usuario bloqueado");
+    } else {
+      res.status(401).send({ message: "No tiene acceso" });
+    }
+  }
+);
 
 module.exports = router;

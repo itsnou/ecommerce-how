@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
-
-const findOrCreate = require("mongoose-findorcreate");
+const bcrypt = require("bcrypt");
 
 const UsersSchema = new mongoose.Schema(
   {
@@ -21,13 +20,15 @@ const UsersSchema = new mongoose.Schema(
       type: String,
     },
     userStatus: {
-      required: true,
+      required: false,
       type: String,
-      enum: ["Premium", "Regular", "Admin"],
+      enum: ["Premium", "Regular", "Admin", "Bloqueado"],
+      default: "Regular",
     },
     address: {
       required: false,
       type: String,
+      default: "",
     },
     //SE DEBE SETEAR EL CRYPTO
     password: {
@@ -41,9 +42,20 @@ const UsersSchema = new mongoose.Schema(
       },
     ],
   },
-
   { versionKey: false }
 );
+
+UsersSchema.pre("save", async function (next) {
+  const hash = await bcrypt.hash(this.password, 10);
+  this.password = hash;
+  next();
+});
+
+UsersSchema.methods.isValidPassword = async function (password) {
+  const user = this;
+  const compare = await bcrypt.compare(password, user.password);
+  return compare;
+};
 
 const User = mongoose.model("User", UsersSchema, "users");
 

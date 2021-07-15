@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { HiOutlineSearch } from "react-icons/hi";
-import { getProductsByName } from "../../redux/actions";
+import { getProductsByName } from "../../../redux/actions/request";
 import StyledDiv from "./styled.js";
 import Button from "@material-ui/core/Button";
 
-const Search = () => {
+const SearchAtCatalogo = () => {
   const [product, setProduct] = useState("");
   const search = useSelector((state) => state.search);
 
@@ -51,4 +51,4 @@ const Search = () => {
   );
 };
 
-export default Search;
+export default SearchAtCatalogo;

@@ -21,26 +21,41 @@ import {
   ADD_TO_CART,
   REMOVE_FROM_CART,
   MODIFY_ITEM_CART,
+  MODIFY_PRODUCT,
   RESET,
   FILTER_STATE,
   GET_VARIETALS,
   FILTRED_FOR_CATEGORY,
+  LOAD_PROFILE,
+  LOG_IN,
+  EDIT_USER_STATUS,
+  USERS_FILTERED,
+  EDIT_ORDER_STATUS
+
 } from "../actions/constant";
 
 import { addToCart } from "../../utils/addToCart";
 import { modifyItemInCart } from "../../utils/modifyItemInCart";
+import { filterWines, filterOnOff, filterUsers } from "../../utils/methods";
 
 const initialState = {
   products: [],
   productDetail: {},
   users: [],
+  userDetail: {},
   orders: [],
+  orderDetail: {},
   cart: [],
   search: [],
   loading: false,
   productsFilter: [],
   varietals: [],
   filter: "off",
+  user: [],
+  created: "",
+  loged: "off",
+  searchUser: [],
+  confirm: false
 };
 
 const reducer = (state = initialState, { payload, type }) => {
@@ -51,6 +66,7 @@ const reducer = (state = initialState, { payload, type }) => {
         products: payload,
         loading: false,
       };
+
     case GET_PRODUCT_DETAIL:
       return {
         ...state,
@@ -84,47 +100,61 @@ const reducer = (state = initialState, { payload, type }) => {
     case GET_ORDER_DETAIL:
       return {
         ...state,
-        orders: [payload],
+        orderDetail: payload,
         loading: false,
       };
     case GET_USERS:
       return {
         ...state,
         users: payload,
-        loading: false,
+      };
+    case LOAD_PROFILE:
+      return {
+        ...state,
+        user: [payload.user],
+        loged: payload.log,
+      };
+    case LOG_IN:
+      return {
+        ...state,
+        loged: payload,
       };
     case GET_USER_DETAIL:
       return {
         ...state,
-        orders: [payload],
-        loading: false,
+        userDetail: payload
+      };
+    case USERS_FILTERED:
+      return {
+        ...state,
+        searchUser: filterUsers(payload)
       };
     case FILTRED_FOR_PRICE_LOW_TO_HIGH:
       return {
         ...state,
         products: payload,
-        loading: false,
       };
     case FILTRED_FOR_PRICE_HIGH_TO_LOW:
       return {
         ...state,
         products: payload,
-        loading: false,
       };
     case FILTRED_FOR_RATING_LOW_TO_HIGH:
       return {
         ...state,
         products: payload,
-        loading: false,
       };
     case FILTRED_FOR_RATING_HIGH_TO_LOW:
       return {
         ...state,
         products: payload,
-        loading: false,
       };
     case ADD_USER:
-      return state;
+      return {
+        ...state,
+        created: payload.created,
+        confirm: payload.confirm
+      };
     case ADD_CATEGORY:
       return state;
     case ADD_PRODUCT:
@@ -155,6 +185,11 @@ const reducer = (state = initialState, { payload, type }) => {
         ...state,
         cart: modifyItemInCart(payload, state.cart),
       };
+    case MODIFY_PRODUCT:
+      return {
+        ...state,
+        confirm: payload
+      }
     case RESET:
       return {
         ...state,
@@ -169,19 +204,7 @@ const reducer = (state = initialState, { payload, type }) => {
       }
       return {
         ...state,
-        productsFilter: payload.filterVarietals.length
-          ? filtered
-              .filter((el) => el.category === payload.category)
-              .filter((el) => {
-                let validate = true;
-                for (let i = 0; i < payload.filterVarietals.length; i++) {
-                  if (!el.varietal.includes(payload.filterVarietals[i])) {
-                    validate = false;
-                  }
-                }
-                return validate;
-              })
-          : filtered.filter((el) => el.category === payload.category),
+        productsFilter: filterWines(payload, filtered),
       };
     case GET_VARIETALS:
       return {
@@ -192,8 +215,12 @@ const reducer = (state = initialState, { payload, type }) => {
     case FILTER_STATE:
       return {
         ...state,
-        filter: payload !== "default" ? "on" : "off",
+        filter: filterOnOff(payload),
       };
+    case EDIT_USER_STATUS:
+      return state;
+    case EDIT_ORDER_STATUS:
+      return state;
     default:
       return state;
   }

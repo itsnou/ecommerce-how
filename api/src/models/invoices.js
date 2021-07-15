@@ -7,6 +7,15 @@ const InvoicesSchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
+    date: {
+      type: Date,
+      required: false,
+      default: Date.now,
+    },
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+    },
   },
   {
     versionKey: false,

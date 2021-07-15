@@ -3,10 +3,42 @@ const router = Router();
 const orderSchema = require("../models/orders");
 const invoiceSchema = require("../models/invoices");
 const userSchema = require("../models/users");
+const jwt = require("jsonwebtoken");
+const passport = require("passport");
+const jwt_decode = require("jwt-decode");
 
-router.get("/", async (req, res) => {
-  const { userName, date } = req.query;
-  if (userName) {
+
+router.get(
+  "/:id",
+  passport.authenticate("jwt", { session: false }),
+  async (req, res) => {
+    const token = req.headers.authorization.split(" ");
+    const decodificado = jwt_decode(token[1]);
+    const findUser = await userSchema.findOne({ email: decodificado.email });
+    try {
+      const { id } = req.params;
+      const orderById = await orderSchema
+      .findById(id)
+      .populate("user")
+      .populate("invoice");
+      res.send(orderById);
+    } catch (err) {
+      return res.status(404).send("Order not found");
+    }
+  }
+);
+
+// router.get('/user')
+
+router.get("/",
+  passport.authenticate("jwt", { session: false }),
+  async (req, res) => {
+    const token = req.headers.authorization.split(" ");
+    const decodificado = jwt_decode(token[1]);
+    const findUser = await userSchema.findOne({ email: decodificado.email });
+    const { user, date, state } = req.query;
+
+  if (findUser.userStatus !== "Admin") {
     try {
       const ordersByUser = await orderSchema
         .find()
@@ -31,6 +63,17 @@ router.get("/", async (req, res) => {
       return res.status(404).send("Date without orders");
     }
   }
+  if (state) {
+    try {
+      const ordersByDate = await orderSchema
+        .find({ state: state })
+        .populate("user")
+        .populate("invoice");
+      return res.send(ordersByDate);
+    } catch (err) {
+      return res.status(404).send("Date without orders");
+    }
+  }
   const getAllOrders = await orderSchema
     .find()
     .populate("user")
@@ -46,13 +89,32 @@ router.post("/", async (req, res) => {
     const data = {
       user: userData._id,
       invoice: invoiceData._id,
+      //  items: invoiceData.items
     };
     const newOrder = await new orderSchema(data);
     await newOrder.save();
-    return res.send("Post Ok");
+    return res.send(newOrder);
   } catch (err) {
     return res.status(404).send(err);
   }
 });
+
+router.put(
+  '/modify',
+  passport.authenticate("jwt", { session: false }),
+  async (req, res) => {
+    const token = req.headers.authorization.split(" ");
+    const decodificado = jwt_decode(token[1]);
+    const findUser = await userSchema.findOne({ email: decodificado.email });
+    if(findUser.userStatus === 'Admin') {
+      const { id, state } = req.body;
+      const update = { state: state };
+      const order = await orderSchema.findByIdAndUpdate(id, update);
+      res.send('Order state updated');
+    } else {
+      res.status(401).send({message: 'Unauthorized'})
+    }
+  }
+)
 
 module.exports = router;

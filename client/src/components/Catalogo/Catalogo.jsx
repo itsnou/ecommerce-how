@@ -6,35 +6,40 @@ import ProductCard from "../ProductCard/ProductCard";
 import ReactPaginate from "react-paginate";
 import Loading from "../Loading/Loading";
 import Filters from "../Filters/Filters";
+import Sort from "../Sorts/Sort";
 
 const Catalogo = () => {
-  const dispatch = useDispatch();
-  const store = useSelector((state) => state);
-  const search = useSelector((state) => state.search);
-  const products = useSelector((state) => state.products);
-  const productsFilter = useSelector((state) => state.productsFilter);
-  const [renderProduct, setRenderProduct] = useState([]);
-  const filter = useSelector((state) => state.filter);
+    const dispatch = useDispatch();
+    const search = useSelector((state) => state.search);
+    const products = useSelector((state) => state.products);
+    const productsFilter = useSelector((state) => state.productsFilter);
+    const [renderProduct, setRenderProduct] = useState([]);
+    const filter = useSelector((state) => state.filter);
 
-  useEffect(() => {
-    dispatch(getProductsAll());
-    dispatch(getProductsByName(""));
-  }, [dispatch]);
-  useEffect(() => {
-    if (store.search.length) {
-      setPageNumber(0);
-    }
-  }, [store.search.length]);
+    useEffect(() => {
+        dispatch(getProductsAll());
+        dispatch(getProductsByName(""));
+    }, [dispatch]);
 
-  useEffect(() => {
-    setRenderProduct(search.length ? search : products);
-  }, [search, products]);
+    useEffect(() => {
+        if (search.length) {
+            setPageNumber(0);
+        } else {
+            if (productsFilter && productsFilter.length) {
+                setPageNumber(0);
+            }
+        }
+    }, [search.length, productsFilter]);
 
-  let filterProducts = filter === "on" ? productsFilter : renderProduct;
+    useEffect(() => {
+        setRenderProduct(search.length ? search : products);
+    }, [search, products]);
+
+    let filterProducts = filter === "on" ? productsFilter : renderProduct;
 
   //paginated
   const [pageNumber, setPageNumber] = useState(0);
-  const productsPerPage = 6; // productos a mostrar
+  const productsPerPage = 14; // productos a mostrar 
   const pagesVisited = pageNumber * productsPerPage;
   const displayProducts = filterProducts
     .slice(pagesVisited, pagesVisited + productsPerPage)
@@ -42,45 +47,41 @@ const Catalogo = () => {
       return <ProductCard key={idx} product={product} />;
     });
 
-  const pageCount = Math.ceil(filterProducts.length / productsPerPage);
+    const pageCount = Math.ceil(filterProducts.length / productsPerPage);
 
-  const changePage = ({ selected }) => {
-    setPageNumber(selected);
-  };
+    const changePage = ({ selected }) => {
+        setPageNumber(selected);
+    };
 
   return (
     <>
-      {store.loading ? (
-        <Loading />
-      ) : (
-        <StyledDiv>
-          <div className="filter">
-            <Filters></Filters>
-          </div>
-          <div className="cards-container">
-            {displayProducts.length ? (
-              displayProducts
-            ) : (
-              <h1>No hay coincidencias</h1>
-            )}
-          </div>
-          <div className="paginate">
-            {filterProducts.length > 6 ? (
-              <ReactPaginate
-                previousLabel={"Anterior"}
-                nextLabel={"Siguiente"}
-                pageCount={pageCount}
-                onPageChange={changePage}
-                containerClassName={"paginationBtn"}
-                previousLinkClassName={"previousBtn"}
-                nextLinkClassName={"nextBtn"}
-                disabledClassName={"paginationDisable"}
-                activeClassName={"paginationActive"}
-              />
-            ) : null}
-          </div>
-        </StyledDiv>
-      )}
+      <StyledDiv>
+        <div className="filter">
+          <Filters></Filters>
+        </div>
+        <div className="cards-container">
+          {displayProducts.length ? (
+            displayProducts
+          ) : (
+            <h1>No hay coincidencias</h1>
+          )}
+        </div>
+        <div className="paginate">
+          {filterProducts.length > 6 ? (
+            <ReactPaginate
+              previousLabel={"Anterior"}
+              nextLabel={"Siguiente"}
+              pageCount={pageCount}
+              onPageChange={changePage}
+              containerClassName={"paginationBtn"}
+              previousLinkClassName={"previousBtn"}
+              nextLinkClassName={"nextBtn"}
+              disabledClassName={"paginationDisable"} //visibility:hidden;
+              activeClassName={"paginationActive"}
+            />
+          ) : null}
+        </div>
+      </StyledDiv>
     </>
   );
 };

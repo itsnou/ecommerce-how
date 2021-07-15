@@ -9,13 +9,12 @@ import {
   GET_URL,
   GET_USERS,
   GET_USER_DETAIL,
-  LOADING,
   GET_VARIETALS,
+  LOAD_PROFILE,
 } from "./constant";
 
 export const getProductsAll = () => {
   return async (dispatch) => {
-    dispatch({ type: LOADING });
     try {
       const products = await axios.get(`${GET_URL}products`);
       return dispatch({ type: GET_PRODUCTS_ALL, payload: products.data });
@@ -43,7 +42,6 @@ export const getProductsByName = (name) => {
 
 export const getProductsForCategory = (category) => {
   return async (dispatch) => {
-    dispatch({ type: LOADING });
     try {
       const products = await axios.get(
         `${GET_URL}products?category=${category}`
@@ -61,7 +59,6 @@ export const getProductsForCategory = (category) => {
 
 export const getProductDetail = (id) => {
   return async (dispatch) => {
-    dispatch({ type: LOADING });
     try {
       const products = await axios.get(`${GET_URL}products/${id}`);
       return dispatch({
@@ -77,10 +74,13 @@ export const getProductDetail = (id) => {
 
 export const getUsers = () => {
   return async (dispatch) => {
-    dispatch({ type: LOADING });
     try {
-      const products = await axios.get(`${GET_URL}user`);
-      return dispatch({ type: GET_USERS, payload: products.data });
+      const users = await axios.get(`${GET_URL}users/allusers`, {
+        headers: {
+          authorization: "Bearer " + sessionStorage.getItem("token"),
+        },
+      });
+      return dispatch({ type: GET_USERS, payload: users.data });
     } catch (e) {
       console.log(e);
       return dispatch({ type: GET_USERS, payload: [] });
@@ -88,25 +88,32 @@ export const getUsers = () => {
   };
 };
 
+
 export const getUserDetail = (id) => {
   return async (dispatch) => {
-    dispatch({ type: LOADING });
     try {
-      const products = await axios.get(`${GET_URL}user/${id}`);
-      return dispatch({ type: GET_USER_DETAIL, payload: products.data });
+      const users = await axios.get(`${GET_URL}users/${id}`, {
+        headers: {
+          authorization: "Bearer " + sessionStorage.getItem("token"),
+        },
+      });
+      return dispatch({ type: GET_USER_DETAIL, payload: users.data });
     } catch (e) {
       console.log(e);
-      return dispatch({ type: GET_USER_DETAIL, payload: [] });
+      return dispatch({ type: GET_USER_DETAIL, payload: {} });
     }
   };
 };
 
 export const getOrders = () => {
   return async (dispatch) => {
-    dispatch({ type: LOADING });
     try {
-      const products = await axios.get(`${GET_URL}order`);
-      return dispatch({ type: GET_ORDERS, payload: products.data });
+      const orders = await axios.get(`${GET_URL}orders`, {
+        headers: {
+          authorization: "Bearer " + sessionStorage.getItem("token"),
+        },
+      });
+      return dispatch({ type: GET_ORDERS, payload: orders.data });
     } catch (e) {
       console.log(e);
       return dispatch({ type: GET_ORDERS, payload: [] });
@@ -116,13 +123,16 @@ export const getOrders = () => {
 
 export const getOrderDetail = (id) => {
   return async (dispatch) => {
-    dispatch({ type: LOADING });
     try {
-      const products = await axios.get(`${GET_URL}order/${id}`);
-      return dispatch({ type: GET_ORDER_DETAIL, payload: products.data });
+      const order = await axios.get(`${GET_URL}orders/id`, {
+        headers: {
+          authorization: "Bearer " + sessionStorage.getItem("token"),
+        },
+      });
+      return dispatch({ type: GET_ORDER_DETAIL, payload: order.data });
     } catch (e) {
       console.log(e);
-      return dispatch({ type: GET_ORDER_DETAIL, payload: [] });
+      return dispatch({ type: GET_ORDER_DETAIL, payload: {} });
     }
   };
 };
@@ -136,6 +146,26 @@ export const getVarietals = () => {
     } catch (e) {
       console.log(e);
       return dispatch({ type: GET_VARIETALS, payload: [] });
+    }
+  };
+};
+
+export const getProfile = () => {
+  let apiRes;
+  return async (dispatch) => {
+    try {
+      apiRes = await axios.get(`${GET_URL}users`, {
+        headers: {
+          authorization: "Bearer " + sessionStorage.getItem("token"),
+        },
+      });
+      dispatch({
+        type: LOAD_PROFILE,
+        payload: { user: apiRes.data, log: "on" },
+      });
+    } catch (err) {
+      apiRes = err.response.data.message;
+      dispatch({ type: LOAD_PROFILE, payload: { user: [], log: "off" } });
     }
   };
 };

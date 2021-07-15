@@ -5,7 +5,9 @@ export const addToCart = (obj, array) => {
   } else {
     return array.map((e) => {
       if (e._id === obj._id) {
-        e = { ...e, quantity: obj.quantity };
+        if(e.stock < e.quantity){
+          e = { ...e, quantity: obj.quantity };
+        }
       }
       return e;
     });

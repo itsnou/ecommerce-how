@@ -3,6 +3,9 @@ import {
     filtredForPriceLowToHigh,
     filtredForRatingHightoLow,
     filtredForRatingLowToHigh,
+    filtredByAtoZ,
+    filtredByZtoA,
+    userFiltered
 } from "./filtrer";
 import {
     getProductsAll,
@@ -11,8 +14,8 @@ import {
     getUsers,
     getUserDetail,
     getOrders,
-    getProductDetail,
     getOrderDetail,
+    getProductDetail,
 } from "./request";
 import {
     addCategory,
@@ -21,6 +24,7 @@ import {
     deleteCategory,
     deleteProduct,
     deleteUser,
+    editUserStatus
 } from "./sending";
 import { RESET } from "./constant";
 
@@ -36,9 +40,12 @@ export {
     filtredForPriceLowToHigh,
     filtredForRatingHightoLow,
     filtredForRatingLowToHigh,
-    getOrderDetail,
+    filtredByAtoZ,
+    filtredByZtoA,
+    userFiltered,
     getUsers,
     getOrders,
+    getOrderDetail,
     getUserDetail,
     getProductsAll,
     getProductDetail,
@@ -50,4 +57,5 @@ export {
     deleteCategory,
     deleteProduct,
     deleteUser,
+    editUserStatus
 };

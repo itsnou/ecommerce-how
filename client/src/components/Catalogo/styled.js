@@ -34,7 +34,23 @@ const StyledDiv = styled.div`
 
     .filter{
         grid-area: filter;
+        width:100%;
+        user-select:none;
+        .filter-container{
+            background-color: #420D1F;
+            margin:20px 20px;
+            padding:25px;
+            border-radius:6px;
+            position:fixed;
+            color:white;
+            font-weight:bold;
+            .filter-category_label{
+                display:flex;
+                flex-direction:column;
+            }
+        }
     }
+
     .cards-container{
         grid-area: product;
         width:95%;
@@ -46,11 +62,11 @@ const StyledDiv = styled.div`
         .container-card{
             display:grid;
             grid-template-columns: 1fr 1fr;
-            width:500px;
+            width:450px;
             height:15rem;
             margin:auto;
             border-radius: 8px;
-            box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+            box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 20px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
             .card-image{
                 text-align:center;
                 height:100%;
@@ -90,45 +106,42 @@ const StyledDiv = styled.div`
                     display:flex;
                     justify-content:center;
                     width:100%;
-                        .card-rating{
-                            padding:4px;
-                            margin-right:5px;
-                            background-color: #420D1F;
-                            border-radius:3px;
-                            color:white;
-                            :hover{
-                                background-color:white;
-                                color:#420D1F;
-                                cursor:pointer;
-                            }
-                        }
-                        .card-buttons_build{
-                            background-color: #420D1F;
-                            border-radius:3px;
-                            padding:4px;
-                            color:white;
+                    .card-buttons_disabled{
                             border:none;
+                            background-color:gray;
                             font-weight:bold;
+                            border-radius:3px;
+                            padding:4px;
+                            cursor: not-allowed;
+                    }
+                    .card-buttons_build{
+                        background-color: #420D1F;
+                        border-radius:3px;
+                        padding:4px;
+                        color:white;
+                        border:none;
+                        font-weight:bold;
+                        :hover{
+                            background-color:white;
+                            color:#420D1F;
+                            cursor:pointer;
+                        }
+                    
+                        button{
+                            text-align:center;
+                            color:white;
+                            margin:auto;
+                            margin-bottom:2px;
+                            cursor:pointer;
                             :hover{
-                                background-color:white;
+                                font-weight:bold;
                                 color:#420D1F;
-                                cursor:pointer;
-                            }
-                            button{
-                                text-align:center;
-                                color:white;
-                                margin:auto;
-                                margin-bottom:2px;
-                                cursor:pointer;
-                                :hover{
-                                    font-weight:bold;
-                                    color:#420D1F;
-                                }
                             }
                         }
                     }
                 }
             }
+        }
     }
 `
 
