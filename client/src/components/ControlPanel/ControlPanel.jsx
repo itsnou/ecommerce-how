@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { StyledPanel } from "./styled.js";
 import Orders from "./Orders/Orders.jsx";
 import Users from "./Users/Users.jsx";
@@ -10,6 +10,7 @@ import Subsidiarys from "./Subsidiarys/Subsidiarys.jsx";
 import Search from "./Search.jsx";
 import AddProduct from "./AddProduct.jsx";
 import ItemUsers from "./Users/ItemUsers.jsx";
+import ItemOrder from "./Orders/ItemOrder.jsx";
 
 const ControlPanel = () => {
   const store = useSelector((state) => state);
@@ -42,6 +43,14 @@ const ControlPanel = () => {
             )}
             {visual.addProduct && <AddProduct />}
             {visual.users && store.users.map((p) => <ItemUsers user={p} />)}
+            {visual.usersSearch && (
+              <>
+                <Search itemValue={"user"} />
+                {store.searchUser.length > 0 &&
+                  store.searchUser.map((p) => <ItemUsers user={p} />)}
+              </>
+            )}
+            {visual.orders && store.orders.map((p) => <ItemOrder order={p} />)}
             {visual.usersSearch && (
               <>
                 <Search itemValue={"user"} />

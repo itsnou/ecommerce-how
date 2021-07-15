@@ -29,7 +29,8 @@ import {
   LOAD_PROFILE,
   LOG_IN,
   EDIT_USER_STATUS,
-  USERS_FILTERED
+  USERS_FILTERED,
+  EDIT_ORDER_STATUS
 
 } from "../actions/constant";
 
@@ -43,6 +44,7 @@ const initialState = {
   users: [],
   userDetail: {},
   orders: [],
+  orderDetail: {},
   cart: [],
   search: [],
   loading: false,
@@ -93,13 +95,11 @@ const reducer = (state = initialState, { payload, type }) => {
       return {
         ...state,
         orders: payload,
-        loading: false,
       };
     case GET_ORDER_DETAIL:
       return {
         ...state,
-        orders: [payload],
-        loading: false,
+        orderDetail: payload,
       };
     case GET_USERS:
       return {
@@ -151,7 +151,7 @@ const reducer = (state = initialState, { payload, type }) => {
       return {
         ...state,
         created: payload.created,
-        confirm:payload.confirm
+        confirm: payload.confirm
       };
     case ADD_CATEGORY:
       return state;
@@ -184,9 +184,9 @@ const reducer = (state = initialState, { payload, type }) => {
         cart: modifyItemInCart(payload, state.cart),
       };
     case MODIFY_PRODUCT:
-      return{
+      return {
         ...state,
-        confirm:payload
+        confirm: payload
       }
     case RESET:
       return {
@@ -216,6 +216,8 @@ const reducer = (state = initialState, { payload, type }) => {
         filter: filterOnOff(payload),
       };
     case EDIT_USER_STATUS:
+      return state;
+    case EDIT_ORDER_STATUS:
       return state;
     default:
       return state;
