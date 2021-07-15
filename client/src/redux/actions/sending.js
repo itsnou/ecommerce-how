@@ -177,10 +177,11 @@ export const addToWishlist = (product) => {
 export const removeFromWishlist = (product) => {
   return async (dispatch) => {
     try {
-      await axios.delete(`${GET_URL}wishlist/product`, product, {
+      await axios.delete(`${GET_URL}wishlist/product`, {
         headers: {
           authorization: "Bearer " + sessionStorage.getItem("token"),
         },
+        data: { product: product },
       });
       return dispatch({ type: REMOVE_FROM_WISHLIST, payload: product });
     } catch (e) {

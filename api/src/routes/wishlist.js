@@ -97,6 +97,7 @@ router.delete(
   passport.authenticate("jwt", { session: false }),
   async (req, res) => {
     const { product } = req.body;
+    console.log("el productito", product);
     const token = req.headers.authorization.split(" ");
     const decodificado = jwt_decode(token[1]);
     const findUser = await userSchema.findOne({ email: decodificado.email });

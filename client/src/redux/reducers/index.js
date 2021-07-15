@@ -221,9 +221,11 @@ const reducer = (state = initialState, { payload, type }) => {
         wishlist: [...state.wishlist, payload],
       };
     case REMOVE_FROM_WISHLIST:
+      let aux = state.wishlist.filter((e) => e !== payload);
+      console.log(aux);
       return {
         ...state,
-        wishlist: removeFromWishlist(payload, state.wishlist),
+        wishlist: aux,
       };
     default:
       return state;

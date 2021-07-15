@@ -1,4 +1,5 @@
 const removeFromWishlist = (payload, wishlist) => {
-  const newWishlist = wishlist.filter((e) => e._id !== payload);
-  return newWishlist;
+  const aux = wishlist.filter((e) => e !== payload);
+  console.log(aux);
+  return aux;
 };

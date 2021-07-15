@@ -18,9 +18,11 @@ const ProductDetail = ({ match }) => {
   const [stars, setStars] = useState(0);
   const fixed = useRef(match.params.id);
   const wishlist = useSelector((store) => store.wishlist);
+  const [wishlistBoolean, setWishlistBoolean] = useState(false);
 
   useEffect(() => {
     dispatch(getProductDetail(fixed.current));
+    if (wishlist.includes(detail._id)) setWishlistBoolean(true);
   }, [dispatch]);
 
   useEffect(() => {
@@ -47,16 +49,15 @@ const ProductDetail = ({ match }) => {
     dispatch(addToCart(obj));
   };
 
-  let validateWishlist2 = validateWishlist(detail._id, wishlist);
-
-  useEffect(() => {
-    validateWishlist2 = validateWishlist(detail._id, wishlist);
-    console.log("entro al useEffect");
-  }, [wishlist, validateWishlist2]);
-
   const handleWishlist = (e) => {
-    if (e === "remove") dispatch(removeFromWishlist(detail._id));
-    if (e === "add") dispatch(addToWishlist(detail._id));
+    if (e === "remove") {
+      dispatch(removeFromWishlist(detail._id));
+      setWishlistBoolean(false);
+    }
+    if (e === "add") {
+      dispatch(addToWishlist(detail._id));
+      setWishlistBoolean(true);
+    }
   };
 
   return (
@@ -108,7 +109,7 @@ const ProductDetail = ({ match }) => {
               onChange={(e) => setCount(e.target.value)}
             />
             <button onClick={() => handleClick()}>AGREGAR</button>
-            {validateWishlist2 ? (
+            {wishlistBoolean ? (
               <button
                 className="btn-wishlist"
                 onClick={() => {

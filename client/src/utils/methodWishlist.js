@@ -1,7 +1,8 @@
 export const validateWishlist = (product, wishlist) => {
+  let aux = false;
   wishlist.length &&
-    wishlist.forEach((e) => {
-      if (e._id === product) return true;
+    wishlist.map((e) => {
+      if (e._id === product) aux = true;
     });
-  return false;
+  return aux;
 };
