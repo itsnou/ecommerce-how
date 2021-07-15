@@ -28,7 +28,6 @@ router.get(
   }
 );
 
-// router.get('/user')
 
 router.get("/",
   passport.authenticate("jwt", { session: false }),
@@ -37,17 +36,13 @@ router.get("/",
     const decodificado = jwt_decode(token[1]);
     const findUser = await userSchema.findOne({ email: decodificado.email });
     const { user, date, state } = req.query;
-
   if (findUser.userStatus !== "Admin") {
     try {
       const ordersByUser = await orderSchema
-        .find()
+        .find({ user: findUser._id })
         .populate("user")
         .populate("invoice");
-      const filter = ordersByUser.filter((order) => {
-        order.user.email.toLowerCase().includes(userName.toLowerCase());
-      });
-      return res.send(filter);
+      return res.send(ordersByUser);
     } catch (err) {
       return res.status(404).send("User without orders");
     }
@@ -55,10 +50,11 @@ router.get("/",
   if (date) {
     try {
       const ordersByDate = await orderSchema
-        .find({ date: date })
+        .find()
         .populate("user")
         .populate("invoice");
-      return res.send(ordersByDate);
+        const filter = ordersByDate.filter(order => order.date.toString().includes(date))
+      return res.send(filter);
     } catch (err) {
       return res.status(404).send("Date without orders");
     }
@@ -70,6 +66,18 @@ router.get("/",
         .populate("user")
         .populate("invoice");
       return res.send(ordersByDate);
+    } catch (err) {
+      return res.status(404).send("Date without orders");
+    }
+  }
+  if (user) {
+    try {
+      const ordersByUser = await orderSchema
+        .find()
+        .populate("user")
+        .populate("invoice");
+      const filtered = ordersByUser.filter(order=> order.user.email === user)
+      return res.send(filtered);
     } catch (err) {
       return res.status(404).send("Date without orders");
     }
@@ -89,7 +97,6 @@ router.post("/", async (req, res) => {
     const data = {
       user: userData._id,
       invoice: invoiceData._id,
-      //  items: invoiceData.items
     };
     const newOrder = await new orderSchema(data);
     await newOrder.save();

@@ -18,7 +18,7 @@ router.get("/",
 
     if(findUser.userStatus !== "Admin") {      
       const allInvoices = await invoiceSchema
-      .find({ email: decodificado.email })
+      .find({ user: findUser._id })
       .populate("user");
       return res.send(allInvoices);
     }
