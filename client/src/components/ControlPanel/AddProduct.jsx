@@ -8,21 +8,30 @@ import { useForm } from "react-hook-form";
 const AddProduct = () => {
     const { register, handleSubmit, formState:{ errors } } = useForm();
    
-    
+    const [uvas,setUvas]=useState(["Varietales"]);
     const varietals = useSelector((state) => state.varietals);
     const dispatch = useDispatch();
     const onSubmit = (data, e) => {
-        console.log(data)
+        
         var product=data
         dispatch(addProduct(product))
         // limpiar campos
         e.target.reset();
     }
-
+    var category={
+        Tinto:[],
+        Rosado:[],
+        Blanco:[],
+        vacio:["Varietales"]
+    }
+    for (let i = 0; i < varietals.length; i++) {
+        category[varietals[i].relatedCategory].push(varietals[i].name)
+    }
+    const handleChange=(e)=>{setUvas(category[e.target.value])}
 
     useEffect(() => {
         if (varietals.length === 0) dispatch(getVarietals())
-    }, []);
+    }, [varietals]);
 
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
@@ -60,20 +69,22 @@ const AddProduct = () => {
                     message: 'Seleccione una opción'
                 }
             })}
+            onChange={e=>handleChange(e)}
             >
+                <option  value="vacio">Elegir una categoría</option>
                 <option value="Tinto">Tinto</option>
                 <option value="Rosado">Rosado</option>
                 <option value="Blanco">Blanco</option>
             </select>
             <span>{errors.category?.message}</span>
-            <label>Varietal</label>
+            {/* <label>Varietal</label> */}
             <select {...register("varietal", {
                 required: {
                     value: true,
                     message: 'Seleccione una o más opciones'
                 }
             })} multiple>
-                {varietals.map(e => (<option value={e.name}>{e.name}</option>))}
+                {uvas.map((e,i) => (<option key={i} value={e}>{e}</option>))}
             </select>
             <span>{errors.varietal?.message}</span>
             <input placeholder="Precio" type="number"
@@ -138,7 +149,7 @@ const AddProduct = () => {
             {/* <input type="submit" value=" Create Recipe" onClick={(e) => handleSubmit(e)}/> */}
             {/* <button type="submit" > Create Recipe </button> */}
             <button type="submit" >Agregar Producto</button>
-            <Link to={`/admin/controlpanel`}><button >Volver</button></Link>
+            <Link to={`/catalogo`}><button >Volver</button></Link>
 
         </form>
     )
