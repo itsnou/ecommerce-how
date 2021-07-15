@@ -29,11 +29,13 @@ import {
   LOAD_PROFILE,
   LOG_IN,
   EDIT_USER_STATUS,
-  USERS_FILTERED
-
+  USERS_FILTERED,
+  ADD_TO_WISHLIST,
+  REMOVE_FROM_WISHLIST,
 } from "../actions/constant";
 
 import { addToCart } from "../../utils/addToCart";
+import { removeFromWishlist } from "../../utils/removeFromWishlist";
 import { modifyItemInCart } from "../../utils/modifyItemInCart";
 import { filterWines, filterOnOff, filterUsers } from "../../utils/methods";
 
@@ -52,8 +54,8 @@ const initialState = {
   user: [],
   created: "",
   loged: "off",
-  searchUser: []
-
+  searchUser: [],
+  wishlist: [],
 };
 
 const reducer = (state = initialState, { payload, type }) => {
@@ -120,12 +122,12 @@ const reducer = (state = initialState, { payload, type }) => {
     case GET_USER_DETAIL:
       return {
         ...state,
-        userDetail: payload
+        userDetail: payload,
       };
     case USERS_FILTERED:
       return {
         ...state,
-        searchUser: filterUsers(payload)
+        searchUser: filterUsers(payload),
       };
     case FILTRED_FOR_PRICE_LOW_TO_HIGH:
       return {
@@ -213,6 +215,16 @@ const reducer = (state = initialState, { payload, type }) => {
       };
     case EDIT_USER_STATUS:
       return state;
+    case ADD_TO_WISHLIST:
+      return {
+        ...state,
+        wishlist: [...state.wishlist, payload],
+      };
+    case REMOVE_FROM_WISHLIST:
+      return {
+        ...state,
+        wishlist: removeFromWishlist(payload, state.wishlist),
+      };
     default:
       return state;
   }

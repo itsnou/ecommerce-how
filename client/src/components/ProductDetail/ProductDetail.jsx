@@ -5,6 +5,10 @@ import { addToCart } from "../../redux/actions/cart";
 import StyledDiv from "./style";
 import StarRatingComponent from "react-star-rating-component";
 import { FaWineGlass } from "react-icons/fa";
+import emptyheart from "../../assets/image/emptyheart.png";
+import fullheart from "../../assets/image/fullheart.png";
+import { addToWishlist, removeFromWishlist } from "../../redux/actions/sending";
+import { validateWishlist } from "../../utils/methodWishlist";
 
 const ProductDetail = ({ match }) => {
   const dispatch = useDispatch();
@@ -13,6 +17,7 @@ const ProductDetail = ({ match }) => {
   const [count, setCount] = useState(0);
   const [stars, setStars] = useState(0);
   const fixed = useRef(match.params.id);
+  const wishlist = useSelector((store) => store.wishlist);
 
   useEffect(() => {
     dispatch(getProductDetail(fixed.current));
@@ -40,6 +45,18 @@ const ProductDetail = ({ match }) => {
       quantity: count,
     };
     dispatch(addToCart(obj));
+  };
+
+  let validateWishlist2 = validateWishlist(detail._id, wishlist);
+
+  useEffect(() => {
+    validateWishlist2 = validateWishlist(detail._id, wishlist);
+    console.log("entro al useEffect");
+  }, [wishlist, validateWishlist2]);
+
+  const handleWishlist = (e) => {
+    if (e === "remove") dispatch(removeFromWishlist(detail._id));
+    if (e === "add") dispatch(addToWishlist(detail._id));
   };
 
   return (
@@ -91,6 +108,33 @@ const ProductDetail = ({ match }) => {
               onChange={(e) => setCount(e.target.value)}
             />
             <button onClick={() => handleClick()}>AGREGAR</button>
+            {validateWishlist2 ? (
+              <button
+                className="btn-wishlist"
+                onClick={() => {
+                  handleWishlist("remove");
+                }}
+              >
+                <img
+                  className="btn-wishlist"
+                  alt="Couldn't load"
+                  src={fullheart}
+                />
+              </button>
+            ) : (
+              <button
+                className="btn-wishlist"
+                onClick={() => {
+                  handleWishlist("add");
+                }}
+              >
+                <img
+                  className="btn-wishlist"
+                  alt="Couldn't load"
+                  src={emptyheart}
+                />
+              </button>
+            )}
           </div>
         )}
       </div>

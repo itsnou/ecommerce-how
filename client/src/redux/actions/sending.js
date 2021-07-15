@@ -10,6 +10,8 @@ import {
   LOG_IN,
   EDIT_USER_STATUS,
   MODIFY_PRODUCT,
+  ADD_TO_WISHLIST,
+  REMOVE_FROM_WISHLIST,
 } from "./constant";
 
 export const addProduct = (product) => {
@@ -147,6 +149,40 @@ export const blockUser = (id) => {
           },
         }
       );
+    } catch (e) {
+      console.log(e);
+    }
+  };
+};
+
+export const addToWishlist = (product) => {
+  return async (dispatch) => {
+    try {
+      await axios.post(
+        `${GET_URL}wishlist`,
+        { product: product },
+        {
+          headers: {
+            authorization: "Bearer " + sessionStorage.getItem("token"),
+          },
+        }
+      );
+      return dispatch({ type: ADD_TO_WISHLIST, payload: product });
+    } catch (e) {
+      console.log(e);
+    }
+  };
+};
+
+export const removeFromWishlist = (product) => {
+  return async (dispatch) => {
+    try {
+      await axios.delete(`${GET_URL}wishlist/product`, product, {
+        headers: {
+          authorization: "Bearer " + sessionStorage.getItem("token"),
+        },
+      });
+      return dispatch({ type: REMOVE_FROM_WISHLIST, payload: product });
     } catch (e) {
       console.log(e);
     }
