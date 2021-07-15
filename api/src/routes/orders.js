@@ -115,6 +115,7 @@ router.put(
     const findUser = await userSchema.findOne({ email: decodificado.email });
     if(findUser.userStatus === 'Admin') {
       const { id, state } = req.body;
+      console.log ("*************",id,state)
       const update = { state: state };
       const order = await orderSchema.findByIdAndUpdate(id, update);
       res.send('Order state updated');
