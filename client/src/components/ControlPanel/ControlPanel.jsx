@@ -11,6 +11,7 @@ import Search from "./Search.jsx";
 import AddProduct from "./AddProduct.jsx";
 import ItemUsers from "./Users/ItemUsers.jsx";
 import ItemOrder from "./Orders/ItemOrder.jsx";
+import FilterOrders from "./Orders/FilterOrders.jsx";
 
 const ControlPanel = () => {
   const store = useSelector((state) => state);
@@ -51,11 +52,11 @@ const ControlPanel = () => {
               </>
             )}
             {visual.orders && store.orders.map((p) => <ItemOrder order={p} />)}
-            {visual.usersSearch && (
+            {visual.ordersSearch && (
               <>
-                <Search itemValue={"user"} />
-                {store.searchUser.length > 0 &&
-                  store.searchUser.map((p) => <ItemUsers user={p} />)}
+                <Search itemValue={"order"} /> <FilterOrders />
+                {store.searchOrders.length > 0 &&
+                  store.searchOrders.map((p) => <ItemOrder order={p} />)}
               </>
             )}
           </div>

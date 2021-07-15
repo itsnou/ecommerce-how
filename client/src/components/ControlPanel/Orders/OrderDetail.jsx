@@ -4,6 +4,7 @@ import { getOrderDetail } from "../../../redux/actions";
 import { StyledOrderDetail } from "../styled";
 import { ButtonGroup, Button } from "@material-ui/core";
 import { editOrderStatus } from "../../../redux/actions/sending";
+import swal from 'sweetalert';
 
 const OrderDetail = ({ match }) => {
   const dispatch = useDispatch();
@@ -14,8 +15,28 @@ const OrderDetail = ({ match }) => {
   }, [dispatch]);
 
   const handleClick = (e) => {
-    dispatch(editOrderStatus(order._id, e.currentTarget.value));
-    dispatch(getOrderDetail(match.params.id));
+    const value= e.currentTarget.value;
+    swal({
+      title: "¿Cambiar el estado de esta orden?",
+      text: `Estas por cambiar el estado a ${value}`,
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    })
+      .then((willDelete) => {
+        if (willDelete) {
+          dispatch(editOrderStatus(order._id, value));
+          dispatch(getOrderDetail(match.params.id));
+          swal("Estado modificado", {
+            icon: "success",
+          });
+        } else {
+          swal("Accion cancelada", {
+            icon: "error",
+          });
+        }
+      });
+
   };
 
   return (
@@ -28,7 +49,7 @@ const OrderDetail = ({ match }) => {
           <li className="email">Email: {order.user.email}</li>
           <li className="status">Estado de la orden: {order.state}</li>
           <li>Cambiar estado:
-            <ButtonGroup  color="secondary" aria-label="outlined primary button group">
+            <ButtonGroup color="secondary" aria-label="outlined primary button group">
               <Button onClick={handleClick} value="En preparación">En preparación</Button>
               <Button onClick={handleClick} value="Enviado">Enviado</Button>
               <Button onClick={handleClick} value="Finalizado">Finalizado</Button>

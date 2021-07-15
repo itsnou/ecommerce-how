@@ -31,7 +31,8 @@ import {
   EDIT_USER_STATUS,
   USERS_FILTERED,
   SET_PAYMENT,
-  EDIT_ORDER_STATUS
+  EDIT_ORDER_STATUS,
+  GET_ORDERS_FOR_STATUS
 
 } from "../actions/constant";
 
@@ -61,6 +62,7 @@ const initialState = {
   created: "",
   loged: "off",
   searchUser: [],
+  searchOrders: [],
   confirm: false,
   payment: {},
 };
@@ -107,6 +109,11 @@ const reducer = (state = initialState, { payload, type }) => {
       return {
         ...state,
         orderDetail: payload,
+      };
+    case GET_ORDERS_FOR_STATUS:
+      return {
+        ...state,
+        searchOrders: payload,
       };
     case GET_USERS:
       return {

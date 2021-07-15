@@ -1,16 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { StyledOrders } from "../styled.js";
-import Button from '@material-ui/core/Button';
-import { useDispatch } from "react-redux";
 
 const ItemOrder = ({ order }) => {
-    const dispatch = useDispatch();
     let type = "";
     if (order.state === "En preparación") type = "process";
     else if (order.state === "Finalizado") type = "complete";
-    else if (order.state === "Cancelada") type = "cancel";
-    else if (order.state === "Creada") type = "created";
+    else if (order.state === "Enviado") type = "sent";
+    else if (order.state === "Cancelado") type = "cancel";
     return (
         <StyledOrders>
             <Link to={`/order/${order._id}`}>
