@@ -15,7 +15,6 @@ const Checkout = () => {
     },[dispatch]);
     
 
-
     return (
         <>
             <h1>Confirma tus datos para poder enviar los productos</h1>
