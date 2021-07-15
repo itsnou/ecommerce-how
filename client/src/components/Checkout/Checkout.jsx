@@ -21,8 +21,8 @@ const Checkout = () => {
                 user.map((el)=>{
                     return (
                         <div className='container-form'>
-                            <h1>Hola! {el.name}</h1>
-                            <p>Elije el medio de pago que te parezca mejor.</p>
+                            <h1>Hola {el.name}!</h1>
+                            <p>Elije el medio de pago que te parezca conveniente.</p>
                             <Grid container spacing={3}>
                                 <Grid item xs={6}>
                                     <Button className='mercadoPago' variant="contained">Mercado Pago</Button>
