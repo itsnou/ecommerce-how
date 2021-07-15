@@ -11,6 +11,7 @@ import FormProduct from "./components/ControlPanel/Products/EditProduct/EditProd
 import LogIn from "./components/LogIn/LogIn";
 import Profile from "./components/Profile/Profile";
 import UserDetail from "./components/ControlPanel/Users/UserDetail";
+import Chat from "./components/ChatWhatsApp/Chat";
 import Checkout from "./components/Checkout/Checkout";
 import StripePayment from "./components/Checkout/StripePayment";
 import { loadStripe } from "@stripe/stripe-js";
@@ -23,12 +24,14 @@ const stripePromise = loadStripe(
 );
 
 
+
 function App() {
   return (
     <>
       <Route path={["/", "/vino/:id", "/catalogo"]}>
         <Nav />
       </Route>
+      <Route path="/" component={Chat} />
       <Route exact path="/" component={Home} />
       <Route exact path="/catalogo" component={Catalogo} />
       <Route exact path="/product/:id" component={ProductDetail} />
