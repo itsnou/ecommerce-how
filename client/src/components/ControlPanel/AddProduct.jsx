@@ -12,7 +12,7 @@ const AddProduct = () => {
     const varietals = useSelector((state) => state.varietals);
     const dispatch = useDispatch();
     const onSubmit = (data, e) => {
-        console.log(data)
+        
         var product=data
         dispatch(addProduct(product))
         // limpiar campos
