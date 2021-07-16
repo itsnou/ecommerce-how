@@ -279,11 +279,11 @@ export const checkOut = (data) => {
   };
 };
 
-export const addReview = (content) => {
+export const addReview = (data) => {
   return async (dispatch) => {
-    const newReview = await axios.post(
+    const newReview = await axios.put(
       `${GET_URL}products/addreview`,
-      { content: content },
+      { content: data.content, id: data.id },
       {
         headers: { authorization: "Bearer " + sessionStorage.getItem("token") },
       }
