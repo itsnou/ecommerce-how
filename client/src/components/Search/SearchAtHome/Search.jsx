@@ -17,7 +17,7 @@ const SearchAtHome = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getProductsAll());
-  }, []);
+  }, [dispatch]);
 
   const lowerCasedWines = wines.map((wine) => {
     return {

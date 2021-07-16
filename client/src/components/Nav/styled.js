@@ -45,6 +45,7 @@ const StyledDiv = styled.div`
                 a{
                     text-decoration:none;
                     color:white;
+                    margin-right:10px;
                     :hover{
                         color: red;
                     }

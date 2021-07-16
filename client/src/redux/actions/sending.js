@@ -112,7 +112,7 @@ export const logIn = (user) => {
 export const editUserStatus = (userEmail) => {
   return async (dispatch) => {
     try {
-      const change = axios.put(
+      axios.put(
         `${GET_URL}users/upgradeuser`,
         { userEmail: userEmail },
         {
@@ -131,7 +131,7 @@ export const editUserStatus = (userEmail) => {
 export const editOrderStatus = (id, state) => {
   return async (dispatch) => {
     try {
-      const change = axios.put(
+      axios.put(
         `${GET_URL}orders/modify`,
         { id, state },
         {
@@ -150,7 +150,7 @@ export const editOrderStatus = (id, state) => {
 export const editProduct = (data) => {
   return async (dispatch) => {
     try {
-      const change = await axios.put(`${GET_URL}products/modify`, data, {
+      await axios.put(`${GET_URL}products/modify`, data, {
         headers: {
           authorization: "Bearer " + sessionStorage.getItem("token"),
         },
@@ -166,7 +166,7 @@ export const blockUser = (id) => {
   console.log(id);
   return async (dispatch) => {
     try {
-      const change = await axios.put(
+      await axios.put(
         `${GET_URL}users/blockuser`,
         { id: id },
         {
@@ -231,7 +231,6 @@ export const checkOut = (data) => {
           },
         }
       );
-      console.log(response.data);
       if (response.data.message === "Sucessfull payment") {
         const newInvoice = await axios.post(
           `${GET_URL}invoices`,
@@ -254,7 +253,7 @@ export const checkOut = (data) => {
             },
           }
         );
-        const addOrder = await axios.put(
+        await axios.put(
           `${GET_URL}users/addorder`,
           { orderId: newOrder.data },
           {
@@ -263,7 +262,7 @@ export const checkOut = (data) => {
             },
           }
         );
-        const changeStock = await axios.put(
+        await axios.put(
           `${GET_URL}invoices`,
           { items: data.payment.items },
           {
