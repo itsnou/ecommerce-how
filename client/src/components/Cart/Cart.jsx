@@ -100,9 +100,12 @@ export const Cart = () => {
                 <h2>Total: $ {total}</h2>
               </Grid>
               <Grid item xs={6}>
+              { window.sessionStorage.userLog === 'on' ? 
                 <Link to='/checkout'>
                  <Button variant="contained">COMPRAR!</Button>
                 </Link>
+                : null
+              }
               </Grid>
             </Grid>
           </div>
