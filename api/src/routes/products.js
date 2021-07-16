@@ -107,7 +107,7 @@ router.put(
     const findUser = await userSchema.findOne({ email: decodificado.email });
     if (findUser.userStatus === "Admin") {
       const { id, description, name, price, stock, vineyard } = req.body;
-      console.log(id,description,stock,price)
+      console.log(id, description, stock, price);
       const update = {
         name: name,
         price: price,
@@ -119,6 +119,26 @@ router.put(
       res.send("Cambios completos");
     } else {
       res.status(401).send({ message: "No esta autorizado" });
+    }
+  }
+);
+
+router.put(
+  "/addreview",
+  passport.authenticate("jwt", { session: false }),
+  async (req, res) => {
+    try {
+      const { content } = req.body;
+      const token = req.headers.authorization.split(" ");
+      const decodificado = jwt_decode(token[1]);
+      const findUser = await userSchema.findOne({ email: decodificado.email });
+      const review = { name: findUser.name, content: content };
+      const addReview = await productSchema.findByIdAndUpdate(id, {
+        $push: { reviews: review },
+      });
+      res.send("Review agregada");
+    } catch (e) {
+      res.status(404).send({ message: "Ha ocurrido un error" });
     }
   }
 );

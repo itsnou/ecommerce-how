@@ -17,7 +17,6 @@ const Filters = () => {
     category: "default",
     filterVarietals: [],
   });
-console.log(varietals)
   useEffect(() => {
     dispatch(getVarietals());
   }, [dispatch]);
@@ -165,8 +164,10 @@ console.log(varietals)
             })
           : // )
             varietals
-              .filter((el) => el.relatedCategory === filterCategory.category ||
-                              filterCategory.filterVarietals.includes(el.name)
+              .filter(
+                (el) =>
+                  el.relatedCategory === filterCategory.category ||
+                  filterCategory.filterVarietals.includes(el.name)
               )
               .map((el) => {
                 if (filterCategory.filterVarietals.length) {

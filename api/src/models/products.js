@@ -47,6 +47,7 @@ const ProductsSchema = new mongoose.Schema(
       require: true,
       default: 1,
     },
+    reviews: [Object], //{name,content}
   },
   {
     versionKey: false,
