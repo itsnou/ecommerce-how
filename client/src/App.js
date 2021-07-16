@@ -13,7 +13,7 @@ import Profile from "./components/Profile/Profile";
 import UserDetail from "./components/ControlPanel/Users/UserDetail";
 import Chat from "./components/ChatWhatsApp/Chat";
 import Checkout from "./components/Checkout/Checkout";
-import StripePayment from "./components/Checkout/StripePayment";
+import StripePayment from "./components/Checkout/StripePayment/StripePayment";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 import OrderDetail from "./components/ControlPanel/Orders/OrderDetail";
