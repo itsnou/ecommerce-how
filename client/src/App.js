@@ -28,10 +28,12 @@ const stripePromise = loadStripe(
 function App() {
   return (
     <>
-      <Route path={["/", "/vino/:id", "/catalogo"]}>
+      <Route path={["/", "/product/:id", "/catalogo"]}>
         <Nav />
       </Route>
-      <Route path="/" component={Chat} />
+      <Route exact path={["/", "/product/:id", "/catalogo", "/contacto", "/empresa"]}>
+        <Chat/> 
+      </Route>
       <Route exact path="/" component={Home} />
       <Route exact path="/catalogo" component={Catalogo} />
       <Route exact path="/product/:id" component={ProductDetail} />
