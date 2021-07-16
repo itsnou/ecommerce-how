@@ -7,6 +7,7 @@ const StyledChat = styled.div`
   right: 0;
   width: 200px;
   background-color: white;
+  z-index:999;
 `;
 
 export default StyledChat;
