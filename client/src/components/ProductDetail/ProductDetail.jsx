@@ -48,6 +48,7 @@ const ProductDetail = ({ match }) => {
       quantity: count,
     };
     dispatch(addToCart(obj));
+    window.localStorage.setItem(`${detail.name}`, JSON.stringify(obj));
   };
 
   const handleWishlist = (e) => {
@@ -65,81 +66,84 @@ const ProductDetail = ({ match }) => {
     <>{load? <Loading/> :
       <StyledDiv>
         <div className="detail-img">
-          <img src={detail.imageUrl} alt="not found" />
+          <img src={detail.imageUrl} alt={detail.name} />
         </div>
         <div className="detail-explain">
-          <h2>{detail.name}</h2>
-          <h3>Bodega: {detail.vineyard}</h3>
-          <h3>Categoria: {detail.category}</h3>
-          <h3>Precio: ${detail.price}</h3>
-          <div className="detail-varietal">
-            <h3>Varietal/es: </h3>
-            {detail.varietal &&
-              detail.varietal.map((e) => {
-                return <h3 key={e}>{e}</h3>;
-              })}
-          </div>
-          <div className="detail-stars">
-            <h3>
-              puntaje:
-              <StarRatingComponent
-                name="rateWine"
-                editing={false}
-                renderStarIcon={() => (
-                  <span>
-                    <FaWineGlass />
-                  </span>
+          <div className='detail-render'>
+            <h2>{detail.name}</h2>
+            <h3>Bodega: {detail.vineyard}</h3>
+            <h3>Categoria: {detail.category}</h3>
+            <h3>Precio: ${detail.price}</h3>
+            <div className="detail-varietal">
+              <h3>Varietal/es: </h3>
+              {detail.varietal &&
+                detail.varietal.map((e) => {
+                  return <h3 key={e}>{e}</h3>;
+                })}
+            </div>
+            <div className="detail-stars">
+              <h3>
+                puntaje:
+                <StarRatingComponent
+                  name="rateWine"
+                  editing={false}
+                  renderStarIcon={() => (
+                    <span>
+                      <FaWineGlass />
+                    </span>
+                  )}
+                  starCount={5}
+                  value={stars}
+                />
+              </h3>
+            </div>
+            <div className='product-description'>
+              <h3>Detalle: {detail.description}</h3>
+            </div>
+            {detail.stock < 1 ? (
+              <div className="detail-btn">
+                <h3>SIN STOCK</h3>
+              </div>
+            ) : (
+              <div className="detail-btn">
+                <input
+                  type="number"
+                  min={detail.quantity}
+                  max={detail.stock}
+                  value={count}
+                  onChange={(e) => setCount(e.target.value)}
+                />
+                <button onClick={() => handleClick()}>AGREGAR</button>
+                {wishlistBoolean ? (
+                  <button
+                    className="btn-wishlist"
+                    onClick={() => {
+                      handleWishlist("remove");
+                    }}
+                  >
+                    <img
+                      className="btn-wishlist"
+                      alt="Couldn't load"
+                      src={fullheart}
+                    />
+                  </button>
+                ) : (
+                  <button
+                    className="btn-wishlist"
+                    onClick={() => {
+                      handleWishlist("add");
+                    }}
+                  >
+                    <img
+                      className="btn-wishlist"
+                      alt="Couldn't load"
+                      src={emptyheart}
+                    />
+                  </button>
                 )}
-                starCount={5}
-                value={stars}
-              />
-            </h3>
+              </div>
+            )}
           </div>
-
-          <h3>Detalle: {detail.description}</h3>
-          {detail.stock < 1 ? (
-            <div className="detail-btn">
-              <h3>SIN STOCK</h3>
-            </div>
-          ) : (
-            <div className="detail-btn">
-              <input
-                type="number"
-                min={detail.quantity}
-                max={detail.stock}
-                value={count}
-                onChange={(e) => setCount(e.target.value)}
-              />
-              <button onClick={() => handleClick()}>AGREGAR</button>
-              {wishlistBoolean ? (
-                <button
-                  className="btn-wishlist"
-                  onClick={() => {
-                    handleWishlist("remove");
-                  }}
-                >
-                  <img
-                    className="btn-wishlist"
-                    alt="Couldn't load"
-                    src={fullheart}
-                  />
-                </button>
-              ) : (
-                <button
-                  className="btn-wishlist"
-                  onClick={() => {
-                    handleWishlist("add");
-                  }}
-                >
-                  <img
-                    className="btn-wishlist"
-                    alt="Couldn't load"
-                    src={emptyheart}
-                  />
-                </button>
-              )}
-            </div>
-          )}
         </div>
       </StyledDiv>}
     </>

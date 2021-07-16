@@ -40,10 +40,9 @@ const User = () => {
     if (countCart.length > 0) {
       //contador de precios
       let count = countCart.map((e) => e.price * e.quantity);
-      const reducer = (accumulator, currentValue) => accumulator + currentValue;
-      fixed.current = count.reduce(reducer);
-      setPrice(fixed.current);
-
+      const reducer = (accumulator, currentValue) => parseInt(accumulator) + parseInt(currentValue);
+      fixed.current = parseInt(count.reduce(reducer));
+      setPrice(parseInt(fixed.current));
       //contador de cantidades
       let quantity = countCart.map((e) => e.quantity);
       quantityProduct.current = quantity.reduce(reducer);
