@@ -278,3 +278,15 @@ export const checkOut = (data) => {
     }
   };
 };
+
+export const addReview = (content) => {
+  return async (dispatch) => {
+    const newReview = await axios.post(
+      `${GET_URL}products/addreview`,
+      { content: content },
+      {
+        headers: { authorization: "Bearer " + sessionStorage.getItem("token") },
+      }
+    );
+  };
+};
