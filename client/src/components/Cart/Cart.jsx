@@ -43,7 +43,7 @@ export const Cart = () => {
             return (
               <div key={index} className='container-cards_products'>
                 <div className='container-img_card'>
-                  <img className="img-card" src={e.imageUrl} alt="image not found"/>
+                  <img className="img-card" src={e.imageUrl} alt={e.name}/>
                 </div>
                 <div className='container-title'>
                   <h2>{e.name}</h2>

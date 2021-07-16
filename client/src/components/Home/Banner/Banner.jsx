@@ -9,13 +9,13 @@ const Banner = () => {
         dynamicHeight
         >
             <div>
-                <img src={LOGO} />
+                <img src={LOGO} alt='local'/>
             </div>
             <div>
-                <img src={LOGO} />
+                <img src={LOGO} alt='local'/>
             </div>
             <div>
-                <img src={LOGO} />
+                <img src={LOGO} alt='local'/>
             </div>
         </Carousel>
     );

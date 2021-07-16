@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getOrderDetail, reset } from "../../../redux/actions";
 import { StyledOrderDetail } from "../styled";
@@ -11,9 +11,10 @@ const OrderDetail = ({ match }) => {
   const dispatch = useDispatch();
   const order = useSelector((state) => state.orderDetail);
   const load = useSelector(state => state.loading);
+  const id = useRef(match.params.id);
 
   useEffect(() => {
-    dispatch(getOrderDetail(match.params.id));
+    dispatch(getOrderDetail(id.current));
     return dispatch (reset("orderDetail"));
   }, [dispatch]);
 
@@ -65,7 +66,7 @@ const OrderDetail = ({ match }) => {
                 <>
                   <li>Productos :</li>
                   {order.invoice.items.map(item => {
-                    <div className="prodcut">
+                    return <div className="prodcut">
                       <li>Producto: {item.name}</li>
                       <li>Precio: ${item.price}</li>
                       <li>Cantidad: {item.quantity}</li>

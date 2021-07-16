@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import Button from "@material-ui/core/Button";
 import { useDispatch, useSelector } from "react-redux";
 import { editUserStatus, getUserDetail, reset } from "../../../redux/actions";
@@ -11,8 +11,9 @@ const UserDetail = ({ match }) => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.userDetail);
   const load = useSelector((state) => state.loading);
+  const id = useRef(match.params.id)
   useEffect(() => {
-    dispatch(getUserDetail(match.params.id));
+    dispatch(getUserDetail(id.current));
     return dispatch (reset("userDetail"));
   }, [dispatch]);
 
