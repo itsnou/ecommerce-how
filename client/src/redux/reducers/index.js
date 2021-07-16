@@ -33,7 +33,8 @@ import {
   ADD_TO_WISHLIST,
   REMOVE_FROM_WISHLIST,
   SET_PAYMENT,
-  EDIT_ORDER_STATUS
+  EDIT_ORDER_STATUS,
+  GET_ORDERS_FOR_STATUS
 
 } from "../actions/constant";
 
@@ -64,6 +65,7 @@ const initialState = {
   created: "",
   loged: "off",
   searchUser: [],
+  searchOrders: [],
   wishlist: [],
   confirm: false,
   payment: {},
@@ -111,6 +113,11 @@ const reducer = (state = initialState, { payload, type }) => {
       return {
         ...state,
         orderDetail: payload,
+      };
+    case GET_ORDERS_FOR_STATUS:
+      return {
+        ...state,
+        searchOrders: payload,
       };
     case GET_USERS:
       return {

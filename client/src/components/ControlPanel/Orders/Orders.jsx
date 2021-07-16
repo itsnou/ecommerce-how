@@ -27,6 +27,11 @@ const Orders=({visual, setVisual})=> {
                 orders: true
             })
         }
+        if (e.target.value === 2) {
+            setVisual({
+                ordersSearch: true
+            })
+        }
         if (anchorRef.current && anchorRef.current.contains(e.target)) {
             return;
         }
@@ -70,7 +75,7 @@ const Orders=({visual, setVisual})=> {
                             <ClickAwayListener onClickAway={handleClick}>
                                 <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
                                     <MenuItem value={1} onClick={handleClick}>Ver todas las ordenes</MenuItem>
-                                    <MenuItem value={2} onClick={handleClick}>Buscar orden</MenuItem>
+                                    <MenuItem value={2} onClick={handleClick}>Buscar o filtrar ordenes</MenuItem>
                                 </MenuList>
                             </ClickAwayListener>
                         </Paper>

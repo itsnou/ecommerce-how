@@ -6,6 +6,7 @@ export const GET_PRODUCT_DETAIL = "GET_PRODUCT_DETAIL";
 export const GET_USERS = "GET_USERS";
 export const GET_USER_DETAIL = "GET_USER_DETAIL";
 export const GET_ORDERS = "GET_ORDERS";
+export const GET_ORDERS_FOR_STATUS= "GET_ORDERS_FOR_STATUS";
 export const GET_ORDER_DETAIL = "GET_ORDER_DETAIL";
 export const ADD_USER = "ADD_USER";
 export const ADD_PRODUCT = "ADD_PRODUCT";

@@ -119,12 +119,22 @@ const StyledOrders = styled.div`
     }
     .complete{
         width:150px;
-        background-color: blue;
+        background-color: #284E78;
         color:white;
     }
     .process{
         width:150px;
-        background-color: green;
+        background-color: #5D8233;
+        color:white;
+    }
+    .sent{
+        width:150px;
+        background-color: #ECD662;
+        color:white;
+    }
+    .cancel{
+        width:150px;
+        background-color: #8D2828;
         color:white;
     }
 

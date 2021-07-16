@@ -11,6 +11,7 @@ import {
   GET_USER_DETAIL,
   GET_VARIETALS,
   LOAD_PROFILE,
+  GET_ORDERS_FOR_STATUS,
 } from "./constant";
 
 export const getProductsAll = () => {
@@ -136,6 +137,23 @@ export const getOrderDetail = (id) => {
     }
   };
 };
+
+export const getOrderForStatus = (status) => {
+  return async (dispatch) => {
+    try {
+      const order = await axios.get(`${GET_URL}orders?state=${status}`, {
+      headers: {
+        authorization: "Bearer " + sessionStorage.getItem("token"),
+        },
+    });
+    return dispatch({ type: GET_ORDERS_FOR_STATUS, payload: order.data });
+  } catch (e) {
+    console.log(e);
+    return dispatch({ type: GET_ORDERS_FOR_STATUS, payload: [] });
+  }
+};
+};
+
 
 export const getVarietals = () => {
   return async (dispatch) => {
