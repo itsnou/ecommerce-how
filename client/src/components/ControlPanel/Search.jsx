@@ -22,6 +22,7 @@ const Search = ({ itemValue }) => {
             case 'product':
                 dispatch(getProductsByName(input));
             case 'user':
+                dispatch(getUsers());
                 dispatch(userFiltered(input, store.users));
             default:
                 setInput('');
@@ -30,7 +31,6 @@ const Search = ({ itemValue }) => {
     };
 
     useEffect(() => {
-        dispatch(getUsers());
         if (input.length === 0) {
             setInput('');
         }

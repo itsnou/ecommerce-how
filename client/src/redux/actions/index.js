@@ -29,10 +29,10 @@ import {
 } from "./sending";
 import { RESET } from "./constant";
 
-export const reset = (props) => {
+export const reset = (prop) => {
     return {
         type: RESET,
-        payload: props,
+        payload: prop,
     };
 };
 

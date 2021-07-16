@@ -107,11 +107,13 @@ const reducer = (state = initialState, { payload, type }) => {
     case GET_ORDERS:
       return {
         ...state,
+        loading:false,
         orders: payload,
       };
     case GET_ORDER_DETAIL:
       return {
         ...state,
+        loading:false,
         orderDetail: payload,
       };
     case GET_ORDERS_FOR_STATUS:
@@ -123,6 +125,7 @@ const reducer = (state = initialState, { payload, type }) => {
       return {
         ...state,
         users: payload,
+        loading:false,
       };
     case LOAD_PROFILE:
       return {
@@ -138,6 +141,7 @@ const reducer = (state = initialState, { payload, type }) => {
     case GET_USER_DETAIL:
       return {
         ...state,
+        loading:false,
         userDetail: payload,
       };
     case USERS_FILTERED:
@@ -209,7 +213,7 @@ const reducer = (state = initialState, { payload, type }) => {
     case RESET:
       return {
         ...state,
-        [payload]: [],
+        [payload]: []
       };
     case FILTRED_FOR_CATEGORY:
       let filtered;
