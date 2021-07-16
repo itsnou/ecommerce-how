@@ -31,21 +31,12 @@ const SearchAtCatalogo = () => {
   return (
     <StyledDiv>
       <div>
-        <form onSubmit={() => handleSubmit()}>
           <input
             type="search"
             placeholder="Buscar..."
             value={product}
             onChange={(e) => handleChange(e)}
           />
-          <Button
-            className="btn"
-            variant="contained"
-            onClick={() => handleSubmit()}
-          >
-            <HiOutlineSearch />
-          </Button>
-        </form>
       </div>
     </StyledDiv>
   );
