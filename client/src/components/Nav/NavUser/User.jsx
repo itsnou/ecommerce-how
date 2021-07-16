@@ -69,9 +69,9 @@ const User = () => {
             <Link to="/create">CREAR CUENTA</Link>
           )}
         </li>
-        <li>
+        <li className='loged'>
           {userLog === "on" ? (
-            <div>
+            <div className='loged-in'>
               <Link to="/profile">PERFIL</Link>
               <div>
                 <Link onClick={() => disconnect()}>DESCONECTARSE</Link>
@@ -89,7 +89,7 @@ const User = () => {
             <FaShoppingCart /> CARRITO
           </Link>
         </li>
-        <li className="nav-list_count">{cartCount}</li>
+        <li className="nav-list_count"><div className='counter'>{cartCount}</div></li>
         <li className="nav-list_price">$ {price}</li>
       </ul>
     </div>

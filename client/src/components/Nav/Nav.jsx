@@ -24,7 +24,9 @@ const Nav = () => {
                         </div>
                         <hr/>
                     </div>
-                    <User/>
+                    <Grid container item xs={10} spacing={6}>
+                        <User/>
+                    </Grid>
                 </Grid>
             </Grid>
             <NavBar/>
