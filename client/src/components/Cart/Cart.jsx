@@ -100,7 +100,7 @@ export const Cart = () => {
                 <h2>Total: $ {total}</h2>
               </Grid>
               <Grid item xs={6}>
-              { window.sessionStorage.userLog === 'on' ? 
+              { window.sessionStorage.userLog === 'on'  && cartItems.length> 0 ? 
                 <Link to='/checkout'>
                  <Button variant="contained">COMPRAR!</Button>
                 </Link>
