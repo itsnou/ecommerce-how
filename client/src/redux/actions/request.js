@@ -12,6 +12,7 @@ import {
   GET_VARIETALS,
   LOAD_PROFILE,
   GET_ORDERS_FOR_STATUS,
+  LOADING,
 } from "./constant";
 
 export const getProductsAll = () => {
@@ -28,6 +29,7 @@ export const getProductsAll = () => {
 
 export const getProductsByName = (name) => {
   return async (dispatch) => {
+    dispatch({type:LOADING})
     try {
       const products = await axios.get(`${GET_URL}products?name=${name}`);
       return dispatch({
@@ -44,9 +46,7 @@ export const getProductsByName = (name) => {
 export const getProductsForCategory = (category) => {
   return async (dispatch) => {
     try {
-      const products = await axios.get(
-        `${GET_URL}products?category=${category}`
-      );
+      const products = await axios.get(`${GET_URL}products?category=${category}`);
       return dispatch({
         type: GET_PRODUCTS_FOR_CATEGORY,
         payload: products.data,
@@ -60,6 +60,7 @@ export const getProductsForCategory = (category) => {
 
 export const getProductDetail = (id) => {
   return async (dispatch) => {
+    dispatch({type:LOADING})
     try {
       const products = await axios.get(`${GET_URL}products/${id}`);
       return dispatch({
@@ -75,6 +76,7 @@ export const getProductDetail = (id) => {
 
 export const getUsers = () => {
   return async (dispatch) => {
+    dispatch({type:LOADING})
     try {
       const users = await axios.get(`${GET_URL}users/allusers`, {
         headers: {
@@ -92,6 +94,7 @@ export const getUsers = () => {
 
 export const getUserDetail = (id) => {
   return async (dispatch) => {
+    dispatch({type:LOADING})
     try {
       const users = await axios.get(`${GET_URL}users/${id}`, {
         headers: {
@@ -108,6 +111,7 @@ export const getUserDetail = (id) => {
 
 export const getOrders = () => {
   return async (dispatch) => {
+    dispatch({type:LOADING})
     try {
       const orders = await axios.get(`${GET_URL}orders`, {
         headers: {
@@ -124,6 +128,7 @@ export const getOrders = () => {
 
 export const getOrderDetail = (id) => {
   return async (dispatch) => {
+    dispatch({type:LOADING})
     try {
       const order = await axios.get(`${GET_URL}orders/${id}`, {
         headers: {
@@ -142,16 +147,16 @@ export const getOrderForStatus = (status) => {
   return async (dispatch) => {
     try {
       const order = await axios.get(`${GET_URL}orders?state=${status}`, {
-      headers: {
-        authorization: "Bearer " + sessionStorage.getItem("token"),
+        headers: {
+          authorization: "Bearer " + sessionStorage.getItem("token"),
         },
-    });
-    return dispatch({ type: GET_ORDERS_FOR_STATUS, payload: order.data });
-  } catch (e) {
-    console.log(e);
-    return dispatch({ type: GET_ORDERS_FOR_STATUS, payload: [] });
-  }
-};
+      });
+      return dispatch({ type: GET_ORDERS_FOR_STATUS, payload: order.data });
+    } catch (e) {
+      console.log(e);
+      return dispatch({ type: GET_ORDERS_FOR_STATUS, payload: [] });
+    }
+  };
 };
 
 

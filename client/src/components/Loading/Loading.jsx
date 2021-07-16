@@ -1,11 +1,14 @@
 import React from 'react';
-import PropagateLoader from "react-spinners/PropagateLoader";
+import StyledLoading from './styled';
+import load from '../../assets/image/load.gif'
 
 const Loading = () => {
     return (
-        <div >
-            <PropagateLoader size={30} />
-        </div>
+        <StyledLoading>
+            <div>
+                <img src={load} alt="not found" />
+            </div>
+        </StyledLoading>
     );
 };
 
