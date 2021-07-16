@@ -129,8 +129,7 @@ router.put(
   passport.authenticate("jwt", { session: false }),
   async (req, res) => {
     try {
-      const { content } = req.body;
-      console.log(content);
+      const { content, id } = req.body;
       const token = req.headers.authorization.split(" ");
       const decodificado = jwt_decode(token[1]);
       const findUser = await userSchema.findOne({ email: decodificado.email });

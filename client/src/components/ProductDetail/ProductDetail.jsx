@@ -69,7 +69,7 @@ const ProductDetail = ({ match }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(addReview(content));
+    dispatch(addReview({ content: content, id: detail._id }));
     setContent("");
   };
 
