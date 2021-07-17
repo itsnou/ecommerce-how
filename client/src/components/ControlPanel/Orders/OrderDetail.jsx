@@ -54,22 +54,22 @@ const OrderDetail = ({ match }) => {
               </li>
               <li className="email">Email: {order.user.email}</li>
               <li className="status">Estado de la orden: {order.state}</li>
-              <li>
                 Cambiar estado:
+              <li>
                 <ButtonGroup
                   color="secondary"
                   aria-label="outlined primary button group"
                 >
-                  <Button onClick={handleClick} value="En preparación">
+                  <Button className='btn-prep' onClick={handleClick} value="En preparación">
                     En preparación
                   </Button>
-                  <Button onClick={handleClick} value="Enviado">
+                  <Button className='btn-sent' onClick={handleClick} value="Enviado">
                     Enviado
                   </Button>
-                  <Button onClick={handleClick} value="Finalizado">
+                  <Button className='btn-done' onClick={handleClick} value="Finalizado">
                     Finalizado
                   </Button>
-                  <Button onClick={handleClick} value="Cancelado">
+                  <Button className='btn-cancel' onClick={handleClick} value="Cancelado">
                     Cancelado
                   </Button>
                 </ButtonGroup>
@@ -79,14 +79,14 @@ const OrderDetail = ({ match }) => {
                   <li>Productos :</li>
                   {order.invoice.items.map(item => {
                     return <div className="prodcut">
-                      <li>Producto: {item.name}</li>
-                      <li>Precio: ${item.price}</li>
+                      <li>{item.name}</li>
+                      <li>Precio/u: ${item.price}</li>
                       <li>Cantidad: {item.quantity}</li>
                     </div>;
                   })}
                 </>
               )}
-              <li>Fecha: {order.invoice.date}</li>
+              <li>Fecha de compra: {order.invoice.date.slice(0,10)}</li>
             </div>
           )}
         </StyledOrderDetail>

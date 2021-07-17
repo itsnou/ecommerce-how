@@ -124,44 +124,66 @@ const StyledOrders = styled.div`
     justify-content:space-between;
     text-align: center;
     align-items: center;
-    margin: 0px 20px 0px 20px;
+    margin: 0px 20px 10px 20px;
     padding: 5px;
-    background-color: #EDEDED;
+    background-color: #420D1F;
     list-style: none;
-    border-radius: 2px;
-    border:solid rgba(0, 0, 0, 0.1);
-    .name {
-        width: 250px;
+    border-radius: 8px;
+    color:white;
+    font-weight:bold;
+    height:40px;
+    .link-user{
+        text-decoration: none;
+        color:white;
+        font-weight:bold;
+        .name {
+            width: 200px;
+        }
     }
     .email {
-        width:200px;
+        width:150px;
     }
     .cant {
         display:flex;
         align-items: center;
         flex-direction: column;
         justify-content: center;
-        width:100px;
+        width:350px;
+        p{
+            padding:0;
+            margin:0;
+        }
     }
     .complete{
         width:150px;
-        background-color: #284E78;
-        color:white;
+        border-radius:8px;
+        padding:5px;
+        background-color: #5D8233;
+        color:black;
     }
     .process{
         width:150px;
-        background-color: #5D8233;
-        color:white;
+        border-radius:8px;
+        padding:5px;
+        background-color: #284E78;
+        color:black;
     }
     .sent{
         width:150px;
+        border-radius:8px;
+        padding:5px;
         background-color: #ECD662;
-        color:white;
+        color:black;
     }
     .cancel{
         width:150px;
+        border-radius:8px;
+        padding:5px;
         background-color: #8D2828;
-        color:white;
+        color:black;
+    }
+    .date{
+        margin-right:1rem;
     }
 
 `
@@ -190,25 +212,51 @@ box-shadow: 0px 14px 15px rgba(0, 0, 0, 0.1);
 }
 `
 const StyledOrderDetail = styled.div`
-
-display: flex;
-justify-content:center;
-align-items:center;
-height: 60%;
-width: 50%;
-position: absolute; 
-margin: 60px 25% 0px 25%;
-text-align:center;
-list-style:none;
-background-color: #EDEDED;
-border-radius: 8px;
-border:solid rgba(0, 0, 0, 0.1);
-box-shadow: 0px 14px 15px rgba(0, 0, 0, 0.1);
-.name{
-    font-size: 30px;
+    list-style:none;
+    background-color: #420D1F;
+    border-radius: 8px;
+    border:solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 14px 15px rgba(0, 0, 0, 0.1);
+    color:white;
     font-weight:bold;
-    margin: 0px 10px 0px 10px;
-}
+    text-align:center;
+    padding:10px;
+    width:75%;
+    margin:auto;
+    margin-top:15px;
+    .name{
+        font-size: 30px;
+        font-weight:bold;
+        margin: 0px 10px 0px 10px;
+    }
+    
+    .btn-prep{
+        color:black;
+        font-weight:bold;
+        background-color:#284E78;
+        border:none;
+    }
+
+    .btn-sent{
+        color:black;
+        font-weight:bold;
+        background-color:#ECD662;
+        border:none;
+    }
+
+    .btn-done{
+        color:black;
+        font-weight:bold;
+        background-color:#5D8233;
+        border:none;
+    }
+
+    .btn-cancel{
+        color:black;
+        font-weight:bold;
+        background-color:#8D2828;
+        border:none;
+    }
 `
 export {
     StyledPanel,
