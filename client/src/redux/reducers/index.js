@@ -35,6 +35,7 @@ import {
   SET_PAYMENT,
   EDIT_ORDER_STATUS,
   GET_ORDERS_FOR_STATUS,
+  GET_ORDERS_FOR_USER
 } from "../actions/constant";
 
 import { addToCart } from "../../utils/addToCart";
@@ -117,6 +118,13 @@ const reducer = (state = initialState, { payload, type }) => {
     case GET_ORDERS_FOR_STATUS:
       return {
         ...state,
+        loading:false,
+        searchOrders: payload,
+      };
+    case GET_ORDERS_FOR_USER:
+      return {
+        ...state,
+        loading:false,
         searchOrders: payload,
       };
     case GET_USERS:

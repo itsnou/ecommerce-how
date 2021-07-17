@@ -63,9 +63,12 @@ const ControlPanel = () => {
             {visual.ordersSearch && (
               <>
                 <Search itemValue={"order"} /> <FilterOrders />
-                {store.searchOrders.length > 0 &&
-                  store.searchOrders.map((p) => <ItemOrder order={p} />)}
-              </>
+                {store.loading ? <Loading /> :
+                  (
+                    store.searchOrders.length > 0 &&
+                    store.searchOrders.map((p) => <ItemOrder order={p} />)
+                  )
+                }</>
             )}
           </div>
         </>

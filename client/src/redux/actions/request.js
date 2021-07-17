@@ -13,6 +13,7 @@ import {
   LOAD_PROFILE,
   GET_ORDERS_FOR_STATUS,
   LOADING,
+  GET_ORDERS_FOR_USER,
 } from "./constant";
 
 export const getProductsAll = () => {
@@ -145,6 +146,7 @@ export const getOrderDetail = (id) => {
 
 export const getOrderForStatus = (status) => {
   return async (dispatch) => {
+    dispatch({ type: LOADING });
     try {
       const order = await axios.get(`${GET_URL}orders?state=${status}`, {
         headers: {
@@ -155,6 +157,23 @@ export const getOrderForStatus = (status) => {
     } catch (e) {
       console.log(e);
       return dispatch({ type: GET_ORDERS_FOR_STATUS, payload: [] });
+    }
+  };
+};
+
+export const getOrderForUser = (status) => {
+  return async (dispatch) => {
+    dispatch({ type: LOADING });
+    try {
+      const order = await axios.get(`${GET_URL}orders?user=${status}`, {
+        headers: {
+          authorization: "Bearer " + sessionStorage.getItem("token"),
+        },
+      });
+      return dispatch({ type: GET_ORDERS_FOR_USER, payload: order.data });
+    } catch (e) {
+      console.log(e);
+      return dispatch({ type: GET_ORDERS_FOR_USER, payload: [] });
     }
   };
 };
