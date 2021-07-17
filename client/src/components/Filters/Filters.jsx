@@ -160,6 +160,7 @@ const Filters = () => {
                   </div>
                 );
               }
+              return null;
             })
           : // )
             varietals
@@ -221,6 +222,7 @@ const Filters = () => {
                     </div>
                   );
                 }
+                return null;
               })}
       </div>
     </div>

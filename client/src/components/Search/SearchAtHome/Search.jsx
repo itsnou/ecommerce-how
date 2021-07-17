@@ -27,14 +27,14 @@ const SearchAtHome = () => {
   });
 
   const getSuggestions = (value) => {
-    return lowerCasedWines.filter((wine,idx) =>{
-      if(idx<5){
-        return wine.name.includes(value.trim().toUpperCase())
+    return lowerCasedWines.filter((wine, idx) => {
+      if (idx < 5) {
+        return wine.name.includes(value.trim().toUpperCase());
       }
-    }
-    );
+      return null;
+    });
   };
-  
+
   return (
     <StyledDiv>
       <AutoSuggest
