@@ -302,7 +302,7 @@ export const addReview = (data) => {
   return async (dispatch) => {
     const newReview = await axios.put(
       `${GET_URL}products/addreview`,
-      { content: data.content, id: data.id },
+      { content: data.content, id: data.id, calification: data.calification },
       {
         headers: { authorization: "Bearer " + sessionStorage.getItem("token") },
       }
