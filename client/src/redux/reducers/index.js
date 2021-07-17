@@ -34,7 +34,8 @@ import {
   REMOVE_FROM_WISHLIST,
   SET_PAYMENT,
   EDIT_ORDER_STATUS,
-  GET_ORDERS_FOR_STATUS
+  GET_ORDERS_FOR_STATUS,
+  GET_ORDERS_FOR_USER
 
 } from "../actions/constant";
 
@@ -107,25 +108,32 @@ const reducer = (state = initialState, { payload, type }) => {
     case GET_ORDERS:
       return {
         ...state,
-        loading:false,
+        loading: false,
         orders: payload,
       };
     case GET_ORDER_DETAIL:
       return {
         ...state,
-        loading:false,
+        loading: false,
         orderDetail: payload,
       };
     case GET_ORDERS_FOR_STATUS:
       return {
         ...state,
+        loading:false,
+        searchOrders: payload,
+      };
+    case GET_ORDERS_FOR_USER:
+      return {
+        ...state,
+        loading:false,
         searchOrders: payload,
       };
     case GET_USERS:
       return {
         ...state,
         users: payload,
-        loading:false,
+        loading: false,
       };
     case LOAD_PROFILE:
       return {
@@ -141,7 +149,7 @@ const reducer = (state = initialState, { payload, type }) => {
     case GET_USER_DETAIL:
       return {
         ...state,
-        loading:false,
+        loading: false,
         userDetail: payload,
       };
     case USERS_FILTERED:

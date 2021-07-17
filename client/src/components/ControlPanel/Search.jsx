@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { HiOutlineSearch } from 'react-icons/hi';
-import { getProductsByName, getUsers, reset, userFiltered } from '../../redux/actions';
+import { getOrderForUser, getProductsByName, getUsers, reset, userFiltered } from '../../redux/actions';
 
 import Button from '@material-ui/core/Button';
 import { StyledSearch } from './styled';
@@ -26,6 +26,9 @@ const Search = ({ itemValue }) => {
                 dispatch(getUsers());
                 dispatch(userFiltered(input, store.users));
                 break;
+                case 'order':
+                    dispatch(getOrderForUser(input));
+                break;
             default:
                 setInput('');
         }
@@ -45,7 +48,7 @@ const Search = ({ itemValue }) => {
                 <form onSubmit={handleSubmit}>
                     <input
                         type='search'
-                        placeholder='Buscar...'
+                        placeholder='Buscar por nombre...'
                         value={input}
                         onChange={handleChange}
                     />

@@ -16,7 +16,8 @@ import {
     getOrders,
     getOrderDetail,
     getProductDetail,
-    getOrderForStatus
+    getOrderForStatus,
+    getOrderForUser
 } from "./request";
 import {
     addCategory,
@@ -48,6 +49,7 @@ export {
     getOrders,
     getOrderDetail,
     getOrderForStatus,
+    getOrderForUser,
     getUserDetail,
     getProductsAll,
     getProductDetail,
