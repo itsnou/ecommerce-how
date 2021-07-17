@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { StyledUsers } from "../styled.js";
 import Button from '@material-ui/core/Button';
@@ -61,14 +61,13 @@ const ItemUsers = ({ user }) => {
     };
     return (
         <StyledUsers>
-            <Link to={`/user/${user._id}`}>
+            <Link to={`/user/${user._id}`} className='link-name'>
                 <li className="name">{user.name} {user.lastname}</li>
             </Link>
             <li className="email">{user.email}</li>
             <li className="status">{user.userStatus}</li>
-            {user.userStatus === "Regular" ? <Button variant="contained" onClick={handleClick}>Hacer Admin</Button > :
-                <Button className="btn" variant="contained" onClick={handleClick}>Hacer Admin</Button >}
-            <Button variant="contained" color="secondary" onClick={blockedUser}>X</Button>
+            <Button className={user.userStatus ==='Regular'? 'active' : 'btn'} onClick={()=> user.userStatus ==='Regular'? handleClick() : null}>Hacer Admin</Button>
+            <Button variant="contained" color="secondary" onClick={blockedUser}>Bloquear</Button>
         </StyledUsers>
     )
 };
