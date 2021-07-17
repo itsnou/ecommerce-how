@@ -41,6 +41,12 @@ const UsersSchema = new mongoose.Schema(
         ref: "Order",
       },
     ],
+    wishlist: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Product",
+      },
+    ],
   },
   { versionKey: false }
 );
