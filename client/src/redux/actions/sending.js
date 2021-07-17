@@ -235,7 +235,7 @@ export const checkOut = (data) => {
         `${GET_URL}stripe/checkout`,
         {
           id: data.id,
-          amount: data.payment.totalAmount,
+          amount: Math.ceil(data.payment.totalAmount * 0.0104 * 100),
         },
         {
           headers: {
@@ -249,7 +249,6 @@ export const checkOut = (data) => {
           {
             items: data.payment.items,
             totalAmount: data.payment.totalAmount,
-            service:'Stripe'
           },
           {
             headers: {

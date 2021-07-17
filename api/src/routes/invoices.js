@@ -38,10 +38,6 @@ router.post(
       const token = req.headers.authorization.split(" ");
       const decodificado = jwt_decode(token[1]);
       const findUser = await userSchema.findOne({ email: decodificado.email });
-      if (service === "Stripe") {
-        totalAmount = totalAmount * 104;
-      }
-
       const data = {
         items: items,
         totalAmount: totalAmount,
