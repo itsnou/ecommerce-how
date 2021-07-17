@@ -1,11 +1,10 @@
 import {
-  Elements,
   CardElement,
   useStripe,
   useElements,
 } from "@stripe/react-stripe-js";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { checkOut } from "../../../redux/actions/sending";
 import { setPayment } from "../../../redux/actions/cart";
 import Button from "@material-ui/core/Button";
@@ -20,7 +19,7 @@ const StripePayment = () => {
 
   useEffect(() => {
     dispatch(setPayment());
-  }, []);
+  }, [dispatch]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();

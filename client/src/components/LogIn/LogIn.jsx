@@ -19,7 +19,7 @@ const LogIn = () => {
       history.push("/");
       window.location.reload();
     }
-  }, [loged]);
+  }, [loged,history]);
 
   const responseGoogle = (responseGoogle) => {
     let data = {

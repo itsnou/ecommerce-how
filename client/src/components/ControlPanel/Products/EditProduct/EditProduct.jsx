@@ -8,7 +8,7 @@ import StyledDiv from './styled';
 
 const FormProduct = ({ match }) => {
     const dispatch = useDispatch();
-    const { register, handleSubmit, watch, formState: { errors } } = useForm();
+    const { register, handleSubmit } = useForm();
     const id = useRef(match.params.id);
     const product = useSelector(state => state.productDetail);
     const edit = useSelector(state => state.confirm);

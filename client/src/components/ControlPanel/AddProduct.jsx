@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { addProduct } from '../../redux/actions/sending';
 import { getVarietals } from '../../redux/actions/request';
@@ -31,7 +31,7 @@ const AddProduct = () => {
 
     useEffect(() => {
         if (varietals.length === 0) dispatch(getVarietals())
-    }, [varietals]);
+    }, [dispatch, varietals]);
 
     return (
         <form onSubmit={handleSubmit(onSubmit)}>

@@ -29,7 +29,7 @@ const ProductDetail = ({ match }) => {
   useEffect(() => {
     dispatch(getProductDetail(fixed.current));
     if (wishlist.includes(detail._id)) setWishlistBoolean(true);
-  }, [dispatch]);
+  }, [dispatch, detail._id, wishlist]);
 
   useEffect(() => {
     if (cart.length > 0) {
@@ -38,7 +38,7 @@ const ProductDetail = ({ match }) => {
         setCount(wine.quantity);
       }
     }
-  }, []);
+  }, [cart, detail._id]);
 
   useEffect(() => {
     if (detail.rating) {

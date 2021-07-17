@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { HiOutlineSearch } from 'react-icons/hi';
 import { getProductsByName, getUsers, reset, userFiltered } from '../../redux/actions';
@@ -8,7 +8,7 @@ import { StyledSearch } from './styled';
 
 const Search = ({ itemValue }) => {
     const [input, setInput] = useState('');
-
+    const entry = useRef(input.length)
     const dispatch = useDispatch();
     const store = useSelector(state => state);
 
@@ -21,9 +21,11 @@ const Search = ({ itemValue }) => {
         switch (itemValue) {
             case 'product':
                 dispatch(getProductsByName(input));
+                break;
             case 'user':
                 dispatch(getUsers());
                 dispatch(userFiltered(input, store.users));
+                break;
             default:
                 setInput('');
         }
@@ -31,7 +33,7 @@ const Search = ({ itemValue }) => {
     };
 
     useEffect(() => {
-        if (input.length === 0) {
+        if (entry.current === 0) {
             setInput('');
         }
         return dispatch(reset("searchUser"))
