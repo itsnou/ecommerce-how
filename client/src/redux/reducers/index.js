@@ -36,7 +36,6 @@ import {
   EDIT_ORDER_STATUS,
   GET_ORDERS_FOR_STATUS,
   GET_ORDERS_FOR_USER
-
 } from "../actions/constant";
 
 import { addToCart } from "../../utils/addToCart";
@@ -67,7 +66,6 @@ const initialState = {
   loged: "off",
   searchUser: [],
   searchOrders: [],
-  wishlist: [],
   confirm: false,
   payment: {},
 };
@@ -216,12 +214,12 @@ const reducer = (state = initialState, { payload, type }) => {
     case MODIFY_PRODUCT:
       return {
         ...state,
-        confirm: payload
-      }
+        confirm: payload,
+      };
     case RESET:
       return {
         ...state,
-        [payload]: []
+        [payload]: [],
       };
     case FILTRED_FOR_CATEGORY:
       let filtered;
@@ -247,18 +245,6 @@ const reducer = (state = initialState, { payload, type }) => {
       };
     case EDIT_USER_STATUS:
       return state;
-    case ADD_TO_WISHLIST:
-      return {
-        ...state,
-        wishlist: [...state.wishlist, payload],
-      };
-    case REMOVE_FROM_WISHLIST:
-      let aux = state.wishlist.filter((e) => e !== payload);
-      console.log(aux);
-      return {
-        ...state,
-        wishlist: aux,
-      };
     case SET_PAYMENT:
       return {
         ...state,

@@ -1,6 +1,6 @@
 import { React, useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getProductDetail } from "../../redux/actions/request";
+import { getProductDetail, getProfile } from "../../redux/actions/request";
 import { addToCart } from "../../redux/actions/cart";
 import StyledDiv from "./style";
 import StarRatingComponent from "react-star-rating-component";
@@ -22,14 +22,29 @@ const ProductDetail = ({ match }) => {
   const [count, setCount] = useState(0);
   const [stars, setStars] = useState(0);
   const fixed = useRef(match.params.id);
-  const wishlist = useSelector((store) => store.wishlist);
   const [wishlistBoolean, setWishlistBoolean] = useState(false);
   const [content, setContent] = useState("");
+  const [calification, setCalification] = useState(0);
+  const [errors, setErrors] = useState("");
+  const user = useSelector((state) => state.user);
+
+  useEffect(() => {
+    if (window.sessionStorage.getItem("userLog")) {
+      dispatch(getProfile());
+    }
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (user && user[0]?.wishlist.includes(detail._id)) {
+      setWishlistBoolean(true);
+    } else {
+      setWishlistBoolean(false);
+    }
+  }, [user]);
 
   useEffect(() => {
     dispatch(getProductDetail(fixed.current));
-    if (wishlist.includes(detail._id)) setWishlistBoolean(true);
-  }, [dispatch, detail._id, wishlist]);
+  }, [dispatch, detail._id]);
 
   useEffect(() => {
     if (cart.length > 0) {
@@ -52,25 +67,40 @@ const ProductDetail = ({ match }) => {
       ...detail,
       quantity: count,
     };
+    if (count < 1 || count > detail.stock) {
+      return setErrors(
+        `La cantidad máxima es: ${detail.stock}, y la mímina es 1 `
+      );
+    }
     dispatch(addToCart(obj));
     window.localStorage.setItem(`${detail.name}`, JSON.stringify(obj));
   };
 
   const handleWishlist = (e) => {
     if (e === "remove") {
-      dispatch(removeFromWishlist(detail._id));
+      dispatch(removeFromWishlist({ id: detail._id }));
       setWishlistBoolean(false);
     }
     if (e === "add") {
-      dispatch(addToWishlist(detail._id));
+      dispatch(addToWishlist({ id: detail._id }));
       setWishlistBoolean(true);
     }
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(addReview({ content: content, id: detail._id }));
+    if (calification < 1 || calification > 5) {
+      setErrors("");
+    }
+    dispatch(
+      addReview({
+        content: content,
+        id: detail._id,
+        calification: calification,
+      })
+    );
     setContent("");
+    setCalification(0);
   };
 
   return (
@@ -122,53 +152,68 @@ const ProductDetail = ({ match }) => {
                 <div className="detail-btn">
                   <input
                     type="number"
-                    min={detail.quantity}
+                    min={1}
                     max={detail.stock}
                     value={count}
                     onChange={(e) => setCount(e.target.value)}
                   />
                   <button onClick={() => handleClick()}>AGREGAR</button>
-                  {wishlistBoolean ? (
-                    <button
-                      className="btn-wishlist"
-                      onClick={() => {
-                        handleWishlist("remove");
-                      }}
-                    >
-                      <img
+                  {window.sessionStorage.getItem("userLog") ? (
+                    wishlistBoolean ? (
+                      <button
                         className="btn-wishlist"
-                        alt="Couldn't load"
-                        src={fullheart}
-                      />
-                    </button>
-                  ) : (
-                    <button
-                      className="btn-wishlist"
-                      onClick={() => {
-                        handleWishlist("add");
-                      }}
-                    >
-                      <img
+                        onClick={() => {
+                          handleWishlist("remove");
+                        }}
+                      >
+                        <img
+                          className="btn-wishlist"
+                          alt="Couldn't load"
+                          src={fullheart}
+                        />
+                      </button>
+                    ) : (
+                      <button
                         className="btn-wishlist"
-                        alt="Couldn't load"
-                        src={emptyheart}
-                      />
-                    </button>
-                  )}
+                        onClick={() => {
+                          handleWishlist("add");
+                        }}
+                      >
+                        <img
+                          className="btn-wishlist"
+                          alt="Couldn't load"
+                          src={emptyheart}
+                        />
+                      </button>
+                    )
+                  ) : null}
+                  <h3>{errors}</h3>
                 </div>
               )}
             </div>
             <div>
               {window.sessionStorage.getItem("userLog") ? (
-                <form onSubmit={(e) => handleSubmit(e)}>
-                  <input
-                    type="text"
-                    placeholder="add review"
-                    value={content}
-                    onChange={(e) => setContent(e.target.value)}
-                  />
-                  <button type="submit">Enviar</button>
-                </form>
+                <div>
+                  <form onSubmit={(e) => handleSubmit(e)}>
+                    <textarea
+                      type="text"
+                      placeholder="add review"
+                      value={content}
+                      onChange={(e) => setContent(e.target.value)}
+                    />
+                    <div>
+                      Puntaje
+                      <input
+                        type="number"
+                        min={1}
+                        max={5}
+                        value={calification}
+                        onChange={(e) => setCalification(e.target.value)}
+                      ></input>
+                      <button type="submit">Enviar</button>
+                    </div>
+                  </form>
+                </div>
               ) : null}
             </div>
           </div>

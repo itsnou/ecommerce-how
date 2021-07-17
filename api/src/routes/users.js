@@ -20,6 +20,7 @@ router.get(
       name: findUser.name,
       lastName: findUser.lastName,
       email: findUser.email,
+      wishlist: findUser.wishlist,
     };
     res.json(returnedUser);
   }
@@ -49,6 +50,7 @@ router.post("/signup", async (req, res) => {
     email: email,
     password: password,
     orders: [],
+    wishlist: [],
   };
   try {
     const newUser = await new userSchema(data);
@@ -154,6 +156,36 @@ router.put(
     const findUser = await userSchema.findOne({ email: decodificado.email });
     const addOrder = await userSchema.findByIdAndUpdate(findUser._id, {
       $push: { orders: orderId },
+    });
+    res.send("Correcto");
+  }
+);
+
+router.put(
+  "/addwishlist",
+  passport.authenticate("jwt", { session: false }),
+  async (req, res) => {
+    const { productId } = req.body;
+    const token = req.headers.authorization.split(" ");
+    const decodificado = jwt_decode(token[1]);
+    const findUser = await userSchema.findOne({ email: decodificado.email });
+    const addWish = await userSchema.findByIdAndUpdate(findUser._id, {
+      $push: { wishlist: productId },
+    });
+    res.send("Correcto");
+  }
+);
+
+router.put(
+  "/removewishlist",
+  passport.authenticate("jwt", { session: false }),
+  async (req, res) => {
+    const { productId } = req.body;
+    const token = req.headers.authorization.split(" ");
+    const decodificado = jwt_decode(token[1]);
+    const findUser = await userSchema.findOne({ email: decodificado.email });
+    const removeWish = await userSchema.findByIdAndUpdate(findUser._id, {
+      $pull: { wishlist: productId },
     });
     res.send("Correcto");
   }

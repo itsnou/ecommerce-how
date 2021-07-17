@@ -12,6 +12,32 @@ const StyledDiv = styled.div`
         width:50%;
         margin:0;
     }
+
+    .orders-ul{
+        .orders-links{
+            text-decoration:none;
+            .orders-li{
+                background-color:white;
+                color:black;
+                list-style-type:none;
+                width:50%;
+                margin:auto;
+                margin-bottom:10px;
+                border-radius:8px;
+                text-align:center;
+                font-weight:bold;
+                .orders-users{
+                    display:flex;
+                    justify-content:space-around;
+                    h4{
+                        padding:0;
+                        margin:auto 0;
+                    }
+                }
+            }
+
+        }
+    }
 `
 
 export default StyledDiv;

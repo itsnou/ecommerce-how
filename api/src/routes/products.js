@@ -129,13 +129,16 @@ router.put(
   passport.authenticate("jwt", { session: false }),
   async (req, res) => {
     try {
-      const { content, id } = req.body;
+      const { content, id, calification } = req.body;
       const token = req.headers.authorization.split(" ");
       const decodificado = jwt_decode(token[1]);
       const findUser = await userSchema.findOne({ email: decodificado.email });
       const review = { name: findUser.name, content: content };
       const addReview = await productSchema.findByIdAndUpdate(id, {
         $push: { reviews: review },
+      });
+      const addCalification = await productSchema.findByIdAndUpdate(id, {
+        $push: { rating: calification },
       });
       res.send("Review agregada");
     } catch (e) {
