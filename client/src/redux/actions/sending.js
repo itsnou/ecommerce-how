@@ -128,7 +128,7 @@ export const editUserStatus = (userEmail) => {
   };
 };
 
-export const editOrderStatus = (id, state) => {
+export const editOrderStatus = (id, state, clientEmail) => {
   return async (dispatch) => {
     try {
       axios.put(
@@ -140,6 +140,17 @@ export const editOrderStatus = (id, state) => {
           },
         }
       );
+      if (state === "Enviado") {
+        const sendEmail = await axios.post(
+          `${GET_URL}sendMail/orderstatus`,
+          { id, clientEmail },
+          {
+            headers: {
+              authorization: "Bearer " + sessionStorage.getItem("token"),
+            },
+          }
+        );
+      }
       dispatch({ type: EDIT_ORDER_STATUS });
     } catch (e) {
       console.log(e);
@@ -271,9 +282,30 @@ export const checkOut = (data) => {
             },
           }
         );
+        const sendEmail = await axios.post(
+          `${GET_URL}sendMail/confirmation`,
+          { totalAmount: data.payment.totalAmount },
+          {
+            headers: {
+              authorization: "Bearer " + sessionStorage.getItem("token"),
+            },
+          }
+        );
       }
     } catch (e) {
       console.log(e);
     }
+  };
+};
+
+export const addReview = (data) => {
+  return async (dispatch) => {
+    const newReview = await axios.put(
+      `${GET_URL}products/addreview`,
+      { content: data.content, id: data.id },
+      {
+        headers: { authorization: "Bearer " + sessionStorage.getItem("token") },
+      }
+    );
   };
 };

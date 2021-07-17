@@ -1,36 +1,107 @@
-const {Router} = require('express');
-const nodemailer = require('nodemailer');
-var smtpTransport = require('nodemailer-smtp-transport');
+const { Router } = require("express");
+const nodemailer = require("nodemailer");
+var smtpTransport = require("nodemailer-smtp-transport");
 const router = Router();
+const passport = require("passport");
+const jwt_decode = require("jwt-decode");
+const userSchema = require("../models/users");
 
-router.post('/', (req, res) => {
-	const {name, subjet, message} = req.body;
-	var transporter = nodemailer.createTransport(
-		smtpTransport({
-			service: 'gmail',
-			host: 'smtp.gmail.com',
-			auth: {
-				user: 'houseOfWinesHr@gmail.com',
-				pass: 'jjjteemmg',
-			},
-		})
-	);
-	var mailOptions = {
-		from: 'houseOfWinesHr@gmail.com',
-		to: 'houseOfWinesHr@gmail.com',
-		subject: subjet,
-		text: 'esto es una prueba',
-		html: `<h2>House Of Wines</h2>
+router.post("/", async (req, res) => {
+  const { name, subjet, message } = req.body;
+  var transporter = nodemailer.createTransport(
+    smtpTransport({
+      service: "gmail",
+      host: "smtp.gmail.com",
+      auth: {
+        user: "houseOfWinesHr@gmail.com",
+        pass: "jjjteemmg",
+      },
+    })
+  );
+  var mailOptions = {
+    from: "houseOfWinesHr@gmail.com",
+    to: "houseOfWinesHr@gmail.com",
+    subject: subjet,
+    text: "esto es una prueba",
+    html: `<h2>House Of Wines</h2>
 		<h3>mensaje de: ${name}</h3>
 		<p>mensaje: ${message}</p>`,
-	};
+  };
 
-	transporter.sendMail(mailOptions, (err, info) => {
-		if (err) {
-			return res.status(500).send(err.message);
-		}
-		return res.send('ok');
-	});
+  transporter.sendMail(mailOptions, (err, info) => {
+    if (err) {
+      return res.status(500).send(err.message);
+    }
+    return res.send("ok");
+  });
 });
+
+router.post(
+  "/confirmation",
+  passport.authenticate("jwt", { session: false }),
+  async (req, res) => {
+    const { totalAmount } = req.body;
+    const token = req.headers.authorization.split(" ");
+    const decodificado = jwt_decode(token[1]);
+    const findUser = await userSchema.findOne({ email: decodificado.email });
+    const transporter = nodemailer.createTransport(
+      smtpTransport({
+        service: "gmail",
+        host: "stmp.gmail.com",
+        auth: {
+          user: "houseOfWinesHr@gmail.com",
+          pass: "jjjteemmg",
+        },
+      })
+    );
+    const mailOptions = {
+      from: "houseOfWinesHr@gmail.com",
+      to: `${decodificado.email}`,
+      subject: "Confirmación de compra House of Wines",
+      text: "La compra fue realizada con exito",
+      html: `<h2>El total de la compra fue:${totalAmount}</h2>`,
+    };
+    transporter.sendMail(mailOptions, (err, info) => {
+      if (err) {
+        return res.status(500).send(err.message);
+      }
+      return res.send("Se envió el correo");
+    });
+  }
+);
+
+router.post(
+  "/orderstatus",
+  passport.authenticate("jwt", { session: false }),
+  async (req, res) => {
+    const { id, clientEmail } = req.body;
+    console.log(id);
+    console.log(clientEmail);
+
+    const transporter = nodemailer.createTransport(
+      smtpTransport({
+        service: "gmail",
+        host: "stmp.gmail.com",
+        auth: {
+          user: "houseOfWinesHr@gmail.com",
+          pass: "jjjteemmg",
+        },
+      })
+    );
+    const mailOptions = {
+      from: "houseOfWinesHr@gmail.com",
+      to: `${clientEmail}`,
+      subject: `Pedido #${id}`,
+      text: "Despacho de pedido exitoso.",
+      html: `<h2>Su pedido está en camino </h2>`,
+    };
+    transporter.sendMail(mailOptions, (err, info) => {
+      if (err) {
+        return res.status(500).send(err.message);
+      }
+      return res.send("Se envió el correo");
+    });
+  }
+);
 
 module.exports = router;

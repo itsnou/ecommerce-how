@@ -15,8 +15,6 @@ const Products = ({ setVisual }) => {
     const anchorRef = useRef(null);
     const dispatch = useDispatch();
 
-
-
     const handleToggle = () => {
         setOpen((prevOpen) => !prevOpen);
     };
@@ -29,7 +27,6 @@ const Products = ({ setVisual }) => {
             })
         }
         if (e.target.value === 2) {
-            // dispatch(getProductsAll());
             setVisual({
                 productsSearch: true,
             })

@@ -45,7 +45,6 @@ function App() {
       <Route exact path="/admin/controlpanel" component={ControlPanel} />
       <Route exact path="/login" component={LogIn} />
       <Route exact path="/profile" component={Profile} />
-      <Route exact path="/admin/editProduct/:id" component={FormProduct} />
       <Route exact path="/checkout" component={Checkout} />
       <Elements stripe={stripePromise}>
         <Route exact path="/checkout/stripe" component={StripePayment} />

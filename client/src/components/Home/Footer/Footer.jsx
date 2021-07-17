@@ -68,7 +68,7 @@ const Footer = () => {
                     <ul>
                         <li>
                         <Link to='/catalogo'>
-                            Cátalogo
+                            Catálogo
                         </Link>
                         </li>
                     </ul>
@@ -104,7 +104,7 @@ const Footer = () => {
                     </ul>
                 </div>
             </div>
-            <div className='footer-derechos'>Copyright House&Wines - 2021</div>
+            <div className='footer-derechos'>Copyright House & Wines - 2021</div>
     </StyledDiv>
     );
 }

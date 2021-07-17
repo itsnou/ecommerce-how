@@ -85,6 +85,7 @@ router.post(
           imageUrl: imageUrl,
           varietal: varietal,
           year: year,
+          reviews: [],
         };
         const newProduct = await new productSchema(data);
         newProduct.save();
@@ -128,7 +129,7 @@ router.put(
   passport.authenticate("jwt", { session: false }),
   async (req, res) => {
     try {
-      const { content } = req.body;
+      const { content, id } = req.body;
       const token = req.headers.authorization.split(" ");
       const decodificado = jwt_decode(token[1]);
       const findUser = await userSchema.findOne({ email: decodificado.email });

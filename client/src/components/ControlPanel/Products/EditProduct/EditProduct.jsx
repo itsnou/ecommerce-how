@@ -22,7 +22,6 @@ const FormProduct = ({ match }) => {
         dispatch(editProduct(data));
     }
 
-
     return (
         <>{load ? <Loading /> :
             <StyledDiv>

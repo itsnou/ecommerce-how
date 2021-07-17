@@ -47,7 +47,8 @@ const StyledDiv = styled.div`
                     color:white;
                     margin-right:10px;
                     :hover{
-                        color: red;
+                        /* color: red; */
+                        color: #FADDD3;
                     }
                 }
             }
