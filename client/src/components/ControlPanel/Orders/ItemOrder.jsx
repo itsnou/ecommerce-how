@@ -8,8 +8,11 @@ const ItemOrder = ({ order }) => {
     else if (order.state === "Finalizado") type = "complete";
     else if (order.state === "Enviado") type = "sent";
     else if (order.state === "Cancelado") type = "cancel";
+    console.log(order);
     return (
-        <StyledOrders>
+        <>
+        {order.user && 
+            <StyledOrders>
             <Link to={`/order/${order._id}`}>
                 <li className="name">{order.user.name} {order.user.lastName}</li>
             </Link>
@@ -21,6 +24,8 @@ const ItemOrder = ({ order }) => {
             <li className={type}>{order.state}</li>
             <li className="date">{order.invoice.date}</li>
         </StyledOrders>
+        }
+        </>
     )
 };
 
