@@ -24,16 +24,17 @@ const StyledMenu = styled.div`
     text-shadow: 0 8px 10px #231e23, 1px -2px 1px #231e23;
     color: #f6e5e9;
 `
+
 const StyledProduct = styled.div`
     display:flex;
     text-align: center;
     align-items: center;
     justify-content:space-between;
-    margin: 0px 20px 0px 20px;
+    margin: 0px 20px 5px 20px;
     padding: 5px;
     background-color: #EDEDED;
     list-style: none;
-    border-radius: 2px;
+    border-radius: 8px;
     border:solid rgba(0, 0, 0, 0.1);
     .name {
         width: 300px;
@@ -44,8 +45,24 @@ const StyledProduct = styled.div`
     .vineyard{
         width:200px;
     }
-
+    a{
+        text-decoration:none;
+        color:black;
+        font-weight:bold;
+        :hover{
+            color:red;
+        }
+        button{
+            background-color:blue;
+            color:white;
+            :hover{
+                background-color:white;
+                color:black;
+            }
+        }
+    }
 `
+
 const StyledUsers = styled.div`
     display:flex;
     text-align: center;

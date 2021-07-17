@@ -11,9 +11,11 @@ const ItemProduct = ({ product }) => {
             </Link>
             <li className="price">$ {product.price}</li>
             <li className="vineyard">{product.vineyard}</li>
-            <li className="stock">{product.stock}<button>-</button><button>+</button></li>
+            <li className="stock">Stock: {product.stock}</li>
             <br />
-            <Button variant="contained">EDITAR</Button>
+            <Link to={`/admin/editProduct/${product._id}`}>
+                <Button variant="contained">EDITAR</Button>
+            </Link>
             <Button variant="contained" color="secondary" >X</Button>
         </StyledProduct>
     )
