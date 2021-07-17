@@ -9,7 +9,7 @@ const Chat = () => {
       <WhatsAppWidget
         phoneNumber="5493415704791"
         textReplyTime="Normalmente responde en menos de 2 horas"
-        companyName="House & Wine"
+        companyName="House & Wines"
         message="¡Hola! 👋🏼 ¿Necesitas ayuda? Déjanos un mensaje de WhatsApp"
         sendButton="Enviar"
       />
