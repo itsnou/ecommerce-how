@@ -1,23 +1,30 @@
 import styled from 'styled-components';
 
 const StyledPanel = styled.div`
-display: flex;
-flex-direction: column;
-align-items: center;
-.panel{
-    display:flex;
-justify-content: space-between;
-background-color: #EDEDED;
-margin: 5px;
-padding:5px 15px 5px 15px;
-border-radius: 5px;
-    border:solid rgba(0, 0, 0, 0.1);
-    box-shadow: 0px 14px 15px rgba(0, 0, 0, 0.1);
-}
-.content{
-    width:100%;
-    margin-top: 20px;
-}
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .panel{
+        display:flex;
+        justify-content: space-between;
+        background-color: #EDEDED;
+        margin: 5px;
+        padding:5px 15px 5px 15px;
+        border-radius: 5px;
+        border:solid rgba(0, 0, 0, 0.1);
+        box-shadow: 0px 14px 15px rgba(0, 0, 0, 0.1);
+        z-index: 999;
+    }
+    .content{
+        width:90%;
+        margin: 20px auto;
+        background-color:gray;
+        padding: 20px 0px;
+        border-radius:8px;
+        box-shadow: 0 0 5px 0 ;
+        background: inherit;
+        backdrop-filter: blur(10px);
+    }
 `
 const StyledMenu = styled.div`
     font-weight: bold;
@@ -32,10 +39,12 @@ const StyledProduct = styled.div`
     justify-content:space-between;
     margin: 0px 20px 5px 20px;
     padding: 5px;
-    background-color: #EDEDED;
+    background-color: #420D1F;
     list-style: none;
     border-radius: 8px;
+    color:white;
     border:solid rgba(0, 0, 0, 0.1);
+    font-weight:bold;
     .name {
         width: 300px;
     }
@@ -43,17 +52,17 @@ const StyledProduct = styled.div`
         width:80px;
     }
     .vineyard{
-        width:200px;
+        width:150px;
     }
     a{
         text-decoration:none;
-        color:black;
+        color:white;
         font-weight:bold;
         :hover{
             color:red;
         }
         button{
-            background-color:blue;
+            background-color:black;
             color:white;
             :hover{
                 background-color:white;

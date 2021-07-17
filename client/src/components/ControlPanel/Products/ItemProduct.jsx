@@ -12,11 +12,11 @@ const ItemProduct = ({ product }) => {
             <li className="price">$ {product.price}</li>
             <li className="vineyard">{product.vineyard}</li>
             <li className="stock">Stock: {product.stock}</li>
-            <br />
             <Link to={`/admin/editProduct/${product._id}`}>
                 <Button variant="contained">EDITAR</Button>
             </Link>
-            <Button variant="contained" color="secondary" >X</Button>
+            {/* ESTE BOTON PODRÍA ESTAR EN EDITAR, PORQUE SI LE ERRA EL USUARIO, TAMO EN PROBLEMA */}
+            {/* <Button className='delete-product' variant="contained" color="secondary" >X</Button> */}
         </StyledProduct>
     )
 };
