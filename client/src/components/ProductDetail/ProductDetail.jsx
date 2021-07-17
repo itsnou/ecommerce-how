@@ -42,10 +42,13 @@ const ProductDetail = ({ match }) => {
 
   useEffect(() => {
     wishlist.forEach((e) => {
-      if (e.product._id == fixed.current) {
+      if (e && e.product?._id == fixed.current) {
         setWishlistBoolean(true);
+      } else {
+        setWishlistBoolean(false);
       }
     });
+    dispatch(getWishlist(fixed.current));
   }, [wishlist]);
 
   const handleClick = () => {
@@ -116,34 +119,26 @@ const ProductDetail = ({ match }) => {
               onChange={(e) => setCount(e.target.value)}
             />
             <button onClick={() => handleClick()}>AGREGAR</button>
-            {wishlistBoolean ? (
-              <button
-                className="btn-wishlist"
-                onClick={() => {
-                  handleWishlist("remove");
-                }}
-              >
-                <img
-                  className="btn-wishlist"
-                  alt="Couldn't load"
-                  src={fullheart}
-                />
-              </button>
-            ) : (
-              <button
-                className="btn-wishlist"
-                onClick={() => {
-                  handleWishlist("add");
-                }}
-              >
-                <img
-                  className="btn-wishlist"
-                  alt="Couldn't load"
-                  src={emptyheart}
-                />
-              </button>
-            )}
           </div>
+        )}
+        {wishlistBoolean ? (
+          <img
+            className="btn-wishlist"
+            alt="Couldn't load"
+            src={fullheart}
+            onClick={() => {
+              handleWishlist("remove");
+            }}
+          />
+        ) : (
+          <img
+            className="btn-wishlist"
+            alt="Couldn't load"
+            src={emptyheart}
+            onClick={() => {
+              handleWishlist("add");
+            }}
+          />
         )}
       </div>
     </StyledDiv>

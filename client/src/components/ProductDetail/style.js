@@ -40,13 +40,13 @@ const StyledDiv = styled.div`
         color: white;
         padding: 5px;
       }
-      .btn-wishlist {
-        padding-top: 20px;
-        background-color: #faddd3;
-        width: 25px;
-        height: 25px;
-      }
     }
+  }
+  .btn-wishlist {
+    padding-top: 20px;
+    background-color: #faddd3;
+    width: 25px;
+    height: 25px;
   }
 `;
 
