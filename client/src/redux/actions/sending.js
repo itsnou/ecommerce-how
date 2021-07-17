@@ -249,6 +249,7 @@ export const checkOut = (data) => {
           {
             items: data.payment.items,
             totalAmount: data.payment.totalAmount,
+            service:'Stripe'
           },
           {
             headers: {

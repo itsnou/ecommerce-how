@@ -78,13 +78,22 @@ const StyledUsers = styled.div`
     align-items: center;
     justify-content:space-between;
     margin: 0px 20px 0px 20px;
-    padding: 5px;
-    background-color: #EDEDED;
+    background-color: #420D1F;
     list-style: none;
     border-radius: 2px;
-    border:solid rgba(0, 0, 0, 0.1);
-    .name {
-        width: 300px;
+    margin:auto;
+    margin-bottom:15px;
+    color:white;
+    width:85%;
+    padding:10px;
+    border-radius:8px;
+    .link-name{
+        font-weight:bold;
+        color:white;
+        text-underline:1px;
+        .name {
+            width: 300px;
+        }
     }
     .email {
         width:500px;
@@ -93,7 +102,14 @@ const StyledUsers = styled.div`
         width:100px;
     }
     .btn{
-    visibility:hidden;
+        visibility:hidden;
+    }
+    .active{
+        font-weight:bold;
+        background-color:white;
+        :hover{
+            background-color:orange;
+        }
     }
     
 `

@@ -10,6 +10,7 @@ import ControlPanel from "./components/ControlPanel/ControlPanel";
 import FormProduct from "./components/ControlPanel/Products/EditProduct/EditProduct";
 import LogIn from "./components/LogIn/LogIn";
 import Profile from "./components/Profile/Profile";
+import OrderUser from "./components/Profile/OrderUser/OrderUser";
 import UserDetail from "./components/ControlPanel/Users/UserDetail";
 import Chat from "./components/ChatWhatsApp/Chat";
 import Checkout from "./components/Checkout/Checkout";
@@ -51,6 +52,7 @@ function App() {
       </Elements>
       <Route exact path="/admin/editProduct/:id" component={FormProduct}/>
       <Route exact path='/contacto' component={ContactUs} />
+      <Route exact path='/profile/:id' component={OrderUser}/>
     </>
   );
 }
