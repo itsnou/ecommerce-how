@@ -31,11 +31,11 @@ import {
   EDIT_USER_STATUS,
   USERS_FILTERED,
   ADD_TO_WISHLIST,
+  GET_WISHLIST,
   REMOVE_FROM_WISHLIST,
   SET_PAYMENT,
   EDIT_ORDER_STATUS,
-  GET_ORDERS_FOR_STATUS
-
+  GET_ORDERS_FOR_STATUS,
 } from "../actions/constant";
 
 import { addToCart } from "../../utils/addToCart";
@@ -204,8 +204,8 @@ const reducer = (state = initialState, { payload, type }) => {
     case MODIFY_PRODUCT:
       return {
         ...state,
-        confirm: payload
-      }
+        confirm: payload,
+      };
     case RESET:
       return {
         ...state,
@@ -246,6 +246,11 @@ const reducer = (state = initialState, { payload, type }) => {
       return {
         ...state,
         wishlist: aux,
+      };
+    case GET_WISHLIST:
+      return {
+        ...state,
+        wishlist: payload,
       };
     case SET_PAYMENT:
       return {

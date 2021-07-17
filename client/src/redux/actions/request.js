@@ -10,6 +10,7 @@ import {
   GET_USERS,
   GET_USER_DETAIL,
   GET_VARIETALS,
+  GET_WISHLIST,
   LOAD_PROFILE,
   GET_ORDERS_FOR_STATUS,
 } from "./constant";
@@ -89,7 +90,6 @@ export const getUsers = () => {
   };
 };
 
-
 export const getUserDetail = (id) => {
   return async (dispatch) => {
     try {
@@ -142,18 +142,17 @@ export const getOrderForStatus = (status) => {
   return async (dispatch) => {
     try {
       const order = await axios.get(`${GET_URL}orders?state=${status}`, {
-      headers: {
-        authorization: "Bearer " + sessionStorage.getItem("token"),
+        headers: {
+          authorization: "Bearer " + sessionStorage.getItem("token"),
         },
-    });
-    return dispatch({ type: GET_ORDERS_FOR_STATUS, payload: order.data });
-  } catch (e) {
-    console.log(e);
-    return dispatch({ type: GET_ORDERS_FOR_STATUS, payload: [] });
-  }
+      });
+      return dispatch({ type: GET_ORDERS_FOR_STATUS, payload: order.data });
+    } catch (e) {
+      console.log(e);
+      return dispatch({ type: GET_ORDERS_FOR_STATUS, payload: [] });
+    }
+  };
 };
-};
-
 
 export const getVarietals = () => {
   return async (dispatch) => {
@@ -161,6 +160,23 @@ export const getVarietals = () => {
     try {
       const varietals = await axios.get(`${GET_URL}varietal`);
       return dispatch({ type: GET_VARIETALS, payload: varietals.data });
+    } catch (e) {
+      console.log(e);
+      return dispatch({ type: GET_VARIETALS, payload: [] });
+    }
+  };
+};
+
+export const getWishlist = () => {
+  return async (dispatch) => {
+    // dispatch({ type: LOADING });
+    try {
+      const wishlist = await axios.get(`${GET_URL}wishlist`, {
+        headers: {
+          authorization: "Bearer " + sessionStorage.getItem("token"),
+        },
+      });
+      return dispatch({ type: GET_WISHLIST, payload: wishlist.data });
     } catch (e) {
       console.log(e);
       return dispatch({ type: GET_VARIETALS, payload: [] });

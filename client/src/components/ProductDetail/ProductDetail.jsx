@@ -1,6 +1,6 @@
 import { React, useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getProductDetail } from "../../redux/actions/request";
+import { getProductDetail, getWishlist } from "../../redux/actions/request";
 import { addToCart } from "../../redux/actions/cart";
 import StyledDiv from "./style";
 import StarRatingComponent from "react-star-rating-component";
@@ -21,7 +21,7 @@ const ProductDetail = ({ match }) => {
 
   useEffect(() => {
     dispatch(getProductDetail(fixed.current));
-    if (wishlist.includes(detail._id)) setWishlistBoolean(true);
+    dispatch(getWishlist(fixed.current));
   }, [dispatch]);
 
   useEffect(() => {
@@ -39,6 +39,14 @@ const ProductDetail = ({ match }) => {
       setStars(totalStars / detail.rating.length);
     }
   }, [detail]);
+
+  useEffect(() => {
+    wishlist.forEach((e) => {
+      if (e.product._id == fixed.current) {
+        setWishlistBoolean(true);
+      }
+    });
+  }, [wishlist]);
 
   const handleClick = () => {
     let obj = {
