@@ -192,35 +192,36 @@ export const blockUser = (id) => {
   };
 };
 
-export const addToWishlist = (product) => {
+export const addToWishlist = (data) => {
   return async (dispatch) => {
     try {
-      await axios.post(
-        `${GET_URL}wishlist`,
-        { product: product },
+      await axios.put(
+        `${GET_URL}users/addwishlist`,
+        { productId: data.id },
         {
           headers: {
             authorization: "Bearer " + sessionStorage.getItem("token"),
           },
         }
       );
-      return dispatch({ type: ADD_TO_WISHLIST, payload: product });
     } catch (e) {
       console.log(e);
     }
   };
 };
 
-export const removeFromWishlist = (product) => {
+export const removeFromWishlist = (data) => {
   return async (dispatch) => {
     try {
-      await axios.delete(`${GET_URL}wishlist/product`, {
-        headers: {
-          authorization: "Bearer " + sessionStorage.getItem("token"),
-        },
-        data: { product: product },
-      });
-      return dispatch({ type: REMOVE_FROM_WISHLIST, payload: product });
+      await axios.put(
+        `${GET_URL}users/removewishlist`,
+        { productId: data.id },
+        {
+          headers: {
+            authorization: "Bearer " + sessionStorage.getItem("token"),
+          },
+        }
+      );
     } catch (e) {
       console.log(e);
     }

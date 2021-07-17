@@ -1,6 +1,6 @@
 import { React, useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getProductDetail } from "../../redux/actions/request";
+import { getProductDetail, getProfile } from "../../redux/actions/request";
 import { addToCart } from "../../redux/actions/cart";
 import StyledDiv from "./style";
 import StarRatingComponent from "react-star-rating-component";
@@ -22,17 +22,29 @@ const ProductDetail = ({ match }) => {
   const [count, setCount] = useState(0);
   const [stars, setStars] = useState(0);
   const fixed = useRef(match.params.id);
-  const wishlist = useSelector((store) => store.wishlist);
   const [wishlistBoolean, setWishlistBoolean] = useState(false);
   const [content, setContent] = useState("");
   const [calification, setCalification] = useState(0);
   const [errors, setErrors] = useState("");
-  console.log(detail.stock);
+  const user = useSelector((state) => state.user);
+
+  useEffect(() => {
+    if (window.sessionStorage.getItem("userLog")) {
+      dispatch(getProfile());
+    }
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (user && user[0]?.wishlist.includes(detail._id)) {
+      setWishlistBoolean(true);
+    } else {
+      setWishlistBoolean(false);
+    }
+  }, [user]);
 
   useEffect(() => {
     dispatch(getProductDetail(fixed.current));
-    if (wishlist.includes(detail._id)) setWishlistBoolean(true);
-  }, [dispatch, detail._id, wishlist]);
+  }, [dispatch, detail._id]);
 
   useEffect(() => {
     if (cart.length > 0) {
@@ -66,11 +78,11 @@ const ProductDetail = ({ match }) => {
 
   const handleWishlist = (e) => {
     if (e === "remove") {
-      dispatch(removeFromWishlist(detail._id));
+      dispatch(removeFromWishlist({ id: detail._id }));
       setWishlistBoolean(false);
     }
     if (e === "add") {
-      dispatch(addToWishlist(detail._id));
+      dispatch(addToWishlist({ id: detail._id }));
       setWishlistBoolean(true);
     }
   };
