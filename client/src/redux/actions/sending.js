@@ -128,10 +128,10 @@ export const editUserStatus = (userEmail) => {
   };
 };
 
-export const editOrderStatus = (id, state) => {
+export const editOrderStatus = (id, state, clientEmail) => {
   return async (dispatch) => {
     try {
-      const change = axios.put(
+      const change = await axios.put(
         `${GET_URL}orders/modify`,
         { id, state },
         {
@@ -140,6 +140,17 @@ export const editOrderStatus = (id, state) => {
           },
         }
       );
+      if (state === "Enviado") {
+        const sendEmail = await axios.post(
+          `${GET_URL}sendMail/orderstatus`,
+          { id, clientEmail },
+          {
+            headers: {
+              authorization: "Bearer " + sessionStorage.getItem("token"),
+            },
+          }
+        );
+      }
       dispatch({ type: EDIT_ORDER_STATUS });
     } catch (e) {
       console.log(e);
@@ -266,6 +277,15 @@ export const checkOut = (data) => {
         const changeStock = await axios.put(
           `${GET_URL}invoices`,
           { items: data.payment.items },
+          {
+            headers: {
+              authorization: "Bearer " + sessionStorage.getItem("token"),
+            },
+          }
+        );
+        const sendEmail = await axios.post(
+          `${GET_URL}sendMail/confirmation`,
+          { totalAmount: data.payment.totalAmount },
           {
             headers: {
               authorization: "Bearer " + sessionStorage.getItem("token"),
