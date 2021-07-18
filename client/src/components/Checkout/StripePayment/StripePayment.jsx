@@ -1,14 +1,11 @@
-import {
-  CardElement,
-  useStripe,
-  useElements,
-} from "@stripe/react-stripe-js";
+import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { checkOut } from "../../../redux/actions/sending";
 import { setPayment } from "../../../redux/actions/cart";
 import Button from "@material-ui/core/Button";
 import StyledDiv from "./styled";
+import { Redirect } from "react-router";
 
 const StripePayment = () => {
   const stripe = useStripe();
@@ -52,6 +49,7 @@ const StripePayment = () => {
         <CardElement className="form-control" />
         <Button type="submit">ENVIAR</Button>
       </form>
+      {!cart.length ? <Redirect to="/profile"></Redirect> : null}
     </StyledDiv>
   );
 };

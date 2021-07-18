@@ -15,6 +15,7 @@ import {
   REMOVE_FROM_WISHLIST,
   ADD_VARIETAL,
   DELETE_VARIETAL,
+  CLEAR_CART,
 } from "./constant";
 
 export const addProduct = (product) => {
@@ -294,6 +295,8 @@ export const checkOut = (data) => {
             },
           }
         );
+        window.localStorage.clear();
+        dispatch({ type: CLEAR_CART, payload: [] });
       }
     } catch (e) {
       console.log(e);
