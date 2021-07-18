@@ -6,7 +6,7 @@ const StyledDiv = styled.div`
                         'filter product product product'
                         'filter product product product'
                         'filter paginate paginate paginate';
-
+    margin-top: 20px;
     .paginate{
         grid-area: paginate;
         margin:auto;

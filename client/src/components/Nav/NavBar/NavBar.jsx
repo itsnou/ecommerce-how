@@ -36,7 +36,7 @@ const NavBar = () => {
                 handleOnClick("/catalogo");
               }}
             >
-              <li>Catalogo</li>
+              <li>Catálogo</li>
             </Link>
             <Link to="/contacto">
               <li>Contacto</li>
