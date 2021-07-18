@@ -127,7 +127,7 @@ const ProductDetail = ({ match }) => {
               </div>
               <div className="detail-stars">
                 <h3>
-                  puntaje:
+                  Puntaje:
                   <StarRatingComponent
                     name="rateWine"
                     editing={false}
