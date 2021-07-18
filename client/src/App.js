@@ -19,7 +19,7 @@ import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 import OrderDetail from "./components/ControlPanel/Orders/OrderDetail";
 import ContactUs from "./components/ContactUs/ContactUs";
-import EditProductVarietals from "./components/ControlPanel/Products/EditProductVarietals";
+import EditProductVarietals from "./components/ControlPanel/Products/EditProductVarietals/EditProductVarietals";
 
 const stripePromise = loadStripe(
   "pk_test_51JDBoyGdIVmQXHqKUNKQADTSCIpNAgJeaoehTBVijP5uRNmbv2wgrUO92p2fxkOiSg3Ol0GTUYKFZfu7c5WxFOsb00E9tMt4VU"
