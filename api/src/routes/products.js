@@ -147,4 +147,42 @@ router.put(
   }
 );
 
+router.put(
+  "/addvarietal",
+  passport.authenticate("jwt", { session: false }),
+  async (req, res) => {
+    const { productId, varietal } = req.body;
+    const token = req.headers.authorization.split(" ");
+    const decodificado = jwt_decode(token[1]);
+    const findUser = await userSchema.findOne({ email: decodificado.email });
+    if (findUser.userStatus === "Admin") {
+      const addVarietal = await productSchema.findByIdAndUpdate(productId, {
+        $push: { varietal: varietal },
+      });
+      res.send("Se añadió el varietal");
+    } else {
+      res.status(401).send({ message: "No tiene permisos" });
+    }
+  }
+);
+
+router.put(
+  "/removevarietal",
+  passport.authenticate("jwt", { session: false }),
+  async (req, res) => {
+    const { productId, varietal } = req.body;
+    const token = req.headers.authorization.split(" ");
+    const decodificado = jwt_decode(token[1]);
+    const findUser = await userSchema.findOne({ email: decodificado.email });
+    if (findUser.userStatus === "Admin") {
+      const removeVarietal = await productSchema.findByIdAndUpdate(productId, {
+        $pull: { varietal: varietal },
+      });
+      res.send("Se removió el varietal");
+    } else {
+      res.status(491).send({ message: "No tiene permisos" });
+    }
+  }
+);
+
 module.exports = router;

@@ -35,7 +35,9 @@ import {
   SET_PAYMENT,
   EDIT_ORDER_STATUS,
   GET_ORDERS_FOR_STATUS,
-  GET_ORDERS_FOR_USER
+  GET_ORDERS_FOR_USER,
+  ADD_VARIETAL,
+  DELETE_VARIETAL
 } from "../actions/constant";
 
 import { addToCart } from "../../utils/addToCart";
@@ -68,6 +70,7 @@ const initialState = {
   searchOrders: [],
   confirm: false,
   payment: {},
+  flag:1
 };
 
 const reducer = (state = initialState, { payload, type }) => {
@@ -252,6 +255,16 @@ const reducer = (state = initialState, { payload, type }) => {
       };
     case EDIT_ORDER_STATUS:
       return state;
+    case DELETE_VARIETAL:
+      return{
+        ...state,
+        flag:state.flag + payload
+      }
+    case ADD_VARIETAL:
+      return{
+        ...state,
+        flag:state.flag + payload
+      }
     default:
       return state;
   }

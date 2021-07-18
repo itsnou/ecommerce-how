@@ -13,6 +13,8 @@ import {
   MODIFY_PRODUCT,
   ADD_TO_WISHLIST,
   REMOVE_FROM_WISHLIST,
+  ADD_VARIETAL,
+  DELETE_VARIETAL,
 } from "./constant";
 
 export const addProduct = (product) => {
@@ -308,5 +310,66 @@ export const addReview = (data) => {
         headers: { authorization: "Bearer " + sessionStorage.getItem("token") },
       }
     );
+  };
+};
+
+export const addNewVarietal = (varietal) => {
+  return async (dispatch) => {
+    try {
+      await axios.post(
+        `${GET_URL}varietal/`,
+        { name: varietal.name, relatedCategory: varietal.relatedCategory },
+        {
+          headers: {
+            authorization: "Bearer " + sessionStorage.getItem("token"),
+          },
+        }
+      );
+      dispatch({ type: ADD_VARIETAL, payload: 1 });
+    } catch (e) {
+      console.log(e);
+    }
+  };
+};
+
+export const deleteVarietal = (varietal) => {
+  return async (dispatch) => {
+    try {
+      await axios.delete(`${GET_URL}varietal/`, {
+        headers: {
+          authorization: "Bearer " + sessionStorage.getItem("token"),
+        },
+        data: { id: varietal },
+      });
+      dispatch({ type: DELETE_VARIETAL, payload: 1 });
+    } catch (e) {
+      console.log(e);
+    }
+  };
+};
+
+export const addProductVarietal = (data) => {
+  return async (dispatch) => {
+    const add = await axios.put(
+      `${GET_URL}products/addvarietal`,
+      { productId: data.productId, varietal: data.varietal },
+      {
+        headers: { authorization: "Bearer " + sessionStorage.getItem("token") },
+      }
+    );
+    dispatch({ type: ADD_VARIETAL, payload: 1 });
+  };
+};
+
+export const removeProductVarietal = (data) => {
+  return async (dispatch) => {
+    const add = await axios.put(
+      `${GET_URL}products/removevarietal`,
+      { productId: data.productId, varietal: data.varietal },
+      {
+        headers: { authorization: "Bearer " + sessionStorage.getItem("token") },
+      }
+    );
+    dispatch({ type: DELETE_VARIETAL, payload: 1 });
   };
 };
