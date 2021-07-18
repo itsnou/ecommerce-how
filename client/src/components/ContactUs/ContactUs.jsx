@@ -30,8 +30,8 @@ const ContactUs = (props) => {
 			</div>
 			<div>
 				<h3>
-					si tenes alguna duda, podes enviarla completando el siguiente
-					formulario
+					Si tiene alguna duda, puede enviarla completando el siguiente
+					formulario:
 				</h3>
 				<form onSubmit={handleSubmit(onSubmit)}>
 					<h3>Nombre: </h3>

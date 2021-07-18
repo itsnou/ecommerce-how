@@ -61,9 +61,6 @@ function App() {
         path="/admin/editProductVarietals/:id"
         component={EditProductVarietals}
       />
-      <Route exact path="/admin/editProduct/:id" component={FormProduct} />
-      <Route exact path="/contacto" component={ContactUs} />
-      <Route exact path="/profile/:id" component={OrderUser} />
     </>
   );
 }
