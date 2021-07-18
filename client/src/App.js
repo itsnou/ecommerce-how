@@ -19,13 +19,12 @@ import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 import OrderDetail from "./components/ControlPanel/Orders/OrderDetail";
 import EditAddCategory from "./components/ControlPanel/Categorys/EditAddCategory/EditAddCategory";
-import ContactUs from './components/ContactUs/ContactUs';
+import ContactUs from "./components/ContactUs/ContactUs";
+import EditProductVarietals from "./components/ControlPanel/Products/EditProductVarietals";
 
 const stripePromise = loadStripe(
   "pk_test_51JDBoyGdIVmQXHqKUNKQADTSCIpNAgJeaoehTBVijP5uRNmbv2wgrUO92p2fxkOiSg3Ol0GTUYKFZfu7c5WxFOsb00E9tMt4VU"
 );
-
-
 
 function App() {
   return (
@@ -33,8 +32,11 @@ function App() {
       <Route path={["/", "/product/:id", "/catalogo"]}>
         <Nav />
       </Route>
-      <Route exact path={["/", "/product/:id", "/catalogo", "/contacto", "/empresa"]}>
-        <Chat/> 
+      <Route
+        exact
+        path={["/", "/product/:id", "/catalogo", "/contacto", "/empresa"]}
+      >
+        <Chat />
       </Route>
       <Route exact path="/" component={Home} />
       <Route exact path="/catalogo" component={Catalogo} />
@@ -51,11 +53,16 @@ function App() {
       <Elements stripe={stripePromise}>
         <Route exact path="/checkout/stripe" component={StripePayment} />
       </Elements>
-      <Route exact path="/admin/editProduct/:id" component={FormProduct}/>
-      <Route exact path='/contacto' component={ContactUs} />
-      <Route exact path='/profile/:id' component={OrderUser}/>
+      <Route exact path="/admin/editProduct/:id" component={FormProduct} />
+      <Route exact path="/contacto" component={ContactUs} />
+      <Route exact path="/profile/:id" component={OrderUser} />
       {/* ESTO DE ABAJO SE TIENE QUE BORRAR */}
-      <Route exact path="/admin/editCategory" component={EditAddCategory}/>
+      <Route exact path="/admin/editCategory" component={EditAddCategory} />
+      <Route
+        exact
+        path="/admin/editProductVarietals/:id"
+        component={EditProductVarietals}
+      />
     </>
   );
 }

@@ -148,7 +148,7 @@ router.put(
 );
 
 router.put(
-  "addvarietal",
+  "/addvarietal",
   passport.authenticate("jwt", { session: false }),
   async (req, res) => {
     const { productId, varietal } = req.body;
@@ -167,7 +167,7 @@ router.put(
 );
 
 router.put(
-  "removevarietal",
+  "/removevarietal",
   passport.authenticate("jwt", { session: false }),
   async (req, res) => {
     const { productId, varietal } = req.body;
