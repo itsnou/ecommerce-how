@@ -19,6 +19,11 @@ const Categorys=({visual, setVisual})=> {
     };
 
     const handleClick = (e) => {
+        if (e.target.value === 1) {
+            setVisual({
+                categorys: true
+            })
+        }
         if (anchorRef.current && anchorRef.current.contains(e.target)) {
             return;
         }
@@ -61,8 +66,7 @@ const Categorys=({visual, setVisual})=> {
                         <Paper>
                             <ClickAwayListener onClickAway={handleClick}>
                                 <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
-                                    <MenuItem value={1} onClick={handleClick}>Ver categorias</MenuItem>
-                                    <MenuItem value={2} onClick={handleClick}>Agregar nueva categoria</MenuItem>
+                                    <MenuItem value={1} onClick={handleClick}>Ver o agregar categorias</MenuItem>
                                 </MenuList>
                             </ClickAwayListener>
                         </Paper>

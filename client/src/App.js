@@ -18,7 +18,6 @@ import StripePayment from "./components/Checkout/StripePayment/StripePayment";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 import OrderDetail from "./components/ControlPanel/Orders/OrderDetail";
-import EditAddCategory from "./components/ControlPanel/Categorys/EditAddCategory/EditAddCategory";
 import ContactUs from './components/ContactUs/ContactUs';
 
 const stripePromise = loadStripe(
@@ -54,8 +53,6 @@ function App() {
       <Route exact path="/admin/editProduct/:id" component={FormProduct}/>
       <Route exact path='/contacto' component={ContactUs} />
       <Route exact path='/profile/:id' component={OrderUser}/>
-      {/* ESTO DE ABAJO SE TIENE QUE BORRAR */}
-      <Route exact path="/admin/editCategory" component={EditAddCategory}/>
     </>
   );
 }

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef} from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { HiOutlineSearch } from 'react-icons/hi';
 import { getOrderForUser, getProductsByName, getUsers, reset, userFiltered } from '../../redux/actions';
@@ -26,8 +26,8 @@ const Search = ({ itemValue }) => {
                 dispatch(getUsers());
                 dispatch(userFiltered(input, store.users));
                 break;
-                case 'order':
-                    dispatch(getOrderForUser(input));
+            case 'order':
+                dispatch(getOrderForUser(input));
                 break;
             default:
                 setInput('');
