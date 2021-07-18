@@ -13,6 +13,7 @@ import ItemUsers from "./Users/ItemUsers.jsx";
 import ItemOrder from "./Orders/ItemOrder.jsx";
 import FilterOrders from "./Orders/FilterOrders.jsx";
 import Loading from "../Loading/Loading.jsx";
+import EditAddCategory from "./Categorys/EditAddCategory/EditAddCategory"
 
 const ControlPanel = () => {
   const store = useSelector((state) => state);
@@ -70,6 +71,9 @@ const ControlPanel = () => {
                   )
                 }</>
             )}
+            {visual.categorys && 
+            <EditAddCategory/>
+            }
           </div>
         </>
       ) : null}
