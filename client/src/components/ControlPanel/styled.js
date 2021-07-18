@@ -217,9 +217,24 @@ const StyledUserDetail = styled.div`
     border-radius: 8px;
     color:white;
     box-shadow: 0px 14px 15px rgba(0, 0, 0, 0.1);
-    .btn{
+    .btn-admin{
         margin: 150px 10px 0px 10px;
         background-color:orange;
+        font-weight:bold;
+        :hover{
+            background-color: white;
+        }
+    }
+    .btn-block{
+        margin: 150px 10px 0px 10px;
+        background-color:red;
+        font-weight:bold;
+    }
+    .btn-recoverypsw{
+        margin: 150px 10px 0px 10px;
+        background-color:#E9EEF9;
+        color:black;
+        font-weight:bold;
     }
     .name{
         font-size: 30px;
@@ -274,6 +289,81 @@ const StyledOrderDetail = styled.div`
         border:none;
     }
 `
+
+const StyledAddProduct = styled.div`
+    width: 75%;
+    margin:auto;
+    background: #420D1F;
+    border-radius:8px;
+    color:white;
+    font-weight:bold;
+    .add-product{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        label{
+            margin-top:10px;
+            display:flex;
+            align-items:center;
+            flex-direction:column;
+            h4{
+                padding:0;
+                margin-right:5px;
+                font-size:18px;
+            }
+            input{
+                width: 55%;
+                padding: .7em;
+                border: none;
+                background: white;
+                outline: none;
+                color: black;
+                border-radius: 4px;
+                font-width:bold;
+                height:10px;
+            }
+            select{
+                width: 55%;
+                padding: .7em;
+                border: none;
+                background: white;
+                outline: none;
+                color: black;
+                border-radius: 4px;
+                font-width:bold;
+            }
+            textarea{
+                width: 55%;
+                padding: .7em;
+                border: none;
+                background: white;
+                outline: none;
+                color: black;
+                border-radius: 4px;
+                font-width:bold;
+                height:10px;
+            }
+        }
+        .block{
+            background: orange;
+            height:50px;
+            color:white;
+            font-weight:bold;
+            width:85%;
+            margin:auto;
+            margin-top:20px;
+        }
+        a{
+            text-decoration:none;
+            .volver{
+                color:white;
+                background-color:black;
+                margin-bottom:5px;
+                margin-left:5px;
+            }
+        }
+    }
+`
+
 export {
     StyledPanel,
     StyledMenu,
@@ -282,5 +372,6 @@ export {
     StyledUsers,
     StyledUserDetail,
     StyledOrders,
-    StyledOrderDetail
+    StyledOrderDetail,
+    StyledAddProduct
 };

@@ -94,18 +94,18 @@ const UserDetail = ({ match }) => {
             </>
           )}
           <li className="status">{user.userStatus}</li>
-          <Button className="btn" variant="contained" onClick={handleClick}>
+          <Button className="btn-admin" variant="contained" onClick={handleClick}>
             Hacer Admin
           </Button>
           <Button
-            className="btn"
+            className="btn-block"
             variant="contained"
             color="secondary"
             onClick={blockedUser}
           >
             Bloquear Usuario
           </Button>
-          <Button className="btn" variant="contained">
+          <Button className="btn-recoverypsw" variant="contained">
             Forzar reinicio de contraseña
           </Button>
         </div>
