@@ -17,7 +17,6 @@ const FilterOrders = () => {
     const classes = useStyles();
     const dispatch = useDispatch();
     const handleChange = (e) => {
-        console.log(e.target.value)
         dispatch(getOrderForStatus(e.target.value))
         setTimeout(() => e.target.value = "", 1000);
     }

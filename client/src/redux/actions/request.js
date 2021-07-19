@@ -161,11 +161,11 @@ export const getOrderForStatus = (status) => {
   };
 };
 
-export const getOrderForUser = (status) => {
+export const getOrderForUser = (user) => {
   return async (dispatch) => {
     dispatch({ type: LOADING });
     try {
-      const order = await axios.get(`${GET_URL}orders?user=${status}`, {
+      const order = await axios.get(`${GET_URL}orders?user=${user}`, {
         headers: {
           authorization: "Bearer " + sessionStorage.getItem("token"),
         },
