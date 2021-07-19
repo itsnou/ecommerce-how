@@ -1,22 +1,18 @@
-import {React, useState} from 'react';
+import {React} from 'react';
 import {GoogleMap, LoadScript, Marker} from '@react-google-maps/api';
 import {useForm} from 'react-hook-form';
 import axios from 'axios';
 import StyledDiv from './style';
-import swal from 'sweetalert';
 
 const ContactUs = (props) => {
 	const mapStyle = {height: '400px', width: '600px'};
 	const defaultCenter = {lat: -38.955327, lng: -68.14018};
 	const {register, errors, handleSubmit} = useForm();
-	const [error,setError] = useState("");
 
 	const onSubmit = (data, e) => {
 		axios.post('http://localhost:3001/sendMail', data);
 		e.target.reset();
-		swal("El usuario a sido bloqueado", {
-			icon: "success",
-		});
+		alert('consulta enviada');
 	};
 
 	return (
