@@ -14,6 +14,7 @@ import {
   GET_PRODUCTS_ALL,
   GET_PRODUCTS_FOR_CATEGORY,
   GET_PRODUCTS_BY_NAME,
+  GET_PRODUCTS_BY_BARCODE,
   GET_PRODUCT_DETAIL,
   GET_USERS,
   GET_USER_DETAIL,
@@ -99,6 +100,18 @@ const reducer = (state = initialState, { payload, type }) => {
       return {
         ...state,
         search: searching,
+        loading: false,
+      };
+    case GET_PRODUCTS_BY_BARCODE:
+      let searchBarcode;
+      if (payload.length > 0) {
+        searchBarcode = payload;
+      } else {
+        searchBarcode = ["No hay productos"];
+      }
+      return {
+        ...state,
+        search: searchBarcode,
         loading: false,
       };
     case GET_PRODUCTS_FOR_CATEGORY:

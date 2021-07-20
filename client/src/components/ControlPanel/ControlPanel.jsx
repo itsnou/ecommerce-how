@@ -43,7 +43,7 @@ const ControlPanel = () => {
               <>
                 <Search itemValue={"product"} />
                 {store.loading ? <Loading /> :
-                  store.search.length > 1 &&
+                  store.search.length>0 &&
                   store.search.map((p) => <ItemProduct product={p} />)}
               </>
             )}

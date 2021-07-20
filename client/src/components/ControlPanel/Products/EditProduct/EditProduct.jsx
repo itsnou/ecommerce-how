@@ -5,6 +5,7 @@ import { getProductDetail } from '../../../../redux/actions/request';
 import { editProduct } from '../../../../redux/actions/sending';
 import Loading from '../../../Loading/Loading';
 import StyledDiv from './styled';
+import { Link } from 'react-router-dom';
 
 const FormProduct = ({ match }) => {
     const dispatch = useDispatch();
@@ -15,7 +16,9 @@ const FormProduct = ({ match }) => {
     const load = useSelector(state => state.loading);
 
     useEffect(() => {
-        return dispatch(getProductDetail(id.current))
+        dispatch(getProductDetail(id.current))
+        return () => { dispatch(getProductDetail("fakeId")) }
+
     }, [dispatch])
 
     const onSubmit = data => {
@@ -59,6 +62,9 @@ const FormProduct = ({ match }) => {
                                 </p>
                                 <p classname='block'>
                                     <button type="submit">ENVIAR</button>
+                                </p>
+                                <p classname='block'>
+                                <Link to={`/admin/controlpanel`}><button>Volver</button></Link>
                                 </p>
                             </form>
                             {edit ? <h1>LA MODIFICACIÓN FUE UN ÉXITO</h1> : null}
