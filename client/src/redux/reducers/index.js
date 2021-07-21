@@ -72,7 +72,7 @@ const initialState = {
   searchOrders: [],
   confirm: false,
   payment: {},
-  flag: 1,
+  flag: 1
 };
 
 const reducer = (state = initialState, { payload, type }) => {
@@ -104,16 +104,19 @@ const reducer = (state = initialState, { payload, type }) => {
         loading: false,
       };
     case GET_PRODUCTS_BY_BARCODE:
-      // let searchBarcode;
-      // if (payload.length > 0) {
-      //   searchBarcode = payload;
-      // } else {
-      //   searchBarcode = [];
-      // }
+      let searchBarcode;
+      let loadingBarcode;
+      if (payload.length > 0) {
+        searchBarcode = payload;
+        loadingBarcode= true
+      } else {
+        searchBarcode = ["No tiene este producto cargado"];
+        loadingBarcode= false
+      }
       return {
         ...state,
-        search: payload,
-        loading: false,
+        search: searchBarcode,
+        loading: loadingBarcode,
       };
     case GET_PRODUCTS_FOR_CATEGORY:
       return {

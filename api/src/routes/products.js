@@ -44,10 +44,11 @@ router.get("/", async (req, res) => {
       const productsByBarcode = await productSchema.find({
         barcode: barcode,
       });
+      console.log(productsByBarcode)
       if(productsByBarcode.length > 0) {
         return res.send(productsByBarcode);
       } else {
-        return res.status(404).send("Sorry... Barcode not found");
+        return res.status(404).send(["Not found"]);
       }
     } catch (err) {
       return res.status(404).send("Sorry... Barcode not found");

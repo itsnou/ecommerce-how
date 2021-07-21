@@ -34,9 +34,7 @@ const Search = ({ itemValue }) => {
     e.preventDefault();
     switch (itemValue) {
       case "product":
-        input?
         dispatch(getProductsByName(input))
-        :dispatch(getProductsByBarcode(barcode));
         break;
       case "user":
         dispatch(getUsers());
@@ -64,7 +62,7 @@ const Search = ({ itemValue }) => {
   useEffect(()=>{
     if(store.search.length>0){
     if(store.search[0].barcode == barcode){
-      history.push(`/admin/editProduct/${store.search[0]._id}`)
+      setTimeout(history.push(`/admin/editProduct/${store.search[0]._id}`),5000)
     }}
     // else if(barcode.toString.length==6){
     //   history.push(`/admin/controlpanel`)
