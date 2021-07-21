@@ -127,12 +127,15 @@ const StyledSearch = styled.div`
     float: left;
     background: #fff;
     height: 30px;
+    border-radius: 4px;
+    margin-right: 10px;
+    margin-bottom: 10px;
   }
   .btn {
     height: 31px;
-    border-left: none;
     background: #EDEDED;
     color: #214252;
+
   }
 `
 const StyledOrders = styled.div`

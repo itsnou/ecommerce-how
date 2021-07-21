@@ -89,6 +89,7 @@ const reducer = (state = initialState, { payload, type }) => {
         ...state,
         productDetail: payload,
         loading: false,
+        confirm: false,
       };
     case GET_PRODUCTS_BY_NAME:
       let searching;
@@ -103,15 +104,15 @@ const reducer = (state = initialState, { payload, type }) => {
         loading: false,
       };
     case GET_PRODUCTS_BY_BARCODE:
-      let searchBarcode;
-      if (payload.length > 0) {
-        searchBarcode = payload;
-      } else {
-        searchBarcode = ["No hay productos"];
-      }
+      // let searchBarcode;
+      // if (payload.length > 0) {
+      //   searchBarcode = payload;
+      // } else {
+      //   searchBarcode = [];
+      // }
       return {
         ...state,
-        search: searchBarcode,
+        search: payload,
         loading: false,
       };
     case GET_PRODUCTS_FOR_CATEGORY:

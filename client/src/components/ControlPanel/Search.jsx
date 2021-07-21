@@ -74,22 +74,26 @@ const Search = ({ itemValue }) => {
     <StyledSearch>
       <div>
         <form onSubmit={handleSubmit}>
+          <div>
           <input
             type="search"
             placeholder="Buscar por nombre..."
             value={input}
             onChange={handleChange}
           />
+          <Button className="btn" type='submit' variant="contained" onClick={handleSubmit}>
+            <HiOutlineSearch />
+          </Button>
+          </div>
+          <div>
           {itemValue==="product"?<input
             type="number"
-            placeholder="Buscar por Código de Barras..."
+            placeholder="Código de Barras..."
             value={barcode}
             onChange={handleChangeBarcode}
           />:null
           }
-          <Button className="btn" variant="contained" onClick={handleSubmit}>
-            <HiOutlineSearch />
-          </Button>
+          </div>
         </form>
       </div>
     </StyledSearch>

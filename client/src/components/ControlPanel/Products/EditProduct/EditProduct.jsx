@@ -17,8 +17,9 @@ const FormProduct = ({ match }) => {
 
     useEffect(() => {
         dispatch(getProductDetail(id.current))
-        return () => { dispatch(getProductDetail("fakeId")) }
-
+        return () => { 
+            dispatch(getProductDetail("fakeId")) }
+            
     }, [dispatch])
 
     const onSubmit = data => {
