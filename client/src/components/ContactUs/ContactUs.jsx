@@ -1,4 +1,4 @@
-import {React, useState} from 'react';
+import {React} from 'react';
 import {GoogleMap, LoadScript, Marker} from '@react-google-maps/api';
 import {useForm} from 'react-hook-form';
 import axios from 'axios';
@@ -30,8 +30,8 @@ const ContactUs = (props) => {
 			</div>
 			<div>
 				<h3>
-					si tenes alguna duda, podes enviarla completando el siguiente
-					formulario
+					Si tiene alguna duda, puede enviarla completando el siguiente
+					formulario:
 				</h3>
 				<form onSubmit={handleSubmit(onSubmit)}>
 					<h3>Nombre: </h3>

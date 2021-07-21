@@ -4,9 +4,7 @@ import StyledDiv from "./styled.js";
 import { getProductsAll, getProductsByName } from "../../redux/actions/request";
 import ProductCard from "../ProductCard/ProductCard";
 import ReactPaginate from "react-paginate";
-import Loading from "../Loading/Loading";
 import Filters from "../Filters/Filters";
-import Sort from "../Sorts/Sort";
 
 const Catalogo = () => {
     const dispatch = useDispatch();

@@ -6,7 +6,7 @@ const StyledDiv = styled.div`
                         'filter product product product'
                         'filter product product product'
                         'filter paginate paginate paginate';
-
+    margin-top: 20px;
     .paginate{
         grid-area: paginate;
         margin:auto;
@@ -77,7 +77,7 @@ const StyledDiv = styled.div`
                     width:8rem;
                     height:14rem;
                     :hover{
-                        transform: scale(1.5); 
+                        animation: subidon 1.5s;
                     }
                 }
             }
@@ -143,6 +143,11 @@ const StyledDiv = styled.div`
             }
         }
     }
+    @keyframes subidon {
+  0%   {transform: scale(1);}
+  100% {transform: scale(1.5);
+    animation-play-state: paused}
+}
 `
 
 export default StyledDiv;

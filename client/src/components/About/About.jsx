@@ -15,7 +15,7 @@ const About = () => {
         </div>
       <div>
         <p>Somos apasionados del vino como usted y queremos acercarle los mejores vinos a su paladar.
-        Ofrecemos un servicio ágil, una muy buena selección de productos con una equilibrada relación en su precio. Suscribase a nuestro Newsletter par recibir promociones especiales y e información sobre nuevos productos.
+        Ofrecemos un servicio ágil, con una muy buena selección de productos y una equilibrada relación en su precio. Suscribase a nuestro Newsletter par recibir promociones especiales y e información sobre nuevos productos.
         </p>
       </div>
       <div className='subtitle'>

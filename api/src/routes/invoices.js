@@ -34,11 +34,10 @@ router.post(
 	passport.authenticate('jwt', {session: false}),
 	async (req, res) => {
 		try {
-			const {items, totalAmount} = req.body;
+			const {items, totalAmount, service} = req.body;
 			const token = req.headers.authorization.split(' ');
 			const decodificado = jwt_decode(token[1]);
 			const findUser = await userSchema.findOne({email: decodificado.email});
-
 			const data = {
 				items: items,
 				totalAmount: totalAmount,

@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { FaShoppingCart } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { addToCart, modifyItemCart } from "../../../redux/actions/cart";
+import { addToCart } from "../../../redux/actions/cart";
 
 const User = () => {
   const dispatch = useDispatch();
@@ -31,7 +31,7 @@ const User = () => {
   useEffect(() => {
     if (window.localStorage) {
       Object.keys(window.localStorage).map((el) => {
-        dispatch(addToCart(JSON.parse(window.localStorage.getItem(`${el}`))));
+        return dispatch(addToCart(JSON.parse(window.localStorage.getItem(`${el}`))));
       });
     }
   }, [dispatch]);
@@ -40,10 +40,9 @@ const User = () => {
     if (countCart.length > 0) {
       //contador de precios
       let count = countCart.map((e) => e.price * e.quantity);
-      const reducer = (accumulator, currentValue) => accumulator + currentValue;
-      fixed.current = count.reduce(reducer);
-      setPrice(fixed.current);
-
+      const reducer = (accumulator, currentValue) => parseInt(accumulator) + parseInt(currentValue);
+      fixed.current = parseInt(count.reduce(reducer));
+      setPrice(parseInt(fixed.current));
       //contador de cantidades
       let quantity = countCart.map((e) => e.quantity);
       quantityProduct.current = quantity.reduce(reducer);
@@ -65,14 +64,7 @@ const User = () => {
       <ul className="nav-list_usuario">
         <li>
           {userLog === "on" ? (
-            <h1></h1>
-          ) : (
-            <Link to="/create">CREAR CUENTA</Link>
-          )}
-        </li>
-        <li>
-          {userLog === "on" ? (
-            <div>
+            <div className='loged-in'>
               <Link to="/profile">PERFIL</Link>
               <div>
                 <Link onClick={() => disconnect()}>DESCONECTARSE</Link>
@@ -82,7 +74,10 @@ const User = () => {
               ) : null}
             </div>
           ) : (
-            <Link to="/login">INICIAR SESIÓN</Link>
+            <div>
+              <Link to="/create">CREAR CUENTA</Link>
+              <Link to="/login">INICIAR SESIÓN</Link>
+            </div>
           )}
         </li>
         <li>
@@ -90,7 +85,7 @@ const User = () => {
             <FaShoppingCart /> CARRITO
           </Link>
         </li>
-        <li className="nav-list_count">{cartCount}</li>
+        <li className="nav-list_count"><div className='counter'>{cartCount}</div></li>
         <li className="nav-list_price">$ {price}</li>
       </ul>
     </div>

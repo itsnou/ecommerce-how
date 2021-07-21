@@ -10,6 +10,7 @@ import ControlPanel from './components/ControlPanel/ControlPanel';
 import FormProduct from './components/ControlPanel/Products/EditProduct/EditProduct';
 import LogIn from './components/LogIn/LogIn';
 import Profile from './components/Profile/Profile';
+import OrderUser from './components/Profile/OrderUser/OrderUser';
 import UserDetail from './components/ControlPanel/Users/UserDetail';
 import Chat from './components/ChatWhatsApp/Chat';
 import Checkout from './components/Checkout/Checkout';
@@ -18,6 +19,7 @@ import {loadStripe} from '@stripe/stripe-js';
 import {Elements} from '@stripe/react-stripe-js';
 import OrderDetail from './components/ControlPanel/Orders/OrderDetail';
 import ContactUs from './components/ContactUs/ContactUs';
+import EditProductVarietals from './components/ControlPanel/Products/EditProductVarietals/EditProductVarietals';
 import MercadoPago from './components/Checkout/MercadoPago/MercadoPago';
 
 const stripePromise = loadStripe(
@@ -27,10 +29,15 @@ const stripePromise = loadStripe(
 function App() {
 	return (
 		<>
-			<Route path={['/', '/vino/:id', '/catalogo']}>
+			<Route path={['/', '/product/:id', '/catalogo']}>
 				<Nav />
 			</Route>
-			<Route path='/' component={Chat} />
+			<Route
+				exact
+				path={['/', '/product/:id', '/catalogo', '/contacto', '/empresa']}
+			>
+				<Chat />
+			</Route>
 			<Route exact path='/' component={Home} />
 			<Route exact path='/catalogo' component={Catalogo} />
 			<Route exact path='/product/:id' component={ProductDetail} />
@@ -42,14 +49,19 @@ function App() {
 			<Route exact path='/admin/controlpanel' component={ControlPanel} />
 			<Route exact path='/login' component={LogIn} />
 			<Route exact path='/profile' component={Profile} />
-			<Route exact path='/admin/editProduct/:id' component={FormProduct} />
 			<Route exact path='/checkout' component={Checkout} />
 			<Elements stripe={stripePromise}>
 				<Route exact path='/checkout/stripe' component={StripePayment} />
 			</Elements>
+			<Route exact path='/checkOutMp' component={MercadoPago} />
 			<Route exact path='/admin/editProduct/:id' component={FormProduct} />
 			<Route exact path='/contacto' component={ContactUs} />
-			<Route exact path='/checkOutMp' component={MercadoPago} />
+			<Route exact path='/profile/:id' component={OrderUser} />
+			<Route
+				exact
+				path='/admin/editProductVarietals/:id'
+				component={EditProductVarietals}
+			/>
 		</>
 	);
 }

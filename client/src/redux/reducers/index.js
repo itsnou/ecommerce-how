@@ -34,8 +34,11 @@ import {
   REMOVE_FROM_WISHLIST,
   SET_PAYMENT,
   EDIT_ORDER_STATUS,
-  GET_ORDERS_FOR_STATUS
-
+  GET_ORDERS_FOR_STATUS,
+  GET_ORDERS_FOR_USER,
+  ADD_VARIETAL,
+  DELETE_VARIETAL,
+  CLEAR_CART,
 } from "../actions/constant";
 
 import { addToCart } from "../../utils/addToCart";
@@ -66,9 +69,9 @@ const initialState = {
   loged: "off",
   searchUser: [],
   searchOrders: [],
-  wishlist: [],
   confirm: false,
   payment: {},
+  flag: 1,
 };
 
 const reducer = (state = initialState, { payload, type }) => {
@@ -107,22 +110,32 @@ const reducer = (state = initialState, { payload, type }) => {
     case GET_ORDERS:
       return {
         ...state,
+        loading: false,
         orders: payload,
       };
     case GET_ORDER_DETAIL:
       return {
         ...state,
+        loading: false,
         orderDetail: payload,
       };
     case GET_ORDERS_FOR_STATUS:
       return {
         ...state,
+        loading: false,
+        searchOrders: payload,
+      };
+    case GET_ORDERS_FOR_USER:
+      return {
+        ...state,
+        loading: false,
         searchOrders: payload,
       };
     case GET_USERS:
       return {
         ...state,
         users: payload,
+        loading: false,
       };
     case LOAD_PROFILE:
       return {
@@ -138,6 +151,7 @@ const reducer = (state = initialState, { payload, type }) => {
     case GET_USER_DETAIL:
       return {
         ...state,
+        loading: false,
         userDetail: payload,
       };
     case USERS_FILTERED:
@@ -204,8 +218,8 @@ const reducer = (state = initialState, { payload, type }) => {
     case MODIFY_PRODUCT:
       return {
         ...state,
-        confirm: payload
-      }
+        confirm: payload,
+      };
     case RESET:
       return {
         ...state,
@@ -235,18 +249,6 @@ const reducer = (state = initialState, { payload, type }) => {
       };
     case EDIT_USER_STATUS:
       return state;
-    case ADD_TO_WISHLIST:
-      return {
-        ...state,
-        wishlist: [...state.wishlist, payload],
-      };
-    case REMOVE_FROM_WISHLIST:
-      let aux = state.wishlist.filter((e) => e !== payload);
-      console.log(aux);
-      return {
-        ...state,
-        wishlist: aux,
-      };
     case SET_PAYMENT:
       return {
         ...state,
@@ -254,6 +256,21 @@ const reducer = (state = initialState, { payload, type }) => {
       };
     case EDIT_ORDER_STATUS:
       return state;
+    case DELETE_VARIETAL:
+      return {
+        ...state,
+        flag: state.flag + payload,
+      };
+    case ADD_VARIETAL:
+      return {
+        ...state,
+        flag: state.flag + payload,
+      };
+    case CLEAR_CART:
+      return {
+        ...state,
+        cart: payload,
+      };
     default:
       return state;
   }

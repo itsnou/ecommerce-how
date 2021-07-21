@@ -85,6 +85,7 @@ router.post(
           imageUrl: imageUrl,
           varietal: varietal,
           year: year,
+          reviews: [],
         };
         const newProduct = await new productSchema(data);
         newProduct.save();
@@ -107,7 +108,7 @@ router.put(
     const findUser = await userSchema.findOne({ email: decodificado.email });
     if (findUser.userStatus === "Admin") {
       const { id, description, name, price, stock, vineyard } = req.body;
-      console.log(id,description,stock,price)
+      console.log(id, description, stock, price);
       const update = {
         name: name,
         price: price,
@@ -119,6 +120,67 @@ router.put(
       res.send("Cambios completos");
     } else {
       res.status(401).send({ message: "No esta autorizado" });
+    }
+  }
+);
+
+router.put(
+  "/addreview",
+  passport.authenticate("jwt", { session: false }),
+  async (req, res) => {
+    try {
+      const { content, id, calification } = req.body;
+      const token = req.headers.authorization.split(" ");
+      const decodificado = jwt_decode(token[1]);
+      const findUser = await userSchema.findOne({ email: decodificado.email });
+      const review = { name: findUser.name, content: content };
+      const addReview = await productSchema.findByIdAndUpdate(id, {
+        $push: { reviews: review },
+      });
+      const addCalification = await productSchema.findByIdAndUpdate(id, {
+        $push: { rating: calification },
+      });
+      res.send("Review agregada");
+    } catch (e) {
+      res.status(404).send({ message: "Ha ocurrido un error" });
+    }
+  }
+);
+
+router.put(
+  "/addvarietal",
+  passport.authenticate("jwt", { session: false }),
+  async (req, res) => {
+    const { productId, varietal } = req.body;
+    const token = req.headers.authorization.split(" ");
+    const decodificado = jwt_decode(token[1]);
+    const findUser = await userSchema.findOne({ email: decodificado.email });
+    if (findUser.userStatus === "Admin") {
+      const addVarietal = await productSchema.findByIdAndUpdate(productId, {
+        $push: { varietal: varietal },
+      });
+      res.send("Se añadió el varietal");
+    } else {
+      res.status(401).send({ message: "No tiene permisos" });
+    }
+  }
+);
+
+router.put(
+  "/removevarietal",
+  passport.authenticate("jwt", { session: false }),
+  async (req, res) => {
+    const { productId, varietal } = req.body;
+    const token = req.headers.authorization.split(" ");
+    const decodificado = jwt_decode(token[1]);
+    const findUser = await userSchema.findOne({ email: decodificado.email });
+    if (findUser.userStatus === "Admin") {
+      const removeVarietal = await productSchema.findByIdAndUpdate(productId, {
+        $pull: { varietal: varietal },
+      });
+      res.send("Se removió el varietal");
+    } else {
+      res.status(491).send({ message: "No tiene permisos" });
     }
   }
 );

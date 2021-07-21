@@ -8,19 +8,28 @@ const ItemOrder = ({ order }) => {
     else if (order.state === "Finalizado") type = "complete";
     else if (order.state === "Enviado") type = "sent";
     else if (order.state === "Cancelado") type = "cancel";
+    const reducer = (accumulator, currentValue) => accumulator + currentValue;
+    const countProduct = order?.invoice.items.map(el=>el.quantity);
+
+    console.log(countProduct)
+
     return (
-        <StyledOrders>
-            <Link to={`/order/${order._id}`}>
+        <>
+        {order.user && 
+            <StyledOrders>
+            <Link to={`/order/${order._id}`} className='link-user'>
                 <li className="name">{order.user.name} {order.user.lastName}</li>
             </Link>
             <li className="email">{order.user.email}</li>
             <li className="cant">
-                <li>Cant.Prod.: {order.invoice.items.length}</li>
-                <li className="amount">Total: ${order.invoice.totalAmount}</li>
+                <p>Cant.Prod.: {countProduct?.reduce(reducer)}</p>
+                <p className="amount">${order.invoice.totalAmount}</p>
             </li>
             <li className={type}>{order.state}</li>
-            <li className="date">{order.invoice.date}</li>
+            <li className="date">{order.invoice.date.slice(0,10)}</li>
         </StyledOrders>
+        }
+        </>
     )
 };
 

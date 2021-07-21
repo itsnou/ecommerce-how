@@ -43,7 +43,7 @@ export const Cart = () => {
             return (
               <div key={index} className='container-cards_products'>
                 <div className='container-img_card'>
-                  <img className="img-card" src={e.imageUrl} alt="image not found"/>
+                  <img className="img-card" src={e.imageUrl} alt={e.name}/>
                 </div>
                 <div className='container-title'>
                   <h2>{e.name}</h2>
@@ -100,9 +100,12 @@ export const Cart = () => {
                 <h2>Total: $ {total}</h2>
               </Grid>
               <Grid item xs={6}>
+              { window.sessionStorage.userLog === 'on'  && cartItems.length> 0 ? 
                 <Link to='/checkout'>
                  <Button variant="contained">COMPRAR!</Button>
                 </Link>
+                : null
+              }
               </Grid>
             </Grid>
           </div>

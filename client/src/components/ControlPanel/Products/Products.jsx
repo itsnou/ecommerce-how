@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import Button from '@material-ui/core/Button';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import Grow from '@material-ui/core/Grow';
@@ -15,8 +15,6 @@ const Products = ({ setVisual }) => {
     const anchorRef = useRef(null);
     const dispatch = useDispatch();
 
-
-
     const handleToggle = () => {
         setOpen((prevOpen) => !prevOpen);
     };
@@ -29,7 +27,6 @@ const Products = ({ setVisual }) => {
             })
         }
         if (e.target.value === 2) {
-            // dispatch(getProductsAll());
             setVisual({
                 productsSearch: true,
             })

@@ -1,4 +1,3 @@
-import {useEffect} from 'react';
 import { FaCartPlus } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { useDispatch,useSelector } from "react-redux";

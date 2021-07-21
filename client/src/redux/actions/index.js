@@ -16,7 +16,8 @@ import {
     getOrders,
     getOrderDetail,
     getProductDetail,
-    getOrderForStatus
+    getOrderForStatus,
+    getOrderForUser
 } from "./request";
 import {
     addCategory,
@@ -29,10 +30,10 @@ import {
 } from "./sending";
 import { RESET } from "./constant";
 
-export const reset = (props) => {
+export const reset = (prop) => {
     return {
         type: RESET,
-        payload: props,
+        payload: prop,
     };
 };
 
@@ -48,6 +49,7 @@ export {
     getOrders,
     getOrderDetail,
     getOrderForStatus,
+    getOrderForUser,
     getUserDetail,
     getProductsAll,
     getProductDetail,

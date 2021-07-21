@@ -6,7 +6,7 @@ const StyledDiv = styled.div`
     
     .nav-logo{
         text-align: center;
-        margin:auto;
+        margin:auto 230px;
         img{
             width:400px;
         }
@@ -30,20 +30,25 @@ const StyledDiv = styled.div`
     }
 
     .nav-user{
+        width:100%;
+        height:100px;
         .nav-list_usuario{
             display:flex;
+            width:500px;
             list-style:none;
             padding:0;
             font-weight:bold;
             font-size:12px;
             li{
                 padding:4px;
-                margin-left:10px;
+                margin-left:3px;
                 a{
                     text-decoration:none;
                     color:white;
+                    margin-right:10px;
                     :hover{
-                        color: red;
+                        /* color: red; */
+                        color: #900C3E;
                     }
                 }
             }
@@ -51,6 +56,7 @@ const StyledDiv = styled.div`
                 background-color:black;
                 color:white;
                 padding:4px;
+                max-height:15px
             }
             .nav-list_price{
                 color:white;

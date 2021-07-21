@@ -68,7 +68,7 @@ const Footer = () => {
                     <ul>
                         <li>
                         <Link to='/catalogo'>
-                            Cátalogo
+                            Catálogo
                         </Link>
                         </li>
                     </ul>
@@ -77,17 +77,17 @@ const Footer = () => {
                     <h2>Seguinos: </h2>
                     <ul>
                         <li>
-                        <a href="#" target="_blank">
+                        <a href="www.instagram.com" target="_blank">
                             <img src={insta} class="footer-svg" alt=""/>
                         </a>
                         </li>
                         <li>
-                        <a href="#" target="_blank">
+                        <a href="www.facebook.com" target="_blank">
                             <img src={face} class="footer-svg" alt=""/>
                         </a>
                         </li>
                         <li>
-                        <a href="#" target="_blank">
+                        <a href="www.twitter.com" target="_blank">
                             <img src={twitter} class="footer-svg" alt=""/>
                         </a>
                         </li>
@@ -104,7 +104,7 @@ const Footer = () => {
                     </ul>
                 </div>
             </div>
-            <div className='footer-derechos'>Copyright House&Wines - 2021</div>
+            <div className='footer-derechos'>Copyright House & Wines - 2021</div>
     </StyledDiv>
     );
 }

@@ -1,6 +1,6 @@
 import {useEffect, useState} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
-import {getProductsAll, getVarietals} from '../../redux/actions/request';
+import {getVarietals} from '../../redux/actions/request';
 import {
 	changeFilterState,
 	filtredForCategory,
@@ -10,13 +10,15 @@ import {
 
 const Filters = () => {
 	const dispatch = useDispatch();
-	const products = useSelector((state) => state.products);
 	const search = useSelector((state) => state.search);
 	const varietals = useSelector((state) => state.varietals);
 	const [filterCategory, setFilterCategory] = useState({
 		category: 'default',
 		filterVarietals: [],
 	});
+	useEffect(() => {
+		dispatch(getVarietals());
+	}, [dispatch]);
 
 	useEffect(() => {
 		dispatch(getVarietals());
@@ -32,25 +34,6 @@ const Filters = () => {
 			...filterCategory,
 			category: event.target.value,
 		});
-	};
-
-	const handleVarietals = (event) => {
-		if (filterCategory.filterVarietals.includes(event.target.value)) {
-			setFilterCategory({
-				...filterCategory,
-				filterVarietals: filterCategory.filterVarietals.filter(
-					(el) => el !== event.target.value
-				),
-			});
-		} else {
-			setFilterCategory({
-				...filterCategory,
-				filterVarietals: [
-					...filterCategory.filterVarietals,
-					event.target.value,
-				],
-			});
-		}
 	};
 
 	return (
@@ -162,6 +145,7 @@ const Filters = () => {
 									</div>
 								);
 							}
+							return null;
 					  })
 					: // )
 					  varietals
@@ -223,6 +207,7 @@ const Filters = () => {
 										</div>
 									);
 								}
+								return null;
 							})}
 			</div>
 		</div>

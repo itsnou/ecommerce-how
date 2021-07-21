@@ -52,9 +52,7 @@ export const setPaymentReducer = (state) => {
   let items = [];
   state.cart.map((el) => {
     items.push({ name: el.name, price: el.price, quantity: el.quantity });
-    totalAmount += el.quantity * el.price;
+    return (totalAmount += el.quantity * el.price); // ESTO DEJAMOS PARA VER
   });
-  totalAmount = Math.ceil(totalAmount * 0.0104);
-  totalAmount = totalAmount * 100;
   return { totalAmount: totalAmount, items: items };
 };

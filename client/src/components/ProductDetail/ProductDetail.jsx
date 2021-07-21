@@ -1,28 +1,50 @@
 import { React, useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getProductDetail } from "../../redux/actions/request";
+import { getProductDetail, getProfile } from "../../redux/actions/request";
 import { addToCart } from "../../redux/actions/cart";
 import StyledDiv from "./style";
 import StarRatingComponent from "react-star-rating-component";
 import { FaWineGlass } from "react-icons/fa";
 import emptyheart from "../../assets/image/emptyheart.png";
 import fullheart from "../../assets/image/fullheart.png";
-import { addToWishlist, removeFromWishlist } from "../../redux/actions/sending";
+import {
+  addReview,
+  addToWishlist,
+  removeFromWishlist,
+} from "../../redux/actions/sending";
+import Loading from "../Loading/Loading";
 
 const ProductDetail = ({ match }) => {
   const dispatch = useDispatch();
   const detail = useSelector((store) => store.productDetail);
   const cart = useSelector((store) => store.cart);
+  const load = useSelector((store) => store.loading);
   const [count, setCount] = useState(0);
   const [stars, setStars] = useState(0);
   const fixed = useRef(match.params.id);
-  const wishlist = useSelector((store) => store.wishlist);
   const [wishlistBoolean, setWishlistBoolean] = useState(false);
+  const [content, setContent] = useState("");
+  const [calification, setCalification] = useState(0);
+  const [errors, setErrors] = useState("");
+  const user = useSelector((state) => state.user);
+
+  useEffect(() => {
+    if (window.sessionStorage.getItem("userLog")) {
+      dispatch(getProfile());
+    }
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (user && user[0]?.wishlist.includes(detail._id)) {
+      setWishlistBoolean(true);
+    } else {
+      setWishlistBoolean(false);
+    }
+  }, [user]);
 
   useEffect(() => {
     dispatch(getProductDetail(fixed.current));
-    if (wishlist.includes(detail._id)) setWishlistBoolean(true);
-  }, [dispatch]);
+  }, [dispatch, detail._id]);
 
   useEffect(() => {
     if (cart.length > 0) {
@@ -31,7 +53,7 @@ const ProductDetail = ({ match }) => {
         setCount(wine.quantity);
       }
     }
-  }, []);
+  }, [cart, detail._id]);
 
   useEffect(() => {
     if (detail.rating) {
@@ -45,100 +67,159 @@ const ProductDetail = ({ match }) => {
       ...detail,
       quantity: count,
     };
+    if (count < 1 || count > detail.stock) {
+      return setErrors(
+        `La cantidad máxima es: ${detail.stock}, y la mímina es 1 `
+      );
+    }
     dispatch(addToCart(obj));
+    window.localStorage.setItem(`${detail.name}`, JSON.stringify(obj));
   };
 
   const handleWishlist = (e) => {
     if (e === "remove") {
-      dispatch(removeFromWishlist(detail._id));
+      dispatch(removeFromWishlist({ id: detail._id }));
       setWishlistBoolean(false);
     }
     if (e === "add") {
-      dispatch(addToWishlist(detail._id));
+      dispatch(addToWishlist({ id: detail._id }));
       setWishlistBoolean(true);
     }
   };
 
-  return (
-    <StyledDiv>
-      <div className="detail-img">
-        <img src={detail.imageUrl} alt="not found" />
-      </div>
-      <div className="detail-explain">
-        <h2>{detail.name}</h2>
-        <h3>Bodega: {detail.vineyard}</h3>
-        <h3>Categoria: {detail.category}</h3>
-        <h3>Precio: ${detail.price}</h3>
-        <div className="detail-varietal">
-          <h3>Varietal/es: </h3>
-          {detail.varietal &&
-            detail.varietal.map((e) => {
-              return <h3 key={e}>{e}</h3>;
-            })}
-        </div>
-        <div className="detail-stars">
-          <h3>
-            puntaje:
-            <StarRatingComponent
-              name="rateWine"
-              editing={false}
-              renderStarIcon={() => (
-                <span>
-                  <FaWineGlass />
-                </span>
-              )}
-              starCount={5}
-              value={stars}
-            />
-          </h3>
-        </div>
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (calification < 1 || calification > 5) {
+      setErrors("");
+    }
+    dispatch(
+      addReview({
+        content: content,
+        id: detail._id,
+        calification: calification,
+      })
+    );
+    setContent("");
+    setCalification(0);
+  };
 
-        <h3>Detalle: {detail.description}</h3>
-        {detail.stock < 1 ? (
-          <div className="detail-btn">
-            <h3>SIN STOCK</h3>
+  return (
+    <>
+      {load ? (
+        <Loading />
+      ) : (
+        <StyledDiv>
+          <div className="detail-img">
+            <img src={detail.imageUrl} alt={detail.name} />
           </div>
-        ) : (
-          <div className="detail-btn">
-            <input
-              type="number"
-              min={detail.quantity}
-              max={detail.stock}
-              value={count}
-              onChange={(e) => setCount(e.target.value)}
-            />
-            <button onClick={() => handleClick()}>AGREGAR</button>
-            {wishlistBoolean ? (
-              <button
-                className="btn-wishlist"
-                onClick={() => {
-                  handleWishlist("remove");
-                }}
-              >
-                <img
-                  className="btn-wishlist"
-                  alt="Couldn't load"
-                  src={fullheart}
-                />
-              </button>
-            ) : (
-              <button
-                className="btn-wishlist"
-                onClick={() => {
-                  handleWishlist("add");
-                }}
-              >
-                <img
-                  className="btn-wishlist"
-                  alt="Couldn't load"
-                  src={emptyheart}
-                />
-              </button>
-            )}
+          <div className="detail-explain">
+            <div className="detail-render">
+              <h2>{detail.name}</h2>
+              <h3>Bodega: {detail.vineyard}</h3>
+              <h3>Categoria: {detail.category}</h3>
+              <h3>Precio: ${detail.price}</h3>
+              <div className="detail-varietal">
+                <h3>Varietal/es: </h3>
+                {detail.varietal &&
+                  detail.varietal.map((e) => {
+                    return <h3 key={e}>{e}</h3>;
+                  })}
+              </div>
+              <div className="detail-stars">
+                <h3>
+                  Puntaje:
+                  <StarRatingComponent
+                    name="rateWine"
+                    editing={false}
+                    renderStarIcon={() => (
+                      <span>
+                        <FaWineGlass />
+                      </span>
+                    )}
+                    starCount={5}
+                    value={stars}
+                  />
+                </h3>
+              </div>
+              <div className="product-description">
+                <h3>Detalle: {detail.description}</h3>
+              </div>
+              {detail.stock < 1 ? (
+                <div className="detail-btn">
+                  <h3>SIN STOCK</h3>
+                </div>
+              ) : (
+                <div className="detail-btn">
+                  <input
+                    type="number"
+                    min={1}
+                    max={detail.stock}
+                    value={count}
+                    onChange={(e) => setCount(e.target.value)}
+                  />
+                  <button onClick={() => handleClick()}>AGREGAR</button>
+                  {window.sessionStorage.getItem("userLog") ? (
+                    wishlistBoolean ? (
+                      <button
+                        className="btn-wishlist"
+                        onClick={() => {
+                          handleWishlist("remove");
+                        }}
+                      >
+                        <img
+                          className="btn-wishlist"
+                          alt="Couldn't load"
+                          src={fullheart}
+                        />
+                      </button>
+                    ) : (
+                      <button
+                        className="btn-wishlist"
+                        onClick={() => {
+                          handleWishlist("add");
+                        }}
+                      >
+                        <img
+                          className="btn-wishlist"
+                          alt="Couldn't load"
+                          src={emptyheart}
+                        />
+                      </button>
+                    )
+                  ) : null}
+                  <h3>{errors}</h3>
+                </div>
+              )}
+            </div>
+            <div>
+              {window.sessionStorage.getItem("userLog") ? (
+                <div>
+                  <form onSubmit={(e) => handleSubmit(e)}>
+                    <textarea
+                      type="text"
+                      placeholder="add review"
+                      value={content}
+                      onChange={(e) => setContent(e.target.value)}
+                    />
+                    <div>
+                      Puntaje
+                      <input
+                        type="number"
+                        min={1}
+                        max={5}
+                        value={calification}
+                        onChange={(e) => setCalification(e.target.value)}
+                      ></input>
+                      <button type="submit">Enviar</button>
+                    </div>
+                  </form>
+                </div>
+              ) : null}
+            </div>
           </div>
-        )}
-      </div>
-    </StyledDiv>
+        </StyledDiv>
+      )}
+    </>
   );
 };
 
