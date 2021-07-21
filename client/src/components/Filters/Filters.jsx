@@ -21,10 +21,6 @@ const Filters = () => {
 	}, [dispatch]);
 
 	useEffect(() => {
-		dispatch(getVarietals());
-	}, [dispatch]);
-
-	useEffect(() => {
 		dispatch(filtredForCategory(filterCategory));
 		dispatch(changeFilterState(filterCategory));
 	}, [dispatch, filterCategory, search]);
@@ -34,6 +30,25 @@ const Filters = () => {
 			...filterCategory,
 			category: event.target.value,
 		});
+	};
+
+	const handleVarietals = (event) => {
+		if (filterCategory.filterVarietals.includes(event.target.value)) {
+			setFilterCategory({
+				...filterCategory,
+				filterVarietals: filterCategory.filterVarietals.filter(
+					(el) => el !== event.target.value
+				),
+			});
+		} else {
+			setFilterCategory({
+				...filterCategory,
+				filterVarietals: [
+					...filterCategory.filterVarietals,
+					event.target.value,
+				],
+			});
+		}
 	};
 
 	return (
