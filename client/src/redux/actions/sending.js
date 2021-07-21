@@ -280,13 +280,60 @@ export const checkOut = (data) => {
 
 export const checkOutMp = (payload) => {
 	return async () => {
-		console.log('payload ', payload);
 		try {
 			const response = await axios.post(
 				`${GET_URL}paymentMP/create_preference`,
 				payload
 			);
 			window.location = response.data.response.sandbox_init_point;
+		} catch (error) {
+			console.log(error);
+		}
+	};
+};
+
+export const finishMpSale = (data) => {
+	return async (dispatch) => {
+		try {
+			const newInvoice = await axios.post(
+				`${GET_URL}invoices`,
+				{
+					items: data.items,
+					totalAmount: data.totalAmount,
+				},
+				{
+					headers: {
+						authorization: 'Bearer ' + sessionStorage.getItem('token'),
+					},
+				}
+			);
+			const newOrder = await axios.post(
+				`${GET_URL}orders`,
+				{invoice: newInvoice.data},
+				{
+					headers: {
+						authorization: 'Bearer ' + sessionStorage.getItem('token'),
+					},
+				}
+			);
+			const addOrder = await axios.put(
+				`${GET_URL}users/addorder`,
+				{orderId: newOrder.data},
+				{
+					headers: {
+						authorization: 'Bearer ' + sessionStorage.getItem('token'),
+					},
+				}
+			);
+			const changeStock = await axios.put(
+				`${GET_URL}invoices`,
+				{items: data.items},
+				{
+					headers: {
+						authorization: 'Bearer ' + sessionStorage.getItem('token'),
+					},
+				}
+			);
 		} catch (error) {
 			console.log(error);
 		}

@@ -1,5 +1,4 @@
 export const mercadoPagoCart = (arr) => {
-	console.log('estoy en la funcion');
 	let arrAux = arr.map((e) => {
 		return {title: e.name, quantity: e.quantity, unit_price: e.price};
 	});
