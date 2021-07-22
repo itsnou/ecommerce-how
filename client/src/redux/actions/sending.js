@@ -16,6 +16,7 @@ import {
 	ADD_VARIETAL,
 	DELETE_VARIETAL,
 	CLEAR_CART,
+  FORCE_RESET,
 } from './constant';
 
 export const addProduct = (product) => {
@@ -129,6 +130,25 @@ export const editUserStatus = (userEmail) => {
 			console.log(e);
 		}
 	};
+};
+
+export const forceReset = (id) => {
+  return async (dispatch) => {
+    try {
+      axios.put(
+        `${GET_URL}users/resetPass`,
+        { id: id },
+        {
+          headers: {
+            authorization: "Bearer " + sessionStorage.getItem("token"),
+          },
+        }
+      );
+      dispatch({ type: FORCE_RESET });
+    } catch (e) {
+      console.log(e);
+    }
+  };
 };
 
 export const editOrderStatus = (id, state, clientEmail) => {

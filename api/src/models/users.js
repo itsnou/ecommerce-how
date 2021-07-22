@@ -3,6 +3,7 @@ const bcrypt = require("bcrypt");
 
 const UsersSchema = new mongoose.Schema(
   {
+    resetPass: false,
     name: {
       required: true,
       type: String,
@@ -48,7 +49,11 @@ const UsersSchema = new mongoose.Schema(
       },
     ],
   },
-  { versionKey: false }
+  {
+    versionKey: false
+  },
+
+
 );
 
 UsersSchema.pre("save", async function (next) {
