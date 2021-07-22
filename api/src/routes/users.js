@@ -45,6 +45,7 @@ router.get(
 router.post("/signup", async (req, res) => {
   const { name, lastName, email, address, password } = req.body;
   const data = {
+    resetPass: false,
     name: name,
     lastName: lastName,
     email: email,
@@ -71,17 +72,16 @@ router.get(
     if (findUser.userStatus === "Admin") {
       const { id } = req.params;
       const user = await userSchema.findById(id);
-      console.log(user);
       res.send(user);
     } else {
       res.status(401).send({ message: "No tiene permisos" });
     }
   }
-);
-
-router.post("/login", async (req, res) => {
-  const { email, password } = req.body;
-  const userEmail = await userSchema.findOne({ email: email });
+  );
+  
+  router.post("/login", async (req, res) => {
+    const { email, password } = req.body;
+    const userEmail = await userSchema.findOne({ email: email });
   if (!userEmail) {
     return res.status(401).send({ message: "off" });
   }
@@ -91,6 +91,9 @@ router.post("/login", async (req, res) => {
   }
   if (userEmail.userStatus === "Bloqueado") {
     return res.status(401).send({ message: "Acceso denegado" });
+  }
+  if (userEmail.resetPass){
+    return res.send({ message: "reset pass" });
   }
 
   const jwtToken = jwt.sign(
@@ -125,6 +128,24 @@ router.put(
     }
   }
 );
+router.put(
+  "/resetPass",
+  passport.authenticate("jwt", { session: false }),
+  async (req, res) => {
+    const token = req.headers.authorization.split(" ");
+    const decodificado = jwt_decode(token[1]);
+    const findUser = await userSchema.findOne({ email: decodificado.email });
+    if (findUser.userStatus === "Admin") {
+      const { id } = req.body;
+      const userDeleted = await userSchema.findByIdAndUpdate(id, {
+        resetPass: true,
+      });
+      res.send("Usuario debe restablecer password");
+    } else {
+      res.status(401).send({ message: "No tiene acceso" });
+    }
+  }
+);
 
 router.put(
   "/blockuser",
@@ -135,7 +156,6 @@ router.put(
     const findUser = await userSchema.findOne({ email: decodificado.email });
     if (findUser.userStatus === "Admin") {
       const { id } = req.body;
-      console.log(id);
       const userDeleted = await userSchema.findByIdAndUpdate(id, {
         userStatus: "Bloqueado",
       });

@@ -11,11 +11,10 @@ import {
   EDIT_USER_STATUS,
   EDIT_ORDER_STATUS,
   MODIFY_PRODUCT,
-  ADD_TO_WISHLIST,
-  REMOVE_FROM_WISHLIST,
   ADD_VARIETAL,
   DELETE_VARIETAL,
   CLEAR_CART,
+  FORCE_RESET,
 } from "./constant";
 
 export const addProduct = (product) => {
@@ -125,6 +124,25 @@ export const editUserStatus = (userEmail) => {
         }
       );
       dispatch({ type: EDIT_USER_STATUS });
+    } catch (e) {
+      console.log(e);
+    }
+  };
+};
+
+export const forceReset = (id) => {
+  return async (dispatch) => {
+    try {
+      axios.put(
+        `${GET_URL}users/resetPass`,
+        { id: id },
+        {
+          headers: {
+            authorization: "Bearer " + sessionStorage.getItem("token"),
+          },
+        }
+      );
+      dispatch({ type: FORCE_RESET });
     } catch (e) {
       console.log(e);
     }

@@ -39,6 +39,7 @@ import {
   ADD_VARIETAL,
   DELETE_VARIETAL,
   CLEAR_CART,
+  LOG_OFF,
 } from "../actions/constant";
 
 import { addToCart } from "../../utils/addToCart";
@@ -148,6 +149,11 @@ const reducer = (state = initialState, { payload, type }) => {
         ...state,
         loged: payload,
       };
+    case LOG_OFF:
+      return {
+        ...state,
+        loged: payload
+      }
     case GET_USER_DETAIL:
       return {
         ...state,

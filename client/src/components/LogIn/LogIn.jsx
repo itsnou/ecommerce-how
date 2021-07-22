@@ -19,6 +19,10 @@ const LogIn = () => {
       history.push("/");
       window.location.reload();
     }
+    if (loged === "reset pass"){
+      history.push("/reset-password")
+    }
+    
   }, [loged,history]);
 
   const responseGoogle = (responseGoogle) => {
@@ -43,6 +47,7 @@ const LogIn = () => {
       email: email,
       password: password,
     };
+    
     dispatch(logIn(data));
   };
 
@@ -60,6 +65,7 @@ const LogIn = () => {
           value={email}
           placeholder="Email"
           onChange={(e) => validateUser(e.target.value)}
+          required
         />
         {!error ? null : <p>{error}</p>}
         <input
@@ -68,6 +74,7 @@ const LogIn = () => {
           placeholder="Password"
           type="password"
           onChange={(e) => setPassword(e.target.value)}
+          required
         />
         <Button type="submit" variant="contained">
           ENVIAR

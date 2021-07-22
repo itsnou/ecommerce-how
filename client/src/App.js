@@ -20,6 +20,7 @@ import { Elements } from "@stripe/react-stripe-js";
 import OrderDetail from "./components/ControlPanel/Orders/OrderDetail";
 import ContactUs from "./components/ContactUs/ContactUs";
 import EditProductVarietals from "./components/ControlPanel/Products/EditProductVarietals/EditProductVarietals";
+import ResetPassword from "./components/ResetPassword/ResetPassword";
 
 const stripePromise = loadStripe(
   "pk_test_51JDBoyGdIVmQXHqKUNKQADTSCIpNAgJeaoehTBVijP5uRNmbv2wgrUO92p2fxkOiSg3Ol0GTUYKFZfu7c5WxFOsb00E9tMt4VU"
@@ -52,7 +53,7 @@ function App() {
       <Elements stripe={stripePromise}>
         <Route exact path="/checkout/stripe" component={StripePayment} />
       </Elements>
-
+    <Route exact path="/reset-password" component={ResetPassword}/>
       <Route exact path="/admin/editProduct/:id" component={FormProduct} />
       <Route exact path="/contacto" component={ContactUs} />
       <Route exact path="/profile/:id" component={OrderUser} />
