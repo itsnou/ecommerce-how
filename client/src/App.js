@@ -53,7 +53,7 @@ function App() {
       <Elements stripe={stripePromise}>
         <Route exact path="/checkout/stripe" component={StripePayment} />
       </Elements>
-    <Route exact path="/reset-password" component={ResetPassword}/>
+    <Route exact path="/reset-password/:id" component={ResetPassword}/>
       <Route exact path="/admin/editProduct/:id" component={FormProduct} />
       <Route exact path="/contacto" component={ContactUs} />
       <Route exact path="/profile/:id" component={OrderUser} />

@@ -20,7 +20,7 @@ const LogIn = () => {
       window.location.reload();
     }
     if (loged === "reset pass"){
-      history.push("/reset-password")
+      history.push(`/reset-password/${email}`)
     }
     
   }, [loged,history]);
