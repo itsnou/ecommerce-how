@@ -78,7 +78,9 @@ router.get(
           .populate("user")
           .populate("invoice");
         const filtered = ordersByUser.filter(
-          (order) => order.user.name.toLowerCase().includes(user.toLowerCase())
+          (order) => {
+            if (order.user===null) return false;
+            return order.user.name.toLowerCase().includes(user.toLowerCase())}
         );
         return res.send(filtered);
       } catch (err) {

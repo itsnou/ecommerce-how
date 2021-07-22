@@ -7,7 +7,7 @@ const jwt_decode = require("jwt-decode");
 const userSchema = require("../models/users");
 
 router.get("/", async (req, res) => {
-  const { category, name, vineyard } = req.query;
+  const { category, name, vineyard, barcode } = req.query;
   if (vineyard) {
     try {
       const productsByVineyard = await productSchema.find({
@@ -37,6 +37,21 @@ router.get("/", async (req, res) => {
       return res.send(filter);
     } catch (err) {
       return res.status(404).send("The wine was not found");
+    }
+  }
+  if (barcode) {
+    try {
+      const productsByBarcode = await productSchema.find({
+        barcode: barcode,
+      });
+      console.log(productsByBarcode)
+      if(productsByBarcode.length > 0) {
+        return res.send(productsByBarcode);
+      } else {
+        return res.status(404).send(["Not found"]);
+      }
+    } catch (err) {
+      return res.status(404).send("Sorry... Barcode not found");
     }
   }
   const products = await productSchema.find();
@@ -73,6 +88,7 @@ router.post(
           imageUrl,
           varietal,
           year,
+          barcode,
         } = req.body;
         const data = {
           name: name,
@@ -86,6 +102,7 @@ router.post(
           varietal: varietal,
           year: year,
           reviews: [],
+          barcode: barcode
         };
         const newProduct = await new productSchema(data);
         newProduct.save();
@@ -107,8 +124,7 @@ router.put(
     const decodificado = jwt_decode(token[1]);
     const findUser = await userSchema.findOne({ email: decodificado.email });
     if (findUser.userStatus === "Admin") {
-      const { id, description, name, price, stock, vineyard } = req.body;
-      console.log(id, description, stock, price);
+      const { id, description, name, price, stock, vineyard, barcode } = req.body;
       const update = {
         name: name,
         price: price,

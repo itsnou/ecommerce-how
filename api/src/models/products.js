@@ -48,6 +48,11 @@ const ProductsSchema = new mongoose.Schema(
       default: 1,
     },
     reviews: [Object], //{name,content}
+    barcode: {
+      type: Number,
+      required: true,
+      unique: true
+    }
   },
   {
     versionKey: false,

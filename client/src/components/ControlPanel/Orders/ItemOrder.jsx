@@ -11,7 +11,6 @@ const ItemOrder = ({ order }) => {
     const reducer = (accumulator, currentValue) => accumulator + currentValue;
     const countProduct = order?.invoice.items.map(el=>el.quantity);
 
-    console.log(countProduct)
 
     return (
         <>
