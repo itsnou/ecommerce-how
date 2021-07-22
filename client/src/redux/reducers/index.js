@@ -14,6 +14,7 @@ import {
   GET_PRODUCTS_ALL,
   GET_PRODUCTS_FOR_CATEGORY,
   GET_PRODUCTS_BY_NAME,
+  GET_PRODUCTS_BY_BARCODE,
   GET_PRODUCT_DETAIL,
   GET_USERS,
   GET_USER_DETAIL,
@@ -68,7 +69,7 @@ const initialState = {
   searchOrders: [],
   confirm: false,
   payment: {},
-  flag: 1,
+  flag: 1
 };
 
 const reducer = (state = initialState, { payload, type }) => {
@@ -85,6 +86,7 @@ const reducer = (state = initialState, { payload, type }) => {
         ...state,
         productDetail: payload,
         loading: false,
+        confirm: false,
       };
     case GET_PRODUCTS_BY_NAME:
       let searching;
@@ -97,6 +99,21 @@ const reducer = (state = initialState, { payload, type }) => {
         ...state,
         search: searching,
         loading: false,
+      };
+    case GET_PRODUCTS_BY_BARCODE:
+      let searchBarcode;
+      let loadingBarcode;
+      if (payload.length > 0) {
+        searchBarcode = payload;
+        loadingBarcode= true
+      } else {
+        searchBarcode = ["No tiene este producto cargado"];
+        loadingBarcode= false
+      }
+      return {
+        ...state,
+        search: searchBarcode,
+        loading: loadingBarcode,
       };
     case GET_PRODUCTS_FOR_CATEGORY:
       return {

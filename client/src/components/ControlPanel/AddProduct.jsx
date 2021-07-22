@@ -157,6 +157,18 @@ const AddProduct = () => {
                     <span>{errors?.year?.message}</span>
                 </label>
                 <label>
+                    <h4>Código de Barras: </h4>
+                    <input placeholder="Código de Barras" type="number"
+                        {...register("barcode", {
+                            required: {
+                                valueAsNumber: true,
+                                message: 'El código de barras es requerido'
+                            }
+                        })
+                        } />
+                    <span>{errors?.barcode?.message}</span>
+                </label>
+                <label>
                     <h4>Descripcion: </h4>
                     <textarea placeholder="Descripción"
                         {...register("description", {
@@ -172,7 +184,7 @@ const AddProduct = () => {
                 {/* {error === -1 ? <button type="submit" className="btn-submit">Agregar Producto</button> : <span className={error && 'danger'} >{error}</span>} */}
                 {/* <input type="submit" value=" Create Recipe" onClick={(e) => handleSubmit(e)}/> */}
                 <Button className='block' type="submit" >Agregar Producto</Button>
-                <Link to={`/catalogo`}><Button className='volver'>Volver</Button></Link>
+                <Link to={`/admin/controlpanel`}><Button className='volver'>Volver</Button></Link>
             </form>
         </StyledAddProduct>
     )
