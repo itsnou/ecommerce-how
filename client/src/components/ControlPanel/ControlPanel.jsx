@@ -35,13 +35,12 @@ const ControlPanel = () => {
     if(!aux.includes(p.vineyard)) {
       aux.push(p.vineyard)
     }})
-    return aux
+    return aux.sort();
   }
 
 
   useEffect( () => {
     setVineyards(filteredVineyards(store.products))
-    console.log(vineyards)
   }, [visual])
 
   return (

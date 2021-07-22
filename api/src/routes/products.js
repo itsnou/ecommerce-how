@@ -127,9 +127,9 @@ router.put(
       const {vineyard, increase, discount} = req.body
       const productsByVineyard = await productSchema.find();
       let filter = productsByVineyard.filter((v) => v.vineyard.toLowerCase().includes(vineyard.toLowerCase()))
-     filter.map(async(wine)=>{
+      filter.map(async(wine)=>{
        const update = {
-        price: wine.price * increase * discount 
+        price: Math.floor(wine.price * increase * discount) 
       };
       const product = await productSchema.findByIdAndUpdate(wine._id, update);
      })      

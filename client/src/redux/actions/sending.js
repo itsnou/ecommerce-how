@@ -199,7 +199,7 @@ export const editProduct = (data) => {
 export const editProductsByVineyard = (data) => {
 	return async (dispatch) => {
 		try {
-			await axios.put(`${GET_URL}products/modify`, data, {
+			await axios.put(`${GET_URL}products/vineyard`, data, {
 				headers: {
 					authorization: 'Bearer ' + sessionStorage.getItem('token'),
 				},
