@@ -14,9 +14,17 @@ router.post('/create_preference', async (req, res) => {
 	const preference = {
 		items: req.body.cart,
 		back_urls: {
-			success: 'localhost:3000/', //PONER PAGINA QUE QUEREMOS QUE NOS VAYA CUANDOS EFECTUA EL PAGO
-			pending: 'localhost:3000/',
-			failure: 'localhost:3000/',
+			success: 'localhost:3000/checkOutMp', //PONER PAGINA QUE QUEREMOS QUE NOS VAYA CUANDOS EFECTUA EL PAGO
+			pending: 'localhost:3000/checkOutMp',
+			failure: 'localhost:3000/checkOutMp',
+		},
+		payment_methods: {
+			excluded_payment_types: [
+				{
+					id: 'ticket',
+				},
+			],
+			installments: 12,
 		},
 		auto_return: 'approved',
 	};
