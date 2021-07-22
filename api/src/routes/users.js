@@ -110,7 +110,7 @@ router.post("/login", async (req, res) => {
     var mailOptions = {
       from: "houseOfWinesHr@gmail.com",
       to: `${userEmail.email}`,
-      subject: "password code reset",
+      subject: "Restablecimiento de contraseña",
       text: "Este codigo es para restablecer tu contraseña",
       html: `<h2>House Of Wines</h2>
       <h3>Codigo de recuperacion: ${code}</h3>`
