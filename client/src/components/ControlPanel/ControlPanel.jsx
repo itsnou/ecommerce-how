@@ -6,14 +6,17 @@ import Products from "./Products/Products.jsx";
 import { useSelector } from "react-redux";
 import ItemProduct from "./Products/ItemProduct.jsx";
 import Categorys from "./Categorys/Categorys.jsx";
-import Subsidiarys from "./Subsidiarys/Subsidiarys.jsx";
+// import Subsidiarys from "./Subsidiarys/Subsidiarys.jsx";
 import Search from "./Search.jsx";
+import Vineyards from "./Vineyards/Vineyards.jsx";
 import AddProduct from "./AddProduct.jsx";
 import ItemUsers from "./Users/ItemUsers.jsx";
 import ItemOrder from "./Orders/ItemOrder.jsx";
 import FilterOrders from "./Orders/FilterOrders.jsx";
 import Loading from "../Loading/Loading.jsx";
 import EditAddCategory from "./Categorys/EditAddCategory/EditAddCategory"
+
+
 
 const ControlPanel = () => {
   const store = useSelector((state) => state);
@@ -31,8 +34,9 @@ const ControlPanel = () => {
             <Orders visual={visual} setVisual={setVisual} />
             <Users visual={visual} setVisual={setVisual} />
             <Products visual={visual} setVisual={setVisual} />
+            <Vineyards visual={visual} setVisual={setVisual} />
             <Categorys visual={visual} setVisual={setVisual} />
-            <Subsidiarys visual={visual} setVisual={setVisual} />
+            {/* <Subsidiarys visual={visual} setVisual={setVisual} /> */}
           </div>
           <div className="content">
             {visual.products &&

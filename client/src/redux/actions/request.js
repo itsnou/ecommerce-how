@@ -15,6 +15,7 @@ import {
   GET_ORDERS_FOR_STATUS,
   LOADING,
   GET_ORDERS_FOR_USER,
+  GET_PRODUCTS_BY_VINEYARD
 } from "./constant";
 
 export const getProductsAll = () => {
@@ -40,6 +41,23 @@ export const getProductsByName = (name) => {
     } catch (e) {
       console.log(e);
       return dispatch({ type: GET_PRODUCTS_BY_NAME, payload: [] });
+    }
+  };
+};
+
+export const getProductsByVineyard = (vineyard) => {
+  return async (dispatch) => {
+    dispatch({type:LOADING})
+    try {
+      const products = await axios.get(`${GET_URL}products?vineryard=${vineyard}`);
+       console.log(products.data)
+      return dispatch({
+        type: GET_PRODUCTS_BY_VINEYARD,
+        payload: products.data,
+      });
+    } catch (e) {
+      console.log(e);
+      return dispatch({ type: GET_PRODUCTS_BY_VINEYARD, payload: [] });
     }
   };
 };
