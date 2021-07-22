@@ -40,7 +40,7 @@ const ProductDetail = ({ match }) => {
     } else {
       setWishlistBoolean(false);
     }
-  }, [user]);
+  }, [user, detail._id]);
 
   useEffect(() => {
     dispatch(getProductDetail(fixed.current));
