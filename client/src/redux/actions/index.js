@@ -11,6 +11,7 @@ import {
     getProductsAll,
     getProductsForCategory,
     getProductsByName,
+    getProductsByVineyard,
     getProductsByBarcode,
     getUsers,
     getUserDetail,
@@ -28,6 +29,7 @@ import {
     deleteProduct,
     deleteUser,
     editUserStatus,
+    editProductsByVineyard,
     forceReset
 } from "./sending";
 
@@ -63,6 +65,7 @@ export {
     getProductDetail,
     getProductsForCategory,
     getProductsByName,
+    getProductsByVineyard,
     getProductsByBarcode,
     addCategory,
     addProduct,
@@ -71,5 +74,6 @@ export {
     deleteProduct,
     deleteUser,
     editUserStatus,
+    editProductsByVineyard,
     forceReset
 };

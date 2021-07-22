@@ -9,6 +9,8 @@ import {
   getUsers,
   reset,
   userFiltered,
+  getProductsByVineyard
+  
 } from "../../redux/actions";
 
 import Button from "@material-ui/core/Button";
@@ -35,6 +37,9 @@ const Search = ({ itemValue }) => {
     switch (itemValue) {
       case "product":
         dispatch(getProductsByName(input))
+        break;
+      case "vineyard":
+        dispatch(getProductsByVineyard(input))
         break;
       case "user":
         dispatch(getUsers());

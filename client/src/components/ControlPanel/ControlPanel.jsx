@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState, useEffect} from "react";
 import { StyledPanel } from "./styled.js";
 import Orders from "./Orders/Orders.jsx";
 import Users from "./Users/Users.jsx";
@@ -12,6 +12,7 @@ import Vineyards from "./Vineyards/Vineyards.jsx";
 import AddProduct from "./AddProduct.jsx";
 import ItemUsers from "./Users/ItemUsers.jsx";
 import ItemOrder from "./Orders/ItemOrder.jsx";
+import ItemVineyard from "./Vineyards/ItemVineyard.jsx";
 import FilterOrders from "./Orders/FilterOrders.jsx";
 import Loading from "../Loading/Loading.jsx";
 import EditAddCategory from "./Categorys/EditAddCategory/EditAddCategory"
@@ -20,11 +21,28 @@ import EditAddCategory from "./Categorys/EditAddCategory/EditAddCategory"
 
 const ControlPanel = () => {
   const store = useSelector((state) => state);
+  const [ vineyards, setVineyards ] = useState([])
   const [visual, setVisual] = useState({
     products: false,
     productsSearch: false,
     addProduct: false,
+
   });
+
+  const filteredVineyards = (array) => {
+    let aux = [];
+    array.map((p) => {
+    if(!aux.includes(p.vineyard)) {
+      aux.push(p.vineyard)
+    }})
+    return aux
+  }
+
+
+  useEffect( () => {
+    setVineyards(filteredVineyards(store.products))
+    console.log(vineyards)
+  }, [visual])
 
   return (
     <StyledPanel>
@@ -52,6 +70,12 @@ const ControlPanel = () => {
               </>
             )}
             {visual.addProduct && <AddProduct />}
+
+            {visual.vineyards && (
+              store.loading ? <Loading /> :
+                vineyards.map((v) => <ItemVineyard name={v} />)
+            )}
+
             {visual.users && (store.loading ? <Loading /> :
               store.users.map((p) => <ItemUsers user={p} />))
             }
