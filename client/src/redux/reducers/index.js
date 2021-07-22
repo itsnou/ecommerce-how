@@ -30,8 +30,6 @@ import {
   LOG_IN,
   EDIT_USER_STATUS,
   USERS_FILTERED,
-  ADD_TO_WISHLIST,
-  REMOVE_FROM_WISHLIST,
   SET_PAYMENT,
   EDIT_ORDER_STATUS,
   GET_ORDERS_FOR_STATUS,
@@ -42,7 +40,6 @@ import {
 } from "../actions/constant";
 
 import { addToCart } from "../../utils/addToCart";
-import { removeFromWishlist } from "../../utils/removeFromWishlist";
 import { modifyItemInCart } from "../../utils/modifyItemInCart";
 import {
   filterWines,
