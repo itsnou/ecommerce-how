@@ -19,7 +19,9 @@ export const Vineyards = ({ setVisual})=>{
 
   const handleClick = (e) => {
     if (e.target.value === 1) {
-      dispatch()
+      setVisual({
+
+      })
     }
     if (anchorRef.current && anchorRef.current.contains(e.target)) {
       return;
@@ -75,7 +77,7 @@ export const Vineyards = ({ setVisual})=>{
 
 }
 
-//SE ME MURIO EL DISCORD NO SE QUE ONDA
+
 
 
 export default Vineyards;
