@@ -28,7 +28,8 @@ import {
     deleteProduct,
     deleteUser,
     editUserStatus,
-    forceReset
+    forceReset,
+    changePassword
 } from "./sending";
 
 import { RESET, LOG_OFF } from "./constant";
@@ -71,5 +72,6 @@ export {
     deleteProduct,
     deleteUser,
     editUserStatus,
-    forceReset
+    forceReset,
+    changePassword
 };
