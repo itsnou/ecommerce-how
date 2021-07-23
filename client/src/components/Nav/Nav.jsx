@@ -1,11 +1,22 @@
+import {useEffect} from 'react';
 import LOGO from '../../assets/image/LOGO.png';
 import User from './NavUser/User';
 import NavBar from './NavBar/NavBar';
 import StyledDiv from './styled.js';
 import { Grid } from '@material-ui/core';
 import {FaFacebookSquare, FaInstagramSquare} from 'react-icons/fa';
+import {useDispatch, useSelector} from 'react-redux';
+import { getProfile } from "../../redux/actions/request";
+
 
 const Nav = () => {
+    const user = useSelector( state => state.user)
+    const dispatch = useDispatch();
+
+    useEffect(()=>{
+			dispatch(getProfile())
+    },[dispatch])
+
     return (
         <StyledDiv>
             <Grid container item xs={12} spacing={2}>
@@ -15,6 +26,16 @@ const Nav = () => {
                     </div>
                 </Grid>
                 <Grid container item xs={4} spacing={2}>
+                <Grid container item xs={12} spacing={1}>
+                    {
+                    user[0] !== undefined ?(
+                        <div className='nav-bienvenida'>
+                            <div className='nav-userRegister'>
+                                <p>Bienvenido {user[0].name}</p>
+                            </div>
+                        </div>
+                    ): null
+                    }
                     <div className='nav-social'>
                         <div className='nav-redes'>
                             <p>Seguinos  
@@ -22,8 +43,9 @@ const Nav = () => {
                                 <a href='https://instagram.com' rel="noreferrer noopener" target='_blank'> <FaInstagramSquare/></a>
                             </p>
                         </div>
-                        <hr/>
-                    </div>
+                        </div>
+                </Grid>
+                    <hr/>
                     <Grid container item xs={10} spacing={6}>
                         <User/>
                     </Grid>

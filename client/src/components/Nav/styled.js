@@ -12,15 +12,44 @@ const StyledDiv = styled.div`
         }
     }
 
-    .nav-social{
-        text-align:right;
-        width: 90%;
+    .nav-bienvenida{
+        text-align:left;
+        width: 50%;
         color:white;
         font-size: 18px;
         font-weight:bold;
+        height: 10px;
+        align-self: center;
         p{
-            padding:0;
             margin:10px;
+            margin-top: 11px;
+            padding:0;
+            width:100%;
+            margin-bottom: 0;
+        }
+    }
+    hr{
+      width:100%;
+      margin:0;
+      padding:0;
+      height: 0;
+      margin-top: 10px;
+    }
+
+    .nav-social{
+        height: 10px;
+        text-align:right;
+        width: 50%;
+        color:white;
+        font-size: 18px;
+        font-weight:bold;
+        align-self: center;
+        p{
+            margin:10px;
+            padding:0;
+            width:50%;
+            margin-bottom: 0;
+
         }
         a{
             text-decoration:none;
