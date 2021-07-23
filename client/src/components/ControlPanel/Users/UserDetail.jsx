@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { editUserStatus, getUserDetail, reset } from "../../../redux/actions";
 import swal from "sweetalert";
 import { StyledUserDetail } from "../styled";
-import { blockUser } from "../../../redux/actions/sending";
+import { blockUser, forceReset } from "../../../redux/actions/sending";
 import Loading from "../../Loading/Loading";
 
 const UserDetail = ({ match }) => {
@@ -12,9 +12,10 @@ const UserDetail = ({ match }) => {
   const user = useSelector((state) => state.userDetail);
   const load = useSelector((state) => state.loading);
   const id = useRef(match.params.id)
+
   useEffect(() => {
     dispatch(getUserDetail(id.current));
-    return dispatch (reset("userDetail"));
+    return dispatch(reset("userDetail"));
   }, [dispatch]);
 
   const handleClick = () => {
@@ -45,6 +46,31 @@ const UserDetail = ({ match }) => {
         });
     }
   };
+
+  const forceResetPass = () => {
+    if (user.resetPass) {
+      swal({ title: "Ya se asigno el restablecimiento de contraseña", icon: "warning" });
+    } else {
+      swal({
+        title: "¿Estas seguro?",
+        text: "Forzar el restablecimiento de la contraseña",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      })
+        .then((willDelete) => {
+          if (willDelete) {
+            dispatch(forceReset(user._id));
+            dispatch(getUserDetail(match.params.id));
+            swal("El usuario debera restablecer su contraseña", {
+              icon: "success",
+            });
+          } else {
+            swal("Accion cancelada");
+          }
+        });
+    }
+  }
 
   const blockedUser = () => {
     if (user.userStatus === "Bloqueado") {
@@ -105,7 +131,7 @@ const UserDetail = ({ match }) => {
           >
             Bloquear Usuario
           </Button>
-          <Button className="btn-recoverypsw" variant="contained">
+          <Button className="btn-recoverypsw" onClick={forceResetPass} variant="contained">
             Forzar reinicio de contraseña
           </Button>
         </div>

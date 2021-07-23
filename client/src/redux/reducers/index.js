@@ -14,6 +14,7 @@ import {
   GET_PRODUCTS_ALL,
   GET_PRODUCTS_FOR_CATEGORY,
   GET_PRODUCTS_BY_NAME,
+  GET_PRODUCTS_BY_BARCODE,
   GET_PRODUCT_DETAIL,
   GET_USERS,
   GET_USER_DETAIL,
@@ -30,8 +31,6 @@ import {
   LOG_IN,
   EDIT_USER_STATUS,
   USERS_FILTERED,
-  ADD_TO_WISHLIST,
-  REMOVE_FROM_WISHLIST,
   SET_PAYMENT,
   EDIT_ORDER_STATUS,
   GET_ORDERS_FOR_STATUS,
@@ -39,10 +38,10 @@ import {
   ADD_VARIETAL,
   DELETE_VARIETAL,
   CLEAR_CART,
+  LOG_OFF,
 } from "../actions/constant";
 
 import { addToCart } from "../../utils/addToCart";
-import { removeFromWishlist } from "../../utils/removeFromWishlist";
 import { modifyItemInCart } from "../../utils/modifyItemInCart";
 import {
   filterWines,
@@ -71,7 +70,7 @@ const initialState = {
   searchOrders: [],
   confirm: false,
   payment: {},
-  flag: 1,
+  flag: 1
 };
 
 const reducer = (state = initialState, { payload, type }) => {
@@ -88,6 +87,7 @@ const reducer = (state = initialState, { payload, type }) => {
         ...state,
         productDetail: payload,
         loading: false,
+        confirm: false,
       };
     case GET_PRODUCTS_BY_NAME:
       let searching;
@@ -100,6 +100,21 @@ const reducer = (state = initialState, { payload, type }) => {
         ...state,
         search: searching,
         loading: false,
+      };
+    case GET_PRODUCTS_BY_BARCODE:
+      let searchBarcode;
+      let loadingBarcode;
+      if (payload.length > 0) {
+        searchBarcode = payload;
+        loadingBarcode= true
+      } else {
+        searchBarcode = ["No tiene este producto cargado"];
+        loadingBarcode= false
+      }
+      return {
+        ...state,
+        search: searchBarcode,
+        loading: loadingBarcode,
       };
     case GET_PRODUCTS_FOR_CATEGORY:
       return {
@@ -148,6 +163,11 @@ const reducer = (state = initialState, { payload, type }) => {
         ...state,
         loged: payload,
       };
+    case LOG_OFF:
+      return {
+        ...state,
+        loged: payload
+      }
     case GET_USER_DETAIL:
       return {
         ...state,

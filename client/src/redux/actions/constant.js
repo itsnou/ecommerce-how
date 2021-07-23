@@ -1,6 +1,7 @@
 export const GET_URL = "http://localhost:3001/";
 export const GET_PRODUCTS_ALL = "GET_PRODUCTS_ALL";
 export const GET_PRODUCTS_BY_NAME = "GET_PRODUCTS_BY_NAME";
+export const GET_PRODUCTS_BY_BARCODE = "GET_PRODUCTS_BY_BARCODE";
 export const GET_PRODUCTS_FOR_CATEGORY = "GET_PRODUCTS_FOR_CATEGORY";
 export const GET_PRODUCT_DETAIL = "GET_PRODUCT_DETAIL";
 export const GET_USERS = "GET_USERS";
@@ -44,3 +45,5 @@ export const ADD_REVIEW = "ADD_REVIEW";
 export const DELETE_VARIETAL = "DELETE_VARIETAL";
 export const ADD_VARIETAL = "ADD_VARIETAL";
 export const CLEAR_CART = "CLEAR_CART";
+export const FORCE_RESET= "FORCE_RESET";
+export const LOG_OFF="LOG_OFF"

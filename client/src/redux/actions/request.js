@@ -5,6 +5,7 @@ import {
   GET_PRODUCTS_ALL,
   GET_PRODUCTS_FOR_CATEGORY,
   GET_PRODUCTS_BY_NAME,
+  GET_PRODUCTS_BY_BARCODE,
   GET_PRODUCT_DETAIL,
   GET_URL,
   GET_USERS,
@@ -31,8 +32,7 @@ export const getProductsAll = () => {
 export const getProductsByName = (name) => {
   return async (dispatch) => {
     dispatch({type:LOADING})
-    try {
-      const products = await axios.get(`${GET_URL}products?name=${name}`);
+    try {const products = await axios.get(`${GET_URL}products?name=${name}`);
       return dispatch({
         type: GET_PRODUCTS_BY_NAME,
         payload: products.data,
@@ -40,6 +40,23 @@ export const getProductsByName = (name) => {
     } catch (e) {
       console.log(e);
       return dispatch({ type: GET_PRODUCTS_BY_NAME, payload: [] });
+    }
+  };
+};
+
+export const getProductsByBarcode = (barcode) => {
+  return async (dispatch) => {
+    dispatch({type:LOADING})
+    try {
+      const products = await axios.get(`${GET_URL}products?barcode=${barcode}`);
+       console.log(products.data)
+      return dispatch({
+        type: GET_PRODUCTS_BY_BARCODE,
+        payload: products.data,
+      });
+    } catch (e) {
+      console.log(e);
+      return dispatch({ type: GET_PRODUCTS_BY_BARCODE, payload: [] });
     }
   };
 };
@@ -161,11 +178,11 @@ export const getOrderForStatus = (status) => {
   };
 };
 
-export const getOrderForUser = (status) => {
+export const getOrderForUser = (user) => {
   return async (dispatch) => {
     dispatch({ type: LOADING });
     try {
-      const order = await axios.get(`${GET_URL}orders?user=${status}`, {
+      const order = await axios.get(`${GET_URL}orders?user=${user}`, {
         headers: {
           authorization: "Bearer " + sessionStorage.getItem("token"),
         },

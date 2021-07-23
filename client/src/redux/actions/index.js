@@ -11,6 +11,7 @@ import {
     getProductsAll,
     getProductsForCategory,
     getProductsByName,
+    getProductsByBarcode,
     getUsers,
     getUserDetail,
     getOrders,
@@ -26,9 +27,11 @@ import {
     deleteCategory,
     deleteProduct,
     deleteUser,
-    editUserStatus
+    editUserStatus,
+    forceReset
 } from "./sending";
-import { RESET } from "./constant";
+
+import { RESET, LOG_OFF } from "./constant";
 
 export const reset = (prop) => {
     return {
@@ -36,7 +39,12 @@ export const reset = (prop) => {
         payload: prop,
     };
 };
-
+export const logOff = (payload)=>{
+    return {
+        type:LOG_OFF,
+        payload:payload
+    }
+}
 export {
     filtredForPriceHightoLow,
     filtredForPriceLowToHigh,
@@ -55,11 +63,13 @@ export {
     getProductDetail,
     getProductsForCategory,
     getProductsByName,
+    getProductsByBarcode,
     addCategory,
     addProduct,
     addUser,
     deleteCategory,
     deleteProduct,
     deleteUser,
-    editUserStatus
+    editUserStatus,
+    forceReset
 };
