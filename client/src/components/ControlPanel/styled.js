@@ -45,6 +45,11 @@ const StyledProduct = styled.div`
     color:white;
     border:solid rgba(0, 0, 0, 0.1);
     font-weight:bold;
+    input {
+        width:100px;
+        border-radius: 5px;
+        margin-left: 10px;
+    }
     .name {
         width: 300px;
     }

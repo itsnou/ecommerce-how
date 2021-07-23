@@ -30,11 +30,15 @@ const ControlPanel = () => {
   });
 
   const filteredVineyards = (array) => {
-    let aux = [];
+    let aux = {}
     array.map((p) => {
-    if(!aux.includes(p.vineyard)) {
-      aux.push(p.vineyard)
-    }})
+    if(!aux[p.vineyard]) {
+      aux[p.vineyard] = 1
+    } else {
+      aux[p.vineyard] +=1
+    }
+  })
+    aux = Object.entries(aux)
     return aux.sort();
   }
 
@@ -72,7 +76,7 @@ const ControlPanel = () => {
 
             {visual.vineyards && (
               store.loading ? <Loading /> :
-                vineyards.map((v) => <ItemVineyard name={v} />)
+                vineyards.map((v) => <ItemVineyard name={v[0]} quantity={v[1]} />)
             )}
 
             {visual.users && (store.loading ? <Loading /> :

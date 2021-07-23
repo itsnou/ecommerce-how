@@ -29,14 +29,16 @@ const ItemVineyard = (props) => {
   return (
     <StyledProduct>
           <li className="name">{props.name}</li>
+          <li className="quantity">Productos: {props.quantity}</li>
           <div>
             <label>
-              Modificar precio 
+              Aumentar precio 
             </label>
             <input
-            type='number'
+            type='text'
+            inputMode='numeric'
             name='increase'
-            placeholder= '%'
+            placeholder= 'Ingrese un %'
             onChange={(e)=>handleChange(e)}
             >
             </input>
@@ -44,12 +46,13 @@ const ItemVineyard = (props) => {
           </div>
           <div>
             <label>
-              Aplicar descuento 
+              Disminuir precio 
             </label>
             <input
-            type='number'
+            type='text'
+            inputMode='numeric'
             name='discount'
-            placeholder='%'
+            placeholder='Ingrese un %'
             onChange={(e)=>handleChange(e)}
             ></input>
           </div>
