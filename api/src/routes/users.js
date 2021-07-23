@@ -21,6 +21,7 @@ router.get(
       lastName: findUser.lastName,
       email: findUser.email,
       wishlist: findUser.wishlist,
+      subscribed: findUser.subscribed,
     };
     res.json(returnedUser);
   }
@@ -52,6 +53,7 @@ router.post("/signup", async (req, res) => {
     password: password,
     orders: [],
     wishlist: [],
+    subscribed: false,
   };
   try {
     const newUser = await new userSchema(data);
@@ -77,11 +79,11 @@ router.get(
       res.status(401).send({ message: "No tiene permisos" });
     }
   }
-  );
-  
-  router.post("/login", async (req, res) => {
-    const { email, password } = req.body;
-    const userEmail = await userSchema.findOne({ email: email });
+);
+
+router.post("/login", async (req, res) => {
+  const { email, password } = req.body;
+  const userEmail = await userSchema.findOne({ email: email });
   if (!userEmail) {
     return res.status(401).send({ message: "off" });
   }
@@ -92,7 +94,7 @@ router.get(
   if (userEmail.userStatus === "Bloqueado") {
     return res.status(401).send({ message: "Acceso denegado" });
   }
-  if (userEmail.resetPass){
+  if (userEmail.resetPass) {
     return res.send({ message: "reset pass" });
   }
 
@@ -206,6 +208,21 @@ router.put(
     const findUser = await userSchema.findOne({ email: decodificado.email });
     const removeWish = await userSchema.findByIdAndUpdate(findUser._id, {
       $pull: { wishlist: productId },
+    });
+    res.send("Correcto");
+  }
+);
+
+router.put(
+  "/subscription",
+  passport.authenticate("jwt", { session: false }),
+  async (req, res) => {
+    const { subscribed } = req.body;
+    const token = req.headers.authorization.split(" ");
+    const decodificado = jwt_decode(token[1]);
+    const findUser = await userSchema.findOne({ email: decodificado.email });
+    const removeWish = await userSchema.findByIdAndUpdate(findUser._id, {
+      subscribed: subscribed,
     });
     res.send("Correcto");
   }

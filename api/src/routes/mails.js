@@ -104,4 +104,53 @@ router.post(
   }
 );
 
+router.post(
+  "/newsletter",
+  passport.authenticate("jwt", { session: false }),
+  async (req, res) => {
+    const { product, reason, email, name } = req.body;
+    const transporter = await nodemailer.createTransport(
+      smtpTransport({
+        service: "gmail",
+        host: "stmp.gmail.com",
+        auth: {
+          user: "houseOfWinesHr@gmail.com",
+          pass: "jjjteemmg",
+        },
+      })
+    );
+    if (reason === "stock") {
+      const mailOptions = {
+        from: "houseOfWinesHr@gmail.com",
+        to: `${email}`,
+        subject: `¡Hay stock de ${product}!`,
+        text: `¡Hola, ${name}`,
+        html: `<h2>Queremos informarle que existe stock del producto ${product} que usted tiene en su wishlist</h2>`,
+      };
+      transporter.sendMail(mailOptions, (err, info) => {
+        if (err) {
+          return res.status(500).send(err.message);
+        }
+        return res.send("Se envió el correo");
+      });
+    }
+
+    if (reason === "discount") {
+      const mailOptions = {
+        from: "houseOfWinesHr@gmail.com",
+        to: `${email}`,
+        subject: `¡El producto ${product} está en oferta!`,
+        text: `¡Hola, ${name}`,
+        html: `<h2>Queremos informarle que existe oferta del producto ${product} que usted tiene en su wishlist</h2>`,
+      };
+      transporter.sendMail(mailOptions, (err, info) => {
+        if (err) {
+          return res.status(500).send(err.message);
+        }
+        return res.send("Se envió el correo");
+      });
+    }
+  }
+);
+
 module.exports = router;
