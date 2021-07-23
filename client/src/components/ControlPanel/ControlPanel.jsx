@@ -22,12 +22,7 @@ import EditAddCategory from "./Categorys/EditAddCategory/EditAddCategory"
 const ControlPanel = () => {
   const store = useSelector((state) => state);
   const [ vineyards, setVineyards ] = useState([])
-  const [visual, setVisual] = useState({
-    products: false,
-    productsSearch: false,
-    addProduct: false,
-
-  });
+  const [visual, setVisual] = useState({});
 
   const filteredVineyards = (array) => {
     let aux = {}
@@ -41,7 +36,6 @@ const ControlPanel = () => {
     aux = Object.entries(aux)
     return aux.sort();
   }
-
 
   useEffect( () => {
     setVineyards(filteredVineyards(store.products))
@@ -59,6 +53,7 @@ const ControlPanel = () => {
             <Categorys visual={visual} setVisual={setVisual} />
             {/* <Subsidiarys visual={visual} setVisual={setVisual} /> */}
           </div>
+          {Object.keys(visual).length? (
           <div className="content">
             {visual.products &&
               (store.loading ? <Loading /> :
@@ -72,7 +67,7 @@ const ControlPanel = () => {
                   store.search.map((p) => <ItemProduct product={p} />)}
               </>
             )}
-            {visual.addProduct && <AddProduct />}
+            {visual.addProduct && <AddProduct  visual={visual} setVisual={setVisual} />}
 
             {visual.vineyards && (
               store.loading ? <Loading /> :
@@ -80,7 +75,7 @@ const ControlPanel = () => {
             )}
 
             {visual.users && (store.loading ? <Loading /> :
-              store.users.map((p) => <ItemUsers user={p} />))
+              store.users.map((p) => <ItemUsers user={p}  />))
             }
             {visual.usersSearch && (
               <>
@@ -105,7 +100,7 @@ const ControlPanel = () => {
             {visual.categorys && 
             <EditAddCategory/>
             }
-          </div>
+          </div>):null}
         </>
       ) : null}
     </StyledPanel>

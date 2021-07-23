@@ -69,9 +69,6 @@ const Search = ({ itemValue }) => {
     if(store.search[0].barcode == barcode){
       setTimeout(history.push(`/admin/editProduct/${store.search[0]._id}`),5000)
     }}
-    // else if(barcode.toString.length==6){
-    //   history.push(`/admin/controlpanel`)
-    // }//ver lo de la ruta para direccionar a agregar producto o no
   },[store.search])
   return (
     <StyledSearch>
@@ -90,7 +87,9 @@ const Search = ({ itemValue }) => {
           </div>
           <div>
           {itemValue==="product"?<input
-            type="number"
+            className='barcode'
+            type="text"
+            inputMode= 'numeric'
             placeholder="Código de Barras..."
             value={barcode}
             onChange={handleChangeBarcode}
