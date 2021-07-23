@@ -17,8 +17,6 @@ const Nav = () => {
 			dispatch(getProfile())
     },[dispatch])
 
-    console.log(user);
-
     return (
         <StyledDiv>
             <Grid container item xs={12} spacing={2}>
@@ -28,12 +26,16 @@ const Nav = () => {
                     </div>
                 </Grid>
                 <Grid container item xs={4} spacing={2}>
-									<Grid container item xs={12} spacing={1}>
-										<div className='nav-bienvenida'>
-											<div className='nav-userRegister'>
-												<p>Bienvenido {user[0].name}</p>
-											</div>
-										</div>
+                <Grid container item xs={12} spacing={1}>
+                    {
+                    user[0] !== undefined ?(
+                        <div className='nav-bienvenida'>
+                            <div className='nav-userRegister'>
+                                <p>Bienvenido {user[0].name}</p>
+                            </div>
+                        </div>
+                    ): null
+                    }
                     <div className='nav-social'>
                         <div className='nav-redes'>
                             <p>Seguinos  
@@ -41,9 +43,9 @@ const Nav = () => {
                                 <a href='https://instagram.com' rel="noreferrer noopener" target='_blank'> <FaInstagramSquare/></a>
                             </p>
                         </div>
-                    </div>
-									</Grid>
-									<hr/>
+                        </div>
+                </Grid>
+                    <hr/>
                     <Grid container item xs={10} spacing={6}>
                         <User/>
                     </Grid>
