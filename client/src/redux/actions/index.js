@@ -30,7 +30,8 @@ import {
     deleteUser,
     editUserStatus,
     editProductsByVineyard,
-    forceReset
+    forceReset,
+    changePassword
 } from "./sending";
 
 import { RESET, LOG_OFF } from "./constant";
@@ -75,5 +76,6 @@ export {
     deleteUser,
     editUserStatus,
     editProductsByVineyard,
-    forceReset
+    forceReset,
+    changePassword
 };

@@ -4,6 +4,9 @@ const userSchema = require("../models/users");
 const jwt = require("jsonwebtoken");
 const passport = require("passport");
 const jwt_decode = require("jwt-decode");
+const nodemailer = require("nodemailer");
+var smtpTransport = require("nodemailer-smtp-transport");
+const bcrypt = require("bcrypt");
 
 router.get(
   "/",
@@ -77,11 +80,11 @@ router.get(
       res.status(401).send({ message: "No tiene permisos" });
     }
   }
-  );
-  
-  router.post("/login", async (req, res) => {
-    const { email, password } = req.body;
-    const userEmail = await userSchema.findOne({ email: email });
+);
+
+router.post("/login", async (req, res) => {
+  const { email, password } = req.body;
+  const userEmail = await userSchema.findOne({ email: email });
   if (!userEmail) {
     return res.status(401).send({ message: "off" });
   }
@@ -92,8 +95,33 @@ router.get(
   if (userEmail.userStatus === "Bloqueado") {
     return res.status(401).send({ message: "Acceso denegado" });
   }
-  if (userEmail.resetPass){
-    return res.send({ message: "reset pass" });
+  if (userEmail.resetPass) {
+    let code = (Math.floor(Math.random() * 90000) + 10000).toString();
+    var transporter = nodemailer.createTransport(
+      smtpTransport({
+        service: "gmail",
+        host: "smtp.gmail.com",
+        auth: {
+          user: "houseOfWinesHr@gmail.com",
+          pass: "jjjteemmg",
+        },
+      })
+    );
+    var mailOptions = {
+      from: "houseOfWinesHr@gmail.com",
+      to: `${userEmail.email}`,
+      subject: "Restablecimiento de contraseña",
+      text: "Este codigo es para restablecer tu contraseña",
+      html: `<h2>House Of Wines</h2>
+      <h3>Codigo de recuperacion: ${code}</h3>`
+    };
+
+    transporter.sendMail(mailOptions, (err, info) => {
+      if (err) {
+        return res.send(err.message);
+      }
+    })
+    return res.send({ message: "reset pass", code: code });
   }
 
   const jwtToken = jwt.sign(
@@ -128,6 +156,7 @@ router.put(
     }
   }
 );
+
 router.put(
   "/resetPass",
   passport.authenticate("jwt", { session: false }),
@@ -143,6 +172,24 @@ router.put(
       res.send("Usuario debe restablecer password");
     } else {
       res.status(401).send({ message: "No tiene acceso" });
+    }
+  }
+);
+
+router.put(
+  "/upgradePassword",
+  async (req, res) => {
+    try {
+      console.log("****************body",req.body);
+      const { userEmail, newPassword } = req.body;
+      const hash = await bcrypt.hash(newPassword, 10);
+      const user = await userSchema.findOneAndUpdate(
+        { email: userEmail },
+        { password: hash, resetPass:false }
+      );
+      res.send("Actualizado");
+    } catch (e) {
+      res.status(404).send("No tiene permisos ");
     }
   }
 );
