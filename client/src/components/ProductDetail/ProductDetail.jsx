@@ -116,7 +116,7 @@ const ProductDetail = ({ match }) => {
             <div className="detail-render">
               <h2>{detail.name}</h2>
               <h3>Bodega: {detail.vineyard}</h3>
-              <h3>Categoria: {detail.category}</h3>
+              <h3>Categoría: {detail.category}</h3>
               <h3>Precio: ${detail.price}</h3>
               <div className="detail-varietal">
                 <h3>Varietal/es: </h3>
@@ -196,13 +196,14 @@ const ProductDetail = ({ match }) => {
                 <div>
                   <form onSubmit={(e) => handleSubmit(e)}>
                     <textarea
+                      className='text-area'
                       type="text"
-                      placeholder="add review"
+                      placeholder="Agregue su opinión sobre este producto..."
                       value={content}
                       onChange={(e) => setContent(e.target.value)}
                     />
-                    <div>
-                      Puntaje
+                    <div className='rating'>
+                      Califíque este vino...
                       <input
                         type="number"
                         min={1}
@@ -210,7 +211,7 @@ const ProductDetail = ({ match }) => {
                         value={calification}
                         onChange={(e) => setCalification(e.target.value)}
                       ></input>
-                      <button type="submit">Enviar</button>
+                      <button type="submit">ENVIAR</button>
                     </div>
                   </form>
                 </div>

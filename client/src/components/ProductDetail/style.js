@@ -18,6 +18,34 @@ const StyledDiv = styled.div`
       max-height:500px;
     }
   }
+  .text-area {
+    width: 400px;
+    border-radius: 5px;
+    margin: 20px 20px;
+    border: solid 1.5px;
+  }
+  .rating {
+    font-size: 16px;
+    font-weight: bold;
+    input {
+      border-radius: 5px;
+      margin-left: 10px;
+      margin-right: 10px;
+      height: 20px;
+    }
+    button {
+          margin-right: 5px;
+          outline: none;
+          border-radius: 5px;
+          border: none;
+          background-color: #420d1f;
+          font-weight: bold;
+          color: white;
+          padding: 5px;
+          width:80px;
+        }
+  }
+
   .detail-explain {
     background-color: #faddd3;
     text-align: center;
@@ -49,7 +77,7 @@ const StyledDiv = styled.div`
           padding: 5px;
         }
         .btn-wishlist {
-          padding-top: 20px;
+          padding-top: 10px;
           background-color: #faddd3;
           width: 25px;
           height: 25px;
