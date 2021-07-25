@@ -47,6 +47,7 @@ router.get(
 
 router.post("/signup", async (req, res) => {
   const { name, lastName, email, address, password } = req.body;
+  console.log(req.body)
   const data = {
     resetPass: false,
     name: name,

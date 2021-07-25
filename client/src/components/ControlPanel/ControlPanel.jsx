@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState, useEffect} from "react";
 import { StyledPanel } from "./styled.js";
 import Orders from "./Orders/Orders.jsx";
 import Users from "./Users/Users.jsx";
@@ -6,22 +6,40 @@ import Products from "./Products/Products.jsx";
 import { useSelector } from "react-redux";
 import ItemProduct from "./Products/ItemProduct.jsx";
 import Categorys from "./Categorys/Categorys.jsx";
-import Subsidiarys from "./Subsidiarys/Subsidiarys.jsx";
+// import Subsidiarys from "./Subsidiarys/Subsidiarys.jsx";
 import Search from "./Search.jsx";
+import Vineyards from "./Vineyards/Vineyards.jsx";
 import AddProduct from "./AddProduct.jsx";
 import ItemUsers from "./Users/ItemUsers.jsx";
 import ItemOrder from "./Orders/ItemOrder.jsx";
+import ItemVineyard from "./Vineyards/ItemVineyard.jsx";
 import FilterOrders from "./Orders/FilterOrders.jsx";
 import Loading from "../Loading/Loading.jsx";
 import EditAddCategory from "./Categorys/EditAddCategory/EditAddCategory"
 
+
+
 const ControlPanel = () => {
   const store = useSelector((state) => state);
-  const [visual, setVisual] = useState({
-    products: false,
-    productsSearch: false,
-    addProduct: false,
-  });
+  const [ vineyards, setVineyards ] = useState([])
+  const [visual, setVisual] = useState({});
+
+  const filteredVineyards = (array) => {
+    let aux = {}
+    array.map((p) => {
+    if(!aux[p.vineyard]) {
+      aux[p.vineyard] = 1
+    } else {
+      aux[p.vineyard] +=1
+    }
+  })
+    aux = Object.entries(aux)
+    return aux.sort();
+  }
+
+  useEffect( () => {
+    setVineyards(filteredVineyards(store.products))
+  }, [visual])
 
   return (
     <StyledPanel>
@@ -31,9 +49,11 @@ const ControlPanel = () => {
             <Orders visual={visual} setVisual={setVisual} />
             <Users visual={visual} setVisual={setVisual} />
             <Products visual={visual} setVisual={setVisual} />
+            <Vineyards visual={visual} setVisual={setVisual} />
             <Categorys visual={visual} setVisual={setVisual} />
-            <Subsidiarys visual={visual} setVisual={setVisual} />
+            {/* <Subsidiarys visual={visual} setVisual={setVisual} /> */}
           </div>
+          {Object.keys(visual).length? (
           <div className="content">
             {visual.products &&
               (store.loading ? <Loading /> :
@@ -47,9 +67,15 @@ const ControlPanel = () => {
                   store.search.map((p) => <ItemProduct product={p} />)}
               </>
             )}
-            {visual.addProduct && <AddProduct />}
+            {visual.addProduct && <AddProduct  visual={visual} setVisual={setVisual} />}
+
+            {visual.vineyards && (
+              store.loading ? <Loading /> :
+                vineyards.map((v) => <ItemVineyard name={v[0]} quantity={v[1]} />)
+            )}
+
             {visual.users && (store.loading ? <Loading /> :
-              store.users.map((p) => <ItemUsers user={p} />))
+              store.users.map((p) => <ItemUsers user={p}  />))
             }
             {visual.usersSearch && (
               <>
@@ -74,7 +100,7 @@ const ControlPanel = () => {
             {visual.categorys && 
             <EditAddCategory/>
             }
-          </div>
+          </div>):null}
         </>
       ) : null}
     </StyledPanel>

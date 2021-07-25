@@ -213,6 +213,20 @@ export const editProduct = (data) => {
 	};
 };
 
+export const editProductsByVineyard = (data) => {
+	return async (dispatch) => {
+		try {
+			await axios.put(`${GET_URL}products/vineyard`, data, {
+				headers: {
+					authorization: 'Bearer ' + sessionStorage.getItem('token'),
+				},
+			});
+		} catch (e) {
+			console.log(e);
+		}
+	};
+};
+
 export const blockUser = (id) => {
 	console.log(id);
 	return async (dispatch) => {

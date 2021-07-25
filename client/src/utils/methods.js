@@ -43,7 +43,7 @@ export const filterOnOff = (payload) => {
 
 export const filterUsers = (payload) => {
   return payload.users.filter((user) =>
-    user.name.toLowerCase().includes(payload.name.toLowerCase())
+  ( user.name.toLowerCase().includes(payload.name.toLowerCase()) || user.lastName.toLowerCase().includes(payload.name.toLowerCase()) )
   );
 };
 

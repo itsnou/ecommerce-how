@@ -62,7 +62,7 @@ const ItemUsers = ({ user }) => {
     return (
         <StyledUsers>
             <Link to={`/user/${user._id}`} className='link-name'>
-                <li className="name">{user.name} {user.lastname}</li>
+                <li className="name">{user.lastName}, {user.name}</li>
             </Link>
             <li className="email">{user.email}</li>
             <li className="status">{user.userStatus}</li>

@@ -6,6 +6,8 @@ import swal from "sweetalert";
 import { StyledUserDetail } from "../styled";
 import { blockUser, forceReset } from "../../../redux/actions/sending";
 import Loading from "../../Loading/Loading";
+import { Link } from 'react-router-dom';
+
 
 const UserDetail = ({ match }) => {
   const dispatch = useDispatch();
@@ -134,7 +136,13 @@ const UserDetail = ({ match }) => {
           <Button className="btn-recoverypsw" onClick={forceResetPass} variant="contained">
             Forzar reinicio de contraseña
           </Button>
-        </div>
+          <Link to={'/admin/controlpanel'}>
+          <Button className="btn-recoverypsw" variant="contained">
+            VOLVER
+          </Button>
+          </Link>
+        </div> 
+        
       </StyledUserDetail>}</>
   );
 };
