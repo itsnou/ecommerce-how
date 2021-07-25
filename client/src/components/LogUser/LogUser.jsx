@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import GoogleLogin from "react-google-login";
 import { addUser } from "../../redux/actions/sending";
 import { useDispatch, useSelector } from "react-redux";
 import StyledDiv from "./styled.js";
+import { useHistory } from "react-router";
 import Button from "@material-ui/core/Button";
 
 const LogUser = () => {
@@ -13,6 +14,7 @@ const LogUser = () => {
   const [lastName, setLastName] = useState("");
   let confirm = useSelector(state => state.confirm);
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const responseGoogle = (responseGoogle) => {
     let data = {
@@ -23,6 +25,15 @@ const LogUser = () => {
     };
     dispatch(addUser(data));
   };
+
+  useEffect(()=>{
+    if(confirm){
+      setTimeout(()=>{
+        history.push('/login');
+        window.location.reload();
+      },1000)  
+    } 
+  },[confirm, history])
 
   const validateUser = (value) => {
     if (!/\S+@\S+\.\S+/.test(value)) {
