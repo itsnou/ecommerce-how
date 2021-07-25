@@ -2,6 +2,7 @@ import { React, useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getProductDetail, getProfile } from "../../redux/actions/request";
 import { addToCart } from "../../redux/actions/cart";
+import { Link } from "react-router-dom";
 import StyledDiv from "./style";
 import StarRatingComponent from "react-star-rating-component";
 import { FaWineGlass } from "react-icons/fa";
@@ -115,14 +116,14 @@ const ProductDetail = ({ match }) => {
           <div className="detail-explain">
             <div className="detail-render">
               <h2>{detail.name}</h2>
-              <h2> ${detail.price}</h2>
+              <h2> $ {detail.price}</h2>
               <h3>Bodega: {detail.vineyard}</h3>
               <h3>Categoría: {detail.category}</h3>
               <div className="detail-varietal">
                 <h3>Varietal/es: </h3>
                 {detail.varietal &&
                   detail.varietal.map((e) => {
-                    return <h3 key={e}>{e}</h3>;
+                    return <h3 key={e}>  {e}</h3>;
                   })}
               </div>
               <div className="detail-stars">
@@ -196,13 +197,13 @@ const ProductDetail = ({ match }) => {
                 <div>
                   <form onSubmit={(e) => handleSubmit(e)}>
                     <textarea
-                      className='text-area'
+                      className="text-area"
                       type="text"
                       placeholder="Agregue su opinión sobre este producto..."
                       value={content}
                       onChange={(e) => setContent(e.target.value)}
                     />
-                    <div className='rating'>
+                    <div className="rating">
                       Califíque este vino...
                       <input
                         type="number"
@@ -212,6 +213,9 @@ const ProductDetail = ({ match }) => {
                         onChange={(e) => setCalification(e.target.value)}
                       ></input>
                       <button type="submit">CALIFICAR</button>
+                      <Link to={"/catalogo"}>
+                        <button className="back">VOLVER</button>
+                      </Link>
                     </div>
                   </form>
                 </div>
