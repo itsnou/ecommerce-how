@@ -115,9 +115,9 @@ const ProductDetail = ({ match }) => {
           <div className="detail-explain">
             <div className="detail-render">
               <h2>{detail.name}</h2>
+              <h2> ${detail.price}</h2>
               <h3>Bodega: {detail.vineyard}</h3>
               <h3>Categoría: {detail.category}</h3>
-              <h3>Precio: ${detail.price}</h3>
               <div className="detail-varietal">
                 <h3>Varietal/es: </h3>
                 {detail.varietal &&
@@ -211,7 +211,7 @@ const ProductDetail = ({ match }) => {
                         value={calification}
                         onChange={(e) => setCalification(e.target.value)}
                       ></input>
-                      <button type="submit">ENVIAR</button>
+                      <button type="submit">CALIFICAR</button>
                     </div>
                   </form>
                 </div>

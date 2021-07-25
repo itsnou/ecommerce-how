@@ -42,7 +42,7 @@ const StyledDiv = styled.div`
           font-weight: bold;
           color: white;
           padding: 5px;
-          width:80px;
+          width:90px;
         }
   }
 
