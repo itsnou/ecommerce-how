@@ -65,7 +65,10 @@ const User = () => {
         <li>
           {userLog === "on" ? (
             <div className='loged-in'>
-              <Link to="/profile">PERFIL</Link>
+            {admin === 'on'?
+              null
+              :<Link to="/profile">PERFIL</Link>
+            }
               <div>
                 <Link onClick={() => disconnect()}>DESCONECTARSE</Link>
               </div>

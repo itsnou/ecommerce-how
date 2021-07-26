@@ -4,6 +4,10 @@ const StyledDiv = styled.div`
     background-color: #272727;
     height: 216px;
     
+    .hidden{
+        visibility: hidden;
+    }
+
     .nav-logo{
         text-align: center;
         margin:auto 230px;
@@ -33,30 +37,55 @@ const StyledDiv = styled.div`
       margin:0;
       padding:0;
       height: 0;
-      margin-top: 10px;
     }
 
-    .nav-social{
-        height: 10px;
-        text-align:right;
-        width: 50%;
-        color:white;
-        font-size: 18px;
-        font-weight:bold;
-        align-self: center;
-        p{
-            margin:10px;
-            padding:0;
-            width:50%;
-            margin-bottom: 0;
-
+    .nav-superior{
+        width:100%;
+        margin:0;
+        padding:0 !important;
+        .nav-container_bienvenida{
+            width: 50%;
+            height:70%;
+            color:white;
+            font-size: 18px;
+            font-weight:bold;
+            align-self: flex-end;
+            .nav-bienvenida{
+                width:100%;
+                p{
+                    padding:0;
+                    width:100%;
+                    margin-bottom: 5px;
+                }
+            }
+            .nav-hidden{
+                width:50%;
+                visibility:hidden;
+                height:0;
+            }
         }
-        a{
-            text-decoration:none;
-            color:gray;
-            font-size:18px;
+        .nav-social{
+            text-align:right;
+            width: 50%;
+            color:white;
+            font-size: 18px;
+            font-weight:bold;
+            align-self: center;
+            .nav-redes{
+                p{
+                    padding:0;
+                    width:100%;
+                    margin-bottom: 0;
+                }
+                a{
+                    text-decoration:none;
+                    color:gray;
+                    font-size:18px;
+                }
+            }
         }
     }
+
 
     .nav-user{
         width:100%;
@@ -68,7 +97,11 @@ const StyledDiv = styled.div`
             padding:0;
             font-weight:bold;
             font-size:12px;
+            margin-left:20px;
             li{
+                .loged-in{
+                    display:flex;
+                }
                 padding:4px;
                 margin-left:3px;
                 a{

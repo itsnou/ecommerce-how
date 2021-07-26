@@ -31,7 +31,7 @@ const stripePromise = loadStripe(
 function App() {
 	return (
 		<>
-			<Route path={['/', '/product/:id', '/catalogo']}>
+			<Route path={['/', '/product/:id', '/catalogo', '/empresa', '/contacto', '/admin/controlpanel']}>
 				<Nav />
 			</Route>
 			<Route
@@ -54,7 +54,7 @@ function App() {
       <Route exact path="/wishlist" component={Wishlist} />
 			<Route exact path='/checkout' component={Checkout} />
 			<Elements stripe={stripePromise}>
-				<Route exact path='/checkout/stripe' component={StripePayment} />
+      <Route exact path='/checkout/stripe' component={StripePayment} />
 			</Elements>
 			<Route exact path='/checkOutMp' component={MercadoPago} />
       <Route exact path="/reset-password/:id" component={ResetPassword}/>

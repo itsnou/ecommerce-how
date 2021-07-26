@@ -26,13 +26,15 @@ const Profile = () => {
             <StyledDiv>
               <div>
                 <h1>
-                  Bienvenido: {el.name} {el.lastName}
+                  Bienvenido {el.name} {el.lastName}
                 </h1>
-                <Link to="/wishlist">Wishlist</Link>
               </div>
               <hr />
               <div>
                 <h2>Email: {el.email}</h2>
+              </div>
+              <div className='container-wishlist'>
+                <Link to="/wishlist" className='profile-wishlist'>Mi Wishlist</Link>
               </div>
               <div>
                 <h4>Compras realizadas: </h4>
