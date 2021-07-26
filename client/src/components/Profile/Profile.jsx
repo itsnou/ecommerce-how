@@ -15,8 +15,6 @@ const Profile = () => {
     dispatch(getOrders());
   }, [dispatch]);
 
-  console.log(orders);
-
   return (
     <div>
       {loged === "on" ? (
