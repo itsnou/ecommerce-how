@@ -55,7 +55,7 @@ const User = () => {
   }, [countCart, dispatch]);
 
   const disconnect = () => {
-    window.location.reload();
+    window.location.replace("/");
     window.sessionStorage.clear();
   };
 
