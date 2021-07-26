@@ -41,7 +41,7 @@ const StripePayment = () => {
         <ul>
           {cart &&
             cart.map((el, idx) => {
-              <li>{el.name} </li>;
+              return <li>{el.name} </li>;
             })}
         </ul>
       </div>
