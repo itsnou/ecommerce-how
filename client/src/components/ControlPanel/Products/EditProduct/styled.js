@@ -36,19 +36,19 @@ const StyledDiv = styled.div`
                     width: 100%;
                     padding: .7em;
                     border: none;
-                    background: none;
+                    background-color: #555555;
                     outline: 0;
-                    color: black;
+                    color: white;
                     border-radius: 4px;
-                    background: white;
-                    box-shadow: rgba(255, 255, 255, 0.3) 0px 5px 15px;
+                    /* background: black; */
+                    /* box-shadow: rgba(255, 255, 255, 0.3) 0px 5px 15px; */
                     border: 0;
                     text-transform: uppercase;
                     padding: 1em;
                     font-weight: bold;
                     &:hover {
-                        background: #ff3c00;
-                        color: #fff;
+                        background: white;
+                        color: black;
                         transition: background-color 1s ease-out;
                         outline: 0;
                     }
@@ -67,7 +67,7 @@ const StyledDiv = styled.div`
                     outline: 0;
                     color: black;
                     border-radius: 4px;
-                    font-width:bold;
+                    font-weight:bold;
                 }
                 textarea {
                     width: 100%;

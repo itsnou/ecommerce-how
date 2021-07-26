@@ -105,7 +105,7 @@ const StyledUsers = styled.div`
     .link-name{
         font-weight:bold;
         color:white;
-        text-underline:1px;
+        /* text-underline:1px; */
         text-decoration: none;
         :hover{
             transition:200ms;
@@ -202,33 +202,33 @@ const StyledOrders = styled.div`
     }
     .complete{
         width:150px;
-        border-radius:5px;
+        border-radius:4px;
         padding:5px;
-        background-color: #54E346;
+        background-color: #70AF85;
         color:black;
         text-align: center;
     }
     .process{
         width:150px;
-        border-radius:5px;
+        border-radius:4px;
         padding:5px;
-        background-color: #284E78;
+        background-color: #98D6EA;
         color:black;
         text-align: center;
     }
     .sent{
         width:150px;
-        border-radius:5px;
+        border-radius:4px;
         padding:5px;
-        background-color: #ECD662;
+        background-color: #FAFCC2;
         color:black;
         text-align: center;
     }
     .cancel{
         width:150px;
-        border-radius:5px;
+        border-radius:4px;
         padding:5px;
-        background-color: #8D2828;
+        background-color: #F29191;
         color:black;
         text-align: center;
     }
@@ -254,10 +254,10 @@ const StyledUserDetail = styled.div`
     box-shadow: 0px 14px 15px rgba(0, 0, 0, 0.1);
     .btn-admin{
         margin: 150px 10px 0px 10px;
-        background-color:orange;
+        background-color:white;
         font-weight:bold;
         :hover{
-            background-color: white;
+            background-color: #DDDDDD;
         }
     }
     .btn-block{
@@ -281,58 +281,99 @@ const StyledUserDetail = styled.div`
 }
 `
 const StyledOrderDetail = styled.div`
-    list-style:none;
+    display:flex;
+    text-align: left;
+    align-items: center;
+    justify-content:space-evenly;
+    margin: 50px 50px 50px 50px;
+    padding: 5px;
     background-color: #420D1F;
+    list-style: none;
     border-radius: 8px;
-    border:solid rgba(0, 0, 0, 0.1);
-    box-shadow: 0px 14px 15px rgba(0, 0, 0, 0.1);
     color:white;
+    border:solid rgba(0, 0, 0, 0.1);
     font-weight:bold;
-    text-align:center;
-    padding:10px;
-    width:75%;
-    margin:auto;
-    margin-top:15px;
-    .name{
-        font-size: 30px;
+
+    .client{
+        font-size: 20px;
         font-weight:bold;
-        margin: 0px 10px 0px 10px;
+        margin: 30px 10px 10px 10px;
+        li {
+            margin: 30px;
+        }
+    }
+    .product{
+        text-align: right;
+        font-size: 16px;
+        font-weight:bold;
+        margin: 10px 30px 10px 0px;
+        .items {
+            margin: 10px 00px 10px 10px;
+            background-color: white;
+            color:#420D1F;
+            display:flex;
+            border-radius: 4px;
+            justify-content: space-around;
+
+            li{
+                width: 300px;
+                height: 50px;
+                list-style:none;
+                margin-top: 15px;
+                margin-right: 15px;
+                text-align: center;
+                
+            }
+        }
+        button {
+            font-weight:bold;
+            background-color:#555555;
+            color: white;
+            height: 30px;
+            width: 90px;
+            border-radius: 4px;
+            :hover{
+                background-color:white;
+                transition: 200ms;
+                color: black;
+            }
+
+        }
     }
     
     .btn-prep{
         color:black;
         font-weight:bold;
-        background-color:#00b4d8;
+        background-color:#98D6EA;
         border:none;
     }
 
     .btn-sent{
         color:black;
         font-weight:bold;
-        background-color:#ffdd32;
+        background-color:#FAFCC2;
         border:none;
     }
 
     .btn-done{
         color:black;
         font-weight:bold;
-        background-color:#4ad66d;
+        background-color:#70AF85;
         border:none;
     }
 
     .btn-cancel{
         color:black;
         font-weight:bold;
-        background-color:#ef233c;
+        background-color:#F29191;
         border:none;
     }
-    .btn-back {
+    .back {
     height: 31px;
     background-color: red;
     color: #214252;
     padding: 30px
-
-  }
+    }
 `
 
 const StyledAddProduct = styled.div`
@@ -363,7 +404,7 @@ const StyledAddProduct = styled.div`
                 outline: none;
                 color: black;
                 border-radius: 4px;
-                font-width:bold;
+                font-weight:bold;
                 height:10px;
             }
             select{
@@ -374,7 +415,7 @@ const StyledAddProduct = styled.div`
                 outline: none;
                 color: black;
                 border-radius: 4px;
-                font-width:bold;
+                font-weight:bold;
             }
             textarea{
                 width: 55%;
@@ -384,7 +425,7 @@ const StyledAddProduct = styled.div`
                 outline: none;
                 color: black;
                 border-radius: 4px;
-                font-width:bold;
+                font-weight:bold;
                 height:10px;
             }
         }

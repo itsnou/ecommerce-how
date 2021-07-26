@@ -50,13 +50,13 @@ const OrderDetail = ({ match }) => {
       ) : (
         <StyledOrderDetail>
           {order.user && (
-            <div>
+            <div className='client'>
               <li>
                 Nombre del cliente: {order.user.name} {order.user.lastName}
               </li>
-              <li className="email">Email: {order.user.email}</li>
-              <li className="status">Estado de la orden: {order.state}</li>
-              Cambiar estado:
+              <li>Email: {order.user.email}</li>
+              <li>Estado de la orden: {order.state}</li>
+              <li>Cambiar estado:</li>
               <li>
                 <ButtonGroup
                   color="secondary"
@@ -92,28 +92,33 @@ const OrderDetail = ({ match }) => {
                   </Button>
                 </ButtonGroup>
               </li>
+              </div>)}
+          {order.user && (
+
+              <div className='product'>
               {order.invoice.items && order.invoice.items.length > 0 && (
                 <>
-                  <li>Productos :</li>
+                  <p>Detalle de la compra</p>
                   {order.invoice.items.map((item) => {
                     return (
-                      <div className="prodcut">
-                        <li>{item.name}</li>
-                        <li>Precio/u: ${item.price}</li>
-                        <li>Cantidad: {item.quantity}</li>
-                      </div>
+                        <div className='items'>
+                          <li>{item.name} </li>
+                          <li>Precio unitario: ${item.price} </li>
+                          <li>Cantidad: {item.quantity} </li>
+                        </div>
                     );
                   })}
                 </>
               )}
-              <li>Fecha de compra: {order.invoice.date.slice(0, 10)}</li>
-            </div>
-          )}
-          <p >
+              <p> {order.invoice.date.slice(0, 10)}</p>
+              <p>  $ {order.invoice.totalAmount}</p>
             <Link to={`/admin/controlpanel`}>
-              <button classname="btn-back">VOLVER</button>
+              <button>VOLVER</button>
             </Link>
-          </p>
+              </div>
+          )}
+          <div >
+          </div>
         </StyledOrderDetail>
       )}
     </>
