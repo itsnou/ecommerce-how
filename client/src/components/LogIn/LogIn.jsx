@@ -23,7 +23,7 @@ const LogIn = () => {
       history.push(`/reset-password/${email}`)
     }
     
-  }, [loged,history]);
+  }, [loged,history,email]);
 
   const responseGoogle = (responseGoogle) => {
     let data = {

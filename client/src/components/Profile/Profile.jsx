@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { getProfile, getOrders } from "../../redux/actions/request";
 import StyledDiv from "./styled";
 import { Link } from "react-router-dom";
-import Wishlist from "../Wishlist/Wishlist";
 
 const Profile = () => {
   const dispatch = useDispatch();
