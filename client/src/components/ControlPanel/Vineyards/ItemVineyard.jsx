@@ -55,8 +55,6 @@ const ItemVineyard = (props) => {
       document.getElementById('increase').value = ''
       document.getElementById('discount').value = ''
     }
-
-    console.log("00000000000000000000000000000000000000000000000000000000", document.getElementById('discount'))
   }
 
   return (
