@@ -5,6 +5,7 @@ import { getProductDetail } from '../../../../redux/actions/request';
 import { editProduct } from '../../../../redux/actions/sending';
 import Loading from '../../../Loading/Loading';
 import StyledDiv from './styled';
+import swal from "sweetalert";
 import { Link } from 'react-router-dom';
 
 const FormProduct = ({ match }) => {
@@ -17,13 +18,30 @@ const FormProduct = ({ match }) => {
 
     useEffect(() => {
         dispatch(getProductDetail(id.current))
-        return () => { 
-            dispatch(getProductDetail("fakeId")) }
-            
+        return () => {
+            dispatch(getProductDetail("fakeId"))
+        }
+
     }, [dispatch])
 
     const onSubmit = data => {
-        dispatch(editProduct(data));
+        swal({
+            title: "¿Estas seguro?",
+            text: "Estar por modificar el producto",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+            .then((willDelete) => {
+                if (willDelete) {
+                    dispatch(editProduct(data));
+                    swal("Producto modificado", {
+                        icon: "success",
+                    });
+                } else {
+                    swal("Accion cancelada");
+                }
+            });
     }
 
     return (
@@ -65,7 +83,7 @@ const FormProduct = ({ match }) => {
                                     <button type="submit">ENVIAR</button>
                                 </p>
                                 <p classname='block'>
-                                <Link to={`/admin/controlpanel`}><button>Volver</button></Link>
+                                    <Link to={`/admin/controlpanel`}><button>Volver</button></Link>
                                 </p>
                             </form>
                             {edit ? <h1>LA MODIFICACIÓN FUE UN ÉXITO</h1> : null}
