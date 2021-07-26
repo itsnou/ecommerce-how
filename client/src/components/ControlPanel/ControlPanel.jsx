@@ -1,4 +1,4 @@
-import { useState, useEffect} from "react";
+import { useState, useEffect, useRef} from "react";
 import { StyledPanel } from "./styled.js";
 import Orders from "./Orders/Orders.jsx";
 import Users from "./Users/Users.jsx";
@@ -6,7 +6,6 @@ import Products from "./Products/Products.jsx";
 import { useSelector } from "react-redux";
 import ItemProduct from "./Products/ItemProduct.jsx";
 import Categorys from "./Categorys/Categorys.jsx";
-// import Subsidiarys from "./Subsidiarys/Subsidiarys.jsx";
 import Search from "./Search.jsx";
 import Vineyards from "./Vineyards/Vineyards.jsx";
 import AddProduct from "./AddProduct.jsx";
@@ -21,6 +20,7 @@ import EditAddCategory from "./Categorys/EditAddCategory/EditAddCategory"
 
 const ControlPanel = () => {
   const store = useSelector((state) => state);
+  const products = useRef(store.products);
   const [ vineyards, setVineyards ] = useState([])
   const [visual, setVisual] = useState({});
 
@@ -28,9 +28,9 @@ const ControlPanel = () => {
     let aux = {}
     array.map((p) => {
     if(!aux[p.vineyard]) {
-      aux[p.vineyard] = 1
+      return aux[p.vineyard] = 1
     } else {
-      aux[p.vineyard] +=1
+      return aux[p.vineyard] +=1
     }
   })
     aux = Object.entries(aux)
@@ -38,7 +38,7 @@ const ControlPanel = () => {
   }
 
   useEffect( () => {
-    setVineyards(filteredVineyards(store.products))
+    setVineyards(filteredVineyards(products.current))
   }, [visual])
 
   return (
@@ -51,7 +51,6 @@ const ControlPanel = () => {
             <Products visual={visual} setVisual={setVisual} />
             <Vineyards visual={visual} setVisual={setVisual} />
             <Categorys visual={visual} setVisual={setVisual} />
-            {/* <Subsidiarys visual={visual} setVisual={setVisual} /> */}
           </div>
           {Object.keys(visual).length? (
           <div className="content">
