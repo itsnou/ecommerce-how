@@ -17,14 +17,14 @@ const ItemVineyard = (props) => {
 
   const handleChange = (e) => {
     let aux;
-    if(e.target.name === 'increase') {
-      aux = (100 + parseInt(e.target.value)) / 100 
+    if (e.target.name === 'increase') {
+      aux = (100 + parseInt(e.target.value)) / 100
     } else {
       aux = (100 - parseInt(e.target.value)) / 100
     }
     setInput({
       ...input,
-      [e.target.name] : aux,
+      [e.target.name]: aux,
     })
   }
 
@@ -39,8 +39,8 @@ const ItemVineyard = (props) => {
         buttons: true,
         dangerMode: true,
       })
-      .then((willDelete) => {
-        if (willDelete) {
+        .then((willDelete) => {
+          if (willDelete) {
             dispatch(editProductsByVineyard(input))
             swal("Precio modificado", {
               icon: "success",
@@ -51,52 +51,45 @@ const ItemVineyard = (props) => {
             });
           }
         });
-      }
-      setInput({
-        vineyard: props.name,
-        increase: 1,
-        discount: 1,
-      })
+
       document.getElementById('increase').value = ''
       document.getElementById('discount').value = ''
+    }
+
+    console.log("00000000000000000000000000000000000000000000000000000000", document.getElementById('discount'))
   }
 
   return (
     <StyledProduct>
-          <li className="name">{props.name}</li>
-          <li className="quantity">Productos: {props.quantity}</li>
-          <div>
-            <label>
-              Aumentar precio 
-            </label>
-            <input
-            type='text'
-            inputMode='numeric'
-            name='increase'
-            placeholder= 'Ingrese un %'
-            onChange={(e)=>handleChange(e)}
-            id='increase'
-            >
-            </input>
-
-          </div>
-          <div>
-            <label>
-              Disminuir precio 
-            </label>
-            <input
-            type='text'
-            inputMode='numeric'
-            name='discount'
-            placeholder='Ingrese un %'
-            onChange={(e)=>handleChange(e)}
-            id='discount'
-            ></input>
-          </div>
-          <Button 
-          variant="contained"
-          onClick={()=>handleClick()}
-          >EDITAR</Button>
+      <li className="name">{props.name}</li>
+      <li className="quantity">Productos: {props.quantity}</li>
+      <div>
+        <label>
+          Aumentar precio
+        </label>
+        <input
+          type='text'
+          inputMode='numeric'
+          name='increase'
+          placeholder='Ingrese un %'
+          onChange={handleChange}
+          id='increase'
+        />
+      </div>
+      <div>
+        <label>
+          Disminuir precio
+        </label>
+        <input
+          type='text'
+          inputMode='numeric'
+          name='discount'
+          placeholder='Ingrese un %'
+          onChange={handleChange}
+          id='discount'
+        />
+      </div>
+      <Button variant="contained" onClick={handleClick}      >EDITAR</Button>
     </StyledProduct>
   )
 
