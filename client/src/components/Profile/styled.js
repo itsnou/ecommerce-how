@@ -13,14 +13,27 @@ const StyledDiv = styled.div`
         margin:0;
     }
 
+    .container-wishlist{
+        .profile-wishlist{
+            color:white;
+            font-weight:bold;
+            text-decoration:none;
+            :hover{
+                color:red;
+            }
+        }
+    }
+
     .orders-ul{
+        width:50%;
+        margin:auto;
         .orders-links{
             text-decoration:none;
             .orders-li{
                 background-color:white;
                 color:black;
                 list-style-type:none;
-                width:50%;
+                width:100%;
                 margin:auto;
                 margin-bottom:10px;
                 border-radius:8px;
@@ -35,7 +48,6 @@ const StyledDiv = styled.div`
                     }
                 }
             }
-
         }
     }
 `

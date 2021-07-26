@@ -25,14 +25,16 @@ const Nav = () => {
           </div>
         </Grid>
         <Grid container item xs={4} spacing={2}>
-          <Grid container item xs={12} spacing={1}>
+          <Grid container item xs={12} spacing={1} className='nav-superior' >
+          <div className='nav-container_bienvenida'>
             {user[0] !== undefined ? (
               <div className="nav-bienvenida">
                 <div className="nav-userRegister">
-                  <p>Bienvenido {user[0].name}</p>
+                  <p>Hola {user[0].name}!</p>
                 </div>
               </div>
-            ) : null}
+            ) : <h1 className='nav-hidden'>BIENVENIDO</h1>}
+          </div>
             <div className="nav-social">
               <div className="nav-redes">
                 <p>
