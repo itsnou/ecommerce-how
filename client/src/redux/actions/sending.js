@@ -11,13 +11,10 @@ import {
 	EDIT_USER_STATUS,
 	EDIT_ORDER_STATUS,
 	MODIFY_PRODUCT,
-	ADD_TO_WISHLIST,
-	REMOVE_FROM_WISHLIST,
 	ADD_VARIETAL,
 	DELETE_VARIETAL,
 	CLEAR_CART,
 	FORCE_RESET,
-	CHANGE_USER,
 } from './constant';
 
 export const addProduct = (product) => {
@@ -181,7 +178,7 @@ export const editOrderStatus = (id, state, clientEmail) => {
 				}
 			);
 			if (state === 'Enviado') {
-				const sendEmail = await axios.post(
+				await axios.post(
 					`${GET_URL}sendMail/orderstatus`,
 					{ id, clientEmail },
 					{
@@ -337,7 +334,7 @@ export const checkOut = (data) => {
 						},
 					}
 				);
-				const sendEmail = await axios.post(
+				await axios.post(
 					`${GET_URL}sendMail/confirmation`,
 					{ totalAmount: data.payment.totalAmount },
 					{
@@ -393,7 +390,7 @@ export const finishMpSale = (data) => {
 					},
 				}
 			);
-			const addOrder = await axios.put(
+			await axios.put(
 				`${GET_URL}users/addorder`,
 				{ orderId: newOrder.data },
 				{
@@ -402,7 +399,7 @@ export const finishMpSale = (data) => {
 					},
 				}
 			);
-			const changeStock = await axios.put(
+			await axios.put(
 				`${GET_URL}invoices`,
 				{ items: data.items },
 				{
@@ -419,7 +416,7 @@ export const finishMpSale = (data) => {
 
 export const addReview = (data) => {
 	return async (dispatch) => {
-		const newReview = await axios.put(
+		await axios.put(
 			`${GET_URL}products/addreview`,
 			{ content: data.content, id: data.id, calification: data.calification },
 			{
@@ -465,7 +462,7 @@ export const deleteVarietal = (varietal) => {
 
 export const addProductVarietal = (data) => {
 	return async (dispatch) => {
-		const add = await axios.put(
+		await axios.put(
 			`${GET_URL}products/addvarietal`,
 			{ productId: data.productId, varietal: data.varietal },
 			{
@@ -478,7 +475,7 @@ export const addProductVarietal = (data) => {
 
 export const removeProductVarietal = (data) => {
 	return async (dispatch) => {
-		const add = await axios.put(
+		await axios.put(
 			`${GET_URL}products/removevarietal`,
 			{ productId: data.productId, varietal: data.varietal },
 			{
