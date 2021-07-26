@@ -145,7 +145,7 @@ const UserDetail = ({ match }) => {
               </Link>
             </div>
 
-          </StyledUserDetail>) : null}</>
+          </StyledUserDetail>) : <h1>No tiene permisos para ingresar aqui</h1>}</>
   );
 };
 

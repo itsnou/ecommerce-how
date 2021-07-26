@@ -120,7 +120,7 @@ const OrderDetail = ({ match }) => {
             </div>
           </StyledOrderDetail>
         )
-      ) : null}
+      ) : <h1>No tiene permisos para ingresar aqui</h1>}
     </>
   );
 };
