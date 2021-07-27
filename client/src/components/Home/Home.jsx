@@ -45,13 +45,13 @@ const Home = () => {
     ) {
       dispatch(getProfile());
     }
-  }, [dispatch,user]);
+  }, [dispatch]);
 
   useEffect(() => {
     if (user[0]?.subscribed === false) {
       showPopup("hola");
     }
-  }, [user, showPopup]);
+  }, [user]);
 
 
   const subscribe = (e) => {

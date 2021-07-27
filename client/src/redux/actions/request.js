@@ -243,7 +243,7 @@ export const getProfile = () => {
         payload: { user: apiRes.data, log: "on" },
       });
     } catch (err) {
-      apiRes = err.response.data.message;
+      // apiRes = err.response.data.message;
       dispatch({ type: LOAD_PROFILE, payload: { log: "off" } });
     }
   };
