@@ -100,50 +100,52 @@ const UserDetail = ({ match }) => {
   };
 
   return (
-    <>{load ? <Loading /> :
-      <StyledUserDetail>
-        <div>
-          <li className="name">
-            Nombre: {user.name} {user.lastName}
-          </li>
-          <li className="email">Email: {user.email}</li>
-          {user.address && <li className="adress">Direccion: {user.address}</li>}
-          <br />
-
-          {user.orders && user.orders.length > 0 && (
-            <>
-              <li>
-                {" "}
-                Ordenes:
-                {user.orders.map((u) => (
-                  <li>{u}</li>
-                ))}
+    <>
+      {window.sessionStorage.getItem("admin") ? (
+        load ? <Loading /> :
+          <StyledUserDetail>
+            <div>
+              <li className="name">
+                Nombre: {user.name} {user.lastName}
               </li>
-            </>
-          )}
-          <li className="status">{user.userStatus}</li>
-          <Button className="btn-admin" variant="contained" onClick={handleClick}>
-            Hacer Admin
-          </Button>
-          <Button
-            className="btn-block"
-            variant="contained"
-            color="secondary"
-            onClick={blockedUser}
-          >
-            Bloquear Usuario
-          </Button>
-          <Button className="btn-recoverypsw" onClick={forceResetPass} variant="contained">
-            Forzar reinicio de contraseña
-          </Button>
-          <Link to={'/admin/controlpanel'}>
-          <Button className="btn-recoverypsw" variant="contained">
-            VOLVER
-          </Button>
-          </Link>
-        </div> 
-        
-      </StyledUserDetail>}</>
+              <li className="email">Email: {user.email}</li>
+              {user.address && <li className="adress">Direccion: {user.address}</li>}
+              <br />
+
+              {user.orders && user.orders.length > 0 && (
+                <>
+                  <li>
+                    {" "}
+                    Ordenes:
+                    {user.orders.map((u) => (
+                      <li>{u}</li>
+                    ))}
+                  </li>
+                </>
+              )}
+              <li className="status">{user.userStatus}</li>
+              <Button className="btn-admin" variant="contained" onClick={handleClick}>
+                Hacer Admin
+              </Button>
+              <Button
+                className="btn-block"
+                variant="contained"
+                color="secondary"
+                onClick={blockedUser}
+              >
+                Bloquear Usuario
+              </Button>
+              <Button className="btn-recoverypsw" onClick={forceResetPass} variant="contained">
+                Forzar reinicio de contraseña
+              </Button>
+              <Link to={'/admin/controlpanel'}>
+                <Button className="btn-recoverypsw" variant="contained">
+                  VOLVER
+                </Button>
+              </Link>
+            </div>
+
+          </StyledUserDetail>) : <h1>No tiene permisos para ingresar aqui</h1>}</>
   );
 };
 

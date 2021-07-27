@@ -42,7 +42,6 @@ const ResetPassword = ({ match }) => {
             code: ""
         })
     }
-    // match.param.id
 
     return (
         <div>
