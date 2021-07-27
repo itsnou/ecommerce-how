@@ -39,18 +39,20 @@ const Profile = () => {
                 <h2>
                   Bienvenido {el.name} {el.lastName}
                 </h2>
-                {showUnsubscribe && (
-                  <div>
-                    <h3>Usted se encuentra suscripto al newsletter</h3>
-                    <button className="btn-unsubscribe" onClick={unsubscribe}>
-                      Cancelar suscripción
-                    </button>
-                  </div>
-                )}
+                <hr></hr>
+
               </div>
               <div>
                 <h4>{el.email}</h4>
               </div>
+              {showUnsubscribe && (
+                  <div className='newsletter'>
+                    <h3>Usted se encuentra suscripto al newsletter</h3>
+                    <button className="btn-unsubscribe" onClick={unsubscribe}>
+                      CANCELAR SUSCRIPCIÓN
+                    </button>
+                  </div>
+                )}
 
               <div>
                 <h4>Mis compras </h4>
@@ -80,6 +82,9 @@ const Profile = () => {
                   )}
                 </ul>
               </div>
+              
+              <div className=''>
+
                 <div className='container-wishlist'>
                 <Link to="/wishlist" >
                   <button className='btn'>VER WISHLIST</button>
@@ -88,6 +93,7 @@ const Profile = () => {
                     <button className='btn'>VOLVER</button>
                 </Link>
               </div>
+                </div>
             </StyledDiv>
           );
         })

@@ -17,18 +17,39 @@ const StyledDiv = styled.div`
     h4 {
         margin-left: 40px;
     }
-    .container-wishlist{
-        display: flex;
-        justify-content: space-around;
-        .btn{
-            border-radius: 4px;
+    .newsletter {
+      display: flex;
+      justify-content: center;
+      flex-direction: row;
+      margin-left: 40px;
+      .btn-unsubscribe {
+        border-radius: 4px;
             height: 40px;
             width: 200px;
             background-color:#555555;
             color:white;
             font-weight: bold;
             border-style: none;
-            margin: 10px 0px;
+            margin: 10px 10px;
+            :hover{
+                background-color:white;
+                color:black;
+                transition: 200ms;
+                }
+            }
+      }
+      .container-wishlist{
+        display: flex;
+        justify-content: space-around;
+        .btn{
+            border-radius: 4px;
+            height: 40px;
+            width: 150px;
+            background-color:#555555;
+            color:white;
+            font-weight: bold;
+            border-style: none;
+            margin: 10px 100px;
             :hover{
                 background-color:white;
                 color:black;
@@ -58,8 +79,6 @@ const StyledDiv = styled.div`
             }
         }
       }
-    }
-  }
 `;
 
 export default StyledDiv;
