@@ -7,6 +7,7 @@ const ShowNewsletters = () => {
   const newsletters = useSelector((state) => state.newsletters);
   const [showNewsletters, setShowNewsletters] = useState(false);
   const dispatch = useDispatch();
+  
   useEffect(() => {
     dispatch(getNewsletters());
   }, [dispatch]);

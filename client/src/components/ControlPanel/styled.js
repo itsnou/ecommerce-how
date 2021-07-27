@@ -307,7 +307,7 @@ const StyledOrderDetail = styled.div`
     }
     .product{
         text-align: right;
-        font-size: 16px;
+        font-size: 20px;
         font-weight:bold;
         margin: 10px 30px 10px 0px;
         .items {
