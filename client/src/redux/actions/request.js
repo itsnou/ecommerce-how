@@ -15,6 +15,7 @@ import {
   GET_ORDERS_FOR_STATUS,
   LOADING,
   GET_ORDERS_FOR_USER,
+  LOAD_NEWSLETTERS,
 } from "./constant";
 
 export const getProductsAll = () => {
@@ -31,8 +32,9 @@ export const getProductsAll = () => {
 
 export const getProductsByName = (name) => {
   return async (dispatch) => {
-    dispatch({type:LOADING})
-    try {const products = await axios.get(`${GET_URL}products?name=${name}`);
+    dispatch({ type: LOADING });
+    try {
+      const products = await axios.get(`${GET_URL}products?name=${name}`);
       return dispatch({
         type: GET_PRODUCTS_BY_NAME,
         payload: products.data,
@@ -46,10 +48,10 @@ export const getProductsByName = (name) => {
 
 export const getProductsByBarcode = (barcode) => {
   return async (dispatch) => {
-    dispatch({type:LOADING})
+    dispatch({ type: LOADING });
     try {
       const products = await axios.get(`${GET_URL}products?barcode=${barcode}`);
-       console.log(products.data)
+      console.log(products.data);
       return dispatch({
         type: GET_PRODUCTS_BY_BARCODE,
         payload: products.data,
@@ -64,7 +66,9 @@ export const getProductsByBarcode = (barcode) => {
 export const getProductsForCategory = (category) => {
   return async (dispatch) => {
     try {
-      const products = await axios.get(`${GET_URL}products?category=${category}`);
+      const products = await axios.get(
+        `${GET_URL}products?category=${category}`
+      );
       return dispatch({
         type: GET_PRODUCTS_FOR_CATEGORY,
         payload: products.data,
@@ -78,7 +82,7 @@ export const getProductsForCategory = (category) => {
 
 export const getProductDetail = (id) => {
   return async (dispatch) => {
-    dispatch({type:LOADING})
+    dispatch({ type: LOADING });
     try {
       const products = await axios.get(`${GET_URL}products/${id}`);
       return dispatch({
@@ -94,7 +98,7 @@ export const getProductDetail = (id) => {
 
 export const getUsers = () => {
   return async (dispatch) => {
-    dispatch({type:LOADING})
+    dispatch({ type: LOADING });
     try {
       const users = await axios.get(`${GET_URL}users/allusers`, {
         headers: {
@@ -109,10 +113,9 @@ export const getUsers = () => {
   };
 };
 
-
 export const getUserDetail = (id) => {
   return async (dispatch) => {
-    dispatch({type:LOADING})
+    dispatch({ type: LOADING });
     try {
       const users = await axios.get(`${GET_URL}users/${id}`, {
         headers: {
@@ -129,7 +132,7 @@ export const getUserDetail = (id) => {
 
 export const getOrders = () => {
   return async (dispatch) => {
-    dispatch({type:LOADING})
+    dispatch({ type: LOADING });
     try {
       const orders = await axios.get(`${GET_URL}orders`, {
         headers: {
@@ -146,7 +149,7 @@ export const getOrders = () => {
 
 export const getOrderDetail = (id) => {
   return async (dispatch) => {
-    dispatch({type:LOADING})
+    dispatch({ type: LOADING });
     try {
       const order = await axios.get(`${GET_URL}orders/${id}`, {
         headers: {
@@ -195,7 +198,6 @@ export const getOrderForUser = (user) => {
   };
 };
 
-
 export const getVarietals = () => {
   return async (dispatch) => {
     // dispatch({ type: LOADING });
@@ -225,6 +227,25 @@ export const getProfile = () => {
     } catch (err) {
       apiRes = err.response.data.message;
       dispatch({ type: LOAD_PROFILE, payload: { user: [], log: "off" } });
+    }
+  };
+};
+
+export const getNewsletters = () => {
+  let apiRes;
+  return async (dispatch) => {
+    try {
+      apiRes = await axios.get(`${GET_URL}sendMail/newsletters`, {
+        headers: {
+          authorization: "Bearer " + sessionStorage.getItem("token"),
+        },
+      });
+      dispatch({
+        type: LOAD_NEWSLETTERS,
+        payload: { newsletters: apiRes.data },
+      });
+    } catch (err) {
+      console.log(err);
     }
   };
 };

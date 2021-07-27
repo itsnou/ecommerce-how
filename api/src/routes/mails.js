@@ -5,6 +5,7 @@ const router = Router();
 const passport = require("passport");
 const jwt_decode = require("jwt-decode");
 const userSchema = require("../models/users");
+const newsletterSchema = require("../models/newsletters");
 
 router.post("/", async (req, res) => {
   const { name, subjet, message } = req.body;
@@ -127,10 +128,17 @@ router.post(
         text: `¡Hola, ${name}`,
         html: `<h2>Queremos informarle que existe stock del producto ${product} que usted tiene en su wishlist</h2>`,
       };
-      transporter.sendMail(mailOptions, (err, info) => {
+      transporter.sendMail(mailOptions, async (err, info) => {
         if (err) {
           return res.status(500).send(err.message);
         }
+        const newNewsletter = await new newsletterSchema({
+          product,
+          reason,
+          email,
+          name,
+        });
+        await newNewsletter.save();
         return res.send("Se envió el correo");
       });
     }
@@ -143,12 +151,37 @@ router.post(
         text: `¡Hola, ${name}`,
         html: `<h2>Queremos informarle que existe oferta del producto ${product} que usted tiene en su wishlist</h2>`,
       };
-      transporter.sendMail(mailOptions, (err, info) => {
+      transporter.sendMail(mailOptions, async (err, info) => {
         if (err) {
           return res.status(500).send(err.message);
         }
+        const newNewsletter = await new newsletterSchema({
+          product,
+          reason,
+          email,
+          name,
+        });
+        await newNewsletter.save();
         return res.send("Se envió el correo");
       });
+    }
+  }
+);
+
+router.get(
+  "/newsletters",
+  passport.authenticate("jwt", { session: false }),
+  async (req, res) => {
+    const token = req.headers.authorization.split(" ");
+    const decodificado = jwt_decode(token[1]);
+    const findUser = await userSchema.findOne({ email: decodificado.email });
+    try {
+      if (findUser.userStatus === "Admin") {
+        const emailsSent = await newsletterSchema.find();
+        return res.send(emailsSent);
+      }
+    } catch (err) {
+      return res.status(404).send("Order not found");
     }
   }
 );

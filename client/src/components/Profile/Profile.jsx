@@ -40,11 +40,13 @@ const Profile = () => {
                 {showUnsubscribe && (
                   <div>
                     <h3>Usted se encuentra suscripto al newsletter</h3>
-                    <button onClick={unsubscribe}>Desuscribirse</button>
+                    <button className="btn-unsubscribe" onClick={unsubscribe}>
+                      Cancelar suscripción
+                    </button>
                   </div>
                 )}
               </div>
-              <hr />
+
               <div>
                 <h2>Email: {el.email}</h2>
               </div>

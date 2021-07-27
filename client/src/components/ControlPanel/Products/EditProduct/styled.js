@@ -18,13 +18,13 @@ const StyledDiv = styled.div`
     padding: 1em;
     font-weight: bold;
     &:hover {
-      background: #ff3c00;
+      background: #420d1f;
       color: #fff;
-      transition: background-color 1s ease-out;
+      transition: background-color 1.4s ease-out;
       outline: 0;
     }
     &:focus {
-      background: #e93a3a;
+      background: #420d1f;
       color: #fff;
       transition: background-color 1s ease-out;
       outline: 0;
