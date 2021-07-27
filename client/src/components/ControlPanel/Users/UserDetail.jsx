@@ -106,23 +106,25 @@ const UserDetail = ({ match }) => {
           <StyledUserDetail>
             <div>
               <li className="name">
-                Nombre: {user.name} {user.lastName}
+                {user.name} {user.lastName}
               </li>
-              <li className="email">Email: {user.email}</li>
+              <li className="user-email">{user.email}</li>
               {user.address && <li className="adress">Direccion: {user.address}</li>}
               <br />
-
+{/* 
               {user.orders && user.orders.length > 0 && (
                 <>
                   <li>
                     {" "}
                     Ordenes:
                     {user.orders.map((u) => (
+                      <ul>
                       <li>{u}</li>
+                      </ul>
                     ))}
                   </li>
                 </>
-              )}
+              )} */}
               <li className="status">{user.userStatus}</li>
               <Button className="btn-admin" variant="contained" onClick={handleClick}>
                 Hacer Admin
