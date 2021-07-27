@@ -17,23 +17,26 @@ const OrderUser = ({ match }) => {
             <img src={LOGO} alt="not fount" />
           </div>
           <ul className="details-orders">
-            <li>Fecha de compra: {order.date.slice(0, 10)}</li>
+            <div className='date-amount'>
+            <li> {order.date.slice(0, 10)}</li>
+            <li >
+              Importe Total $ {order.invoice.totalAmount}
+            </li>
+            </div>
             <li>
-              Productos comprados:
-              <ul>
+              <ul className="details-orders">
                 {order.invoice.items.map((el, idx) => {
                   return (
-                    <li key={idx}>
-                      <p>Nombre: {el.name}</p>
-                      <p>Cantidad: {el.quantity}</p>
+                    <li key={idx} className='item'>
+                      <p className='name'>{el.name}</p>
+                      <p className='detail'> {el.quantity} un.</p>
+                      <p className='detail'> $ {el.price}</p>
                     </li>
                   );
                 })}
               </ul>
             </li>
-            <li className="last-mount">
-              Monto total: $ {order.invoice.totalAmount}
-            </li>
+
           </ul>
         </div>
       ) : (
