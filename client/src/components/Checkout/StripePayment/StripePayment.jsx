@@ -49,7 +49,7 @@ const StripePayment = () => {
                 <div>{el.name}</div>
                 <div>{el.quantity} un.</div>
                 <div>$ {el.price}</div>
-                </li>;
+              </li>;
             })}
         </ul>
         <h2>Importe total: $ {total}</h2>
@@ -58,7 +58,11 @@ const StripePayment = () => {
         <CardElement className="form-control" />
         <Button type="submit">ENVIAR</Button>
       </form>
-      {!cart.length ? <Redirect to="/profile"></Redirect> : null}
+      {!cart.length ? (
+        window.sessionStorage.getItem("admin") ?
+          <Redirect to="/admin/controlpanel"></Redirect> :
+          <Redirect to="/profile"></Redirect>) :
+        null}
     </StyledDiv>
   );
 };

@@ -1,23 +1,27 @@
-import { useRef, useState, useEffect} from 'react';
+import { useRef, useState, useEffect } from 'react';
 import Button from '@material-ui/core/Button';
+import { useDispatch } from 'react-redux';
+import { getProductsAll } from '../../../redux/actions';
 
-export const Vineyards = ({ setVisual})=>{
+export const Vineyards = ({ setVisual }) => {
   const [open, setOpen] = useState(false);
   const anchorRef = useRef(null);
+  const dispatch = useDispatch();
 
   const handleClick = (e) => {
-      setVisual({
-        vineyards: true,
-      })
-        setOpen(false);
+    dispatch(getProductsAll());
+    setVisual({
+      vineyards: true,
+    })
+    setOpen(false);
   }
 
   const prevOpen = useRef(open);
   useEffect(() => {
-      if (prevOpen.current === true && open === false) {
-          anchorRef.current.focus();
-      }
-      prevOpen.current = open;
+    if (prevOpen.current === true && open === false) {
+      anchorRef.current.focus();
+    }
+    prevOpen.current = open;
   }, [open]);
 
 

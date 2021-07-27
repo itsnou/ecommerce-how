@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef} from "react";
+import { useState, useEffect, useRef } from "react";
 import { StyledPanel } from "./styled.js";
 import Orders from "./Orders/Orders.jsx";
 import Users from "./Users/Users.jsx";
@@ -23,26 +23,27 @@ import EditAddCategory from "./Categorys/EditAddCategory/EditAddCategory";
 const ControlPanel = () => {
   const store = useSelector((state) => state);
   const products = useRef(store.products);
-  const [ vineyards, setVineyards ] = useState([])
+  const [vineyards, setVineyards] = useState([])
   const [visual, setVisual] = useState({});
 
   const filteredVineyards = (array) => {
     let aux = {}
     array.map((p) => {
-    if(!aux[p.vineyard]) {
-      return aux[p.vineyard] = 1
-    } else {
-      return aux[p.vineyard] +=1
-    }
-  })
+      if (!aux[p.vineyard]) {
+        return aux[p.vineyard] = 1
+      } else {
+        return aux[p.vineyard] += 1
+      }
+    })
     aux = Object.entries(aux)
+    console.log(" *********************  ", aux, "  ***  ",array)
     return aux.sort();
   }
 
-  useEffect( () => {
+  useEffect(() => {
     setVineyards(filteredVineyards(products.current))
   }, [visual])
-
+  console.log(vineyards);
   return (
     <StyledPanel>
       {window.sessionStorage.getItem("admin") ? (
@@ -55,62 +56,61 @@ const ControlPanel = () => {
             <Categorys visual={visual} setVisual={setVisual} />
             <Newsletters visual={visual} setVisual={setVisual} />
           </div>
-          {Object.keys(visual).length? (
-          <div className="content">
-            {visual.products &&
-              (store.loading ? (
-                <Loading />
-              ) : (
-                store.products.map((p) => <ItemProduct product={p} />)
-              ))}
-            {visual.productsSearch && (
-              <>
-                <Search itemValue={"product"} />
-                {store.loading ? (
+          {Object.keys(visual).length ? (
+            <div className="content">
+              {visual.products &&
+                (store.loading ? (
                   <Loading />
                 ) : (
-                  store.search.length > 0 &&
-                  store.search.map((p) => <ItemProduct product={p} />)
-                )}
-              </>
-            )}
-            {visual.addProduct && <AddProduct  visual={visual} setVisual={setVisual} />}
+                  store.products.map((p) => <ItemProduct product={p} />)
+                ))}
+              {visual.productsSearch && (
+                <>
+                  <Search itemValue={"product"} />
+                  {store.loading ? (
+                    <Loading />
+                  ) : (
+                    store.search.length > 0 &&
+                    store.search.map((p) => <ItemProduct product={p} />)
+                  )}
+                </>
+              )}
+              {visual.addProduct && <AddProduct visual={visual} setVisual={setVisual} />}
 
-            {visual.vineyards && (
-              store.loading ? <Loading /> :
+              {visual.vineyards && (
                 vineyards.map((v) => <ItemVineyard name={v[0]} quantity={v[1]} />)
-            )}
+              )}
 
-            {visual.users && (store.loading ? <Loading /> :
-              store.users.map((p) => <ItemUsers user={p}  />))
-            }
-            {visual.usersSearch && (
-              <>
-                <Search itemValue={"user"} />
-                {store.searchUser.length > 0 &&
-                  store.searchUser.map((p) => <ItemUsers user={p} />)}
-              </>
-            )}
-            {visual.orders &&
-              (store.loading ? (
-                <Loading />
-              ) : (
-                store.orders.map((p) => <ItemOrder order={p} />)
-              ))}
-            {visual.ordersSearch && (
-              <>
-                <Search itemValue={"order"} /> <FilterOrders />
-                {store.loading ? (
+              {visual.users && (store.loading ? <Loading /> :
+                store.users.map((p) => <ItemUsers user={p} />))
+              }
+              {visual.usersSearch && (
+                <>
+                  <Search itemValue={"user"} />
+                  {store.searchUser.length > 0 &&
+                    store.searchUser.map((p) => <ItemUsers user={p} />)}
+                </>
+              )}
+              {visual.orders &&
+                (store.loading ? (
                   <Loading />
                 ) : (
-                  store.searchOrders.length > 0 &&
-                  store.searchOrders.map((p) => <ItemOrder order={p} />)
-                )}
-              </>
-            )}
-            {visual.categorys && <EditAddCategory/>}
-            {visual.newsletters && <ShowNewsletters />}
-          </div>):null}
+                  store.orders.map((p) => <ItemOrder order={p} />)
+                ))}
+              {visual.ordersSearch && (
+                <>
+                  <Search itemValue={"order"} /> <FilterOrders />
+                  {store.loading ? (
+                    <Loading />
+                  ) : (
+                    store.searchOrders.length > 0 &&
+                    store.searchOrders.map((p) => <ItemOrder order={p} />)
+                  )}
+                </>
+              )}
+              {visual.categorys && <EditAddCategory />}
+              {visual.newsletters && <ShowNewsletters />}
+            </div>) : null}
         </>
       ) : null}
     </StyledPanel>

@@ -28,7 +28,8 @@ const ItemVineyard = (props) => {
     })
   }
 
-  const handleClick = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
     if (input.increase === 1 && input.discount === 1) {
       swal({ title: "Ingresar un valor", icon: "warning" });
     } else {
@@ -51,9 +52,7 @@ const ItemVineyard = (props) => {
             });
           }
         });
-
-      document.getElementById('increase').value = ''
-      document.getElementById('discount').value = ''
+        e.target.reset();
     }
   }
 
@@ -61,33 +60,24 @@ const ItemVineyard = (props) => {
     <StyledProduct>
       <li className="name">{props.name}</li>
       <li className="quantity">Productos: {props.quantity}</li>
-      <div>
-        <label>
-          Aumentar precio
-        </label>
+      <form onSubmit={handleSubmit}>
+        <Button variant="contained" type="submit">Aumentar precio</Button>
         <input
           type='text'
-          inputMode='numeric'
           name='increase'
           placeholder='Ingrese un %'
           onChange={handleChange}
-          id='increase'
         />
-      </div>
-      <div>
-        <label>
-          Disminuir precio
-        </label>
+      </form>
+      <form onSubmit={handleSubmit}>
+        <Button variant="contained" type="submit">Disminuir precio</Button>
         <input
           type='text'
-          inputMode='numeric'
           name='discount'
           placeholder='Ingrese un %'
           onChange={handleChange}
-          id='discount'
         />
-      </div>
-      <Button variant="contained" onClick={handleClick}      >EDITAR</Button>
+      </form>
     </StyledProduct>
   )
 
