@@ -5,12 +5,14 @@ import StyledDiv from "./styled";
 import { Link } from "react-router-dom";
 import { subscription } from "../../redux/actions/sending";
 
+
 const Profile = () => {
   const dispatch = useDispatch();
   const loged = useSelector((state) => state.loged);
   const user = useSelector((state) => state.user);
   const orders = useSelector((state) => state.orders);
   const [showUnsubscribe, setShowUnsubscribe] = useState(false);
+
 
   useEffect(() => {
     dispatch(getProfile());
@@ -35,7 +37,7 @@ const Profile = () => {
             <StyledDiv>
               <div>
                 <h1>
-                  Bienvenido: {el.name} {el.lastName}
+                  Bienvenido {el.name} {el.lastName}
                 </h1>
                 {showUnsubscribe && (
                   <div>
@@ -46,9 +48,11 @@ const Profile = () => {
                   </div>
                 )}
               </div>
-
               <div>
                 <h2>Email: {el.email}</h2>
+              </div>
+              <div className='container-wishlist'>
+                <Link to="/wishlist" className='profile-wishlist'>Mi Wishlist</Link>
               </div>
               <div>
                 <h4>Compras realizadas: </h4>

@@ -10,10 +10,10 @@ router.get("/", async (req, res) => {
   const { category, name, vineyard, barcode } = req.query;
   if (vineyard) {
     try {
-      const productsByVineyard = await productSchema.find({
-        vineyard: vineyard,
-      });
-      return res.send(productsByVineyard);
+      const productsByVineyard = await productSchema.find();
+      let filter = productsByVineyard.filter((v) => v.vineyard.toLowerCase().includes(vineyard.toLowerCase()))
+      filter.length ? res.send(filter) : res.status(404).send("Sorry... Vineyard not found")
+      ;
     } catch (err) {
       return res.status(404).send("Sorry... Vineyard not found");
     }
@@ -112,6 +112,30 @@ router.post(
       }
     } else {
       res.status(401).send({ message: "No está autorizado" });
+    }
+  }
+);
+
+router.put(
+  "/vineyard",
+  passport.authenticate("jwt", { session: false }),
+  async (req, res) => {
+    const token = req.headers.authorization.split(" ");
+    const decodificado = jwt_decode(token[1]);
+    const findUser = await userSchema.findOne({ email: decodificado.email });
+    if (findUser.userStatus === "Admin") {
+      const {vineyard, increase, discount} = req.body
+      const productsByVineyard = await productSchema.find();
+      let filter = productsByVineyard.filter((v) => v.vineyard.toLowerCase().includes(vineyard.toLowerCase()))
+      filter.map(async(wine)=>{
+       const update = {
+        price: Math.floor(wine.price * increase * discount) 
+      };
+      const product = await productSchema.findByIdAndUpdate(wine._id, update);
+     })      
+      res.send("Cambios completos");
+    } else {
+      res.status(401).send({ message: "No esta autorizado" });
     }
   }
 );

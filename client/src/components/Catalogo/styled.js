@@ -23,11 +23,9 @@ const StyledDiv = styled.div`
                 margin: auto 4px;
                 outline:none;
             }
-            .paginationActive{
-                background-color:#900C3E;
-            }
             .paginationDisable{
                 background-color:gray;
+                visibility:hidden;
             }
         }
     }

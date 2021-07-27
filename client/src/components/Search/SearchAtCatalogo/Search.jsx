@@ -6,13 +6,13 @@ import StyledDiv from "./styled.js";
 const SearchAtCatalogo = () => {
   const [product, setProduct] = useState("");
   const search = useSelector((state) => state.search);
-
   const dispatch = useDispatch();
 
   const handleChange = (e) => {
     setProduct(e.target.value);
     dispatch(getProductsByName(e.target.value));
   };
+
 
   useEffect(() => {
     if (search.length === 0) {

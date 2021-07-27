@@ -1,14 +1,17 @@
 import { Button } from '@material-ui/core';
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { logOff } from '../../redux/actions';
+import { changePassword, logOff } from '../../redux/actions';
 
-const ResetPassword = () => {
+const ResetPassword = ({ match }) => {
     const [error, setError] = useState("");
     const [password, setPassword] = useState({
         password1: "",
-        password2: ""
+        password2: "",
+        code: ""
     });
+
+    const dispatch = useDispatch();
 
     const validate = (e) => {
         setPassword({ ...password, password2: e.target.value })
@@ -17,16 +20,28 @@ const ResetPassword = () => {
         } else {
             setError("");
         }
+
     };
 
-    const dispatch = useDispatch();
     useEffect(() => {
         dispatch(logOff("off"));
     }, [dispatch]);
 
     const handleSubmit = (e) => {
         e.preventDefault();
-      };
+        console.log(match.params.id)
+        if (password.code === window.sessionStorage.getItem("code")) {
+            dispatch(changePassword(match.params.id, password.password1));
+            alert("ok")
+        } else {
+            alert("codigo de validacion invalido");
+        }
+        setPassword({
+            password1: "",
+            password2: "",
+            code: ""
+        })
+    }
 
     return (
         <div>
@@ -48,6 +63,14 @@ const ResetPassword = () => {
                     required
                 />
                 {!error ? null : <p>{error}</p>}
+                <input
+                    name="code"
+                    value={password.code}
+                    placeholder="Ingrese codigo de verificacion"
+                    type="password"
+                    onChange={(e) => setPassword({ ...password, code: e.target.value })}
+                    required
+                />
                 <Button type="submit" variant="contained">
                     ENVIAR
                 </Button>

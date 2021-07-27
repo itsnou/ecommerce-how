@@ -1,18 +1,21 @@
-import {React} from 'react';
-import {GoogleMap, LoadScript, Marker} from '@react-google-maps/api';
-import {useForm} from 'react-hook-form';
+import { React } from 'react';
+import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
+import { useForm } from 'react-hook-form';
 import axios from 'axios';
 import StyledDiv from './style';
+import swal from "sweetalert";
 
 const ContactUs = (props) => {
-	const mapStyle = {height: '400px', width: '600px'};
-	const defaultCenter = {lat: -38.955327, lng: -68.14018};
-	const {register, errors, handleSubmit} = useForm();
+	const mapStyle = { height: '400px', width: '600px' };
+	const defaultCenter = { lat: -38.955327, lng: -68.14018 };
+	const { register, errors, handleSubmit } = useForm();
 
 	const onSubmit = (data, e) => {
 		axios.post('http://localhost:3001/sendMail', data);
 		e.target.reset();
-		alert('consulta enviada');
+		swal('consulta enviada', {
+			icon: "success",
+		});
 	};
 
 	return (
@@ -38,14 +41,14 @@ const ContactUs = (props) => {
 					<input
 						className='inputs'
 						type='text'
-						{...register('name', {required: true, minLength: 4})}
+						{...register('name', { required: true, minLength: 4 })}
 					/>
 					<span>{errors?.name?.message}</span>
 					<h3>Asunto: </h3>
 					<input
 						className='inputs'
 						type='text'
-						{...register('subject', {required: true, minLength: 3})}
+						{...register('subject', { required: true, minLength: 3 })}
 					/>
 					<h3>Mensaje: </h3>
 					<textarea

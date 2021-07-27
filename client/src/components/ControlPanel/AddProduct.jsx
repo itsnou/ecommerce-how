@@ -2,13 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { addProduct } from '../../redux/actions/sending';
 import { getVarietals } from '../../redux/actions/request';
-import { Link } from 'react-router-dom';
 import { useForm } from "react-hook-form";
 import {StyledAddProduct} from './styled';
 import Button from '@material-ui/core/Button';
 
 
-const AddProduct = () => {
+const AddProduct = ({setVisual}) => {
     const { register, handleSubmit, formState:{ errors } } = useForm();
    
     const [uvas,setUvas]=useState(["Varietales"]);
@@ -180,11 +179,8 @@ const AddProduct = () => {
                         } rows={5}/>
                     <span>{errors?.description?.message}</span>
                 </label>
-
-                {/* {error === -1 ? <button type="submit" className="btn-submit">Agregar Producto</button> : <span className={error && 'danger'} >{error}</span>} */}
-                {/* <input type="submit" value=" Create Recipe" onClick={(e) => handleSubmit(e)}/> */}
                 <Button className='block' type="submit" >Agregar Producto</Button>
-                <Link to={`/admin/controlpanel`}><Button className='volver'>Volver</Button></Link>
+                <Button className='block' onClick={() =>setVisual({})}>Volver</Button>
             </form>
         </StyledAddProduct>
     )

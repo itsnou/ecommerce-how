@@ -37,27 +37,41 @@ const StyledDiv = styled.div`
       outline: 0;
     }
   }
+    .container-wishlist{
+        .profile-wishlist{
+            color:white;
+            font-weight:bold;
+            text-decoration:none;
+            :hover{
+                color:red;
+            }
+        }
+    }
 
-  .orders-ul {
-    .orders-links {
-      text-decoration: none;
-      .orders-li {
-        background-color: white;
-        color: black;
-        list-style-type: none;
-        width: 50%;
-        margin: auto;
-        margin-bottom: 10px;
-        border-radius: 8px;
-        text-align: center;
-        font-weight: bold;
-        .orders-users {
-          display: flex;
-          justify-content: space-around;
-          h4 {
-            padding: 0;
-            margin: auto 0;
-          }
+    .orders-ul{
+        width:50%;
+        margin:auto;
+        .orders-links{
+            text-decoration:none;
+            .orders-li{
+                background-color:white;
+                color:black;
+                list-style-type:none;
+                width:100%;
+                margin:auto;
+                margin-bottom:10px;
+                border-radius:8px;
+                text-align:center;
+                font-weight:bold;
+                .orders-users{
+                    display:flex;
+                    justify-content:space-around;
+                    h4{
+                        padding:0;
+                        margin:auto 0;
+                    }
+                }
+            }
         }
       }
     }

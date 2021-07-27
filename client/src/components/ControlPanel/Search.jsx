@@ -9,6 +9,8 @@ import {
   getUsers,
   reset,
   userFiltered,
+  getProductsByVineyard
+  
 } from "../../redux/actions";
 
 import Button from "@material-ui/core/Button";
@@ -22,6 +24,23 @@ const Search = ({ itemValue }) => {
   const store = useSelector((state) => state);
   const history = useHistory();
 
+  useEffect(() => {
+    if (entry.current === 0) {
+      setInput("");
+      setBarcode("");
+    }
+    return ()=>{
+      dispatch(reset("searchUser"));
+      dispatch(reset("search"));}
+  }, [dispatch]);
+
+  useEffect(()=>{
+    if(store.search.length>0){
+    if(store.search[0].barcode === barcode){
+      setTimeout(history.push(`/admin/editProduct/${store.search[0]._id}`),5000)
+    }}
+  },[store.search,history,barcode])
+  
   const handleChange = (e) => {
     setInput(e.target.value);
   };
@@ -36,6 +55,9 @@ const Search = ({ itemValue }) => {
       case "product":
         dispatch(getProductsByName(input))
         break;
+      case "vineyard":
+        dispatch(getProductsByVineyard(input))
+        break;
       case "user":
         dispatch(getUsers());
         dispatch(userFiltered(input, store.users));
@@ -49,25 +71,7 @@ const Search = ({ itemValue }) => {
     setInput("");
   };
 
-  useEffect(() => {
-    if (entry.current === 0) {
-      setInput("");
-      setBarcode("");
-    }
-    return ()=>{
-      dispatch(reset("searchUser"));
-      dispatch(reset("search"));}
-  }, [dispatch]);
-
-  useEffect(()=>{
-    if(store.search.length>0){
-    if(store.search[0].barcode == barcode){
-      setTimeout(history.push(`/admin/editProduct/${store.search[0]._id}`),5000)
-    }}
-    // else if(barcode.toString.length==6){
-    //   history.push(`/admin/controlpanel`)
-    // }//ver lo de la ruta para direccionar a agregar producto o no
-  },[store.search])
+ 
   return (
     <StyledSearch>
       <div>
@@ -85,7 +89,9 @@ const Search = ({ itemValue }) => {
           </div>
           <div>
           {itemValue==="product"?<input
-            type="number"
+            className='barcode'
+            type="text"
+            inputMode= 'numeric'
             placeholder="Código de Barras..."
             value={barcode}
             onChange={handleChangeBarcode}

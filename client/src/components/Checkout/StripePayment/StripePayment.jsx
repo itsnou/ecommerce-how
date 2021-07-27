@@ -13,6 +13,7 @@ const StripePayment = () => {
   const dispatch = useDispatch();
   const payment = useSelector((state) => state.payment);
   const cart = useSelector((state) => state.cart);
+  let total = 0;
 
   useEffect(() => {
     dispatch(setPayment());
@@ -34,16 +35,24 @@ const StripePayment = () => {
     }
   };
 
+  console.log(cart);
+
   return (
     <StyledDiv>
-      <h1>Productos: </h1>
-      <div>
+      <h1>Detalle: </h1>
+      <div className='detail'>
         <ul>
           {cart &&
             cart.map((el, idx) => {
-              <li>{el.name} </li>;
+              total = total + el.price * el.quantity
+              return <li key={idx}>
+                <div>{el.name}</div>
+                <div>{el.quantity} un.</div>
+                <div>$ {el.price}</div>
+                </li>;
             })}
         </ul>
+        <h2>Importe total: $ {total}</h2>
       </div>
       <form onSubmit={(e) => handleSubmit(e)} className="form-container">
         <CardElement className="form-control" />

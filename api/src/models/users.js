@@ -7,12 +7,12 @@ const UsersSchema = new mongoose.Schema(
     name: {
       required: true,
       type: String,
-      lowecase: true,
+      // lowecase: true,
     },
     lastName: {
       required: true,
       type: String,
-      lowercase: true,
+      // lowercase: true,
     },
     //SE DEBE HACER LA VALIDACIÓN
     email: {

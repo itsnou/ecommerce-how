@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import Button from '@material-ui/core/Button';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import Grow from '@material-ui/core/Grow';
@@ -38,6 +38,11 @@ const Products = ({ setVisual }) => {
                 addProduct: true,
             })
         }
+        if(e.target.value === 4) {
+            setVisual({
+                productsSearch: true,
+            })
+        }
         
         if (anchorRef.current && anchorRef.current.contains(e.target)) {
             return;
@@ -54,7 +59,7 @@ const Products = ({ setVisual }) => {
 
     // return focus to the button when we transitioned from !open -> open
     const prevOpen = useRef(open);
-    React.useEffect(() => {
+    useEffect(() => {
         if (prevOpen.current === true && open === false) {
             anchorRef.current.focus();
         }
@@ -84,7 +89,7 @@ const Products = ({ setVisual }) => {
                                     <MenuItem value={1} onClick={handleClick}>Ver todos los productos</MenuItem>
                                     <MenuItem value={2} onClick={handleClick}>Buscar producto</MenuItem>
                                     <MenuItem value={3} onClick={handleClick}>Agregar producto</MenuItem>
-                                    <MenuItem value={4} onClick={handleClick}>Modificar ofertas</MenuItem>
+                                    {/* <MenuItem value={4} onClick={handleClick}>Bodegas</MenuItem> */}
                                 </MenuList>
                             </ClickAwayListener>
                         </Paper>

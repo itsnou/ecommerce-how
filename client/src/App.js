@@ -1,4 +1,3 @@
-
 import {Route} from 'react-router-dom';
 import Nav from './components/Nav/Nav';
 import Catalogo from './components/Catalogo/Catalogo';
@@ -23,6 +22,7 @@ import ContactUs from './components/ContactUs/ContactUs';
 import EditProductVarietals from './components/ControlPanel/Products/EditProductVarietals/EditProductVarietals';
 import ResetPassword from "./components/ResetPassword/ResetPassword";
 import MercadoPago from './components/Checkout/MercadoPago/MercadoPago';
+import Wishlist from "./components/Wishlist/Wishlist";
 
 const stripePromise = loadStripe(
 	'pk_test_51JDBoyGdIVmQXHqKUNKQADTSCIpNAgJeaoehTBVijP5uRNmbv2wgrUO92p2fxkOiSg3Ol0GTUYKFZfu7c5WxFOsb00E9tMt4VU'
@@ -31,7 +31,7 @@ const stripePromise = loadStripe(
 function App() {
 	return (
 		<>
-			<Route path={['/', '/product/:id', '/catalogo']}>
+			<Route path={['/', '/product/:id', '/catalogo', '/empresa', '/contacto', '/admin/controlpanel']}>
 				<Nav />
 			</Route>
 			<Route
@@ -51,9 +51,10 @@ function App() {
 			<Route exact path='/admin/controlpanel' component={ControlPanel} />
 			<Route exact path='/login' component={LogIn} />
 			<Route exact path='/profile' component={Profile} />
+      <Route exact path="/wishlist" component={Wishlist} />
 			<Route exact path='/checkout' component={Checkout} />
 			<Elements stripe={stripePromise}>
-				<Route exact path='/checkout/stripe' component={StripePayment} />
+      <Route exact path='/checkout/stripe' component={StripePayment} />
 			</Elements>
 			<Route exact path='/checkOutMp' component={MercadoPago} />
       <Route exact path="/reset-password/:id" component={ResetPassword}/>
