@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 const StyledDiv = styled.div`
   width: 85%;
-  height: 620px;
+  max-height: 750px;
   margin: 15px auto;
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -50,6 +50,7 @@ const StyledDiv = styled.div`
   }
 
   .detail-explain {
+    max-height:750px;
     background-color: #faddd3;
     text-align: center;
     border-radius: 0px 8px 8px 0px;
@@ -97,6 +98,7 @@ const StyledDiv = styled.div`
       border-radius:8px;
       background-color: #420D1F;
       margin-top:15px;
+      margin-bottom:15px;
       h1{
         color:white;
       }
@@ -106,7 +108,7 @@ const StyledDiv = styled.div`
         text-align:left;
       }
       h5{
-        font-size:0.6rem;
+        font-size:0.7rem;
       }
       .reviews-list{
         list-style:none;

@@ -142,8 +142,8 @@ const StyledDiv = styled.div`
         }
     }
     @keyframes subidon {
-  0%   {transform: scale(1);}
-  100% {transform: scale(1.5);
+    0%   {transform: scale(1);}
+    100% {transform: scale(1.5);
     animation-play-state: paused}
 }
 `

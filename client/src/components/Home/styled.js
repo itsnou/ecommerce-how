@@ -5,16 +5,10 @@ const StyledDiv = styled.div`
   .divNewsletter {
     color: black;
     text-align: center;
-    border: 1px solid black;
-    border-radius: 10px;
+    border-radius: 18px;
+    border:1px solid black;
     padding: 15px;
-    background: rgb(255, 255, 255);
-    background: linear-gradient(
-      90deg,
-      rgba(255, 255, 255, 0.9023984593837535) 0%,
-      rgba(250, 250, 250, 1) 83%,
-      rgba(250, 250, 250, 0.3225665266106442) 100%
-    );
+    background-color: #FADDD3;
     height: 50px;
     h3 {
       margin: 0;
@@ -32,13 +26,7 @@ const StyledDiv = styled.div`
       position: relative;
       height: 30px;
       width: 60px;
-      background: rgb(255, 255, 255);
-      background: linear-gradient(
-        90deg,
-        rgba(255, 255, 255, 0.9023984593837535) 0%,
-        rgba(250, 250, 250, 1) 83%,
-        rgba(250, 250, 250, 0.3225665266106442) 100%
-      );
+      background: white;
       border-radius: 10px;
       margin-left: 10px;
       margin-right: 10px;

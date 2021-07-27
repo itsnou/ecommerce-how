@@ -74,7 +74,7 @@ const Catalogo = () => {
               containerClassName={"paginationBtn"}
               previousLinkClassName={"previousBtn"}
               nextLinkClassName={"nextBtn"}
-              disabledClassName={"paginationDisable"} //visibility:hidden;
+              disabledClassName={"paginationDisable"}
               activeClassName={"paginationActive"}
             />
           ) : null}

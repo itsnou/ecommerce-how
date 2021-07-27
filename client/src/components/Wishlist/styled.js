@@ -36,7 +36,6 @@ const StyledDiv = styled.div`
           width: 50px;
         }
       }
-
     }
     h1 {
       text-align: center;
