@@ -222,7 +222,7 @@ const ProductDetail = ({ match }) => {
               ) : null}
             </div>
             {
-              detail.reviews.length > 0 ?
+              detail.reviews && detail.reviews.length > 0 ?
               <div className='container-reviews'>
                 <h1>Reviews: </h1>
                 <ul className='reviews-list'>

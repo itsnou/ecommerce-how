@@ -486,6 +486,24 @@ export const removeProductVarietal = (data) => {
 	};
 };
 
+export const subscription = (data) => {
+	return async (dispatch) => {
+	  try {
+		await axios.put(
+		  `${GET_URL}users/subscription`,
+		  { subscribed: data },
+		  {
+			headers: {
+			  authorization: "Bearer " + sessionStorage.getItem("token"),
+			},
+		  }
+		);
+	  } catch (e) {
+		console.log(e);
+	  }
+	};
+  };
+
 export const sendEmailNewsLetter = (data) => {
   return async (dispatch) => {
     const sendEmail = await axios.post(

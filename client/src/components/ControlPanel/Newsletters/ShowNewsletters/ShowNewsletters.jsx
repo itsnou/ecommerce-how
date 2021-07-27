@@ -4,7 +4,7 @@ import StyledNewsletter from "./styled.js";
 
 const ShowNewsletters = () => {
   const store = useSelector((state) => state);
-  return store.newsletters?.newsletters.map((e, index) => {
+  return store && store.newsletters?.newsletters.map((e, index) => {
     return (
       <StyledNewsletter key={index}>
         <h3>Cliente: {e.name}</h3>
