@@ -51,6 +51,11 @@ const Catalogo = () => {
         setPageNumber(selected);
     };
 
+    const toTop= () =>{
+      document.body.scrollTop = 0;
+      document.documentElement.scrollTop = 0;
+    }
+
   return (
     <>
       <StyledDiv>
@@ -76,6 +81,7 @@ const Catalogo = () => {
               nextLinkClassName={"nextBtn"}
               disabledClassName={"paginationDisable"}
               activeClassName={"paginationActive"}
+              hrefBuilder= {()=> toTop()}
             />
           ) : null}
         </div>
