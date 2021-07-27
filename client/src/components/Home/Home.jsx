@@ -7,12 +7,12 @@ import { usePopup } from "react-hook-popup";
 import { useDispatch, useSelector } from "react-redux";
 import { getProfile } from "../../redux/actions/request";
 import { subscription } from "../../redux/actions/sending";
-import { Snackbar, Alert } from "@material-ui/core";
+import { Snackbar } from "@material-ui/core";
 
 const Home = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
-  const [showPopup, hidePopup] = usePopup(
+  const [showPopup] = usePopup(
     "popup",
     ({ message, handleClose }) => (
       <Snackbar open autoHideDuration={6000} onClose={handleClose}>
@@ -38,10 +38,6 @@ const Home = () => {
     )
   );
 
-  const subscribe = (e) => {
-    dispatch(subscription(true));
-  };
-
   useEffect(() => {
     if (
       window.sessionStorage.getItem("userLog") &&
@@ -49,14 +45,20 @@ const Home = () => {
     ) {
       dispatch(getProfile());
     }
-  }, [dispatch]);
+  }, [dispatch,user]);
 
   useEffect(() => {
     if (user[0]?.subscribed === false) {
       showPopup("hola");
     }
-  }, [user]);
+  }, [user, showPopup]);
 
+
+  const subscribe = (e) => {
+    dispatch(subscription(true));
+  };
+
+ 
   return (
     <StyledDiv>
       <div className="banner">

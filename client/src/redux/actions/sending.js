@@ -506,7 +506,7 @@ export const subscription = (data) => {
 
 export const sendEmailNewsLetter = (data) => {
   return async (dispatch) => {
-    const sendEmail = await axios.post(
+    await axios.post(
       `${GET_URL}sendMail/newsletter`,
       {
         reason: data.reason,
