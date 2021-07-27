@@ -39,6 +39,7 @@ import {
   DELETE_VARIETAL,
   CLEAR_CART,
   LOG_OFF,
+  LOAD_NEWSLETTERS,
 } from "../actions/constant";
 
 import { addToCart } from "../../utils/addToCart";
@@ -70,7 +71,8 @@ const initialState = {
   searchOrders: [],
   confirm: false,
   payment: {},
-  flag: 1
+  flag: 1,
+  newsletters: [],
 };
 
 const reducer = (state = initialState, { payload, type }) => {
@@ -106,10 +108,10 @@ const reducer = (state = initialState, { payload, type }) => {
       let loadingBarcode;
       if (payload.length > 0) {
         searchBarcode = payload;
-        loadingBarcode= true
+        loadingBarcode = true;
       } else {
         searchBarcode = ["No tiene este producto cargado"];
-        loadingBarcode= false
+        loadingBarcode = false;
       }
       return {
         ...state,
@@ -166,8 +168,8 @@ const reducer = (state = initialState, { payload, type }) => {
     case LOG_OFF:
       return {
         ...state,
-        loged: payload
-      }
+        loged: payload,
+      };
     case GET_USER_DETAIL:
       return {
         ...state,
@@ -290,6 +292,11 @@ const reducer = (state = initialState, { payload, type }) => {
       return {
         ...state,
         cart: payload,
+      };
+    case LOAD_NEWSLETTERS:
+      return {
+        ...state,
+        newsletters: payload,
       };
     default:
       return state;

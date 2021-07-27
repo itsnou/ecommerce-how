@@ -3,7 +3,9 @@ import { StyledPanel } from "./styled.js";
 import Orders from "./Orders/Orders.jsx";
 import Users from "./Users/Users.jsx";
 import Products from "./Products/Products.jsx";
+import Newsletters from "./Newsletters/Newsletters";
 import { useSelector } from "react-redux";
+import ShowNewsletters from "./Newsletters/ShowNewsletters/ShowNewsletters.jsx";
 import ItemProduct from "./Products/ItemProduct.jsx";
 import Categorys from "./Categorys/Categorys.jsx";
 import Search from "./Search.jsx";
@@ -14,7 +16,7 @@ import ItemOrder from "./Orders/ItemOrder.jsx";
 import ItemVineyard from "./Vineyards/ItemVineyard.jsx";
 import FilterOrders from "./Orders/FilterOrders.jsx";
 import Loading from "../Loading/Loading.jsx";
-import EditAddCategory from "./Categorys/EditAddCategory/EditAddCategory"
+import EditAddCategory from "./Categorys/EditAddCategory/EditAddCategory";
 
 
 
@@ -51,19 +53,25 @@ const ControlPanel = () => {
             <Products visual={visual} setVisual={setVisual} />
             <Vineyards visual={visual} setVisual={setVisual} />
             <Categorys visual={visual} setVisual={setVisual} />
+            <Newsletters visual={visual} setVisual={setVisual} />
           </div>
           {Object.keys(visual).length? (
           <div className="content">
             {visual.products &&
-              (store.loading ? <Loading /> :
+              (store.loading ? (
+                <Loading />
+              ) : (
                 store.products.map((p) => <ItemProduct product={p} />)
-              )}
+              ))}
             {visual.productsSearch && (
               <>
                 <Search itemValue={"product"} />
-                {store.loading ? <Loading /> :
-                  store.search.length>0 &&
-                  store.search.map((p) => <ItemProduct product={p} />)}
+                {store.loading ? (
+                  <Loading />
+                ) : (
+                  store.search.length > 0 &&
+                  store.search.map((p) => <ItemProduct product={p} />)
+                )}
               </>
             )}
             {visual.addProduct && <AddProduct  visual={visual} setVisual={setVisual} />}
@@ -83,22 +91,25 @@ const ControlPanel = () => {
                   store.searchUser.map((p) => <ItemUsers user={p} />)}
               </>
             )}
-            {visual.orders && (store.loading ?
-              <Loading /> : store.orders.map((p) => <ItemOrder order={p} />))
-            }
+            {visual.orders &&
+              (store.loading ? (
+                <Loading />
+              ) : (
+                store.orders.map((p) => <ItemOrder order={p} />)
+              ))}
             {visual.ordersSearch && (
               <>
                 <Search itemValue={"order"} /> <FilterOrders />
-                {store.loading ? <Loading /> :
-                  (
-                    store.searchOrders.length > 0 &&
-                    store.searchOrders.map((p) => <ItemOrder order={p} />)
-                  )
-                }</>
+                {store.loading ? (
+                  <Loading />
+                ) : (
+                  store.searchOrders.length > 0 &&
+                  store.searchOrders.map((p) => <ItemOrder order={p} />)
+                )}
+              </>
             )}
-            {visual.categorys && 
-            <EditAddCategory/>
-            }
+            {visual.categorys && <EditAddCategory/>}
+            {visual.newsletters && <ShowNewsletters />}
           </div>):null}
         </>
       ) : null}

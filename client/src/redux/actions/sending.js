@@ -485,3 +485,22 @@ export const removeProductVarietal = (data) => {
 		dispatch({ type: DELETE_VARIETAL, payload: 1 });
 	};
 };
+
+export const sendEmailNewsLetter = (data) => {
+  return async (dispatch) => {
+    const sendEmail = await axios.post(
+      `${GET_URL}sendMail/newsletter`,
+      {
+        reason: data.reason,
+        product: data.product,
+        email: data.email,
+        name: data.name,
+      },
+      {
+        headers: {
+          authorization: "Bearer " + sessionStorage.getItem("token"),
+        },
+      }
+    );
+  };
+};
