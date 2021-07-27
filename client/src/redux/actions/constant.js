@@ -48,4 +48,4 @@ export const ADD_VARIETAL = "ADD_VARIETAL";
 export const CLEAR_CART = "CLEAR_CART";
 export const FORCE_RESET= "FORCE_RESET";
 export const LOG_OFF="LOG_OFF";
-
+export const LOAD_NEWSLETTERS = "LOAD_NEWSLETTERS";

@@ -15,6 +15,7 @@ import {
   GET_ORDERS_FOR_STATUS,
   LOADING,
   GET_ORDERS_FOR_USER,
+  LOAD_NEWSLETTERS,
   GET_PRODUCTS_BY_VINEYARD
 } from "./constant";
 
@@ -48,7 +49,7 @@ export const getProductsByName = (name) => {
 
 export const getProductsByVineyard = (vineyard) => {
   return async (dispatch) => {
-    dispatch({type:LOADING})
+    dispatch({ type: LOADING });
     try {
       const products = await axios.get(`${GET_URL}products?vineryard=${vineyard}`);
        console.log(products.data)
@@ -244,6 +245,25 @@ export const getProfile = () => {
     } catch (err) {
       apiRes = err.response.data.message;
       dispatch({ type: LOAD_PROFILE, payload: { log: "off" } });
+    }
+  };
+};
+
+export const getNewsletters = () => {
+  let apiRes;
+  return async (dispatch) => {
+    try {
+      apiRes = await axios.get(`${GET_URL}sendMail/newsletters`, {
+        headers: {
+          authorization: "Bearer " + sessionStorage.getItem("token"),
+        },
+      });
+      dispatch({
+        type: LOAD_NEWSLETTERS,
+        payload: { newsletters: apiRes.data },
+      });
+    } catch (err) {
+      console.log(err);
     }
   };
 };

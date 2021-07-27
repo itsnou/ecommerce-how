@@ -1,28 +1,45 @@
 import { useRef, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
-import { getProductDetail } from '../../../../redux/actions/request';
-import { editProduct } from '../../../../redux/actions/sending';
+import { getProductDetail, getUsers } from '../../../../redux/actions/request';
+import { editProduct, sendEmailNewsLetter } from '../../../../redux/actions/sending';
 import Loading from '../../../Loading/Loading';
 import StyledDiv from './styled';
 import swal from "sweetalert";
 import { Link } from 'react-router-dom';
 
+
 const FormProduct = ({ match }) => {
-    const dispatch = useDispatch();
-    const { register, handleSubmit } = useForm();
-    const id = useRef(match.params.id);
-    const product = useSelector(state => state.productDetail);
-    const edit = useSelector(state => state.confirm);
-    const load = useSelector(state => state.loading);
+  const { register, handleSubmit } = useForm();
+  const dispatch = useDispatch();
+  const id = useRef(match.params.id);
+  const product = useSelector((state) => state.productDetail);
+  const edit = useSelector((state) => state.confirm);
+  const load = useSelector((state) => state.loading);
+  const users = useSelector((state) => state.users);
 
     useEffect(() => {
-        dispatch(getProductDetail(id.current))
+        dispatch(getProductDetail(id.current));
+        dispatch(getUsers());
         return () => {
             dispatch(getProductDetail("fakeId"))
         }
 
     }, [dispatch])
+  
+  const handleEmail = (reason) => {
+    users.forEach((e) => {
+      if (e.subscribed && e.wishlist?.includes(product._id)) {
+        const data = {
+          reason: reason,
+          product: product.name,
+          email: e.email,
+          name: e.name,
+        };
+        dispatch(sendEmailNewsLetter(data));
+      }
+    });
+  };
 
     const onSubmit = data => {
         swal({
@@ -88,6 +105,12 @@ const FormProduct = ({ match }) => {
                             </form>
                             {edit ? <h1>LA MODIFICACIÓN FUE UN ÉXITO</h1> : null}
                         </div>
+                        <button className='btn-manu' value="discount" onClick={(e) => handleEmail("discount")}>
+                          Enviar correo descuento
+                        </button>
+                        <button className='btn-manu' value="stock" onClick={(e) => handleEmail("stock")}>
+                          Enviar correo stock disponible
+                        </button>
                     </div>
                     : <h1>No tiene permisos para ingresar aqui</h1>}
             </StyledDiv>}

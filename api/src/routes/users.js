@@ -24,6 +24,7 @@ router.get(
       lastName: findUser.lastName,
       email: findUser.email,
       wishlist: findUser.wishlist,
+      subscribed: findUser.subscribed,
     };
     res.json(returnedUser);
   }
@@ -56,6 +57,7 @@ router.post("/signup", async (req, res) => {
     password: password,
     orders: [],
     wishlist: [],
+    subscribed: false,
   };
   try {
     const newUser = await new userSchema(data);
@@ -255,6 +257,20 @@ router.put(
     res.send("Correcto");
   }
 );
+
+router.put(  
+  "/subscription",
+  passport.authenticate("jwt", { session: false }),
+  async (req, res) => {
+    const { subscribed } = req.body;
+    const token = req.headers.authorization.split(" ");
+    const decodificado = jwt_decode(token[1]);
+    const findUser = await userSchema.findOne({ email: decodificado.email });
+    const removeWish = await userSchema.findByIdAndUpdate(findUser._id, {
+      subscribed: subscribed,
+    });
+    res.send("Correcto");
+});
 
 router.put(
   "/precheckout",

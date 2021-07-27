@@ -20,6 +20,7 @@ const UsersSchema = new mongoose.Schema(
       required: true,
       type: String,
     },
+    subscribed: false,
     userStatus: {
       required: false,
       type: String,
@@ -50,10 +51,8 @@ const UsersSchema = new mongoose.Schema(
     ],
   },
   {
-    versionKey: false
-  },
-
-
+    versionKey: false,
+  }
 );
 
 UsersSchema.pre("save", async function (next) {

@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 const StyledDiv = styled.div`
   width: 85%;
-  max-height: 600px;
+  height: 620px;
   margin: 15px auto;
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -87,6 +87,47 @@ const StyledDiv = styled.div`
           height: 25px;
         }
       }
+    }
+    .container-reviews{
+      width:95%;
+      max-height:150px;
+      overflow: scroll;
+      border:1px solid black;
+      margin:auto;
+      border-radius:8px;
+      background-color: #420D1F;
+      margin-top:15px;
+      h1{
+        color:white;
+      }
+      h4{
+        padding:0;
+        margin:5px;
+        text-align:left;
+      }
+      h5{
+        font-size:0.6rem;
+      }
+      .reviews-list{
+        list-style:none;
+        padding:0;
+        margin:auto;
+        .review{
+          background-color:white;
+          color:black;
+          margin:auto;
+          width:80%;
+          display:grid;
+          grid-template-columns:1fr;
+          border:1px solid black;
+          border-radius:5px;
+          margin-bottom:5px;
+          margin-top:5px;
+        }
+      }
+    }
+    .container-reviews::-webkit-scrollbar{
+      display:none;
     }
   }
 `;

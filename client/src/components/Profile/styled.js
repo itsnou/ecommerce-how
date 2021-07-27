@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 const StyledDiv = styled.div`
     width:60%;
@@ -57,7 +57,9 @@ const StyledDiv = styled.div`
                 }
             }
         }
+      }
     }
-`
+  }
+`;
 
 export default StyledDiv;
