@@ -1,4 +1,4 @@
-import { React, useEffect } from "react";
+import { React, useEffect, useRef } from "react";
 import Footer from "./Footer/Footer";
 import Banner from "./Banner/Banner";
 import Destacados from "./Destacados/Destacados";
@@ -9,9 +9,12 @@ import { getProfile } from "../../redux/actions/request";
 import { subscription } from "../../redux/actions/sending";
 import { Snackbar } from "@material-ui/core";
 
+
 const Home = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
+  const user2 = useRef(user);
+  
   const [showPopup] = usePopup(
     "popup",
     ({ message, handleClose }) => (
@@ -37,11 +40,12 @@ const Home = () => {
       </Snackbar>
     )
   );
+  const popup = useRef(showPopup);
 
   useEffect(() => {
     if (
       window.sessionStorage.getItem("userLog") &&
-      user[0]?.userStatus !== "Admin"
+      user2.current[0]?.userStatus !== "Admin"
     ) {
       dispatch(getProfile());
     }
@@ -49,7 +53,7 @@ const Home = () => {
 
   useEffect(() => {
     if (user[0]?.subscribed === false) {
-      showPopup("hola");
+      popup.current("");
     }
   }, [user]);
 
