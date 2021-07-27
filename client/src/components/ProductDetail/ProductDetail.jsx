@@ -221,6 +221,22 @@ const ProductDetail = ({ match }) => {
                 </div>
               ) : null}
             </div>
+            {
+              detail.reviews.length > 0 ?
+              <div className='container-reviews'>
+                <h1>Reviews: </h1>
+                <ul className='reviews-list'>
+                  {
+                    detail.reviews && detail.reviews.map((el,idx)=>{
+                      return <li key={idx} className='review'>
+                      <h4>{el.name}: </h4> 
+                      <h5>{el.content}</h5>
+                      </li>
+                    })
+                  }
+                </ul>
+              </div> :null
+            }
           </div>
         </StyledDiv>
       )}

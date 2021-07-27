@@ -13,8 +13,6 @@ const NavBar = () => {
 		}
 	}, [url]);
 
-	console.log("aca", url);
-
 	const handleOnClick = (string) => {
 		setUrl(string);
 	};
