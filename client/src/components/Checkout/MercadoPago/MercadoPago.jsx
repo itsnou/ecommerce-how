@@ -15,7 +15,7 @@ export const MercadoPago = () => {
 
 	useEffect(() => {
 		dispatch(setPayment());
-	}, []);
+	}, [dispatch]);
 
 	const handleClick = () => {
 		dispatch(finishMpSale(payment));

@@ -1,5 +1,5 @@
 import { Button } from '@material-ui/core';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { changePassword, logOff } from '../../redux/actions';
 

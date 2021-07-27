@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { getProductDetail, getVarietals } from "../../../../redux/actions/request";
 import {
   addProductVarietal,
-  editProduct,
   removeProductVarietal,
 } from "../../../../redux/actions/sending";
 import Button from "@material-ui/core/Button";
@@ -14,10 +13,7 @@ export const EditProductVarietals = ({ match }) => {
   const id = useRef(match.params.id);
   const product = useSelector((state) => state.productDetail);
   const varietals = useSelector((state) => state.varietals);
-  const edit = useSelector((state) => state.confirm);
-  const load = useSelector((state) => state.loading);
   const [newVarietal, setNewVarietal] = useState("");
-  const [errors, setErrors] = useState("");
   const flag = useSelector((state) => state.flag);
 
   useEffect(() => {
@@ -32,9 +28,7 @@ export const EditProductVarietals = ({ match }) => {
       dispatch(
         addProductVarietal({ productId: product._id, varietal: newVarietal })
       );
-    } else {
-      setErrors("Debe seleccionar uno");
-    }
+    } 
   };
 
   const handleClick = (el) => {

@@ -24,6 +24,23 @@ const Search = ({ itemValue }) => {
   const store = useSelector((state) => state);
   const history = useHistory();
 
+  useEffect(() => {
+    if (entry.current === 0) {
+      setInput("");
+      setBarcode("");
+    }
+    return ()=>{
+      dispatch(reset("searchUser"));
+      dispatch(reset("search"));}
+  }, [dispatch]);
+
+  useEffect(()=>{
+    if(store.search.length>0){
+    if(store.search[0].barcode === barcode){
+      setTimeout(history.push(`/admin/editProduct/${store.search[0]._id}`),5000)
+    }}
+  },[store.search,history,barcode])
+  
   const handleChange = (e) => {
     setInput(e.target.value);
   };
@@ -54,22 +71,7 @@ const Search = ({ itemValue }) => {
     setInput("");
   };
 
-  useEffect(() => {
-    if (entry.current === 0) {
-      setInput("");
-      setBarcode("");
-    }
-    return ()=>{
-      dispatch(reset("searchUser"));
-      dispatch(reset("search"));}
-  }, [dispatch]);
-
-  useEffect(()=>{
-    if(store.search.length>0){
-    if(store.search[0].barcode == barcode){
-      setTimeout(history.push(`/admin/editProduct/${store.search[0]._id}`),5000)
-    }}
-  },[store.search])
+ 
   return (
     <StyledSearch>
       <div>
