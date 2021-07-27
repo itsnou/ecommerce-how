@@ -1,11 +1,12 @@
-import {useEffect} from 'react';
-import {Link} from 'react-router-dom';
-import {useLocation} from 'react-router';
-import queryString from 'querystring';
-import {useDispatch, useSelector} from 'react-redux';
-import {finishMpSale} from '../../../redux/actions/sending.js';
-import {setPayment} from '../../../redux/actions/cart.js';
-import {reset} from '../../../redux/actions/index.js';
+import {useEffect} from "react";
+import {Link} from "react-router-dom";
+import {useLocation} from "react-router";
+import queryString from "querystring";
+import {useDispatch, useSelector} from "react-redux";
+import {finishMpSale} from "../../../redux/actions/sending.js";
+import {setPayment} from "../../../redux/actions/cart.js";
+import {reset} from "../../../redux/actions/index.js";
+import {DivMP} from "./style";
 
 export const MercadoPago = () => {
 	const location = useLocation();
@@ -19,28 +20,29 @@ export const MercadoPago = () => {
 
 	const handleClick = () => {
 		dispatch(finishMpSale(payment));
-		dispatch(reset('cart'));
+		dispatch(reset("cart"));
 	};
 
 	return (
-		<div>
-			{status === 'approved' ? (
+		<DivMP>
+			{status === "approved" ? (
 				<div>
-					<h2>su compra fue realizada con exito</h2>
-					<Link to='/'>
+					<h2 className="h2MP">Su compra fue realizada con exito!</h2>
+					<Link to="/">
 						<button
+							className="btnMP"
 							onClick={() => {
 								handleClick();
 							}}
 						>
-							Volver a home
+							VOLVER A HOME
 						</button>
 					</Link>
 				</div>
 			) : (
 				<div></div>
 			)}
-		</div>
+		</DivMP>
 	);
 };
 
