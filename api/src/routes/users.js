@@ -47,7 +47,7 @@ router.get(
 
 router.post("/signup", async (req, res) => {
   const { name, lastName, email, address, password } = req.body;
-  console.log(req.body)
+  console.log(req.body);
   const data = {
     resetPass: false,
     name: name,
@@ -114,14 +114,14 @@ router.post("/login", async (req, res) => {
       subject: "Restablecimiento de contraseña",
       text: "Este codigo es para restablecer tu contraseña",
       html: `<h2>House Of Wines</h2>
-      <h3>Codigo de recuperacion: ${code}</h3>`
+      <h3>Codigo de recuperacion: ${code}</h3>`,
     };
 
     transporter.sendMail(mailOptions, (err, info) => {
       if (err) {
         return res.send(err.message);
       }
-    })
+    });
     return res.send({ message: "reset pass", code: code });
   }
 
@@ -177,23 +177,20 @@ router.put(
   }
 );
 
-router.put(
-  "/upgradePassword",
-  async (req, res) => {
-    try {
-      console.log("****************body",req.body);
-      const { userEmail, newPassword } = req.body;
-      const hash = await bcrypt.hash(newPassword, 10);
-      const user = await userSchema.findOneAndUpdate(
-        { email: userEmail },
-        { password: hash, resetPass:false }
-      );
-      res.send("Actualizado");
-    } catch (e) {
-      res.status(404).send("No tiene permisos ");
-    }
+router.put("/upgradePassword", async (req, res) => {
+  try {
+    console.log("****************body", req.body);
+    const { userEmail, newPassword } = req.body;
+    const hash = await bcrypt.hash(newPassword, 10);
+    const user = await userSchema.findOneAndUpdate(
+      { email: userEmail },
+      { password: hash, resetPass: false }
+    );
+    res.send("Actualizado");
+  } catch (e) {
+    res.status(404).send("No tiene permisos ");
   }
-);
+});
 
 router.put(
   "/blockuser",
@@ -256,6 +253,31 @@ router.put(
       $pull: { wishlist: productId },
     });
     res.send("Correcto");
+  }
+);
+
+router.put(
+  "/precheckout",
+  passport.authenticate("jwt", { session: false }),
+  async (req, res) => {
+    try {
+      const { name, lastName, address } = req.body;
+      const token = req.headers.authorization.split(" ");
+      const decodificado = jwt_decode(token[1]);
+      const findUser = await userSchema.findOne({ email: decodificado.email });
+      const update = {
+        name: name,
+        lastName: lastName,
+        address: address,
+      };
+      const updateUser = await userSchema.findByIdAndUpdate(
+        findUser._id,
+        update
+      );
+      res.send({ message: "Update ok" });
+    } catch (e) {
+      res.status(404).send({ message: "Ha ocurrido un error", error: e });
+    }
   }
 );
 
