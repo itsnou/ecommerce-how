@@ -36,26 +36,26 @@ const Profile = () => {
           return (
             <StyledDiv>
               <div>
-                <h1>
+                <h2>
                   Bienvenido {el.name} {el.lastName}
-                </h1>
-                {showUnsubscribe && (
-                  <div>
+                </h2>
+                <hr></hr>
+
+              </div>
+              <div>
+                <h4>{el.email}</h4>
+              </div>
+              {showUnsubscribe && (
+                  <div className='newsletter'>
                     <h3>Usted se encuentra suscripto al newsletter</h3>
                     <button className="btn-unsubscribe" onClick={unsubscribe}>
-                      Cancelar suscripción
+                      CANCELAR SUSCRIPCIÓN
                     </button>
                   </div>
                 )}
-              </div>
+
               <div>
-                <h2>Email: {el.email}</h2>
-              </div>
-              <div className='container-wishlist'>
-                <Link to="/wishlist" className='profile-wishlist'>Mi Wishlist</Link>
-              </div>
-              <div>
-                <h4>Compras realizadas: </h4>
+                <h4>Mis compras </h4>
                 <ul className="orders-ul">
                   {orders.length > 0 ? (
                     orders.map((invoice, idx) => {
@@ -67,8 +67,8 @@ const Profile = () => {
                         >
                           <li className="orders-li" key={idx}>
                             <div className="orders-users">
-                              <h4>Fecha de compra: </h4>
                               <p>{invoice.date.slice(0, 10)}</p>
+                              <p>$ {invoice.invoice.totalAmount} </p>
                               <p>{invoice.state}</p>
                             </div>
                           </li>
@@ -82,6 +82,18 @@ const Profile = () => {
                   )}
                 </ul>
               </div>
+              
+              <div className=''>
+
+                <div className='container-wishlist'>
+                <Link to="/wishlist" >
+                  <button className='btn'>VER WISHLIST</button>
+                  </Link>
+                  <Link to={"/catalogo"}>
+                    <button className='btn'>VOLVER</button>
+                </Link>
+              </div>
+                </div>
             </StyledDiv>
           );
         })
