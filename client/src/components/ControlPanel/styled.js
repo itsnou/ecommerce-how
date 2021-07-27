@@ -242,7 +242,7 @@ const StyledUserDetail = styled.div`
     display: flex;
     justify-content:center;
     align-items:center;
-    height: 60%;
+    height: 30%;
     width: 50%;
     position: absolute; 
     margin: 60px 25% 0px 25%;
@@ -253,7 +253,7 @@ const StyledUserDetail = styled.div`
     color:white;
     box-shadow: 0px 14px 15px rgba(0, 0, 0, 0.1);
     .btn-admin{
-        margin: 150px 10px 0px 10px;
+        margin: 50px 10px 0px 10px;
         background-color:white;
         font-weight:bold;
         :hover{
@@ -261,12 +261,12 @@ const StyledUserDetail = styled.div`
         }
     }
     .btn-block{
-        margin: 150px 10px 0px 10px;
+        margin: 50px 10px 0px 10px;
         background-color:red;
         font-weight:bold;
     }
     .btn-recoverypsw{
-        margin: 150px 10px 0px 10px;
+        margin: 50px 10px 0px 10px;
         background-color:#E9EEF9;
         color:black;
         font-weight:bold;
@@ -274,11 +274,14 @@ const StyledUserDetail = styled.div`
     .name{
         font-size: 30px;
         font-weight:bold;
-        margin: 0px 10px 0px 10px;
+        margin:  10px;
+    }
+    .user-email {
+        font-size: 25px;
+    }
     .btn-back {
         text-decoration: none;
     }
-}
 `
 const StyledOrderDetail = styled.div`
     display:flex;
@@ -304,7 +307,7 @@ const StyledOrderDetail = styled.div`
     }
     .product{
         text-align: right;
-        font-size: 16px;
+        font-size: 20px;
         font-weight:bold;
         margin: 10px 30px 10px 0px;
         .items {
@@ -329,8 +332,8 @@ const StyledOrderDetail = styled.div`
             font-weight:bold;
             background-color:#555555;
             color: white;
-            height: 30px;
-            width: 90px;
+            height: 40px;
+            width: 150px;
             border-radius: 4px;
             :hover{
                 background-color:white;

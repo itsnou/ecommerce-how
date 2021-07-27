@@ -6,11 +6,8 @@ import Paper from "@material-ui/core/Paper";
 import Popper from "@material-ui/core/Popper";
 import MenuItem from "@material-ui/core/MenuItem";
 import MenuList from "@material-ui/core/MenuList";
-import { useDispatch } from "react-redux";
-import { getNewsletters } from "../../../redux/actions/request";
 
 const Newsletters = ({ visual, setVisual }) => {
-  const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
   const anchorRef = useRef(null);
   const handleToggle = () => {
@@ -20,7 +17,6 @@ const Newsletters = ({ visual, setVisual }) => {
   const handleClick = (e) => {
     if (e.target.value === 1) {
       if (e.target.value === 1) {
-        dispatch(getNewsletters());
         setVisual({
           newsletters: true,
         });
@@ -39,7 +35,6 @@ const Newsletters = ({ visual, setVisual }) => {
     }
   }
 
-  // return focus to the button when we transitioned from !open -> open
   const prevOpen = useRef(open);
   useEffect(() => {
     if (prevOpen.current === true && open === false) {
