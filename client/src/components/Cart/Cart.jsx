@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import {useSelector, useDispatch} from "react-redux";
 import {removeFromCart, modifyItemCart} from "../../redux/actions/cart";
 import StyledCartItems from "./styled.js";
@@ -9,8 +9,16 @@ import {Link} from "react-router-dom";
 export const Cart = () => {
 	const dispatch = useDispatch();
 	const cartItems = useSelector((state) => state.cart);
-	let total = 0;
+	const [total, setTotal] = useState(0);
 	//funcion onclick pa' despachar la action
+
+	useEffect(() => {
+		let aux = 0;
+		cartItems.map((e) => {
+			aux = aux + e.price * e.quantity;
+		});
+		setTotal(aux);
+	}, [cartItems]);
 
 	const handleOnClick = (e, product) => {
 		if (e === "x") {
@@ -65,7 +73,6 @@ export const Cart = () => {
 				<hr />
 				{cartItems.length ? (
 					cartItems.map((e, index) => {
-						total = total + e.price * e.quantity;
 						return (
 							<div key={index} className="container-cards_products">
 								<div className="container-img_card">
