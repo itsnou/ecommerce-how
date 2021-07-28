@@ -25,7 +25,6 @@ const ControlPanel = () => {
   const products = useRef(store.products);
   const [vineyards, setVineyards] = useState([])
   const [visual, setVisual] = useState({});
-  const [product, setProduct] = useState([]);
 
   const filteredVineyards = (array) => {
     let aux = {}
@@ -45,6 +44,8 @@ const ControlPanel = () => {
     setVineyards(filteredVineyards(products.current))
   }, [visual])
   console.log(vineyards);
+
+  
   return (
     <StyledPanel>
       {window.sessionStorage.getItem("admin") ? (

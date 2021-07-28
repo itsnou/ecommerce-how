@@ -94,7 +94,6 @@ const OrderDetail = ({ match }) => {
                 </li>
               </div>)}
             {order.user && (
-
               <div className='product'>
                 {order.invoice.items && order.invoice.items.length > 0 && (
                   <>

@@ -6,7 +6,6 @@ import {
   getOrderForUser,
   getProductsByName,
   getProductsByBarcode,
-  getUsers,
   reset,
   userFiltered,
   getProductsByVineyard
