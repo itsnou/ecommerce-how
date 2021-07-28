@@ -14,14 +14,20 @@ const StyledDiv = styled.div`
     h2 {
         margin-left: 40px;
     }
-    h4 {
+    h3 {
         margin-left: 40px;
+        padding-top: 10px;
     }
     .newsletter {
       display: flex;
-      justify-content: center;
+      justify-content: space-between;
       flex-direction: row;
-      margin-left: 40px;
+      margin-right: 50px;
+      text-align: center;
+      align-items: center;
+      h3 {
+          padding-bottom: 12px;
+      }
       .btn-unsubscribe {
         border-radius: 4px;
             height: 40px;

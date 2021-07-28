@@ -40,10 +40,10 @@ const Profile = () => {
                   Bienvenido {el.name} {el.lastName}
                 </h2>
                 <hr></hr>
-
               </div>
               <div>
-                <h4>{el.email}</h4>
+                <h3>{el.email}</h3>
+                <h3>Domicilio registrado para envios: {el.address}</h3>
               </div>
               {showUnsubscribe && (
                   <div className='newsletter'>
@@ -55,7 +55,7 @@ const Profile = () => {
                 )}
 
               <div>
-                <h4>Mis compras </h4>
+                <h3>Mis compras </h3>
                 <ul className="orders-ul">
                   {orders.length > 0 ? (
                     orders.map((invoice, idx) => {
