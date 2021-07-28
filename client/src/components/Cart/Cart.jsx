@@ -57,9 +57,11 @@ export const Cart = () => {
 							</Grid>
 							<Grid item xs={6}>
 								{window.sessionStorage.userLog === "on"?
+									cartItems.length> 0 ? 
 									<Link to="/precheckout">
 										<Button variant="contained">COMPRAR!</Button>
 									</Link>
+									:null
 									: 
 									<Link to="/create">
 										<Button variant="contained">REGISTRARSE</Button>
