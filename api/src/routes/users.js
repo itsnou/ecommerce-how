@@ -5,7 +5,7 @@ const jwt = require("jsonwebtoken");
 const passport = require("passport");
 const jwt_decode = require("jwt-decode");
 const nodemailer = require("nodemailer");
-var smtpTransport = require("nodemailer-smtp-transport");
+const smtpTransport = require("nodemailer-smtp-transport");
 const bcrypt = require("bcrypt");
 
 router.get(
@@ -100,13 +100,13 @@ router.post("/login", async (req, res) => {
   }
   if (userEmail.resetPass) {
     let code = (Math.floor(Math.random() * 90000) + 10000).toString();
-    var transporter = nodemailer.createTransport(
+    const transporter = nodemailer.createTransport(
       smtpTransport({
         service: "gmail",
         host: "smtp.gmail.com",
         auth: {
           user: "houseOfWinesHr@gmail.com",
-          pass: "jjjteemmg",
+          pass: "googleputo",
         },
       })
     );
@@ -258,7 +258,7 @@ router.put(
   }
 );
 
-router.put(  
+router.put(
   "/subscription",
   passport.authenticate("jwt", { session: false }),
   async (req, res) => {
@@ -270,7 +270,8 @@ router.put(
       subscribed: subscribed,
     });
     res.send("Correcto");
-});
+  }
+);
 
 router.put(
   "/precheckout",
