@@ -56,16 +56,15 @@ export const Cart = () => {
 								<h2>Total: $ {total}</h2>
 							</Grid>
 							<Grid item xs={6}>
-								{window.sessionStorage.userLog === "on" &&
-								cartItems.length > 0 ? (
+								{window.sessionStorage.userLog === "on"?
 									<Link to="/precheckout">
 										<Button variant="contained">COMPRAR!</Button>
 									</Link>
-								) : (
+									: 
 									<Link to="/create">
 										<Button variant="contained">REGISTRARSE</Button>
 									</Link>
-								)}
+								}
 							</Grid>
 						</Grid>
 					</div>
