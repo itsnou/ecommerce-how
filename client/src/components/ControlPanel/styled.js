@@ -88,6 +88,8 @@ const StyledProduct = styled.div`
     }
     .btn-bodega{
         background-color:#555555;
+        color:white;
+        font-weight:bold;
         :hover{
             background-color:white;
             color:black;
