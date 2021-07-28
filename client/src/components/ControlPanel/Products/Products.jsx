@@ -26,11 +26,6 @@ const Products = ({ setVisual }) => {
                 products: true
             })
         }
-        if (e.target.value === 2) {
-            setVisual({
-                productsSearch: true,
-            })
-        }
         if(e.target.value === 3){
             setVisual({
                 products: false,
@@ -87,7 +82,6 @@ const Products = ({ setVisual }) => {
                             <ClickAwayListener onClickAway={handleClick}>
                                 <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
                                     <MenuItem value={1} onClick={handleClick}>Ver todos los productos</MenuItem>
-                                    <MenuItem value={2} onClick={handleClick}>Buscar producto</MenuItem>
                                     <MenuItem value={3} onClick={handleClick}>Agregar producto</MenuItem>
                                     {/* <MenuItem value={4} onClick={handleClick}>Bodegas</MenuItem> */}
                                 </MenuList>

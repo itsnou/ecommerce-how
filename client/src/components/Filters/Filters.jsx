@@ -105,7 +105,7 @@ const Filters = () => {
 			<br></br>
 			<label>Varietales</label>
 			<hr />
-			<div>
+			<div className={varietals}>
 				{filterCategory.category === 'default'
 					? varietals.map((el) => {
 							if (filterCategory.filterVarietals.length) {

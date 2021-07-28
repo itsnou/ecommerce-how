@@ -15,27 +15,17 @@ const Users = ({ setVisual }) => {
     const anchorRef = useRef(null);
     const dispatch = useDispatch();
 
-    const handleClick = (e) => {
-        if (e.target.value === 1) {
+    const handleClick = (e) => { 
             dispatch(getUsers());
             setVisual({
-                users: true
-            })
-        }
-        if (e.target.value === 2) {
-            setVisual({
-                usersSearch: true
-            })
-        }
+                users: true})    
         if (anchorRef.current && anchorRef.current.contains(e.target)) {
             return;
         }
         setOpen(false);
     };
 
-    const handleToggle = () => {
-        setOpen((prevOpen) => !prevOpen);
-    };
+   
 
 
     function handleListKeyDown(event) {
@@ -61,27 +51,11 @@ const Users = ({ setVisual }) => {
                 ref={anchorRef}
                 aria-controls={open ? 'menu-list-grow' : undefined}
                 aria-haspopup="true"
-                onClick={handleToggle}
+                onClick={handleClick}
             >
                 Usuarios
             </Button>
-            <Popper open={open} anchorEl={anchorRef.current} role={undefined} transition disablePortal>
-                {({ TransitionProps, placement }) => (
-                    <Grow
-                        {...TransitionProps}
-                        style={{ transformOrigin: placement === 'bottom' ? 'center left' : 'center bottom' }}
-                    >
-                        <Paper>
-                            <ClickAwayListener onClickAway={handleClick}>
-                                <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
-                                    <MenuItem value={1} onClick={handleClick}>Ver todos los usuarios</MenuItem>
-                                    <MenuItem value={2} onClick={handleClick}>Buscar usuario</MenuItem>
-                                </MenuList>
-                            </ClickAwayListener>
-                        </Paper>
-                    </Grow>
-                )}
-            </Popper>
+    
         </div>
     );
 };

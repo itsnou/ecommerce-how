@@ -10,7 +10,7 @@ import {
   reset,
   userFiltered,
   getProductsByVineyard
-  
+
 } from "../../redux/actions";
 
 import Button from "@material-ui/core/Button";
@@ -29,24 +29,26 @@ const Search = ({ itemValue }) => {
       setInput("");
       setBarcode("");
     }
-    return ()=>{
+    return () => {
       dispatch(reset("searchUser"));
-      dispatch(reset("search"));}
+      dispatch(reset("search"));
+    }
   }, [dispatch]);
 
-  useEffect(()=>{
-    if(store.search.length>0){
-    if(store.search[0].barcode === barcode){
-      setTimeout(history.push(`/admin/editProduct/${store.search[0]._id}`),5000)
-    }}
-  },[store.search,history,barcode])
-  
+  useEffect(() => {
+    if (store.search.length > 0) {
+      if (store.search[0].barcode === barcode) {
+        setTimeout(history.push(`/admin/editProduct/${store.search[0]._id}`), 5000)
+      }
+    }
+  }, [store.search, history, barcode])
+
   const handleChange = (e) => {
     setInput(e.target.value);
   };
   const handleChangeBarcode = (e) => {
     setBarcode(e.target.value);
-    if(e.target.value.toString().length>5)dispatch(getProductsByBarcode(e.target.value));
+    if (e.target.value.toString().length > 5) dispatch(getProductsByBarcode(e.target.value));
   };
 
   const handleSubmit = (e) => {
@@ -59,7 +61,6 @@ const Search = ({ itemValue }) => {
         dispatch(getProductsByVineyard(input))
         break;
       case "user":
-        dispatch(getUsers());
         dispatch(userFiltered(input, store.users));
         break;
       case "order":
@@ -71,32 +72,52 @@ const Search = ({ itemValue }) => {
     setInput("");
   };
 
- 
+  const handleClickReset = (value) => {
+    switch (value) {
+      case "product":
+        dispatch(getProductsByName(""))
+        break;
+      case "vineyard":
+        dispatch(getProductsByVineyard(""))
+        break;
+      case "user":
+        dispatch(userFiltered("", store.users));
+        break;
+      case "order":
+        dispatch(getOrderForUser(""));
+        break;
+      default:
+        return
+    }
+  }
+
+
   return (
     <StyledSearch>
       <div>
         <form onSubmit={handleSubmit}>
           <div>
-          <input
-            type="search"
-            placeholder="Buscar por nombre..."
-            value={input}
-            onChange={handleChange}
-          />
-          <Button className="btn" type='submit' variant="contained" onClick={handleSubmit}>
-            <HiOutlineSearch />
-          </Button>
+            <input
+              type="search"
+              placeholder="Buscar por nombre..."
+              value={input}
+              onChange={handleChange}
+            />
+            <Button className="btn" type='submit' variant="contained" onClick={handleSubmit}>
+              <HiOutlineSearch />
+            </Button>
+            <Button className="btn" variant="contained" onClick={()=>handleClickReset(itemValue)}>All</Button>
           </div>
           <div>
-          {itemValue==="product"?<input
-            className='barcode'
-            type="text"
-            inputMode= 'numeric'
-            placeholder="Código de Barras..."
-            value={barcode}
-            onChange={handleChangeBarcode}
-          />:null
-          }
+            {itemValue === "product" ? <input
+              className='barcode'
+              type="text"
+              inputMode='numeric'
+              placeholder="Código de Barras..."
+              value={barcode}
+              onChange={handleChangeBarcode}
+            /> : null
+            }
           </div>
         </form>
       </div>
