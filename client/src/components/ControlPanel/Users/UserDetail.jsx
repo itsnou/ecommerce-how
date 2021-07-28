@@ -140,8 +140,8 @@ const UserDetail = ({ match }) => {
               <Button className="btn-recoverypsw" onClick={forceResetPass} variant="contained">
                 Forzar reinicio de contraseña
               </Button>
-              <Link to={'/admin/controlpanel'}>
-                <Button className="btn-recoverypsw" variant="contained">
+              <Link to={'/admin/controlpanel'} className='btn-link'>
+                <Button className="btn-back" variant="contained">
                   VOLVER
                 </Button>
               </Link>

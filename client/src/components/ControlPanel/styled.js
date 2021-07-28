@@ -251,7 +251,7 @@ const StyledUserDetail = styled.div`
     display: flex;
     justify-content:center;
     align-items:center;
-    height: 30%;
+    height: 40%;
     width: 50%;
     position: absolute; 
     margin: 60px 25% 0px 25%;
@@ -273,6 +273,15 @@ const StyledUserDetail = styled.div`
         margin: 50px 10px 0px 10px;
         background-color:red;
         font-weight:bold;
+    }
+    .btn-link{
+        text-decoration: none;
+        .btn-back{
+            margin: 50px 10px 0px 10px;
+            background-color:#E9EEF9;
+            color:black;
+            font-weight:bold;
+        }
     }
     .btn-recoverypsw{
         margin: 50px 10px 0px 10px;
