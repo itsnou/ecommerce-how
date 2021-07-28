@@ -36,7 +36,7 @@ const ControlPanel = () => {
       }
     })
     aux = Object.entries(aux)
-    console.log(" *********************  ", aux, "  ***  ",array)
+    console.log(" *********************  ", aux, "  ***  ", array)
     return aux.sort();
   }
 
@@ -58,23 +58,18 @@ const ControlPanel = () => {
           </div>
           {Object.keys(visual).length ? (
             <div className="content">
-              {visual.products &&
-                (store.loading ? (
+              {visual.products && (
+                store.loading ? (
                   <Loading />
                 ) : (
-                  store.products.map((p) => <ItemProduct product={p} />)
+                  <>
+                    <Search itemValue={"product"} />
+                    {store.search.length > 0 ?
+                      store.search.map((p) => <ItemProduct product={p} />) :
+                      store.products.map((p) => <ItemProduct product={p} />)}
+                    ))
+                  </>
                 ))}
-              {visual.productsSearch && (
-                <>
-                  <Search itemValue={"product"} />
-                  {store.loading ? (
-                    <Loading />
-                  ) : (
-                    store.search.length > 0 &&
-                    store.search.map((p) => <ItemProduct product={p} />)
-                  )}
-                </>
-              )}
               {visual.addProduct && <AddProduct visual={visual} setVisual={setVisual} />}
 
               {visual.vineyards && (
