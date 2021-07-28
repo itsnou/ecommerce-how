@@ -50,7 +50,7 @@ export const Cart = () => {
 							<Grid item xs={6}>
 								{window.sessionStorage.userLog === "on" &&
 								cartItems.length > 0 ? (
-									<Link to="/checkout">
+									<Link to="/precheckout">
 										<Button variant="contained">COMPRAR!</Button>
 									</Link>
 								) : (

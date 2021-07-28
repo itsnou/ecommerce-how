@@ -210,6 +210,22 @@ export const editProduct = (data) => {
 	};
 };
 
+
+export const editUser = (data) => {
+	return async () => {
+		try {
+			await axios.put(`${GET_URL}users/precheckout`, data, {
+				headers: {
+					authorization: 'Bearer ' + sessionStorage.getItem('token'),
+				},
+			});
+		} catch (e) {
+			console.log(e);
+		}
+	};
+};
+
+
 export const editProductsByVineyard = (data) => {
 	return async (dispatch) => {
 		try {

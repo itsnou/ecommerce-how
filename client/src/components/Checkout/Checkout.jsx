@@ -27,26 +27,29 @@ const Checkout = () => {
 				user.map((el) => {
 					return (
 						<div className='container-form'>
-							<h1>Hola {el.name}!</h1>
-							<p>Elije el medio de pago que te parezca conveniente.</p>
-							<Grid container spacing={3}>
-								<Grid item xs={6}>
-									<Button
-										className='mercadoPago'
-										variant='contained'
-										onClick={() => {
-											checkMp();
-										}}
-									>
-										Mercado Pago
-									</Button>
-								</Grid>
-								<Grid item xs={6}>
-									<Link to='/checkout/stripe' className='ref-link'>
-										<Button variant='contained'>Tarjeta de Credito</Button>
-									</Link>
-								</Grid>
-							</Grid>
+							<h1>Paso 2</h1>
+              <div className='last-tap'>
+                <h1>Finaliza tu compra {el.name}!</h1>
+                <p>Elije el medio de pago que te parezca conveniente.</p>
+                <Grid container spacing={3}>
+                  <Grid item xs={6}>
+                    <Button
+                      className='mercadoPago'
+                      variant='contained'
+                      onClick={() => {
+                        checkMp();
+                      }}
+                    >
+                      Mercado Pago
+                    </Button>
+                  </Grid>
+                  <Grid item xs={6}>
+                    <Link to='/checkout/stripe' className='ref-link'>
+                      <Button variant='contained'>Tarjeta de Credito</Button>
+                    </Link>
+                  </Grid>
+                </Grid>
+              </div>
 						</div>
 					);
 				})
