@@ -23,6 +23,7 @@ import EditProductVarietals from './components/ControlPanel/Products/EditProduct
 import ResetPassword from "./components/ResetPassword/ResetPassword";
 import MercadoPago from './components/Checkout/MercadoPago/MercadoPago';
 import Wishlist from "./components/Wishlist/Wishlist";
+import PreCheckout from "./components/Checkout/PreCheckout/PreCheckout";
 
 const stripePromise = loadStripe(
 	'pk_test_51JDBoyGdIVmQXHqKUNKQADTSCIpNAgJeaoehTBVijP5uRNmbv2wgrUO92p2fxkOiSg3Ol0GTUYKFZfu7c5WxFOsb00E9tMt4VU'
@@ -51,13 +52,14 @@ function App() {
 			<Route exact path='/admin/controlpanel' component={ControlPanel} />
 			<Route exact path='/login' component={LogIn} />
 			<Route exact path='/profile' component={Profile} />
-      <Route exact path="/wishlist" component={Wishlist} />
+      		<Route exact path="/wishlist" component={Wishlist} />
+			<Route exact path='/precheckout' component={PreCheckout} />
 			<Route exact path='/checkout' component={Checkout} />
 			<Elements stripe={stripePromise}>
-      <Route exact path='/checkout/stripe' component={StripePayment} />
+      		<Route exact path='/checkout/stripe' component={StripePayment} />
 			</Elements>
 			<Route exact path='/checkOutMp' component={MercadoPago} />
-      <Route exact path="/reset-password/:id" component={ResetPassword}/>
+      		<Route exact path="/reset-password/:id" component={ResetPassword}/>
 			<Route exact path='/admin/editProduct/:id' component={FormProduct} />
 			<Route exact path='/contacto' component={ContactUs} />
 			<Route exact path='/profile/:id' component={OrderUser} />
