@@ -4,8 +4,6 @@ import {useDispatch, useSelector} from 'react-redux';
 import {editUser} from '../../../redux/actions/sending';
 import {Redirect} from 'react-router-dom';
 import StyledDiv from './styled';
-import Checkout from '../Checkout';
-
 
 const PreCheckout = () => {
   const [flag,setFlag] = useState(false);

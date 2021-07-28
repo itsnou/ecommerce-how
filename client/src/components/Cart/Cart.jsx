@@ -15,7 +15,7 @@ export const Cart = () => {
 	useEffect(() => {
 		let aux = 0;
 		cartItems.map((e) => {
-			aux = aux + e.price * e.quantity;
+			return aux = aux + e.price * e.quantity;
 		});
 		setTotal(aux);
 	}, [cartItems]);
