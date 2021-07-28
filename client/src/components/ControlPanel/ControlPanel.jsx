@@ -17,7 +17,6 @@ import ItemVineyard from "./Vineyards/ItemVineyard.jsx";
 import FilterOrders from "./Orders/FilterOrders.jsx";
 import Loading from "../Loading/Loading.jsx";
 import EditAddCategory from "./Categorys/EditAddCategory/EditAddCategory";
-import Filters from "../Filters/Filters.jsx";
 
 
 
@@ -40,11 +39,7 @@ const ControlPanel = () => {
     aux = Object.entries(aux)
     return aux.sort();
   }
-  useEffect(() => {
-    setProduct(store.search.length ? store.search : store.products);
-  }, [store.search, store.products]);
-
-  let filterProducts = store.filter === "on" ? store.productsFilter : product;
+  
 
   useEffect(() => {
     setVineyards(filteredVineyards(products.current))
@@ -70,8 +65,9 @@ const ControlPanel = () => {
                 ) : (
                   <>
                     <Search itemValue={"product"} />
-                    <div ClassName="filter"><Filters /></div>
-                    {filterProducts.map((p) => <ItemProduct product={p} />)}
+                    {store.search.length>0?
+                    store.search.map((p) => <ItemProduct product={p} />):
+                    store.products.map((p) => <ItemProduct product={p} />)}
                   </>
                 ))}
               {visual.addProduct && <AddProduct visual={visual} setVisual={setVisual} />}
