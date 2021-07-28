@@ -133,8 +133,8 @@ const StyledDiv = styled.div`
       border-top-left-radius: 10px;
       border-bottom-left-radius: 10px;
       img{
-        width:250px;
-        height: 525px;
+        width:350px;
+        max-height: 525px;
       }
     }
   }
