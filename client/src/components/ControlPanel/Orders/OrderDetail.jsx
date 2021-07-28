@@ -51,10 +51,11 @@ const OrderDetail = ({ match }) => {
             {order.user && (
               <div className='client'>
                 <li>
-                  Nombre del cliente: {order.user.name} {order.user.lastName}
+                  Cliente: {order.user.name} {order.user.lastName}
                 </li>
-                <li>Email: {order.user.email}</li>
+                <li> {order.user.email}</li>
                 <li>Estado de la orden: {order.state}</li>
+                <li>Domicilio: {order.user.address}</li>
                 <li>Cambiar estado:</li>
                 <li>
                   <ButtonGroup
