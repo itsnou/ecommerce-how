@@ -148,7 +148,7 @@ const AddProduct = ({setVisual}) => {
                                 message: 'El año no es valido'
                             },
                             min: {
-                                value: 2010,
+                                value: 1900,
                                 message: 'El año no es valido'
                             }
                         })
