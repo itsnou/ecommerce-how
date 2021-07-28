@@ -52,6 +52,8 @@ const ProductDetail = ({ match }) => {
       let wine = cart.find((e) => e._id === detail._id);
       if (wine) {
         setCount(wine.quantity);
+      }else{
+        setCount(0)
       }
     }
   }, [cart, detail._id]);
