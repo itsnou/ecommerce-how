@@ -132,6 +132,9 @@ const StyledDiv = styled.div`
       background: white;
       border-top-left-radius: 10px;
       border-bottom-left-radius: 10px;
+      img{
+        width:500px;
+      }
     }
   }
 `;
