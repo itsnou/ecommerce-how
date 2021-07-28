@@ -77,17 +77,17 @@ const Footer = () => {
                     <h2>Seguinos: </h2>
                     <ul>
                         <li>
-                        <a href="www.instagram.com" target="_blank">
+                        <a href="http://www.instagram.com" target="_blank">
                             <img src={insta} class="footer-svg" alt=""/>
                         </a>
                         </li>
                         <li>
-                        <a href="www.facebook.com" target="_blank">
+                        <a href="http://www.facebook.com" target="_blank">
                             <img src={face} class="footer-svg" alt=""/>
                         </a>
                         </li>
                         <li>
-                        <a href="www.twitter.com" target="_blank">
+                        <a href="http://www.twitter.com" target="_blank">
                             <img src={twitter} class="footer-svg" alt=""/>
                         </a>
                         </li>

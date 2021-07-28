@@ -39,6 +39,9 @@ const FormProduct = ({ match }) => {
         dispatch(sendEmailNewsLetter(data));
       }
     });
+    swal("Correos Enviados", {
+        icon: "success",
+    })
   };
 
     const onSubmit = data => {
