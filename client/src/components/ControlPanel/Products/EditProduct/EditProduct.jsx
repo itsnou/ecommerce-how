@@ -104,13 +104,16 @@ const FormProduct = ({ match }) => {
                                 </p>
                             </form>
                             {edit ? <h1>LA MODIFICACIÓN FUE UN ÉXITO</h1> : null}
+                            <div className="btn-newsletter">
+                                <button className='btn-manu' value="discount" onClick={(e) => handleEmail("discount")}>
+                                    Enviar correo descuento
+                                </button>
+                                <button className='btn-manu' value="stock" onClick={(e) => handleEmail("stock")}>
+                                    Enviar correo stock
+                                </button>
+                            </div>
                         </div>
-                        <button className='btn-manu' value="discount" onClick={(e) => handleEmail("discount")}>
-                          Enviar correo descuento
-                        </button>
-                        <button className='btn-manu' value="stock" onClick={(e) => handleEmail("stock")}>
-                          Enviar correo stock disponible
-                        </button>
+                        
                     </div>
                     : <h1>No tiene permisos para ingresar aqui</h1>}
             </StyledDiv>}
