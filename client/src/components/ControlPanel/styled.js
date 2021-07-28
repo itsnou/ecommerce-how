@@ -52,6 +52,7 @@ const StyledProduct = styled.div`
         margin-left: 10px;
         text-align: center;
         font-weight: bold;
+        outline:none;
     }
     .name {
         width: 300px;
@@ -83,6 +84,14 @@ const StyledProduct = styled.div`
                 color:black;
                 transition: 200ms;
             }
+        }
+    }
+    .btn-bodega{
+        background-color:#555555;
+        :hover{
+            background-color:white;
+            color:black;
+            transition: 200ms;
         }
     }
 `

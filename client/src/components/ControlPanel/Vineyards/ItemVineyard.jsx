@@ -61,7 +61,7 @@ const ItemVineyard = (props) => {
       <li className="name">{props.name}</li>
       <li className="quantity">Productos: {props.quantity}</li>
       <form onSubmit={handleSubmit}>
-        <Button variant="contained" type="submit">Aumentar precio</Button>
+        <Button className='btn-bodega' variant="contained" type="submit">Aumentar precio</Button>
         <input
           type='text'
           name='increase'
@@ -70,7 +70,7 @@ const ItemVineyard = (props) => {
         />
       </form>
       <form onSubmit={handleSubmit}>
-        <Button variant="contained" type="submit">Disminuir precio</Button>
+        <Button className='btn-bodega' variant="contained" type="submit">Disminuir precio</Button>
         <input
           type='text'
           name='discount'
