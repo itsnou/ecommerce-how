@@ -16,22 +16,14 @@ const Orders=({visual, setVisual})=> {
     const dispatch = useDispatch();
   
 
-    const handleToggle = () => {
-        setOpen((prevOpen) => !prevOpen);
-    };
+   
 
     const handleClick = (e) => {
-        if (e.target.value === 1) {
             dispatch(getOrders());
             setVisual({
                 orders: true
             })
-        }
-        if (e.target.value === 2) {
-            setVisual({
-                ordersSearch: true
-            })
-        }
+        
         if (anchorRef.current && anchorRef.current.contains(e.target)) {
             return;
         }
@@ -61,27 +53,10 @@ const Orders=({visual, setVisual})=> {
                 ref={anchorRef}
                 aria-controls={open ? 'menu-list-grow' : undefined}
                 aria-haspopup="true"
-                onClick={handleToggle}
+                onClick={handleClick}
             >
                 Ordenes
             </Button>
-            <Popper open={open} anchorEl={anchorRef.current} role={undefined} transition disablePortal>
-                {({ TransitionProps, placement }) => (
-                    <Grow
-                        {...TransitionProps}
-                        style={{ transformOrigin: placement === 'bottom' ? 'center left' : 'center bottom' }}
-                    >
-                        <Paper>
-                            <ClickAwayListener onClickAway={handleClick}>
-                                <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
-                                    <MenuItem value={1} onClick={handleClick}>Ver todas las ordenes</MenuItem>
-                                    <MenuItem value={2} onClick={handleClick}>Buscar o filtrar ordenes</MenuItem>
-                                </MenuList>
-                            </ClickAwayListener>
-                        </Paper>
-                    </Grow>
-                )}
-            </Popper>
         </div>
     );
 };
