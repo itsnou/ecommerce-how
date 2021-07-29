@@ -24,6 +24,7 @@ import ResetPassword from "./components/ResetPassword/ResetPassword";
 import MercadoPago from './components/Checkout/MercadoPago/MercadoPago';
 import Wishlist from "./components/Wishlist/Wishlist";
 import PreCheckout from "./components/Checkout/PreCheckout/PreCheckout";
+import DailySells from './components/ControlPanel/DailySells/DailySells';
 
 const stripePromise = loadStripe(
 	'pk_test_51JDBoyGdIVmQXHqKUNKQADTSCIpNAgJeaoehTBVijP5uRNmbv2wgrUO92p2fxkOiSg3Ol0GTUYKFZfu7c5WxFOsb00E9tMt4VU'
@@ -68,6 +69,7 @@ function App() {
 				path='/admin/editProductVarietals/:id'
 				component={EditProductVarietals}
 			/>
+			<Route exact path='/admin/sells' component={DailySells}/>
 		</>
 	);
 }

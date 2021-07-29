@@ -469,6 +469,41 @@ const StyledAddProduct = styled.div`
         }
     }
 `
+const StyledSells = styled.div `
+
+    width: 60%;
+    margin: auto;
+    font-weight:bold;
+    text-align: center;
+
+    h2 {
+        align-self: flex-end;
+    }
+    .items-sold {
+        display:flex;
+        justify-content:space-between;
+        background-color: #420D1F;
+        color: white;
+        border-radius: 4px;
+        padding: 20px 40px;
+        
+    }
+    .btn-back {
+        margin-left: 78%;
+        height: 50px;
+        width: 150px;
+        color: white;
+        background-color: #555555;
+        border-radius: 4px;
+        font-weight: bold;
+        :hover{
+                background-color:#EDEDED;
+                color:black;
+                transition: 200ms;
+            }
+    }
+`
+
 
 export {
     StyledPanel,
@@ -479,5 +514,6 @@ export {
     StyledUserDetail,
     StyledOrders,
     StyledOrderDetail,
-    StyledAddProduct
+    StyledAddProduct,
+    StyledSells
 };
