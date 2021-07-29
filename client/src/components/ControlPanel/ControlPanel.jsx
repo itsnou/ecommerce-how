@@ -4,6 +4,8 @@ import Orders from "./Orders/Orders.jsx";
 import Users from "./Users/Users.jsx";
 import Products from "./Products/Products.jsx";
 import Newsletters from "./Newsletters/Newsletters";
+import DailySells from "./DailySells/DailySells";
+import Sells from "./DailySells/Sells";
 import { useSelector } from "react-redux";
 import ShowNewsletters from "./Newsletters/ShowNewsletters/ShowNewsletters.jsx";
 import ItemProduct from "./Products/ItemProduct.jsx";
@@ -57,6 +59,7 @@ const ControlPanel = () => {
             <Vineyards visual={visual} setVisual={setVisual} />
             <Categorys visual={visual} setVisual={setVisual} />
             <Newsletters visual={visual} setVisual={setVisual} />
+            <Sells visual={visual} setVisual={setVisual} />
           </div>
           {Object.keys(visual).length ? (
             <div className="content">
@@ -95,6 +98,7 @@ const ControlPanel = () => {
                 </>
               ))}
               {visual.categorys && <EditAddCategory />}
+              {visual.dailySells && <DailySells />}
               {visual.newsletters && <ShowNewsletters />}
             </div>) : null}
         </>

@@ -24,7 +24,6 @@ const FormProduct = ({ match }) => {
         return () => {
             dispatch(getProductDetail("fakeId"))
         }
-
     }, [dispatch])
   
   const handleEmail = (reason) => {
