@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { useHistory,Redirect } from "react-router-dom";
 import { HiOutlineSearch } from "react-icons/hi";
 import {
   getOrderForUser,
@@ -22,6 +22,7 @@ const Search = ({ itemValue }) => {
   const dispatch = useDispatch();
   const store = useSelector((state) => state);
   const history = useHistory();
+  const [flag, setFlag] = useState(false);
 
   useEffect(() => {
     if (entry.current === 0) {
@@ -34,21 +35,23 @@ const Search = ({ itemValue }) => {
     }
   }, [dispatch]);
 
-  useEffect(() => {
-    if (store.search.length > 0) {
-      if (store.search[0].barcode === barcode) {
-        setTimeout(history.push(`/admin/editProduct/${store.search[0]._id}`), 5000)
+  useEffect(()=>{
+    if(store.search.length){
+      if(store.search[0].barcode == parseInt(barcode)){
+        setFlag(true)
       }
     }
-  }, [store.search, history, barcode])
+  },[store.search, history,barcode])
 
   const handleChange = (e) => {
     setInput(e.target.value);
   };
   const handleChangeBarcode = (e) => {
     setBarcode(e.target.value);
-    if (e.target.value.toString().length > 5) dispatch(getProductsByBarcode(e.target.value));
-  };
+    if (e.target.value.toString().length === 13) {
+      dispatch(getProductsByBarcode(e.target.value))
+    }
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -93,37 +96,34 @@ const Search = ({ itemValue }) => {
 
   return (
     <StyledSearch>
-      <div>
-        <form onSubmit={handleSubmit}>
-          <div>
-            <input
-              type="search"
-              placeholder="Buscar por nombre..."
-              value={input}
-              onChange={handleChange}
-            />
-            <Button className="btn" type='submit' variant="contained" onClick={handleSubmit}>
-              <HiOutlineSearch />
-            </Button>
-            <Button className="btn" variant="contained" onClick={()=>handleClickReset(itemValue)}>All</Button>
-          </div>
-          <div>
-            {itemValue === "product" ? <input
-              className='barcode'
-              type="text"
-              inputMode='numeric'
-              placeholder="Código de Barras..."
-              value={barcode}
-              onChange={handleChangeBarcode}
-            /> : null
-            }
-          </div>
-        </form>
-      </div>
-    </StyledSearch>
+    <div>
+      <form onSubmit={handleSubmit}>
+        <div>
+        <input
+          type="search"
+          placeholder="Buscar por nombre..."
+          value={input}
+          onChange={handleChange}
+        />
+        <Button className="btn" type='submit' variant="contained" onClick={handleSubmit}>
+          <HiOutlineSearch />
+        </Button>
+        </div>
+      </form>
+        <div>
+        {itemValue==="product"?<input
+          type="number"
+          placeholder="Código de Barras..."
+          value={barcode}
+          onChange={handleChangeBarcode}
+        />:null
+        }
+        </div>
+    </div>
+    {flag? <Redirect to={`/admin/editProduct/${store.search[0]._id}`} />:null}
+  </StyledSearch>
   );
 };
-
 export default Search;
 
 //cualquier cambio

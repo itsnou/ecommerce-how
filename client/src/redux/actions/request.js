@@ -66,10 +66,10 @@ export const getProductsByVineyard = (vineyard) => {
 
 export const getProductsByBarcode = (barcode) => {
   return async (dispatch) => {
-    dispatch({ type: LOADING });
+    // dispatch({ type: LOADING });
     try {
       const products = await axios.get(`${GET_URL}products?barcode=${barcode}`);
-      console.log(products.data);
+      // console.log(products.data);
       return dispatch({
         type: GET_PRODUCTS_BY_BARCODE,
         payload: products.data,

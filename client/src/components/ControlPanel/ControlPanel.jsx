@@ -45,7 +45,6 @@ const ControlPanel = () => {
   useEffect(() => {
     setVineyards(filteredVineyards(products.current))
   }, [visual])
-  console.log(vineyards);
 
   
   return (

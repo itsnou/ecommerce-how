@@ -105,18 +105,18 @@ const reducer = (state = initialState, { payload, type }) => {
       };
     case GET_PRODUCTS_BY_BARCODE:
       let searchBarcode;
-      let loadingBarcode;
+      // let loadingBarcode;
       if (payload.length > 0) {
         searchBarcode = payload;
-        loadingBarcode = true;
+        // loadingBarcode = true;
       } else {
         searchBarcode = ["No tiene este producto cargado"];
-        loadingBarcode = false;
+        // loadingBarcode = false;
       }
       return {
         ...state,
         search: searchBarcode,
-        loading: loadingBarcode,
+        // loading: loadingBarcode,
       };
     case GET_PRODUCTS_FOR_CATEGORY:
       return {
