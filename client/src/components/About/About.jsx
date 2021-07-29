@@ -2,10 +2,7 @@ import StyledDiv from './styled.js';
 import LOGO from '../../assets/image/LOGO.png';
 import Footer from '../Home/Footer/Footer'
 
-
-
 const About = () => {
-
   return (
     <>
     <StyledDiv>
@@ -18,6 +15,8 @@ const About = () => {
         Ofrecemos un servicio ágil, con una muy buena selección de productos y una equilibrada relación en su precio. Suscribase a nuestro Newsletter par recibir promociones especiales y e información sobre nuevos productos.
         </p>
       </div>
+      <br/>
+      <br/>
       <div className='subtitle'>
           Ventas especiales para eventos
       </div>
