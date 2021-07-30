@@ -6,7 +6,7 @@ import Products from "./Products/Products.jsx";
 import Newsletters from "./Newsletters/Newsletters";
 import DailySells from "./DailySells/DailySells";
 import Sells from "./DailySells/Sells";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import ShowNewsletters from "./Newsletters/ShowNewsletters/ShowNewsletters.jsx";
 import ItemProduct from "./Products/ItemProduct.jsx";
 import Categorys from "./Categorys/Categorys.jsx";
@@ -19,14 +19,15 @@ import ItemVineyard from "./Vineyards/ItemVineyard.jsx";
 import FilterOrders from "./Orders/FilterOrders.jsx";
 import Loading from "../Loading/Loading.jsx";
 import EditAddCategory from "./Categorys/EditAddCategory/EditAddCategory";
+import { getProductsAll } from "../../redux/actions/request.js";
 
 
 
 const ControlPanel = () => {
   const store = useSelector((state) => state);
-  const products = useRef(store.products);
   const [vineyards, setVineyards] = useState([])
   const [visual, setVisual] = useState({});
+  const dispatch = useDispatch();
 
   const filteredVineyards = (array) => {
     let aux = {}
@@ -40,13 +41,14 @@ const ControlPanel = () => {
     aux = Object.entries(aux)
     return aux.sort();
   }
-  
+
 
   useEffect(() => {
-    setVineyards(filteredVineyards(products.current))
-  }, [visual])
+    dispatch(getProductsAll());
+    setVineyards(filteredVineyards(store.products))
+  }, [visual, dispatch])
 
-  
+
   return (
     <StyledPanel>
       {window.sessionStorage.getItem("admin") ? (
@@ -68,9 +70,9 @@ const ControlPanel = () => {
                 ) : (
                   <>
                     <Search itemValue={"product"} />
-                    {store.search.length>0?
-                    store.search.map((p) => <ItemProduct product={p} />):
-                    store.products.map((p) => <ItemProduct product={p} />)}
+                    {store.search.length > 0 ?
+                      store.search.map((p) => <ItemProduct product={p} />) :
+                      store.products.map((p) => <ItemProduct product={p} />)}
                   </>
                 ))}
               {visual.addProduct && <AddProduct visual={visual} setVisual={setVisual} />}
@@ -92,8 +94,7 @@ const ControlPanel = () => {
                   <Search itemValue={"order"} /> <FilterOrders />
                   {store.searchOrders.length > 0 ?
                     store.searchOrders.map((p) => <ItemOrder order={p} />) :
-                    store.orders.map((p) => <ItemOrder order={p} />)}
-                  )
+                    store.orders.map((p) => <ItemOrder order={p} />)}                  
                 </>
               ))}
               {visual.categorys && <EditAddCategory />}
