@@ -8,7 +8,7 @@ const ItemOrder = ({ order }) => {
     else if (order.state === "Finalizado") type = "complete";
     else if (order.state === "Enviado") type = "sent";
     else if (order.state === "Cancelado") type = "cancel";
-    const reducer = (accumulator, currentValue) => accumulator + currentValue;
+    const reducer = (accumulator, currentValue) => parseInt(accumulator) + parseInt(currentValue);
     const countProduct = order?.invoice.items.map(el=>el.quantity);
 
 
