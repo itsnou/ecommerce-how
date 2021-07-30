@@ -1,6 +1,6 @@
 import {useState, useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import {getOrders} from '../../../redux/actions/request';
 import moment from 'moment';
 import { StyledSells } from '../styled';
@@ -52,7 +52,7 @@ const DailySells = () =>{
             })
         : <h1>Usted no tiene permisos</h1> 
         }
-          <Link  to={`/admin/controlpanel`}><button className='btn-back'>VOLVER</button></Link>
+          {/* <Link  to={`/admin/controlpanel`}><button className='btn-back'>VOLVER</button></Link> */}
         </StyledSells>
     )
 }
